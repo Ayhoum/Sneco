@@ -14,6 +14,11 @@ $sCity        = $_POST['Sender_City'];
 $sCountry     = $_POST['Sender_Country'];
 $sPhone       = $_POST['Sender_Phone'];
 $sEmail       = $_POST['Sender_Email'];
+$sNationality = $_POST['Sender_Nationality'];
+$sBankAccount = $_POST['Sender_BankAccount'];
+$sIDNumber    = $_POST['Sender_IDNumber'];
+$sExpiary     = $_POST['Sender_Expiary'];
+
         // Receiver
 $rfName       = $_POST['Receiver_fName'];
 $rlName       = $_POST['Receiver_lName'];
@@ -79,6 +84,10 @@ echo "$rfName";
                     '{$sPostcode}',
                     '{$sCity}', 
                     '{$sCountry}',
+                    '{$sBankAccount}',
+                    '{$sIDNumber}',
+                    '{$sNationality}',
+                    '{$sExpiary}',
                     '{$rfName}', 
                     '{$rlName}', 
                     '{$rPhone}', 
@@ -142,6 +151,18 @@ die("Failed!" . mysqli_error($mysqli));
         <tr></tr>
         <td> Email: </td>
         <td><input type="text" name="Sender_Email" required > </td>
+        <tr></tr>
+        <td> Nationality: </td>
+        <td><input type="text" name="Sender_Nationality" required > </td>
+        <tr></tr>
+        <td> BankAccount: </td>
+        <td><input type="text" name="Sender_BankAccount" required > </td>
+        <tr></tr>
+        <td> ID Number: </td>
+        <td><input type="text" name="Sender_IDNumber" required > </td>
+        <tr></tr>
+        <td> Expiary: </td>
+        <td><input type="text" name="Sender_Expiary" required > </td>
         </tbody>
     </table>
 <hr>
