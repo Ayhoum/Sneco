@@ -1,4 +1,5 @@
 <?php
+
 include '../include/phpscripts/DB.php';
 ?>
 <?php
