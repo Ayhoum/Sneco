@@ -49,7 +49,7 @@
       <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span></a>
           <ul>
               <li><a href="form-common.html">Current Agents</a></li>
-              <li><a href="form-validation.html">Add Agent</a></li>
+              <li><a href="adminscripts/add_agent.php">Add Agent</a></li>
           </ul>
       </li>
     <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span></a></li>
