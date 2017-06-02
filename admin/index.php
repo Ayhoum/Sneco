@@ -5,10 +5,11 @@ include '../include/phpscripts/DB.php';
 <?php
 if(isset($_POST['login-form-submit']))
 {
-    $agentName = $_POST['login-form-username'];
+    $agentEmail = $_POST['login-form-username'];
     $agentPass  = $_POST['login-form-password'];
+    $agentStatus = "Active";
 
-    $query = "SELECT * From AGENT WHERE Agent_Name = '{$agentName}' AND Agent_Pass = '{$agentPass}' ";
+    $query = "SELECT * From AGENT WHERE Agent_Email = '{$agentEmail}' AND Agent_Pass = '{$agentPass}' AND Agent_Status = '{$agentStatus}' ";
 
     $result =  mysqli_query($mysqli, $query);
     if (mysqli_num_rows($result) == 1) {
