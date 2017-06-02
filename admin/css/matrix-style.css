@@ -393,7 +393,7 @@ hr{ border-top-color:#dadada;}
 	color: #fff; font-size:14px;
 	font-weight:lighter;
 }
-.quick-actions li a i[class^="icon-"], .quick-actions li a i[class*=" icon-"] {
+.quick-actions li a i[class^="fa-"], .quick-actions li a i[class*=" fa-"] {
 	font-size:30px;
 	display: block;	
 	margin: 0 auto 5px;

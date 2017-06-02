@@ -42,18 +42,18 @@
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+<div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
   <ul>
-    <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-    <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important">0</span></a> </li>
-      <li class="submenu"> <a href="#"><i class="icon-user"></i> <span>Agents</span></a>
+    <li class="active"><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+    <li> <a href="charts.html"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important">0</span></a> </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span></a>
           <ul>
               <li><a href="form-common.html">Current Agents</a></li>
               <li><a href="form-validation.html">Add Agent</a></li>
           </ul>
       </li>
-    <li><a href="tables.html"><i class="icon icon-th"></i> <span>Users</span></a></li>
-    <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>Currency rates</span></a></li>
+    <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span></a></li>
+    <li><a href="grid.html"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
 
   </ul>
 </div>
@@ -71,11 +71,11 @@
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb span3"> <a href="index.html"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> <span class="label label-important">0</span> Transactions</a> </li>
-        <li class="bg_ls span3"> <a href="grid.html"> <i class="icon-user"></i> Agents</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Users</a> </li>
-        <li class="bg_lb span3"> <a href="interface.html"> <i class="icon-pencil"></i>Currency Rates</a> </li>
+        <li class="bg_lb span3"> <a href="index.html"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="fa fa-exchange"></i> <span class="label label-important">0</span> Transactions</a> </li>
+        <li class="bg_ls span3"> <a href="grid.html"> <i class="fa fa-pencil"></i> Agents</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> Users</a> </li>
+        <li class="bg_lb span3"> <a href="interface.html"> <i class="fa fa-money"></i>Currency Rates</a> </li>
 
       </ul>
     </div>
@@ -95,9 +95,9 @@
                 <li class="bg_lh"><i class="fa fa-users"></i> <strong>2540</strong> <small>Total Users</small></li>
                 <li class="bg_lh"><i class="fa fa-user-plus"></i> <strong>120</strong> <small>New Users </small></li>
                 <li class="bg_lh"><i class="fa fa-exchange"></i> <strong>656</strong> <small>Total Transactions</small></li>
-                <li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> <small>Total Agents</small></li>
-                <li class="bg_lh"><i class="icon-repeat"></i> <strong>10</strong> <small>Delivered Transaction</small></li>
-                <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Pending Transactions</small></li>
+                <li class="bg_lh"><i class="fa fa-pencil"></i> <strong>9540</strong> <small>Total Agents</small></li>
+                <li class="bg_lh"><i class="fa fa-check"></i> <strong>10</strong> <small>Delivered Transaction</small></li>
+                <li class="bg_lh"><i class="fa fa-clock-o"></i> <strong>8540</strong> <small>Pending Transactions</small></li>
               </ul>
             </div>
           </div>
