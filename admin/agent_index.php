@@ -290,7 +290,7 @@ require 'agent.php';
                             </div>
                         </div>
                             <div class="form-actions">
-                                <input type="Submit" value="Add" class="btn btn-success">
+                                <input name="Submit" type="submit" value="Add" class="btn btn-success">
                             </div>
                         </div>
                     </div>
