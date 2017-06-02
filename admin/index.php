@@ -1,21 +1,41 @@
 <?php
-
+session_start();
 include '../include/phpscripts/DB.php';
 ?>
 <?php
-if(isset($_POST['login-form-submit']))
-{
-    $agentEmail = $_POST['login-form-username'];
-    $agentPass  = $_POST['login-form-password'];
-    $agentStatus = "Active";
+if(isset($_POST['login-form-submit'])) {
+    $email = $_POST['login-form-username'];
+    $pass = $_POST['login-form-password'];
+    $status = "Active";
 
-    $query = "SELECT * From AGENT WHERE Agent_Email = '{$agentEmail}' AND Agent_Pass = '{$agentPass}' AND Agent_Status = '{$agentStatus}' ";
 
-    $result =  mysqli_query($mysqli, $query);
+    $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' AND Agent_Pass = '{$pass}' AND Agent_Status = '{$status}' ";
+    $result = mysqli_query($mysqli, $query);
     if (mysqli_num_rows($result) == 1) {
-        echo 'Welcome';
+        $role = "Agent";
+        $_SESSION['email'] = $email;
+        $_SESSION['role']  = $role;
+        echo 'Welcome Agent';
     } else {
-        echo 'Check your login data!';
+        $query = "SELECT * From ADMIN WHERE Admin_Email = '{$email}' AND Admin_Password = '{$pass}' ";
+        $result = mysqli_query($mysqli, $query);
+        if (mysqli_num_rows($result) == 1) {
+            $role = "Admin";
+            $_SESSION['email'] = $email;
+            $_SESSION['role']  = $role;
+            echo " Welcome Admin";
+        } else{
+            $query = "SELECT * From ACCOUNTANT WHERE Aco_Email = '{$email}' AND Aco_Password = '{$pass}' ";
+            $result = mysqli_query($mysqli, $query);
+            if (mysqli_num_rows($result) == 1) {
+                $role = "Accountant";
+                $_SESSION['email'] = $email;
+                $_SESSION['role']  = $role;
+                echo " Welcome Accountant ";
+        } else {
+            echo "Enter a Valid Data !! ";
+            }
+        }
     }
 }
 ?>
