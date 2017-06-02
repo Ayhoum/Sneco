@@ -1,5 +1,7 @@
+<?php
+require 'agent.php';
+?>
 <!DOCTYPE html>
-<--g-->
 <html lang="en">
 <head>
     <title>Matrix Admin</title>
@@ -75,95 +77,96 @@
 <!--sidebar-menu-->
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="agent_index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">New Transaction </a>  </div>
-        <h1>New Transaction</h1>
+        <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Form elements</a> <a href="#" class="current">Validation</a> </div>
+        <h1>NEW TRANSITION</h1>
     </div>
     <div class="container-fluid"><hr>
         <div class="row-fluid">
+            <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
             <div class="span12">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                        <h5> Sender </h5>
+                        <h5>Sender</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form class="form-horizontal" method="post" action="agent_index.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="control-label">First Name</label>
+                            <div class="controls">
+                                <input type="text" name="Sender_fName" id="Sender_fName" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Last Name</label>
+                            <div class="controls">
+                                <input type="text" name="Sender_lName" id="Sender_lName" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Street Name </label>
+                            <div class="controls">
+                                <input type="text" name="Sender_StreetName" id="Sender_StreetName" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">House Number</label>
+                            <div class="controls">
+                                <input type="text" name="Sender_HouseNumber" id="Sender_HouseNumber" required>
+                            </div>
                             <div class="control-group">
-                                <label class="control-label">First Name</label>
+                                <label class="control-label">Postcode </label>
                                 <div class="controls">
-                                    <input type="text" name="Sender_fName" id="Sender_fName" required>
+                                    <input type="text" name="Sender_Postcode" id="Sender_Postcode" required>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Last Name</label>
+                                <label class="control-label">City</label>
                                 <div class="controls">
-                                    <input type="text" name="Sender_lName" id="Sender_lName" required>
+                                    <input type="text" name="Sender_City" id="Sender_City" required>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Street Name </label>
+                                <label class="control-label">Country</label>
                                 <div class="controls">
-                                    <input type="text" name="Sender_StreetName" id="Sender_StreetName" required>
+                                    <input type="text" name="Sender_Country" id="Sender_Country" required>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">House Number</label>
+                                <label class="control-label">Phone</label>
                                 <div class="controls">
-                                    <input type="text" name="Sender_HouseNumber" id="Sender_HouseNumber" required>
+                                    <input type="text" name="Sender_Phone" id="Sender_Phone" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Postcode </label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_Postcode" id="Sender_Postcode" required>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Email</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_Email" id="Sender_Email" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">City</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_City" id="Sender_City" required>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Nationality</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_Nationality" id="Sender_Nationality" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Country</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_Country" id="Sender_Country" required>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Bank Account</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Phone</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_Phone" id="Sender_Phone" required>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">ID Number</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_IDNumber" id="Sender_IDNumber" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Email</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_Email" id="Sender_Email" required>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Expiry Date </label>
+                                <div class="controls">
+                                    <input type="date" name="Sender_Expiary" id="Sender_Expiary" required>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Nationality</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_Nationality" id="Sender_Nationality" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Bank Account</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">ID Number</label>
-                                    <div class="controls">
-                                        <input type="text" name="Sender_IDNumber" id="Sender_IDNumber" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Expiry Date </label>
-                                    <div class="controls">
-                                        <input type="date" name="Sender_Expiary" id="Sender_Expiary" required>
-                                    </div>
-                                </div>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -174,24 +177,24 @@
                         <h5>Receiver</h5>
                     </div>
                     <div class="widget-content nopadding">
-                            <div class="control-group">
-                                <label class="control-label">First Name</label>
-                                <div class="controls">
-                                    <input type="text" name="Receiver_fName" id="Receiver_fName"required />
-                                </div>
+                        <div class="control-group">
+                            <label class="control-label">First Name</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_fName" id="Receiver_fName"required />
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">Last Name</label>
-                                <div class="controls">
-                                    <input type="text" name="Receiver_lName" id="Receiver_lName"required />
-                                </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Last Name</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_lName" id="Receiver_lName"required />
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">Street Name</label>
-                                <div class="controls">
-                                    <input type="text" name="Receiver_StreetName" id="Receiver_StreetName" required />
-                                </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Street Name</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_StreetName" id="Receiver_StreetName" required />
                             </div>
+                        </div>
                         <div class="control-group">
                             <label class="control-label">House Number</label>
                             <div class="controls">
@@ -238,65 +241,70 @@
                             <h5>Other</h5>
                         </div>
                         <div class="widget-content nopadding">
-                                <div class="control-group">
-                                    <label class="control-label">Amount</label>
-                                    <div class="controls">
-                                        <input type="text" name="Amount" id="Amount" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Current Currency</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Current_Currency" id="Current_Currency" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Payment Currency</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Payment_Currency" id="Payment_Currency" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Reason</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Reason" id="Reason" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                     <label class="control-label">Comment</label>
-                                     <div class="controls">
-                                         <input  type="text" name="Comment" id="Comment" required />
-                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Rate</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Rate" id="Rate" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Charge</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Charge" id="Charge" required />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Total</label>
-                                    <div class="controls">
-                                        <input  type="text" name="Total" id="Total" required />
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <input type="submit" value="Validate" class="btn btn-success" re>
-                                </div>
-                            </form>
+                            <div class="control-group">
+                            <label class="control-label">Amount</label>
+                            <div class="controls">
+                                <input type="text" name="Amount" id="Amount" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Current Currency</label>
+                            <div class="controls">
+                                <input  type="text" name="Current_Currency" id="Current_Currency" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Payment Currency</label>
+                            <div class="controls">
+                                <input  type="text" name="Payment_Currency" id="Payment_Currency" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Reason</label>
+                            <div class="controls">
+                                <input  type="text" name="Reason" id="Reason" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Comment</label>
+                            <div class="controls">
+                                <input  type="text" name="Comment" id="Comment" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Rate</label>
+                            <div class="controls">
+                                <input  type="text" name="Rate" id="Rate" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Charge</label>
+                            <div class="controls">
+                                <input  type="text" name="Charge" id="Charge" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Total</label>
+                            <div class="controls">
+                                <input  type="text" name="Total" id="Total" required />
+                            </div>
+                        </div>
+                            <div class="form-actions">
+                                <input type="Submit" value="Add" class="btn btn-success">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+            </form>
     </div>
 </div>
+<!--Footer-part-->
+<div class="row-fluid">
+    <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+<!--end-Footer-part-->
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.ui.custom.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -305,29 +313,5 @@
 <script src="js/jquery.validate.js"></script>
 <script src="js/matrix.js"></script>
 <script src="js/matrix.form_validation.js"></script>
-<script type="text/javascript">
-    // This function is called from the pop-up menus to transfer to
-    // a different page. Ignore if the value returned is a null string:
-    function goPage (newURL) {
-
-        // if url is empty, skip the menu dividers and reset the menu selection to default
-        if (newURL != "") {
-
-            // if url is "-", it is this page -- reset the menu:
-            if (newURL == "-" ) {
-                resetMenu();
-            }
-            // else, send page to designated URL
-            else {
-                document.location.href = newURL;
-            }
-        }
-    }
-
-    // resets the menu selection upon entry to this page:
-    function resetMenu() {
-        document.gomenu.selector.selectedIndex = 2;
-    }
-</script>
 </body>
 </html>

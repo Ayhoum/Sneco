@@ -114,120 +114,120 @@ die("Failed!" . mysqli_error($mysqli));
 }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Agent</title>
-</head>
-<body>
-<form method="post" action="agent.php">
-    <table>
-        <thead> Sender </thead>
-        <tbody>
-        <td> First Name: </td>
-        <td><input type="text" name="Sender_fName" required > </td>
-        <tr></tr>
-        <td> Last Name: </td>
-        <td><input type="text" name="Sender_lName" required > </td>
-        <tr></tr>
-        <td> Street Name: </td>
-        <td><input type="text" name="Sender_StreetName" required > </td>
-        <tr></tr>
-        <td> House Number: </td>
-        <td><input type="text" name="Sender_HouseNumber" required > </td>
-        <tr></tr>
-        <td> Postcode: </td>
-        <td><input type="text" name="Sender_Postcode" required > </td>
-        <tr></tr>
-        <td> City : </td>
-        <td><input type="text" name="Sender_City" required > </td>
-        <tr></tr>
-        <td> Country: </td>
-        <td><input type="text" name="Sender_Country" required > </td>
-        <tr></tr>
-        <td> Phone: </td>
-        <td><input type="text" name="Sender_Phone" required > </td>
-        <tr></tr>
-        <td> Email: </td>
-        <td><input type="text" name="Sender_Email" required > </td>
-        <tr></tr>
-        <td> Nationality: </td>
-        <td><input type="text" name="Sender_Nationality" required > </td>
-        <tr></tr>
-        <td> BankAccount: </td>
-        <td><input type="text" name="Sender_BankAccount" required > </td>
-        <tr></tr>
-        <td> ID Number: </td>
-        <td><input type="text" name="Sender_IDNumber" required > </td>
-        <tr></tr>
-        <td> Expiary: </td>
-        <td><input type="text" name="Sender_Expiary" required > </td>
-        </tbody>
-    </table>
-<hr>
-    <table>
-        <thead> Receiver </thead>
-        <tbody>
-        <td> First Name: </td>
-        <td><input type="text" name="Receiver_fName" required > </td>
-        <tr></tr>
-        <td> Last Name: </td>
-        <td><input type="text" name="Receiver_lName" required > </td>
-        <tr></tr>
-        <td> Street Name: </td>
-        <td><input type="text" name="Receiver_StreetName" required > </td>
-        <tr></tr>
-        <td> House Number: </td>
-        <td><input type="text" name="Receiver_HouseNumber" required > </td>
-        <tr></tr>
-        <td> Postcode: </td>
-        <td><input type="text" name="Receiver_Postcode" required > </td>
-        <tr></tr>
-        <td> City : </td>
-        <td><input type="text" name="Receiver_City" required > </td>
-        <tr></tr>
-        <td> Country: </td>
-        <td><input type="text" name="Receiver_Country" required > </td>
-        <tr></tr>
-        <td> Phone: </td>
-        <td><input type="text" name="Receiver_Phone" required > </td>
-        <tr></tr>
-        <td> Email: </td>
-        <td><input type="text" name="Receiver_Email" required > </td>
-        </tbody>
-    </table>
-<hr>
-    <table>
-        <thead>  </thead>
-        <td> Amount: </td>
-        <td> <input type="text" name="Amount"required></td>
-        <tr></tr>
-        <td> Current Currency: </td>
-        <td> <input type="" name="Current_Currency"required></td>
-        <tr></tr>
-        <td> Payment Currency: </td>
-        <td> <input type="text" name="Payment_Currency"required></td>
-        <tr></tr>
-        <td> Comments : </td>
-        <td> <input type="text_area" name="Comment" ></td>
-        <tr></tr>
-        <td> Reason : </td>
-        <td> <input type="text_area" name="Reason"></td>
-
-        <tr></tr>
-        <td> Rate : </td>
-        <td> <input type="text" name="Rate" ></td>
-        <tr></tr>
-        <td> Charge : </td>
-        <td> <input type="area" name="Charge" ></td>
-        <tr></tr>
-        <td> Total : </td>
-        <td> <input type="text_area" name="Total" ></td>
-        <tr></tr>
-        <td> <input type="submit" name="Submit"></td>
-    </table>
-    <hr>
-</form>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Agent</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form method="post" action="agent.php">-->
+<!--    <table>-->
+<!--        <thead> Sender </thead>-->
+<!--        <tbody>-->
+<!--        <td> First Name: </td>-->
+<!--        <td><input type="text" name="Sender_fName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Last Name: </td>-->
+<!--        <td><input type="text" name="Sender_lName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Street Name: </td>-->
+<!--        <td><input type="text" name="Sender_StreetName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> House Number: </td>-->
+<!--        <td><input type="text" name="Sender_HouseNumber" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Postcode: </td>-->
+<!--        <td><input type="text" name="Sender_Postcode" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> City : </td>-->
+<!--        <td><input type="text" name="Sender_City" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Country: </td>-->
+<!--        <td><input type="text" name="Sender_Country" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Phone: </td>-->
+<!--        <td><input type="text" name="Sender_Phone" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Email: </td>-->
+<!--        <td><input type="text" name="Sender_Email" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Nationality: </td>-->
+<!--        <td><input type="text" name="Sender_Nationality" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> BankAccount: </td>-->
+<!--        <td><input type="text" name="Sender_BankAccount" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> ID Number: </td>-->
+<!--        <td><input type="text" name="Sender_IDNumber" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Expiary: </td>-->
+<!--        <td><input type="text" name="Sender_Expiary" required > </td>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--<hr>-->
+<!--    <table>-->
+<!--        <thead> Receiver </thead>-->
+<!--        <tbody>-->
+<!--        <td> First Name: </td>-->
+<!--        <td><input type="text" name="Receiver_fName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Last Name: </td>-->
+<!--        <td><input type="text" name="Receiver_lName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Street Name: </td>-->
+<!--        <td><input type="text" name="Receiver_StreetName" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> House Number: </td>-->
+<!--        <td><input type="text" name="Receiver_HouseNumber" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Postcode: </td>-->
+<!--        <td><input type="text" name="Receiver_Postcode" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> City : </td>-->
+<!--        <td><input type="text" name="Receiver_City" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Country: </td>-->
+<!--        <td><input type="text" name="Receiver_Country" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Phone: </td>-->
+<!--        <td><input type="text" name="Receiver_Phone" required > </td>-->
+<!--        <tr></tr>-->
+<!--        <td> Email: </td>-->
+<!--        <td><input type="text" name="Receiver_Email" required > </td>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--<hr>-->
+<!--    <table>-->
+<!--        <thead>  </thead>-->
+<!--        <td> Amount: </td>-->
+<!--        <td> <input type="text" name="Amount"required></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Current Currency: </td>-->
+<!--        <td> <input type="" name="Current_Currency"required></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Payment Currency: </td>-->
+<!--        <td> <input type="text" name="Payment_Currency"required></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Comments : </td>-->
+<!--        <td> <input type="text_area" name="Comment" ></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Reason : </td>-->
+<!--        <td> <input type="text_area" name="Reason"></td>-->
+<!---->
+<!--        <tr></tr>-->
+<!--        <td> Rate : </td>-->
+<!--        <td> <input type="text" name="Rate" ></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Charge : </td>-->
+<!--        <td> <input type="area" name="Charge" ></td>-->
+<!--        <tr></tr>-->
+<!--        <td> Total : </td>-->
+<!--        <td> <input type="text_area" name="Total" ></td>-->
+<!--        <tr></tr>-->
+<!--        <td> <input type="submit" name="Submit"></td>-->
+<!--    </table>-->
+<!--    <hr>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
