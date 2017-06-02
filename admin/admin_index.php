@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="css/matrix-media.css" />
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/jquery.gritter.css" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -30,7 +31,7 @@
               <li><a class="sAdd" title="" href="#"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
           </ul>
       </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Online Users Now</span> <span class="label label-important">5</span></a></li>
+    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -54,21 +55,6 @@
     <li><a href="tables.html"><i class="icon icon-th"></i> <span>Users</span></a></li>
     <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>Currency rates</span></a></li>
 
-
-    <li class="content"> <span>Monthly Bandwidth Transfer</span>
-      <div class="progress progress-mini progress-danger active progress-striped">
-        <div style="width: 77%;" class="bar"></div>
-      </div>
-      <span class="percent">77%</span>
-      <div class="stat">21419.94 / 14000 MB</div>
-    </li>
-    <li class="content"> <span>Disk Space Usage</span>
-      <div class="progress progress-mini active progress-striped">
-        <div style="width: 87%;" class="bar"></div>
-      </div>
-      <span class="percent">87%</span>
-      <div class="stat">604.44 / 4000 MB</div>
-    </li>
   </ul>
 </div>
 <!--sidebar-menu-->
@@ -86,7 +72,7 @@
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_lb span3"> <a href="index.html"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> <span class="label label-important">20</span> Transactions</a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> <span class="label label-important">0</span> Transactions</a> </li>
         <li class="bg_ls span3"> <a href="grid.html"> <i class="icon-user"></i> Agents</a> </li>
         <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Users</a> </li>
         <li class="bg_lb span3"> <a href="interface.html"> <i class="icon-pencil"></i>Currency Rates</a> </li>
@@ -103,13 +89,11 @@
         </div>
         <div class="widget-content" >
           <div class="row-fluid">
-            <div class="span9">
-              <div class="chart"></div>
-            </div>
-            <div class="span3">
+
+            <div class="span12">
               <ul class="site-stats">
-                <li class="bg_lh"><i class="icon-user"></i> <strong>2540</strong> <small>Total Users</small></li>
-                <li class="bg_lh"><i class="icon-plus"></i> <strong>120</strong> <small>New Users </small></li>
+                <li class="bg_lh"><i class="fa fa-users"></i> <strong>2540</strong> <small>Total Users</small></li>
+                <li class="bg_lh"><i class="fa fa-user-plus"></i> <strong>120</strong> <small>New Users </small></li>
                 <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Total Transactions</small></li>
                 <li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> <small>Total Agents</small></li>
                 <li class="bg_lh"><i class="icon-repeat"></i> <strong>10</strong> <small>Delivered Transaction</small></li>
@@ -136,7 +120,7 @@
 <!--Footer-part-->
 
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+  <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
 
 <!--end-Footer-part-->
