@@ -72,97 +72,238 @@
     </ul>
 </div>
 <!--sidebar-menu-->
-
-<!--main-container-part-->
 <div id="content">
-    <!--breadcrumbs-->
     <div id="content-header">
-        <div id="breadcrumb"> <a href="index.html" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
+        <div id="breadcrumb"> <a href="agent_index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">New Transaction </a>  </div>
+        <h1>New Transaction</h1>
     </div>
-    <!--End-breadcrumbs-->
-
-    <!--Action boxes-->
-    <div class="container-fluid">
-        <div class="quick-actions_homepage">
-            <ul class="quick-actions">
-                <li class="bg_lb span3"> <a href="index.html"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
-                <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> <span class="label label-important">20</span> Transactions</a> </li>
-                <li class="bg_ls span3"> <a href="grid.html"> <i class="icon-user"></i> Agents</a> </li>
-                <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Users</a> </li>
-                <li class="bg_lb span3"> <a href="interface.html"> <i class="icon-pencil"></i>Currency Rates</a> </li>
-
-            </ul>
-        </div>
-        <!--End-Action boxes-->
-
-        <!--Chart-box-->
+    <div class="container-fluid"><hr>
         <div class="row-fluid">
-            <div class="widget-box">
-                <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
-                    <h5>Site Analytics</h5>
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5> Sender </h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="agent_index.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">First Name</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_fName" id="Sender_fName" required>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Last Name</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_lName" id="Sender_lName" required>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Street Name </label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_StreetName" id="Sender_StreetName" required>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">House Number</label>
+                                <div class="controls">
+                                    <input type="text" name="Sender_HouseNumber" id="Sender_HouseNumber" required>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Postcode </label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_Postcode" id="Sender_Postcode" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">City</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_City" id="Sender_City" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Country</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_Country" id="Sender_Country" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Phone</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_Phone" id="Sender_Phone" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_Email" id="Sender_Email" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Nationality</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_Nationality" id="Sender_Nationality" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Bank Account</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">ID Number</label>
+                                    <div class="controls">
+                                        <input type="text" name="Sender_IDNumber" id="Sender_IDNumber" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Expiry Date </label>
+                                    <div class="controls">
+                                        <input type="date" name="Sender_Expiary" id="Sender_Expiary" required>
+                                    </div>
+                                </div>
                 </div>
-                <div class="widget-content" >
-                    <div class="row-fluid">
-                        <div class="span9">
-                            <div class="chart"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>Receiver</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                            <div class="control-group">
+                                <label class="control-label">First Name</label>
+                                <div class="controls">
+                                    <input type="text" name="Receiver_fName" id="Receiver_fName"required />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Last Name</label>
+                                <div class="controls">
+                                    <input type="text" name="Receiver_lName" id="Receiver_lName"required />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Street Name</label>
+                                <div class="controls">
+                                    <input type="text" name="Receiver_StreetName" id="Receiver_StreetName" required />
+                                </div>
+                            </div>
+                        <div class="control-group">
+                            <label class="control-label">House Number</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_HouseNumber" id="Receiver_HouseNumber" required />
+                            </div>
                         </div>
-                        <div class="span3">
-                            <ul class="site-stats">
-                                <li class="bg_lh"><i class="icon-user"></i> <strong>2540</strong> <small>Total Users</small></li>
-                                <li class="bg_lh"><i class="icon-plus"></i> <strong>120</strong> <small>New Users </small></li>
-                                <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Total Transactions</small></li>
-                                <li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> <small>Total Agents</small></li>
-                                <li class="bg_lh"><i class="icon-repeat"></i> <strong>10</strong> <small>Delivered Transaction</small></li>
-                                <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Pending Transactions</small></li>
-                            </ul>
+                        <div class="control-group">
+                            <label class="control-label">Postcode</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_Postcode" id="Receiver_Postcode" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">City</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_City" id="Receiver_City" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Country</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_Country" id="Receiver_Country" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Phone</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_Phone" id="Receiver_Phone" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Email</label>
+                            <div class="controls">
+                                <input type="text" name="Receiver_Email" id="Receiver_Email" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                            <h5>Other</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Amount</label>
+                                    <div class="controls">
+                                        <input type="text" name="Amount" id="Amount" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Current Currency</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Current_Currency" id="Current_Currency" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Payment Currency</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Payment_Currency" id="Payment_Currency" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Reason</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Reason" id="Reason" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                     <label class="control-label">Comment</label>
+                                     <div class="controls">
+                                         <input  type="text" name="Comment" id="Comment" required />
+                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Rate</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Rate" id="Rate" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Charge</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Charge" id="Charge" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Total</label>
+                                    <div class="controls">
+                                        <input  type="text" name="Total" id="Total" required />
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="submit" value="Validate" class="btn btn-success" re>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--End-Chart-box-->
-        <hr/>
-        <div class="row-fluid">
-            <div class="span6">
-            </div>
-            <div class="span6">
-            </div>
-        </div>
     </div>
 </div>
-
-<!--end-main-container-part-->
-
-<!--Footer-part-->
-
-<div class="row-fluid">
-    <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
-</div>
-
-<!--end-Footer-part-->
-
-<script src="js/excanvas.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.ui.custom.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.flot.min.js"></script>
-<script src="js/jquery.flot.resize.min.js"></script>
-<script src="js/jquery.peity.min.js"></script>
-<script src="js/fullcalendar.min.js"></script>
-<script src="js/matrix.js"></script>
-<script src="js/matrix.dashboard.js"></script>
-<!--<script src="js/jquery.gritter.min.js"></script> -->
-<script src="js/matrix.interface.js"></script>
-<script src="js/matrix.chat.js"></script>
-<script src="js/jquery.validate.js"></script>
-<script src="js/matrix.form_validation.js"></script>
-<script src="js/jquery.wizard.js"></script>
 <script src="js/jquery.uniform.js"></script>
 <script src="js/select2.min.js"></script>
-<script src="js/matrix.popover.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/matrix.tables.js"></script>
-
+<script src="js/jquery.validate.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/matrix.form_validation.js"></script>
 <script type="text/javascript">
     // This function is called from the pop-up menus to transfer to
     // a different page. Ignore if the value returned is a null string:
