@@ -8,7 +8,7 @@ if(isset($_POST['login-form-submit']))
     $agentName = $_POST['login-form-username'];
     $agentPass  = $_POST['login-form-password'];
 
-    $query = 'SELECT * From Agent WHERE Agent_Name = "'.$agentName.'" AND Agent_Pass ="'.$agentPass.'" ';
+    $query = "SELECT * From AGENT WHERE Agent_Name = '{$agentName}' AND Agent_Pass = '{$agentPass}' ";
 
     $result =  mysqli_query($mysqli, $query);
     if (mysqli_num_rows($result) == 1) {
