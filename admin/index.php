@@ -8,7 +8,6 @@ if(isset($_POST['login-form-submit'])) {
     $pass = $_POST['login-form-password'];
     $status = "Active";
 
-
     $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' AND Agent_Pass = '{$pass}' AND Agent_Status = '{$status}' ";
     $result = mysqli_query($mysqli, $query);
     if (mysqli_num_rows($result) == 1) {
@@ -16,6 +15,7 @@ if(isset($_POST['login-form-submit'])) {
         $_SESSION['email'] = $email;
         $_SESSION['role']  = $role;
         echo 'Welcome Agent';
+        header("Location: agent_index.php");
     } else {
         $query = "SELECT * From ADMIN WHERE Admin_Email = '{$email}' AND Admin_Password = '{$pass}' ";
         $result = mysqli_query($mysqli, $query);
@@ -24,6 +24,8 @@ if(isset($_POST['login-form-submit'])) {
             $_SESSION['email'] = $email;
             $_SESSION['role']  = $role;
             echo " Welcome Admin";
+            header("Location: admin_index.php");
+
         } else{
             $query = "SELECT * From ACCOUNTANT WHERE Aco_Email = '{$email}' AND Aco_Password = '{$pass}' ";
             $result = mysqli_query($mysqli, $query);
@@ -32,7 +34,9 @@ if(isset($_POST['login-form-submit'])) {
                 $_SESSION['email'] = $email;
                 $_SESSION['role']  = $role;
                 echo " Welcome Accountant ";
-        } else {
+                header("Location: accountant_index.php");
+
+            } else {
             echo "Enter a Valid Data !! ";
             }
         }
@@ -57,7 +61,7 @@ if(isset($_POST['login-form-submit'])) {
     <body>
     <div id="loginbox">
         <form id="login-form" name="login-form" class="form-vertical" action="index.php" method="post">
-            <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
+            <div class="control-group normal_text"> <h3><img src="img/logo2.png" alt="Logo" /></h3></div>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
