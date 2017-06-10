@@ -6,7 +6,7 @@
 
     <div class="widget-box">
     <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-        <h5>Transactions</h5>
+        <h5>Agents</h5>
     </div>
     <div class="widget-content nopadding">
     <table class="table table-bordered data-table">
