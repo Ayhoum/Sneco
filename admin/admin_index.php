@@ -103,8 +103,22 @@ include ("../include/phpscripts/DB.php");
 
       </ul>
     </div>
-<!--End-Action boxes-->    
+<!--End-Action boxes-->
 
+
+      <?php
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Status = 'Done' ";
+      $counter = mysqli_query($mysqli,$query);
+      $num = mysqli_fetch_array($counter);
+      $countTransDone = $num["ID"];
+      ?>
+
+      <?php
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Status != 'Done'";
+      $counter = mysqli_query($mysqli,$query);
+      $num = mysqli_fetch_array($counter);
+      $countTransNot = $num["ID"];
+      ?>
 <!--Chart-box-->    
     <div class="row-fluid">
       <div class="widget-box">
@@ -116,12 +130,12 @@ include ("../include/phpscripts/DB.php");
 
             <div class="span12">
               <ul class="site-stats">
-                <li class="bg_lh"><i class="fa fa-users"></i> <strong>2540</strong> <small>Total Users</small></li>
-                <li class="bg_lh"><i class="fa fa-user-plus"></i> <strong>120</strong> <small>New Users </small></li>
-                <li class="bg_lh"><i class="fa fa-exchange"></i> <strong>656</strong> <small>Total Transactions</small></li>
-                <li class="bg_lh"><i class="fa fa-pencil"></i> <strong>9540</strong> <small>Total Agents</small></li>
-                <li class="bg_lh"><i class="fa fa-check"></i> <strong>10</strong> <small>Delivered Transaction</small></li>
-                <li class="bg_lh"><i class="fa fa-clock-o"></i> <strong>8540</strong> <small>Pending Transactions</small></li>
+                <li class="bg_lh"><i class="fa fa-users"></i> <strong>0</strong> <small>Total Users</small></li>
+                <li class="bg_lh"><i class="fa fa-user-plus"></i> <strong>0</strong> <small>New Users </small></li>
+                <li class="bg_lh"><i class="fa fa-exchange"></i> <strong><?php echo("$countTrans"); ?></strong> <small>Total Transactions</small></li>
+                <li class="bg_lh"><i class="fa fa-pencil"></i> <strong><?php echo("$countAgent"); ?></strong> <small>Total Agents</small></li>
+                <li class="bg_lh"><i class="fa fa-check"></i> <strong><?php echo("$countTransDone"); ?></strong> <small>Delivered Transaction</small></li>
+                <li class="bg_lh"><i class="fa fa-clock-o"></i> <strong><?php echo("$countTransNot"); ?></strong> <small>Pending Transactions</small></li>
               </ul>
             </div>
           </div>
