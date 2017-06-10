@@ -1,9 +1,14 @@
 <?php
 ob_start();
 session_start();
-if($_SESSION['role'] != "Admin"){
+if(!isset($_SESSION['role'])){
     header("Location: index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: agent_index.php");
 }
+?>
+<?php
+include ("../include/phpscripts/DB.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +32,7 @@ if($_SESSION['role'] != "Admin"){
 <div id="header">
   <h1><a href="dashboard.html">Sneco Admin</a></h1>
 </div>
-<!--close-Header-part--> 
-
+<!--close-Header-part-->
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
@@ -49,17 +53,30 @@ if($_SESSION['role'] != "Admin"){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
   <ul>
-    <li class="active"><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
-    <li> <a href="charts.html"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important">0</span></a> </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span></a>
+    <li class="active"><a href="admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+      <?php
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION";
+      $counter = mysqli_query($mysqli,$query);
+      $num = mysqli_fetch_array($counter);
+      $countTrans = $num["ID"];
+      ?>
+
+      <?php
+      $query = "SELECT COUNT(*)  AS ID FROM AGENT";
+      $counter = mysqli_query($mysqli,$query);
+      $num = mysqli_fetch_array($counter);
+      $countAgent = $num["ID"];
+      ?>
+    <li> <a href="adminscripts/transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
           <ul>
-              <li><a href="form-common.html">Current Agents</a></li>
+              <li><a href="adminscripts/agents.php">Current Agents </a></li>
               <li><a href="adminscripts/add_agent.php">Add Agent</a></li>
           </ul>
       </li>
-    <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span></a></li>
+    <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
     <li><a href="grid.html"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
 
   </ul>
@@ -78,10 +95,10 @@ if($_SESSION['role'] != "Admin"){
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb span3"> <a href="index.html"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="fa fa-exchange"></i> <span class="label label-important">0</span> Transactions</a> </li>
-        <li class="bg_ls span3"> <a href="grid.html"> <i class="fa fa-pencil"></i> Agents</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> Users</a> </li>
+        <li class="bg_lb span3"> <a href="admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="adminscripts/transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
+        <li class="bg_ls span3"> <a href="adminscripts/agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
         <li class="bg_lb span3"> <a href="interface.html"> <i class="fa fa-money"></i>Currency Rates</a> </li>
 
       </ul>

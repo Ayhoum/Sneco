@@ -5,8 +5,10 @@ require 'agent.php';
 
 <?php
 session_start();
-if($_SESSION['role'] != "Agent"){
+if(!isset($_SESSION['role'])){
     header("Location: index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: admin_index.php");
 }
 ?>
 

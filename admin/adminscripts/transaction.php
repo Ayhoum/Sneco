@@ -90,11 +90,11 @@ include '../../include/phpscripts/DB.php'
         <div class="row-fluid">
             <div class="span12">
 
-<?php
-        include "view_agents.php";
-?>
+                <?php
+                include "view_transaction.php";
+                ?>
 
-</div>
+            </div>
         </div>
         <!--End-Chart-box-->
         <hr/>

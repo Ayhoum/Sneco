@@ -1,10 +1,16 @@
-<table class="table table-bordered table-hover">
+<?php include("../../include/phpscripts/DB.php") ?>
+    <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+    <div class="span12">
 
-    <div class="col-xs-12">
-        <a class="btn btn-primary" href="add_agent.php">Add New</a>
+    <div class="widget-box">
+    <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+        <h5>Transactions</h5>
     </div>
-
-    <thead>
+    <div class="widget-content nopadding">
+    <table class="table table-bordered data-table">
+        <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -25,7 +31,7 @@
     <tbody>
 
     <?php
-    $query = "SELECT * FROM AGENT ORDER BY ID DESC";
+    $query = "SELECT * FROM AGENT ORDER BY Agent_Status ASC";
     $select_posts = mysqli_query($mysqli, $query);
     while($row = mysqli_fetch_assoc($select_posts)){
         $agent_id = $row['ID'];
@@ -65,8 +71,12 @@
     }
     ?>
     </tbody>
-</table>
-
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 <?php
 if(isset($_GET['block'])){
 
