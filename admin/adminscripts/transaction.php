@@ -34,7 +34,7 @@ include '../../include/phpscripts/DB.php'
     <ul class="nav">
         <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome User</span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a class="sAdd" title="" href="logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+                <li><a class="sAdd" title="" href="../logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </li>
         <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>

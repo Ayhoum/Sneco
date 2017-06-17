@@ -6,7 +6,7 @@
 $_SESSION['email'] = null;
 $_SESSION['role']  = null;
 
-header("Location: ../index.php");
+header("Location: index.php");
 
 
 ?>
