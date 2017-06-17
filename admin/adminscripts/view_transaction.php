@@ -40,7 +40,7 @@
                                 $query = "SELECT * FROM TRANSITION ORDER BY ID DESC";
                                 $select_posts = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_posts)){
-                                    $sender_id = $row['ID'];
+                                    $id = $row['ID'];
                                     $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
                                     $sender_email = $row['Sender_Email'];
                                     $sender_country = $row['Sender_Country'];
@@ -62,7 +62,7 @@
                                     echo "<tr>";
                                     ?>
                                     <?php
-                                    echo "<td>$sender_id</td>";
+                                    echo "<td>$id</td>";
                                     echo "<td>$sender_name</td>";
                                     echo "<td>$sender_email</td>";
                                     echo "<td>$sender_country</td>";
@@ -82,8 +82,8 @@
 
 
 
-                                    echo "<td><a href='agents.php?block=$sender_id'>Delete</a></td>";
-                                    echo "<td><a href='agents.php?activate=$sender_id'>Edit</a></td>";
+                                    echo "<td><a href='transaction.php?delete=$id'>Delete</a></td>";
+                                    echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
 
                                     echo "<td>Download</td>";
 
@@ -101,21 +101,12 @@
         </div>
 
 <?php
-if(isset($_GET['block'])){
 
-    $the_agent_id = $_GET['block'];
-    $query = "UPDATE AGENT SET Agent_Status = 'Blocked' WHERE ID = {$the_agent_id}";
-    $block_agent_query = mysqli_query($mysqli, $query);
-    header("Location: agents.php");
-    echo "Agent Blocked!";
-}
+if(isset($_GET['delete'])){
 
-if(isset($_GET['activate'])){
-
-    $the_agent_id = $_GET['activate'];
-    $query = "UPDATE AGENT SET Agent_Status = 'Active' WHERE ID = {$the_agent_id}";
-    $block_agent_query = mysqli_query($mysqli, $query);
-    header("Location: agents.php");
-    echo "Agent Activated!";
+    $id = $_GET['delete'];
+    $query = "DELETE FROM TRANSITION WHERE ID = {$id} ";
+    $delete_query = mysqli_query($mysqli, $query);
+    header("Location: transaction.php");
 }
 ?>

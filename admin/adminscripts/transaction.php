@@ -104,7 +104,20 @@ include '../../include/phpscripts/DB.php'
             <div class="span12">
 
                 <?php
-                include "view_transaction.php";
+
+                if(isset($_GET['source'])){
+                    $source = $_GET['source'];
+                }else{
+                    $source = '';
+                }
+                switch($source){
+                    case 'edit_transaction':
+                        include "edit_transaction.php";
+                        break;
+                    default:
+                        include "view_transaction.php";
+                        break;
+                }
                 ?>
 
             </div>
