@@ -15,6 +15,7 @@ include '../../include/phpscripts/DB.php'
     <link rel="stylesheet" href="../css/select2.css" />
     <link rel="stylesheet" href="../css/matrix-style.css" />
     <link rel="stylesheet" href="../css/matrix-media.css" />
+    <link rel="stylesheet" href="../css/datepicker.css" />
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -148,6 +149,7 @@ include '../../include/phpscripts/DB.php'
 <script src="../js/matrix.form_validation.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/matrix.tables.js"></script>
+<script src="../js/bootstrap-datepicker.js"></script>
 
 </body>
 </html>

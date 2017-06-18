@@ -11,12 +11,12 @@ session_start();
 if(isset($_GET['t_id'])){
     $transaction_id = $_GET['t_id'];
 }
-
 $query = "SELECT * FROM TRANSITION WHERE ID = $transaction_id ";
 $select_trans_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans_by_id)){
 
-    $Agent_id     = $row['ID'];
+    $transaction_ID = $row['ID'];
+    $Agent_id     = $row['Agent_ID'];
     $sfName       = $row['Sender_fName'];
     $slName       = $row['Sender_lName'];
     $sStreetName  = $row['Sender_StreetName'];
@@ -51,8 +51,9 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $comment      = $row['Comment'];
 
 
-    if(isset($_POST['update_post'])){
+    if(isset($_POST['Update'])){
 
+        $ID           = $_POST['ID'];
         $Agent_id     = $_POST['Agent_ID'];
         $sfName       = $_POST['Sender_fName'];
         $slName       = $_POST['Sender_lName'];
@@ -89,6 +90,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $comment = $_POST['Comment'];
 
         $query = "UPDATE TRANSITION SET ";
+        $query .= "ID = '{$ID}', ";
         $query .= "Agent_ID = '{$Agent_id}', ";
         $query .= "Sender_fName = '{$sfName}', ";
         $query .= "Sender_lName = '{$slName}', ";
@@ -121,7 +123,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $query .= "Rate = '{$rate}', ";
         $query .= "Charge = '{$charge}', ";
         $query .= "Reason = '{$reason}', ";
-        $query .= "Comment = '{$comment}', ";
+        $query .= "Comment = '{$comment}' ";
+        $query .= "WHERE ID = {$transaction_ID} ";
 
 
         $update_post = mysqli_query($mysqli, $query);
@@ -144,8 +147,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                         </div>
                         <div class="widget-content nopadding">
                             <form action="#" method="get" class="form-horizontal">
-
-
+                                <div class="control-group">
+                                    <label class="control-label">ID</label>
+                                    <div class="controls">
+                                        <input type="text" name="ID" id="ID" value="<?php echo $transaction_ID; ?>" required>
+                                    </div>
+                                </div>
                                 <div class="control-group">
                                     <label class="control-label">Agent No.</label>
                                     <div class="controls">
@@ -190,7 +197,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Country</label>
                                         <div class="controls">
-                                            <select style="width:215px;" name="Sender_Country" id="Sender_Country" value="<?php echo $sCountry; ?>">
+                                            <select style="width:215px;" name="Sender_Country" id="Sender_Country">
                                                 <option value="">-- select one --</option>
                                                 <option value="Afghanistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -451,7 +458,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Nationality</label>
                                         <div class="controls">
-                                            <select name="Sender_Nationality" id="Sender_Nationality" value="<?php echo $sNationality; ?>" style="width:215px;">
+                                            <select name="Sender_Nationality" id="Sender_Nationality" style="width:215px;">
                                                 <option value="">-- select one --</option>
                                                 <option value="afghan">Afghan</option>
                                                 <option value="albanian">Albanian</option>
@@ -589,7 +596,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                                 <option value="omani">Omani</option>
                                                 <option value="pakistani">Pakistani</option>
                                                 <option value="palauan">Palauan</option>
-                                                <option value="Palestinian">Palestinian</option>
+                                                <option value="palestinian">Palestinian</option>
                                                 <option value="panamanian">Panamanian</option>
                                                 <option value="papua new guinean">Papua New Guinean</option>
                                                 <option value="paraguayan">Paraguayan</option>
@@ -665,7 +672,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Expiry Date </label>
                                         <div class="controls">
-                                            <input type="date" name="Sender_Expiary" id="Sender_Expiary" value="<?php echo $sExpiary; ?>" required>
+                                            <input type="text" name="Sender_Expiary" id="Sender_Expiary" data-date-format="yyyy-mm-dd" value="<?php echo $sExpiary; ?>" class="datepicker span2" required>
+<!--                                            <input type="date" name="Sender_Expiary" id="Sender_Expiary" value="" required>-->
                                         </div>
                                     </div>
                                 </div>
@@ -1036,7 +1044,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input name="Submit" type="submit" value="Update" class="btn btn-success">
+                                        <input name="Update" type="submit" value="Update" class="btn btn-success">
                                     </div>
                                 </div>
                             </div>
@@ -1045,6 +1053,23 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 </div>
             </form>
 
-            <script>
-                ​document.getElementById('Receiver_Country').value = 'Albania';​​​​​​​​​​
-            </script>
+                <script>
+                function setSelectedIndex(s, valsearch)
+                {
+// Loop through all the items in drop down list
+                    for (i = 0; i< s.options.length; i++)
+                    {
+                        if (s.options[i].value == valsearch)
+                        {
+// Item is found. Set its property and exit
+                            s.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    return;
+                }
+                setSelectedIndex(document.getElementById("Receiver_Country"),"<?php echo $rCountry; ?>");
+                setSelectedIndex(document.getElementById("Sender_Nationality"),"<?php echo $sNationality; ?>");
+                setSelectedIndex(document.getElementById("Sender_Country"),"<?php echo $sCountry; ?>");
+
+      </script>

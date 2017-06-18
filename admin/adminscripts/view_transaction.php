@@ -41,6 +41,7 @@
                                 $select_posts = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_posts)){
                                     $id = $row['ID'];
+                                    $agent_id = $row['Agent_ID'];
                                     $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
                                     $sender_email = $row['Sender_Email'];
                                     $sender_country = $row['Sender_Country'];
@@ -58,6 +59,9 @@
                                     $charge = $row['Charge'];
                                     $reason = $row['Reason'];
                                     $status = $row['Status'];
+                                    $timestamp = strtotime($row['Time']);
+                                    $date = date('Y-m-d',$timestamp);
+                                    $time = date('h:m:s',$timestamp);
 
                                     echo "<tr>";
                                     ?>
@@ -85,7 +89,15 @@
                                     echo "<td><a href='transaction.php?delete=$id'>Delete</a></td>";
                                     echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
 
-                                    echo "<td>Download</td>";
+
+                                    $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
+                                    $select_trans_by_id = mysqli_query($mysqli, $query);
+                                    while($row = mysqli_fetch_assoc($select_trans_by_id)) {
+
+                                        $agent_place = $row['Agent_Area'];
+                                    }
+
+                                    echo "<td><a href='../../pdf.php?agent_code={$agent_id}&place={$agent_place}&time={$time}&date={$date}&sender_name={$sender_name}&sender_email={$sender_email}'>Download</a></td>";
 
 
 
