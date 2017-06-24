@@ -1,6 +1,7 @@
 <?php
 ob_start();
 require 'agentscripts/agent.php';
+//include 'rate.php';
 ?>
 <?php
 include '../include/phpscripts/DB.php'
@@ -25,6 +26,49 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
     $agent_id_val = $row['ID'];
 }
 ?>
+<?php
+if (isset($_POST['Calculate'])){
+$amount = $_POST['Amount'];
+switch ($amount) {
+    case $amount > 0 && $amount <= 150 :
+        $rate = 10;
+        $total = $amount + 10;
+//  echo $total;
+        break;
+    case $amount >= 151 && $amount <= 400 :
+        $rate = $amount * 0.08;
+        $total = $amount + $rate;
+// echo $total;
+        break;
+    case $amount >= 401 && $amount <= 1000 :
+        $rate = $amount * 0.07;
+        $total = $amount + $rate;
+// echo $total;
+        break;
+    case $amount >= 1001 && $amount <= 3000 :
+        $rate = $amount * 0.06;
+        $total = $amount + $rate;
+// echo $total;
+        break;
+    case $amount >= 3001 && $amount <= 7000 :
+        $rate = $amount * 0.05;
+        $total = $amount + $rate;
+//echo $total;
+        break;
+    case $amount >= 7001 && $amount < 1000 :
+        $rate = $amount * 0.04;
+        $total = $amount + $rate;
+//echo $total;
+        break;
+    default:
+        $total = 0;
+}
+} else {
+    $total = 0;
+    $rate = 0;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1005,19 +1049,19 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Reason</label>
                             <div class="controls">
-                                <input  type="text" name="Reason" id="Reason" required />
+                                <textarea name="Reason" id="Reason" required> </textarea>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Comment</label>
                             <div class="controls">
-                                <input  type="text" name="Comment" id="Comment" required />
+                                <textarea name="Comment" id="Comment" required> </textarea>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Rate</label>
                             <div class="controls">
-                                <input  type="text" name="Rate" id="Rate" required />
+                                <input  type="text" name="Rate" id="Rate" VALUE="<?php echo $rate; ?>" readonly required />
                             </div>
                         </div>
                         <div class="control-group">
@@ -1029,9 +1073,12 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Total</label>
                             <div class="controls">
-                                <input  type="text" name="Total" id="Total" required />
+                                <input  type="text" name="Total" id="Total" value="<?php echo $total; ?>" readonly required />
                             </div>
                         </div>
+                            <div class="form-actions">
+                                <input name="Calculate" type="submit" value="Calculate" class="btn btn-success" required>
+                            </div>
                             <div class="form-actions">
                                 <input name="Submit" type="submit" value="Add" class="btn btn-success">
                             </div>
