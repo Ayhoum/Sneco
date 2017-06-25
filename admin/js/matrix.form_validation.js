@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 
+
     $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 
     $('select').select2();
@@ -85,4 +86,24 @@ $(document).ready(function(){
             $(element).parents('.control-group').addClass('success');
         }
     });
+
+});
+
+
+$(document).ready(function() {
+
+    $('.datepicker').datepicker();
+    $("#mask-date").mask("999-99-99");
+//------------- Datepicker -------------//
+    if ($('#datepicker').length) {
+        $("#datepicker").datepicker({
+            showOtherMonths: true
+        });
+    }
+    if ($('#datepicker-inline').length) {
+        $('#datepicker-inline').datepicker({
+            inline: true,
+            showOtherMonths: true
+        });
+    }
 });

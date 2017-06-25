@@ -26,48 +26,6 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
     $agent_id_val = $row['ID'];
 }
 ?>
-<?php
-if (isset($_POST['Calculate'])){
-$amount = $_POST['Amount'];
-switch ($amount) {
-    case $amount > 0 && $amount <= 150 :
-        $rate = 10;
-        $total = $amount + 10;
-//  echo $total;
-        break;
-    case $amount >= 151 && $amount <= 400 :
-        $rate = $amount * 0.08;
-        $total = $amount + $rate;
-// echo $total;
-        break;
-    case $amount >= 401 && $amount <= 1000 :
-        $rate = $amount * 0.07;
-        $total = $amount + $rate;
-// echo $total;
-        break;
-    case $amount >= 1001 && $amount <= 3000 :
-        $rate = $amount * 0.06;
-        $total = $amount + $rate;
-// echo $total;
-        break;
-    case $amount >= 3001 && $amount <= 7000 :
-        $rate = $amount * 0.05;
-        $total = $amount + $rate;
-//echo $total;
-        break;
-    case $amount >= 7001 && $amount < 1000 :
-        $rate = $amount * 0.04;
-        $total = $amount + $rate;
-//echo $total;
-        break;
-    default:
-        $total = 0;
-}
-} else {
-    $total = 0;
-    $rate = 0;
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +33,14 @@ switch ($amount) {
     <title>Sneco Agent</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <link rel="stylesheet" href="css/colorpicker.css" />
+    <link rel="stylesheet" href="css/datepicker.css" />
+    <link rel="stylesheet" href="css/uniform.css" />
+
+    <link rel="stylesheet" href="css/bootstrap-wysihtml5.css" />
+
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="css/fullcalendar.css" />
@@ -705,6 +671,15 @@ $agent_id_val = $row['ID'];
                                     <input type="text" name="Sender_IDNumber" id="Sender_IDNumber" required>
                                 </div>
                             </div>
+                            <?php
+                            date_default_timezone_set('Europe/Amsterdam');
+                            ?>
+                            <div class="control-group">
+                                <label class="control-label">Date picker (dd-mm)</label>
+                                <div class="controls">
+                                    <input type="text" data-date="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" data-date-format="yyyy-mm-dd" value="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" class="datepicker span11">
+                                    <span class="help-block">Date with Formate of  (dd-mm-yy)</span> </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label">Expiry Date </label>
                                 <div class="controls">
@@ -1061,7 +1036,7 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Rate</label>
                             <div class="controls">
-                                <input  type="text" name="Rate" id="Rate" VALUE="<?php echo $rate; ?>" readonly required />
+                                <input  type="text" name="Rate" id="Rate" VALUE=" " readonly required />
                             </div>
                         </div>
                         <div class="control-group">
@@ -1073,12 +1048,9 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Total</label>
                             <div class="controls">
-                                <input  type="text" name="Total" id="Total" value="<?php echo $total; ?>" readonly required />
+                                <input  type="text" name="Total" id="Total" value=" " readonly required />
                             </div>
                         </div>
-                            <div class="form-actions">
-                                <input name="Calculate" type="submit" value="Calculate" class="btn btn-success" required>
-                            </div>
                             <div class="form-actions">
                                 <input name="Submit" type="submit" value="Add" class="btn btn-success">
                             </div>
@@ -1095,15 +1067,74 @@ $agent_id_val = $row['ID'];
     <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>
 <!--end-Footer-part-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.ui.custom.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.uniform.js"></script>
-<script src="js/select2.min.js"></script>
-<script src="js/jquery.validate.js"></script>
-<script src="js/matrix.js"></script>
-<script src="js/matrix.form_validation.js"></script>
 
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.ui.custom.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-colorpicker.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.uniform.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/matrix.js"></script>
+<!--    <script src="js/matrix.form_common.js"></script>-->
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.uniform.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/matrix.form_validation.js"></script>
+<script>
+
+    $('#Amount').change(function() {
+
+        $var = Number($(this).val());
+
+        if ($var > 0 && $var <= 150){
+            $rate = 10;
+            $total = $var + $rate;
+        }
+
+        else if  ($var >= 151 && $var <= 400){
+            $rate = $var * 0.08;
+            $total = $var + $rate;
+        }
+        else if ($var >= 401 && $var <= 1000){
+            $rate = $var * 0.07;
+            $total = $var + $rate;
+        }
+        else if ($var >= 1001 && $var <= 3000){
+            $rate = $var * 0.06;
+            $total = $var + $rate;
+        }
+        else if ($var >= 3001 && $var <= 7000) {
+            $rate = $var * 0.05;
+            $total = $var + $rate;
+        }
+        else if ($var >= 7001 && $var < 1000){
+            $rate = $var * 0.04;
+            $total = $var + $rate;
+        }
+        else{
+            $total = 0;
+        }
+
+        $('#Rate').val($total);
+    });
+
+
+    $('#Charge').change(function() {
+
+        $chvar = Number($(this).val());
+        $amtotal = $total + $chvar;
+        $('#Total').val($amtotal);
+    });
+
+
+
+
+</script>
 </body>
 </html>
