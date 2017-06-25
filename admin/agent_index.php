@@ -677,14 +677,8 @@ $agent_id_val = $row['ID'];
                             <div class="control-group">
                                 <label class="control-label">Date picker (dd-mm)</label>
                                 <div class="controls">
-                                    <input type="text" data-date="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" data-date-format="yyyy-mm-dd" value="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" class="datepicker span11">
-                                    <span class="help-block">Date with Formate of  (dd-mm-yy)</span> </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Expiry Date </label>
-                                <div class="controls">
-                                    <input type="date" name="Sender_Expiary" id="Sender_Expiary" required>
-                                </div>
+                                    <input type="text" name="Sender_Expiary" id="Sender_Expiary" required data-date="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" data-date-format="yyyy-mm-dd" value="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" class="datepicker span11">
+                                    <span class="help-block">Date with Formate of  (yyy-mm-dd)</span> </div>
                             </div>
                     </div>
                 </div>

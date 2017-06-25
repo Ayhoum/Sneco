@@ -105,7 +105,7 @@ $rEmail       = $_POST['Receiver_Email'];
                     '{$reason}', 
                     '{$comment}',
                     now(),
-                    '{$comment}') ";
+                    'Pending') ";
 
 $result =  mysqli_query($mysqli, $query);
 if (!$result) {
