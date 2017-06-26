@@ -64,7 +64,7 @@ include ("../include/phpscripts/DB.php");
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];
         ?>
-        <li> <a href="accountantscripts/view_transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
+        <li> <a href="accountantscripts/transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
     </ul>
 </div>
 <!--sidebar-menu-->
@@ -82,7 +82,7 @@ include ("../include/phpscripts/DB.php");
         <div class="quick-actions_homepage">
             <ul class="quick-actions">
                 <li class="bg_lb span3"> <a href="accountant_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-                <li class="bg_lg span3"> <a href="accountantscripts/view_transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
+                <li class="bg_lg span3"> <a href="accountantscripts/transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
             </ul>
         </div>
         <!--End-Action boxes-->
