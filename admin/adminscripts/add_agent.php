@@ -16,6 +16,11 @@ if(isset($_POST['Submit'])) {
     $agArea       = $_POST['Agent_Area'];
     $agStats      = "Active";
 
+
+    $enccode = ['cost' => 11];
+    $encAgPassword = password_hash($agPassword, PASSWORD_BCRYPT, $enccode);
+
+
     if(!empty($agName) && !empty($agEmail) && !empty($agPassword) && !empty($agSt) && !empty($agHn) && !empty($agPc) && !empty($agCity) && !empty($agPhone) && !empty($agArea) && !empty($agStats)){
 //Insert Customerrrr into database::
     $query = "INSERT INTO AGENT(Agent_Name,
@@ -30,7 +35,7 @@ if(isset($_POST['Submit'])) {
                                 Agent_Status) ";
     $query .= "VALUES('{$agName}',
                     '{$agEmail}',
-                    '{$agPassword}',
+                    '{$encAgPassword}',
                     '{$agSt}',
                     '{$agHn}',
                     '{$agPc}',

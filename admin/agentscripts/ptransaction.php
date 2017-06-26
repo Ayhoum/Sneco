@@ -21,6 +21,8 @@ $query = "SELECT * FROM AGENT WHERE Agent_Email = '{$agent_email_get_id}' ";
 $select_agent_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_agent_by_id)){
     $agent_id_val = $row['ID'];
+    $agent_name = $row['Agent_Name'];
+
 }
 ?>
 <!DOCTYPE html>
@@ -44,7 +46,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 
 <!--Header-partttt-->
 <div id="header">
-    <h1><a href="../admin_index.php">Sneco Admin</a></h1>
+    <h1><a href="../agent_index.php">Sneco Agent</a></h1>
 </div>
 <!--close-Header-part-->
 
@@ -52,26 +54,29 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome User</span> <b class="caret"></b></a>
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Welcome <?php echo $agent_name; ?></span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a class="sAdd" title="" href="../logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </li>
-        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
     </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
-<div id="search">
-    <input type="text" placeholder="Search here..."/>
-    <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
+
 <!--close-top-serch-->
 <!--sidebar-menu-->
+
+<?php
+$query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed'";
+$counterc = mysqli_query($mysqli,$query);
+$num = mysqli_fetch_array($counterc);
+$countcTrans = $num["ID"];
+?>
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
     <ul>
         <li class="active"><a href="../agent_index.php"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important">0</span></a> <ul>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"><?php echo $countcTrans; ?></span></a> <ul>
                 <li><a href="transaction.php">All transactions </a></li>
                 <li><a href="ctransaction.php">Completed transactions </a></li>
                 <li><a href="ptransaction.php">Pending transactions</a></li>
@@ -85,12 +90,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
         $countTrans = $num["ID"];
         ?>
 
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed'";
-        $counterc = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counterc);
-        $countcTrans = $num["ID"];
-        ?>
+
         <?php
         if($countTrans == 0){
             $per = 0;
@@ -113,24 +113,30 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 </div>
 <!--sidebar-menu-->
 
-<!--main-container-part-->
+<?php
+if(isset($_SESSION['email'])){
+    $agent_email_get_id = $_SESSION['email'];
+}
+$query = "SELECT * FROM AGENT WHERE Agent_Email = '{$agent_email_get_id}' ";
+$select_agent_by_id = mysqli_query($mysqli, $query);
+while($row = mysqli_fetch_assoc($select_agent_by_id)){
+    $agent_id_val = $row['ID'];
+}
+?>
 <div id="content">
-    <!--breadcrumbs-->
     <div id="content-header">
-        <div id="breadcrumb"> <a href="index.html" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
-    </div>
-    <!--End-breadcrumbs-->
 
-    <!--Action boxes-->
+        <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
+
+    </div>
     <div class="container-fluid">
         <div class="quick-actions_homepage">
             <ul class="quick-actions">
-                <li class="bg_lb span3"> <a href="../admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+                <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
                 <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"></span> Transactions</a> </li>
 
             </ul>
         </div>
-        <!--End-Action boxes-->
 
         <div class="row-fluid">
             <div class="span12">

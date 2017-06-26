@@ -6,41 +6,96 @@ include '../include/phpscripts/DB.php';
 if(isset($_POST['login-form-submit'])) {
     $email = $_POST['login-form-username'];
     $pass = $_POST['login-form-password'];
-    $status = "Active";
+    $statusActive = "Active";
 
-    $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' AND Agent_Pass = '{$pass}' AND Agent_Status = '{$status}' ";
-    $result = mysqli_query($mysqli, $query);
-    if (mysqli_num_rows($result) == 1) {
-        $role = "Agent";
-        $_SESSION['email'] = $email;
-        $_SESSION['role']  = $role;
-        echo 'Welcome Agent';
-        header("Location: agent_index.php");
-    } else {
-        $query = "SELECT * From ADMIN WHERE Admin_Email = '{$email}' AND Admin_Password = '{$pass}' ";
-        $result = mysqli_query($mysqli, $query);
-        if (mysqli_num_rows($result) == 1) {
-            $role = "Admin";
-            $_SESSION['email'] = $email;
-            $_SESSION['role']  = $role;
-            echo " Welcome Admin";
-            header("Location: admin_index.php");
-
-        } else{
-            $query = "SELECT * From ACCOUNTANT WHERE Aco_Email = '{$email}' AND Aco_Password = '{$pass}' ";
-            $result = mysqli_query($mysqli, $query);
-            if (mysqli_num_rows($result) == 1) {
-                $role = "Accountant";
+    $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' ";
+    $getHashAgent = mysqli_query($mysqli, $query);
+    if (mysqli_num_rows($getHashAgent) == 1) {
+        while($row = mysqli_fetch_assoc($getHashAgent)) {
+            $hash = $row['Agent_Pass'];
+            $status = $row['Agent_Status'];
+            if ( (password_verify($pass, $hash)) && ($status == $statusActive) ) {
+                $role = "Agent";
                 $_SESSION['email'] = $email;
                 $_SESSION['role']  = $role;
-                echo " Welcome Accountant ";
-                header("Location: accountant_index.php");
-
+                echo 'Welcome Agent';
+                header("Location: agent_index.php");
             } else {
-            echo "Enter a Valid Data !! ";
+                echo "Enter a Valid Data !! ";
+            }
+        }
+    }else {
+        $query = "SELECT * From ADMIN WHERE Admin_Email = '{$email}' ";
+        $getHashAdmin = mysqli_query($mysqli, $query);
+        if (mysqli_num_rows($getHashAdmin) == 1) {
+            while($row = mysqli_fetch_assoc($getHashAdmin)) {
+                $hash = $row['Admin_Password'];
+                if (password_verify($pass, $hash)) {
+                    $role = "Admin";
+                    $_SESSION['email'] = $email;
+                    $_SESSION['role']  = $role;
+                    echo " Welcome Admin";
+                    header("Location: admin_index.php");
+                } else {
+                    echo "Enter a Valid Data !! ";
+                }
+            }
+        }else{
+            $query = "SELECT * From ACCOUNTANT WHERE Aco_Email = '{$email}' ";
+            $getHashAccountant = mysqli_query($mysqli, $query);
+            if (mysqli_num_rows($getHashAccountant) == 1) {
+                while($row = mysqli_fetch_assoc($getHashAccountant)) {
+                    $hash = $row['Aco_Password'];
+                    if (password_verify($pass, $hash)) {
+                        $role = "Accountant";
+                        $_SESSION['email'] = $email;
+                        $_SESSION['role']  = $role;
+                        echo " Welcome Accountant ";
+                        header("Location: accountant_index.php");
+                    } else {
+                        echo "Enter a Valid Data !! ";
+                    }
+                }
             }
         }
     }
+
+//    $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' AND Agent_Pass = '{$encAgPassword}' AND Agent_Status = '{$status}' ";
+//    $result = mysqli_query($mysqli, $query);
+//    if (mysqli_num_rows($result) == 1) {
+//        $role = "Agent";
+//        $_SESSION['email'] = $email;
+//        $_SESSION['role']  = $role;
+//        echo 'Welcome Agent';
+//        header("Location: agent_index.php");
+//    } else {
+//        $query = "SELECT * From ADMIN WHERE Admin_Email = '{$email}' AND Admin_Password = '{$encAgPassword}' ";
+//        $result = mysqli_query($mysqli, $query);
+//        if (mysqli_num_rows($result) == 1) {
+//            $role = "Admin";
+//            $_SESSION['email'] = $email;
+//            $_SESSION['role']  = $role;
+//            echo " Welcome Admin";
+//            header("Location: admin_index.php");
+//
+//        } else{
+//            $query = "SELECT * From ACCOUNTANT WHERE Aco_Email = '{$email}' AND Aco_Password = '{$encAgPassword}' ";
+//            $result = mysqli_query($mysqli, $query);
+//            if (mysqli_num_rows($result) == 1) {
+//                $role = "Accountant";
+//                $_SESSION['email'] = $email;
+//                $_SESSION['role']  = $role;
+//                echo " Welcome Accountant ";
+//                header("Location: accountant_index.php");
+//
+//            } else {
+//            echo "Enter a Valid Data !! ";
+//            echo $encAgPassword;
+//            echo $email;
+//
+//            }
+//        }
+//    }
 }
 ?>
 

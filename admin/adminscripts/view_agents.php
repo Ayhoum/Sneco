@@ -96,3 +96,9 @@ if(isset($_GET['activate'])){
     echo "Agent Activated!";
 }
 ?>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/matrix.tables.js"></script>
+

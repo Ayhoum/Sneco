@@ -11,6 +11,30 @@ if(!isset($_SESSION['role'])){
 ?>
 <?php
 include ("../include/phpscripts/DB.php");
+
+function users_online(){
+    global  $mysqli;
+    if(isset($_GET['onlineusers'])){
+        if(!$mysqli){
+            session_start();
+            $session = session_id();
+            $time = time();
+            $time_out_in_seconds = 05;
+            $time_out = $time - $time_out_in_seconds;
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $send_query = mysqli_query($mysqli, $query);
+            $count = mysqli_num_rows($send_query);
+            if($count == NULL){
+                mysqli_query($mysqli, "INSERT INTO users_online(session, time) VALUES('$session', '$time') ");
+            }else{
+                mysqli_query($mysqli, "UPDATE users_online SET time = '$time' WHERE session = '$session' ");
+            }
+            $users_online_query = mysqli_query($mysqli, "SELECT * FROM users_online WHERE time > '$time_out' ");
+            echo $count_user = mysqli_num_rows($users_online_query);
+        }
+    }
+}
+users_online();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,27 +56,24 @@ include ("../include/phpscripts/DB.php");
 
 <!--Header-partttt-->
 <div id="header">
-  <h1><a href="dashboard.html">Sneco Admin</a></h1>
+  <h1><a href="admin_index.php">Sneco Admin</a></h1>
 </div>
 <!--close-Header-part-->
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
-      <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome User</span> <b class="caret"></b></a>
+      <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome Admin</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
               <li><a class="sAdd" title="" href="logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
           </ul>
       </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
+    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="useronline label label-important"></span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
-<div id="search">
-  <input type="text" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
+
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
@@ -78,8 +99,8 @@ include ("../include/phpscripts/DB.php");
               <li><a href="adminscripts/add_agent.php">Add Agent</a></li>
           </ul>
       </li>
-    <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-    <li><a href="grid.html"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
+    <li><a href="adminscripts/users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
+    <li><a href="adminscripts/currency.php"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
 
   </ul>
 </div>
@@ -89,7 +110,7 @@ include ("../include/phpscripts/DB.php");
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
+    <div id="breadcrumb"> <a href="contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
   </div>
 <!--End-breadcrumbs-->
 
@@ -100,8 +121,8 @@ include ("../include/phpscripts/DB.php");
         <li class="bg_lb span3"> <a href="admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
         <li class="bg_lg span3"> <a href="adminscripts/transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
         <li class="bg_ls span3"> <a href="adminscripts/agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
-        <li class="bg_lb span3"> <a href="interface.html"> <i class="fa fa-money"></i>Currency Rates</a> </li>
+        <li class="bg_lo span3"> <a href="adminscripts/users.php"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
+        <li class="bg_lb span3"> <a href="adminscripts/currency.php"> <i class="fa fa-money"></i>Currency Rates</a> </li>
 
       </ul>
     </div>
@@ -188,28 +209,28 @@ include ("../include/phpscripts/DB.php");
 <script src="js/matrix.tables.js"></script> 
 
 <script type="text/javascript">
-  // This function is called from the pop-up menus to transfer to
-  // a different page. Ignore if the value returned is a null string:
-  function goPage (newURL) {
 
-      // if url is empty, skip the menu dividers and reset the menu selection to default
-      if (newURL != "") {
-
-          // if url is "-", it is this page -- reset the menu:
-          if (newURL == "-" ) {
-              resetMenu();
-          }
-          // else, send page to designated URL
-          else {
-            document.location.href = newURL;
-          }
-      }
-  }
 
 // resets the menu selection upon entry to this page:
 function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
+
+  function loadUsersOnline(){
+
+      $.get("onlineusers=result", function(data){
+
+          $(".useronline").text(data);
+
+      });
+
+  }
+
+  setInterval(function(){
+
+      loadUsersOnline();
+
+  },500);
 </script>
 </body>
 </html>

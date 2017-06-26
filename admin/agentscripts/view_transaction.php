@@ -128,3 +128,9 @@ if(isset($_GET['pending'])){
     echo "Agent Activated!";
 }
 ?>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/matrix.tables.js"></script>
+
