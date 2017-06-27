@@ -74,7 +74,7 @@ include '../../include/phpscripts/DB.php'
             </ul>
         </li>
         <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
             <ul>
                 <li><a href="currency.php">Current Currencies </a></li>
                 <li><a href="add_currency.php">Add Currencies</a></li>

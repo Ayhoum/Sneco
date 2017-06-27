@@ -69,7 +69,7 @@ users_online();
             </ul>
         </li>
         <li class=""><a title="" href="../index.php"><i class="icon icon-home"></i> <span class="text">Home Page</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important useronline"></span></a></li>
     </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -101,7 +101,7 @@ users_online();
           </ul>
       </li>
     <li><a href="adminscripts/users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
           <ul>
               <li><a href="adminscripts/currency.php">Current Currencies </a></li>
               <li><a href="adminscripts/add_currency.php">Add Currencies</a></li>
