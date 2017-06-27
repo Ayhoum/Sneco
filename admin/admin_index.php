@@ -62,14 +62,15 @@ users_online();
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
-  <ul class="nav">
-      <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome Admin</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-              <li><a class="sAdd" title="" href="logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-          </ul>
-      </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="useronline label label-important"></span></a></li>
-  </ul>
+    <ul class="nav">
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome Admin</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="sAdd" title="" href="logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            </ul>
+        </li>
+        <li class=""><a title="" href="../index.php"><i class="icon icon-home"></i> <span class="text">Home Page</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
+    </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
@@ -100,7 +101,12 @@ users_online();
           </ul>
       </li>
     <li><a href="adminscripts/users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-    <li><a href="adminscripts/currency.php"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+          <ul>
+              <li><a href="adminscripts/currency.php">Current Currencies </a></li>
+              <li><a href="adminscripts/add_currency.php">Add Currencies</a></li>
+          </ul>
+      </li>
 
   </ul>
 </div>

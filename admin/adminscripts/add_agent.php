@@ -81,14 +81,15 @@ if(isset($_POST['Submit'])) {
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
-  <ul class="nav">
-      <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome User</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-              <li><a class="sAdd" title="" href="#"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-          </ul>
-      </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
-  </ul>
+    <ul class="nav">
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="fa fa-lock"></i>  <span class="text">Welcome Admin</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="sAdd" title="" href="../logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            </ul>
+        </li>
+        <li class=""><a title="" href="../index.php"><i class="icon icon-home"></i> <span class="text">Home Page</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-users"></i> <span class="text">Online Users Now</span> <span class="label label-important">0</span></a></li>
+    </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
@@ -99,19 +100,37 @@ if(isset($_POST['Submit'])) {
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
-  <ul>
-    <li class="active"><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
-    <li> <a href="charts.html"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important">0</span></a> </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span></a>
-          <ul>
-              <li><a href="form-common.html">Current Agents</a></li>
-              <li><a href="form-validation.html">Add Agent</a></li>
-          </ul>
-      </li>
-    <li><a href="tables.html"><i class="fa fa-users"></i> <span>Users</span></a></li>
-    <li><a href="grid.html"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
+    <ul>
+        <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <?php
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSITION";
+        $counter = mysqli_query($mysqli,$query);
+        $num = mysqli_fetch_array($counter);
+        $countTrans = $num["ID"];
+        ?>
 
-  </ul>
+        <?php
+        $query = "SELECT COUNT(*)  AS ID FROM AGENT";
+        $counter = mysqli_query($mysqli,$query);
+        $num = mysqli_fetch_array($counter);
+        $countAgent = $num["ID"];
+        ?>
+        <li> <a href="transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+            <ul>
+                <li><a href="agents.php">Current Agents </a></li>
+                <li><a href="add_agent.php">Add Agent</a></li>
+            </ul>
+        </li>
+        <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+            <ul>
+                <li><a href="currency.php">Current Currencies </a></li>
+                <li><a href="add_currency.php">Add Currencies</a></li>
+            </ul>
+        </li>
+
+    </ul>
 </div>
 <!--sidebar-menu-->
 
@@ -119,22 +138,22 @@ if(isset($_POST['Submit'])) {
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
+    <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
   </div>
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
   <div class="container-fluid">
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_lb span3"> <a href="index.html"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="fa fa-exchange"></i> <span class="label label-important">0</span> Transactions</a> </li>
-        <li class="bg_ls span3"> <a href="grid.html"> <i class="fa fa-pencil"></i> Agents</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> Users</a> </li>
-        <li class="bg_lb span3"> <a href="interface.html"> <i class="fa fa-money"></i>Currency Rates</a> </li>
+      <div class="quick-actions_homepage">
+          <ul class="quick-actions">
+              <li class="bg_lb span3"> <a href="../admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+              <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
+              <li class="bg_ls span3"> <a href="agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
+              <li class="bg_lo span3"> <a href="users.php"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
+              <li class="bg_lb span3"> <a href="currency.php"> <i class="fa fa-money"></i>Currency Rates</a> </li>
 
-      </ul>
-    </div>
+          </ul>
+      </div>
 <!--End-Action boxes-->
 
       <div class="container-fluid"><hr>

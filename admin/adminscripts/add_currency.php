@@ -1,8 +1,33 @@
 <?php
-ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
+<?php
+if(isset($_POST['Submit'])) {
+    //Sender
 
+    $curNameFr       = $_POST['Currency_From'];
+    $curNameTo       = $_POST['Currency_To'];
+    $Value           = $_POST['Value'];
+
+
+    if(!empty($curNameFr) && !empty($curNameTo) && !empty($Value)){
+//Insert Customerrrr into database::
+        $query = "INSERT INTO Currencies(CurNameFr,
+                                CurNameTo,
+                                Value) ";
+        $query .= "VALUES('{$curNameFr}',
+                    '{$curNameTo}',
+                    '{$Value}') ";
+
+        $result =  mysqli_query($mysqli, $query);
+        if (!$result) {
+            die("Failed!" . mysqli_error($mysqli));
+        }else{
+            header("Location: currency.php");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +74,7 @@ include '../../include/phpscripts/DB.php'
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="../admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
         <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <?php
@@ -106,18 +131,54 @@ include '../../include/phpscripts/DB.php'
         </div>
         <!--End-Action boxes-->
 
-        <div class="row-fluid">
-            <div class="span12">
-
-<?php
-        include "view_agents.php";
-?>
-
-</div>
+        <div class="container-fluid"><hr>
+            <div class="row-fluid">
+                <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                                <h5>New Currency</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Currency Name (From)</label>
+                                    <div class="controls">
+                                        <input type="text" name="Currency_From" id="Currency_From" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Currency Name (To)</label>
+                                    <div class="controls">
+                                        <input type="text" name="Currency_To" id="Currency_To" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Value</label>
+                                    <div class="controls">
+                                        <input type="text" name="Value" id="Value" required>
+                                    </div>
+                                </div>
+                                    <div class="widget-content nopadding">
+                                        <div class="form-actions">
+                                            <input name="Submit" type="submit" value="Add" class="btn btn-success">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
         </div>
+
+
         <!--End-Chart-box-->
         <hr/>
-
+        <div class="row-fluid">
+            <div class="span6">
+            </div>
+            <div class="span6">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -139,8 +200,6 @@ include '../../include/phpscripts/DB.php'
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/matrix.tables.js"></script>
 
 </body>
 </html>
