@@ -14,21 +14,18 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th style="background: #c9302c;color: #fff">MTRN</th>
                                     <th>Sneder Name</th>
                                     <th>Sneder Email</th>
-                                    <th>Sender Country</th>
-                                    <th>Sneder Bank Account</th>
-                                    <th>Sender Nationality</th>
                                     <th>Expiary Date</th>
                                     <th>Receiver Name</th>
                                     <th>Receiver Email</th>
                                     <th>Receiver Country</th>
-                                    <th>Amount with Current Currency</th>
+                                    <th>Amount in Sent Currency</th>
                                     <th>Payment Currency</th>
                                     <th>Total Amount</th>
                                     <th>Rate</th>
                                     <th>Charge</th>
-                                    <th>Reason</th>
                                     <th>Status</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
@@ -41,13 +38,11 @@
                                 $select_posts = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_posts)){
                                     $id = $row['ID'];
+                                    $mtrn = $row['MTRN1'] . " " . $row['MTRN2'] . " " . $row['MTRN3'] . " " . $row['MTRN4'] . " " . $row['MTRN5'] . " " . $row['MTRN6'] . " " . $row['MTRN7'] . " " . $row['MTRN8'] . " " . $row['MTRN9'] . " " . $row['MTRN10'] ;
                                     $agent_id = $row['Agent_ID'];
                                     $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
                                     $sender_email = $row['Sender_Email'];
-                                    $sender_country = $row['Sender_Country'];
-                                    $sender_bankaccount = $row['Sender_BankAcount'];
                                     $sender_idnumber = $row['Sender_IdNumber'];
-                                    $sender_nationality = $row['Sender_Nationality'];
                                     $sender_expiary = $row['Sender_IdExp'];
                                     $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
                                     $receiver_email = $row['Receiver_Email'];
@@ -57,7 +52,6 @@
                                     $total_amount = $row['Total_Amount'];
                                     $rate = $row['Rate'];
                                     $charge = $row['Charge'];
-                                    $reason = $row['Reason'];
                                     $status = $row['Status'];
                                     $timestamp = strtotime($row['Time']);
                                     $date = date('Y-m-d',$timestamp);
@@ -67,11 +61,9 @@
                                     ?>
                                     <?php
                                     echo "<td>$id</td>";
+                                    echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                     echo "<td>$sender_name</td>";
                                     echo "<td>$sender_email</td>";
-                                    echo "<td>$sender_country</td>";
-                                    echo "<td>$sender_bankaccount</td>";
-                                    echo "<td>$sender_nationality</td>";
                                     echo "<td>$sender_expiary</td>";
                                     echo "<td>$receiver_name</td>";
                                     echo "<td>$receiver_email</td>";
@@ -81,8 +73,12 @@
                                     echo "<td>$total_amount</td>";
                                     echo "<td>$rate</td>";
                                     echo "<td>$charge</td>";
-                                    echo "<td>$reason</td>";
-                                    echo "<td>$status</td>";
+                                    if($status == 'Pending'){
+                                        $back = "background:;color:;";
+                                    }else{
+                                        $back = "background:#C39527;color:#fff;";
+                                    }
+                                    echo "<td style='$back' >$status</td>";
 
 
 

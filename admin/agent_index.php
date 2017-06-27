@@ -669,7 +669,7 @@ $agent_id_val = $row['ID'];
                             <div class="control-group">
                                 <label class="control-label">Bank Account</label>
                                 <div class="controls">
-                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" required>
+                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount">
                                 </div>
                             </div>
                             <div class="control-group">
