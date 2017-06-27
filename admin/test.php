@@ -2,7 +2,7 @@
 
 require_once('../include/phpmailer/class.phpmailer.php');
 
-$mail             = new PHPMailer1(); // defaults to using php "mail()"
+$mail             = new PHPMailer(); // defaults to using php "mail()"
 
 $body             = file_get_contents('contents.html');
 $body             = eregi_replace("[\]",'',$body);
