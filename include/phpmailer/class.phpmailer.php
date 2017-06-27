@@ -25,7 +25,7 @@
  * @author Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author Brent R. Matzelle (original founder)
  */
-class PHPMailer
+class PHPMailer1
 {
     /**
      * The PHPMailer Version number.

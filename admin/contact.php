@@ -1,3 +1,23 @@
+<?php
+if(isset($_POST['Submit'])){
+
+    $to      ='semsemea.a@hotmail.com';
+    $subject = $_POST['subject'];
+    $msg     = $_POST['message'];
+    $headers  = "CC: aylosa@outlook.com". "\r\n";
+    $headers .= 'Error Type: '.$_POST['error'];
+        //send email
+        mail($to, $subject, $msg, $headers);
+
+        //Email response
+        echo "Thank you for contacting us!";
+} else {
+        echo "Your Email cannot be sent at this moment; try again later ";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +42,7 @@
     <!--close-top-Header-menu-->
     <div class="container-fluid"><hr>
         <div class="row-fluid">
-            <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="contact.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
@@ -44,7 +64,7 @@
                             <div class="control-group">
                                 <label class="control-label">Error</label>
                                 <div class="controls">
-                                    <select style="width:215px;" name="Error" id="Error">
+                                    <select style="width:215px;" name="error" id="Error">
                                         <option value="">-- select one --</option>
                                         <option value="Login Page">Login Page</option>
                                         <option value="Add a Transaction">Add a Transaction</option>
