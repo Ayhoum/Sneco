@@ -38,6 +38,16 @@ $rEmail       = $_POST['Receiver_Email'];
     $charge = $_POST['Charge'];
     $reason = $_POST['Reason'];
     $comment = $_POST['Comment'];
+    $mtrn1 = rand(0, 9);
+    $mtrn2 = rand(0, 9);
+    $mtrn3 = rand(0, 9);
+    $mtrn4 = rand(0, 9);
+    $mtrn5 = rand(0, 9);
+    $mtrn6 = rand(0, 9);
+    $mtrn7 = rand(0, 9);
+    $mtrn8 = rand(0, 9);
+    $mtrn9 = rand(0, 9);
+    $mtrn10 = rand(0, 9);
 
 //Insert Customerrrr into database::
     $query = "INSERT INTO TRANSITION(Agent_ID,
@@ -72,6 +82,16 @@ $rEmail       = $_POST['Receiver_Email'];
                                     Reason, 
                                     Comment,
                                     Time,
+                                    MTRN1,
+                                    MTRN2,
+                                    MTRN3,
+                                    MTRN4,
+                                    MTRN5,
+                                    MTRN6,
+                                    MTRN7,
+                                    MTRN8,
+                                    MTRN9,
+                                    MTRN10,
                                     Status) ";
     $query .= "VALUES('{$Agent_id}',
                     '{$sfName}', 
@@ -105,6 +125,16 @@ $rEmail       = $_POST['Receiver_Email'];
                     '{$reason}', 
                     '{$comment}',
                     now(),
+                    '{$mtrn1}',
+                    '{$mtrn2}',
+                    '{$mtrn3}',
+                    '{$mtrn4}',
+                    '{$mtrn5}',
+                    '{$mtrn6}',
+                    '{$mtrn7}',
+                    '{$mtrn8}',
+                    '{$mtrn9}',
+                    '{$mtrn10}',
                     'Pending') ";
 
 $result =  mysqli_query($mysqli, $query);
