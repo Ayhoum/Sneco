@@ -38,6 +38,7 @@
                                 $select_trans = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_trans)){
                                     $id = $row['ID'];
+                                    $accountId = $row['Account_ID'];
                                     $mtrn1  = $row['MTRN1'];
                                     $mtrn2  = $row['MTRN2'];
                                     $mtrn3  = $row['MTRN3'];
@@ -95,7 +96,7 @@
 
 
 
-                                    echo "<td><a href='transaction.php?delete=$id'>Delete</a></td>";
+                                    echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_fname}&senderl={$sender_lname}&receiverf={$receiver_fname}&receiverl={$receiver_lname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'>Delete</a></td>";
                                     echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
 
 
@@ -128,6 +129,8 @@ if(isset($_GET['delete'])){
     $id = $_GET['delete'];
     $query = "DELETE FROM TRANSITION WHERE ID = {$id} ";
     $delete_query = mysqli_query($mysqli, $query);
+    $filelink = "../pdf/{$fsender_name}{$lsender_name}{$freceiver_name}{$lreceiver_name}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf";
+    unlink($filelink) or die("Couldn't delete file");
     header("Location: transaction.php");
 }
 ?>
