@@ -15,7 +15,6 @@
             $var2 = ish2;
         }
 
-
         // get the most recent exchange rates via the "live" endpoint:
 function convert (var1,var2) {
     endpoint = 'live';
