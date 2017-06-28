@@ -145,6 +145,7 @@ if (!$result) {
 die("Failed!" . mysqli_error($mysqli));
 }else{
     header("Location: agentscripts/gpdf.php?sender={$sfName}&m1={$mtrn1}&m2={$mtrn2}&m3={$mtrn3}&m4={$mtrn4}&m5={$mtrn5}&m6={$mtrn6}&m7={$mtrn7}&m8={$mtrn8}&m9={$mtrn9}&m10={$mtrn10}");
+    header("Location: ../test.php");
 }
 }
 ?>
