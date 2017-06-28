@@ -74,22 +74,22 @@ if(isset($_POST['Submit'])){
                             <h5>Send Email</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <div class="control-group" style="width: 100%;">
+                            <div class="control-group" >
                                 <label class="control-label">Subject</label>
                                 <div class="controls">
-                                    <input type="text" name="subject" id="subject"  required>
+                                    <input type="text" name="subject" style="width: 100%;" id="subject"  required>
                                 </div>
                             </div>
-                            <div class="control-group" style="width: 100%;">
+                            <div class="control-group" >
                                 <label class="control-label">Message</label>
                                 <div class="controls">
-                                    <textarea name="message" id="subject" required></textarea>
+                                    <textarea name="message" id="subject" style="width: 100%;" required></textarea>
                                 </div>
                             </div>
-                            <div class="control-group" style="width: 100%;">
+                            <div class="control-group" >
                                 <label class="control-label">Error</label>
-                                <div class="controls">
-                                    <select style="width:215px;" name="error" id="Error">
+                                <div class="controls" >
+                                    <select style="width:215px;" name="error" id="Error" style="width: 100%;">
                                         <option value="">-- select one --</option>
                                         <option value="Login Page">Login Page</option>
                                         <option value="Add a Transaction">Add a Transaction</option>
