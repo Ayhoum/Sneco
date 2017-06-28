@@ -13,6 +13,15 @@ if(isset($_GET['senderf']) && isset($_GET['senderl']) && isset($_GET['receiverf'
     $agentid        = $_GET['agentid'];
     $accountid      = $_GET['accountid'];
 }
+//echo $senderf;
+//echo $senderl ;
+//echo $receiverf ;
+//echo $receiverl;
+//echo $mtrn1 ;
+//echo $mtrn5 ;
+//echo $mtrn10;
+//echo $agentid;
+//echo $accountid;
 
 $mail             = new PHPMailer(); // defaults to using php "mail()"
 
