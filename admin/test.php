@@ -40,6 +40,6 @@ $mail->AddAttachment("pdf/{$senderf}{$senderl}{$receiverf}{$receiverl}{$mtrn1}{$
 if(!$mail->Send()) {
 echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    header("Location: transaction.php");
+    header("Location: agentscripts/transaction.php");
 }
 ?>
