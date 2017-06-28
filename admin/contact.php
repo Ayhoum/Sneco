@@ -35,6 +35,31 @@ if(isset($_POST['Submit'])){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<div id="header">
+    <h1><a href="agent_index.php">Sneco Agent</a></h1>
+</div>
+<!--close-Header-part-->
+
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+    <ul class="nav">
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Welcome To Contact</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="sAdd" title="" href="logout.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            </ul>
+        </li>
+        <li class=""><a title="" href="javascript:history.go(-1)"><i class="icon icon-home"></i> <span class="text">Home Page</span></a></li>
+    </ul>
+</div>
+<!--close-top-Header-menu-->
+<!--start-top-serch-->
+
+<!--close-top-serch-->
+<!--sidebar-menu-->
+
+</div>
+<!--sidebar-menu-->
 <!--main-container-part-->
 <div id="content">
     <!--breadcrumbs-->
