@@ -50,12 +50,28 @@ if(!isset($_SESSION['role'])){
                                 $select_posts = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_posts)){
                                     $id = $row['ID'];
+                                    $agent_id = $row['Agent_ID'];
+                                    $account_Id = $row['Account_ID'];
+                                    $mtrn1  = $row['MTRN1'];
+                                    $mtrn2  = $row['MTRN2'];
+                                    $mtrn3  = $row['MTRN3'];
+                                    $mtrn4  = $row['MTRN4'];
+                                    $mtrn5  = $row['MTRN5'];
+                                    $mtrn6  = $row['MTRN6'];
+                                    $mtrn7  = $row['MTRN7'];
+                                    $mtrn8  = $row['MTRN8'];
+                                    $mtrn9  = $row['MTRN9'];
+                                    $mtrn10 = $row['MTRN10'];
                                     $mtrn = $row['MTRN1'] . " " . $row['MTRN2'] . " " . $row['MTRN3'] . " " . $row['MTRN4'] . " " . $row['MTRN5'] . " " . $row['MTRN6'] . " " . $row['MTRN7'] . " " . $row['MTRN8'] . " " . $row['MTRN9'] . " " . $row['MTRN10'] ;
                                     $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                    $sender_fname = $row['Sender_fName'];
+                                    $sender_lname = $row['Sender_lName'];
                                     $sender_email = $row['Sender_Email'];
                                     $sender_idnumber = $row['Sender_IdNumber'];
                                     $sender_expiary = $row['Sender_IdExp'];
                                     $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+                                    $receiver_fname = $row['Receiver_fName'];
+                                    $receiver_lname = $row['Receiver_lName'];
                                     $receiver_email = $row['Receiver_Email'];
                                     $receiver_country = $row['Receiver_Country'];
                                     $amount = $row['Amount'] . " " . $row['Current_Currency'];
@@ -68,6 +84,7 @@ if(!isset($_SESSION['role'])){
                                     echo "<tr>";
                                     ?>
                                     <?php
+                                    $fee = $rate - $amount;
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                     echo "<td>$sender_name</td>";
@@ -79,7 +96,7 @@ if(!isset($_SESSION['role'])){
                                     echo "<td>$amount</td>";
                                     echo "<td>$payment_currency</td>";
                                     echo "<td>$total_amount</td>";
-                                    echo "<td>$rate</td>";
+                                    echo "<td>$fee</td>";
                                     echo "<td>$charge</td>";
                                     if($status == 'Pending'){
                                         $back = "background:;color:;";
@@ -92,7 +109,7 @@ if(!isset($_SESSION['role'])){
                                     echo "<td><a href='transaction.php?complete=$id'>Complete</a></td>";
                                     echo "<td><a href='transaction.php?pending=$id'>Pending</a></td>";
 
-                                    echo "<td>Download</td>";
+                                    echo "<td><a href='../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf'>Download</a></td>";
 
 
 

@@ -35,16 +35,29 @@
                                 <tbody>
                                 <?php
                                 $query = "SELECT * FROM TRANSITION ORDER BY ID DESC";
-                                $select_posts = mysqli_query($mysqli, $query);
-                                while($row = mysqli_fetch_assoc($select_posts)){
+                                $select_trans = mysqli_query($mysqli, $query);
+                                while($row = mysqli_fetch_assoc($select_trans)){
                                     $id = $row['ID'];
-                                    $mtrn = $row['MTRN1'] . " " . $row['MTRN2'] . " " . $row['MTRN3'] . " " . $row['MTRN4'] . " " . $row['MTRN5'] . " " . $row['MTRN6'] . " " . $row['MTRN7'] . " " . $row['MTRN8'] . " " . $row['MTRN9'] . " " . $row['MTRN10'] ;
+                                    $mtrn1  = $row['MTRN1'];
+                                    $mtrn2  = $row['MTRN2'];
+                                    $mtrn3  = $row['MTRN3'];
+                                    $mtrn4  = $row['MTRN4'];
+                                    $mtrn5  = $row['MTRN5'];
+                                    $mtrn6  = $row['MTRN6'];
+                                    $mtrn7  = $row['MTRN7'];
+                                    $mtrn8  = $row['MTRN8'];
+                                    $mtrn9  = $row['MTRN9'];
+                                    $mtrn10 = $row['MTRN10'];
                                     $agent_id = $row['Agent_ID'];
                                     $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                    $sender_fname = $row['Sender_fName'];
+                                    $sender_lname = $row['Sender_lName'];
                                     $sender_email = $row['Sender_Email'];
                                     $sender_idnumber = $row['Sender_IdNumber'];
                                     $sender_expiary = $row['Sender_IdExp'];
                                     $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+                                    $receiver_fname = $row['Receiver_fName'];
+                                    $receiver_lname = $row['Receiver_lName'];
                                     $receiver_email = $row['Receiver_Email'];
                                     $receiver_country = $row['Receiver_Country'];
                                     $amount = $row['Amount'] . " " . $row['Current_Currency'];
@@ -61,7 +74,7 @@
                                     ?>
                                     <?php
                                     echo "<td>$id</td>";
-                                    echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
+                                    echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
                                     echo "<td>$sender_name</td>";
                                     echo "<td>$sender_email</td>";
                                     echo "<td>$sender_expiary</td>";
@@ -93,7 +106,7 @@
                                         $agent_place = $row['Agent_Area'];
                                     }
 
-                                    echo "<td><a href='../../pdf.php?agent_code={$agent_id}&place={$agent_place}&time={$time}&date={$date}&sender_name={$sender_name}&sender_email={$sender_email}'>Download</a></td>";
+                                    echo "<td><a href='../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}.pdf'>Download</a></td>";
 
 
 

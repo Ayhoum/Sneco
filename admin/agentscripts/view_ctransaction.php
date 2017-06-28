@@ -52,7 +52,19 @@ if(!isset($_SESSION['role'])){
                             $select_posts = mysqli_query($mysqli, $query);
                             while($row = mysqli_fetch_assoc($select_posts)){
                                 $id = $row['ID'];
+                                $mtrn1  = $row['MTRN1'];
+                                $mtrn2  = $row['MTRN2'];
+                                $mtrn3  = $row['MTRN3'];
+                                $mtrn4  = $row['MTRN4'];
+                                $mtrn5  = $row['MTRN5'];
+                                $mtrn6  = $row['MTRN6'];
+                                $mtrn7  = $row['MTRN7'];
+                                $mtrn8  = $row['MTRN8'];
+                                $mtrn9  = $row['MTRN9'];
+                                $mtrn10 = $row['MTRN10'];
                                 $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                $sender_fname = $row['Sender_fName'];
+                                $sender_lname = $row['Sender_lName'];
                                 $sender_email = $row['Sender_Email'];
                                 $sender_country = $row['Sender_Country'];
                                 $sender_bankaccount = $row['Sender_BankAcount'];
@@ -60,6 +72,8 @@ if(!isset($_SESSION['role'])){
                                 $sender_nationality = $row['Sender_Nationality'];
                                 $sender_expiary = $row['Sender_IdExp'];
                                 $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+                                $receiver_fname = $row['Receiver_fName'];
+                                $receiver_lname = $row['Receiver_lName'];
                                 $receiver_email = $row['Receiver_Email'];
                                 $receiver_country = $row['Receiver_Country'];
                                 $amount = $row['Amount'] . " " . $row['Current_Currency'];
@@ -94,7 +108,7 @@ if(!isset($_SESSION['role'])){
                                 echo "<td><a href='ctransaction.php?complete=$id'>Complete</a></td>";
                                 echo "<td><a href='ctransaction.php?pending=$id'>Pending</a></td>";
 
-                                echo "<td>Download</td>";
+                                echo "<td><a href='../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}.pdf'>Download</a></td>";
 
 
 

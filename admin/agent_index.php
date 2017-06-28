@@ -1,10 +1,9 @@
 <?php
 ob_start();
+include("../include/phpscripts/DB.php");
 require 'agentscripts/agent.php';
+date_default_timezone_set('Europe/Amsterdam');
 //include 'rate.php';
-?>
-<?php
-include '../include/phpscripts/DB.php'
 ?>
 <?php
 session_start();
@@ -679,7 +678,6 @@ $agent_id_val = $row['ID'];
                                 </div>
                             </div>
                             <?php
-                            date_default_timezone_set('Europe/Amsterdam');
                             ?>
                             <div class="control-group">
                                 <label class="control-label">Date picker (dd-mm)</label>
@@ -1010,6 +1008,8 @@ $agent_id_val = $row['ID'];
                                 <input type="text" name="Amount" id="Amount" required />
                             </div>
                         </div>
+
+
                         <div class="control-group">
                             <label class="control-label">Current Currency</label>
                             <div class="controls">
@@ -1083,6 +1083,9 @@ $agent_id_val = $row['ID'];
     <script src="js/matrix.form_validation.js"></script>
 <script>
 
+
+
+
     $('#Amount').change(function() {
 
         $var = Number($(this).val());
@@ -1116,20 +1119,19 @@ $agent_id_val = $row['ID'];
             $total = 0;
         }
 
-        $('#Rate').val($total);
+        $('#Rate').val($rate);
     });
-
 
     $('#Charge').change(function() {
 
         $chvar = Number($(this).val());
-        $amtotal = $total + $chvar;
-        $('#Total').val($amtotal);
+        $amtotal = $var * $chvar;
+        $total = $amtotal + $rate;
+        $('#Total').val($total);
     });
 
 
-
-
 </script>
+
 </body>
 </html>

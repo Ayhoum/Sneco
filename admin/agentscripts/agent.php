@@ -1,10 +1,12 @@
 <?php
-include '../include/phpscripts/DB.php'
+ob_start();
+date_default_timezone_set('Europe/Amsterdam');
 ?>
 <?php
 if(isset($_POST['Submit'])) {
          //Sender
 $Agent_id     = $_POST['Agent_ID'];
+$noAcc        = "NaN";
 $sfName       = $_POST['Sender_fName'];
 $slName       = $_POST['Sender_lName'];
 $sStreetName  = $_POST['Sender_StreetName'];
@@ -48,9 +50,9 @@ $rEmail       = $_POST['Receiver_Email'];
     $mtrn8 = rand(0, 9);
     $mtrn9 = rand(0, 9);
     $mtrn10 = rand(0, 9);
-
 //Insert Customerrrr into database::
     $query = "INSERT INTO TRANSITION(Agent_ID,
+                                    Account_ID,
                                     Sender_fName,
                                     Sender_lName, 
                                     Sender_Phone, 
@@ -94,6 +96,7 @@ $rEmail       = $_POST['Receiver_Email'];
                                     MTRN10,
                                     Status) ";
     $query .= "VALUES('{$Agent_id}',
+                    '{$noAcc}',
                     '{$sfName}', 
                     '{$slName}', 
                     '{$sPhone}', 
@@ -124,7 +127,7 @@ $rEmail       = $_POST['Receiver_Email'];
                     '{$charge}', 
                     '{$reason}', 
                     '{$comment}',
-                    now(),
+                    date('Y-m-d H:i:s'),
                     '{$mtrn1}',
                     '{$mtrn2}',
                     '{$mtrn3}',
@@ -140,6 +143,8 @@ $rEmail       = $_POST['Receiver_Email'];
 $result =  mysqli_query($mysqli, $query);
 if (!$result) {
 die("Failed!" . mysqli_error($mysqli));
+}else{
+    header("Location: agentscripts/gpdf.php?sender={$sfName}&m1={$mtrn1}&m2={$mtrn2}&m3={$mtrn3}&m4={$mtrn4}&m5={$mtrn5}&m6={$mtrn6}&m7={$mtrn7}&m8={$mtrn8}&m9={$mtrn9}&m10={$mtrn10}");
 }
 }
 ?>
