@@ -33,8 +33,8 @@ $mail->Subject    = "Your Invoice";
 //$mail->AltBody    = ""; // optional, comment out and test
 
 $mail->MsgHTML($body);
-
-$mail->AddAttachment("pdf/{$senderf}{$senderl}{$receiverf}{$receiverl}{$mtrn1}{$mtrn5}{$mtrn10}{$agentid}{$accountid}.pdf\"");      // attachment
+$pdf= "{$senderf}{$senderl}{$receiverf}{$receiverl}{$mtrn1}{$mtrn5}{$mtrn10}{$agentid}{$accountid}.pdf";
+$mail->AddAttachment("pdf/$pdf");      // attachment
 //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
 
 if(!$mail->Send()) {
