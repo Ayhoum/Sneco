@@ -26,7 +26,7 @@ $address = "aylosa@outlook.com";
 $address1= "semsemea.a@hotmail.com";
 
 $mail->AddAddress($address, "Ayham Najem");
-$email->AddCC($address1, "Alaa Semsemea");
+$mail->AddCC($address1, "Alaa Semsemea");
 
 $mail->Subject    = "Your Invoice";
 
