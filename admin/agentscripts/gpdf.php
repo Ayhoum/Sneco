@@ -18,8 +18,6 @@ if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($
 
 }
 
-
-
 $query = "SELECT * FROM TRANSITION WHERE Sender_fName = '{$sender}' AND MTRN1 = '{$mtrn1}' AND  MTRN2 = '{$mtrn2}' AND  MTRN3 = '{$mtrn3}' AND  MTRN4 = '{$mtrn4}' AND  MTRN5 = '{$mtrn5}' AND  MTRN6 = '{$mtrn6}' AND  MTRN7 = '{$mtrn7}' AND  MTRN8 = '{$mtrn8}' AND  MTRN9 = '{$mtrn9}' AND  MTRN10 = '{$mtrn10}'";
 $select_trans = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans)) {
@@ -243,4 +241,5 @@ $dompdf->render();
 $output = $dompdf->output();
 file_put_contents("../pdf/{$fsender_name}{$lsender_name}{$freceiver_name}{$lreceiver_name}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
 
-header("Location: transaction.php");
+header("Location: ../test.php?senderf='{$fsender_name}'&senderl='{$lsender_name}'&receiverf='{$freceiver_name}'&receiverl='{$lreceiver_name}'&mtrn1'{$mtrn1}'&mtrn5'{$mtrn5}'&mtrn10='{$mtrn10}'&agentid='{$agent_id}'&accountid='{$account_Id}'");
+

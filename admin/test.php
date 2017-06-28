@@ -1,8 +1,18 @@
 <?php
-require_once('agentscripts/gpdf.php');
-require_once('phpmailer/class.phpmailer.php');
+require_once('../include/phpmailer/class.phpmailer.php');
 
+if(isset($_GET['senderf']) && isset($_GET['senderl']) && isset($_GET['receiverf']) && isset($_GET['receiverl']) && isset($_GET['mtrn1']) && isset($_GET['mtrn5']) && isset($_GET['mtrn10']) && isset($_GET['agentid']) && isset($_GET['accountid'])) {
 
+    $senderf        = $_GET['senderf'];
+    $senderl        = $_GET['senderl'];
+    $receiverf      = $_GET['receiverf'];
+    $receiverl      = $_GET['receiverl'];
+    $mtrn1          = $_GET['mtrn1'];
+    $mtrn5          = $_GET['mtrn5'];
+    $mtrn10         = $_GET['mtrn10'];
+    $agentid        = $_GET['agentid'];
+    $accountid      = $_GET['accountid'];
+}
 
 $mail             = new PHPMailer(); // defaults to using php "mail()"
 
@@ -24,12 +34,12 @@ $mail->Subject    = "Your Invoice";
 
 $mail->MsgHTML($body);
 
-$mail->AddAttachment("pdf/{$fsender_name}{$lsender_name}{$freceiver_name}{$lreceiver_name}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf\"");      // attachment
+$mail->AddAttachment("pdf/{$senderf}{$senderl}{$receiverf}{$receiverl}{$mtrn1}{$mtrn5}{$mtrn10}{$agentid}{$accountid}.pdf\"");      // attachment
 //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
 
 if(!$mail->Send()) {
 echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-echo "Message sent!";
+    header("Location: transaction.php");
 }
 ?>
