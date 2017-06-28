@@ -241,5 +241,5 @@ $dompdf->render();
 $output = $dompdf->output();
 file_put_contents("../pdf/{$fsender_name}{$lsender_name}{$freceiver_name}{$lreceiver_name}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
 
-header("Location: ../test.php?senderf='{$fsender_name}'&senderl='{$lsender_name}'&receiverf='{$freceiver_name}'&receiverl='{$lreceiver_name}'&mtrn1'{$mtrn1}'&mtrn5'{$mtrn5}'&mtrn10='{$mtrn10}'&agentid='{$agent_id}'&accountid='{$account_Id}'");
+header("Location: ../test.php?senderf={$fsender_name}&senderl={$lsender_name}&receiverf={$freceiver_name}&receiverl={$lreceiver_name}&mtrn1{$mtrn1}&mtrn5{$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
 
