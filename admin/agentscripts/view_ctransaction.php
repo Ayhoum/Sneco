@@ -26,11 +26,9 @@ if(!isset($_SESSION['role'])){
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th style="background: #c9302c;color: #fff">MTRN</th>
                                 <th>Sneder Name</th>
                                 <th>Sneder Email</th>
-                                <th>Sender Country</th>
-                                <th>Sneder Bank Account</th>
-                                <th>Sender Nationality</th>
                                 <th>Expiary Date</th>
                                 <th>Receiver Name</th>
                                 <th>Receiver Email</th>
@@ -87,11 +85,9 @@ if(!isset($_SESSION['role'])){
                                 ?>
                                 <?php
                                 echo "<td>$id</td>";
+                                echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
                                 echo "<td>$sender_name</td>";
                                 echo "<td>$sender_email</td>";
-                                echo "<td>$sender_country</td>";
-                                echo "<td>$sender_bankaccount</td>";
-                                echo "<td>$sender_nationality</td>";
                                 echo "<td>$sender_expiary</td>";
                                 echo "<td>$receiver_name</td>";
                                 echo "<td>$receiver_email</td>";
