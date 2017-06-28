@@ -74,19 +74,19 @@ if(isset($_POST['Submit'])){
                             <h5>Send Email</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <div class="control-group">
+                            <div class="control-group" style="width: 100%;">
                                 <label class="control-label">Subject</label>
                                 <div class="controls">
                                     <input type="text" name="subject" id="subject"  required>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group" style="width: 100%;">
                                 <label class="control-label">Message</label>
                                 <div class="controls">
                                     <textarea name="message" id="subject" required></textarea>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group" style="width: 100%;">
                                 <label class="control-label">Error</label>
                                 <div class="controls">
                                     <select style="width:215px;" name="error" id="Error">
