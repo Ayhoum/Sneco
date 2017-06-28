@@ -97,7 +97,12 @@ if(!isset($_SESSION['role'])){
                                 echo "<td>$total_amount</td>";
                                 echo "<td>$rate</td>";
                                 echo "<td>$charge</td>";
-                                echo "<td>$status</td>";
+                                if($status == 'Pending'){
+                                    $back = "background:;color:;";
+                                }else{
+                                    $back = "background:#C39527;color:#fff;";
+                                }
+                                echo "<td style='$back' >$status</td>";
 
 
 
