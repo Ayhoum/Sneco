@@ -31,11 +31,13 @@ $body             = "Welcome to our Company";
 //$mail->AddReplyTo("semsemea.a@hotmail.com","Alaa Semsemea");
 
 
-$address = "aylosa@outlook.com";
+$address ="a.alsirafy@sneco.nl";
 $address1= "semsemea.a@hotmail.com";
+$address2="aylosa@outlook.com";
 
-$mail->AddAddress($address, "Ayham Najem");
+$mail->AddAddress($address, "Anas Alsirafy");
 $mail->AddCC($address1, "Alaa Semsemea");
+$mail->AddCC($address2, "Ayham Najem");
 
 $mail->Subject    = "Your Invoice";
 
