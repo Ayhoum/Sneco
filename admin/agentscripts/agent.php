@@ -32,12 +32,12 @@ $rCountry     = $_POST['Receiver_Country'];
 $rPhone       = $_POST['Receiver_Phone'];
 $rEmail       = $_POST['Receiver_Email'];
     //Other Data
-    $amount = $_POST['Amount'];
+    $amount = $_POST['Totalg'];
     $current = $_POST['Current_Currency'];
     $payment = $_POST['Payment_Currency'];
-    $total = $_POST['Total'];
+    $total = $_POST['Totalt'];
     $rate = $_POST['Rate'];
-    $charge = $_POST['Charge'];
+    $charge = $_POST['ExRa'];
     $reason = $_POST['Reason'];
     $comment = $_POST['Comment'];
     $mtrn1 = rand(0, 9);

@@ -47,7 +47,7 @@ while($row = mysqli_fetch_assoc($select_trans)) {
     $receiver_hn = $row['Receiver_HouseNo'];
     $receiver_pc = $row['Receiver_Postcode'];
     $receiver_phone = $row['Receiver_Phone'];
-    $amount = $row['Amount'] . " " . $row['Current_Currency'];
+    $amount = $row['Amount'];
     $amountNum = $row['Amount'];
     $current_currency = $row['Current_Currency'];
     $payment_currency = $row['Payment_Currency'];
@@ -63,7 +63,7 @@ while($row = mysqli_fetch_assoc($select_trans)) {
 }
 
 
-$fee = $rate - $amount;
+$fee = $rate;
 
 $query = "SELECT * FROM AGENT WHERE ID = '{$agent_id}'";
 $select_trans = mysqli_query($mysqli, $query);
@@ -198,7 +198,7 @@ $dompdf->loadHtml("
                 <div style='margin-left: 15px;height: 40px;float: left;width: 23%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Place:</span> $agent_place<br><span style='font-weight: 600;'>Date:</span> $date</p></div>
                 </div>
                 <div style='width: 100%;height: 50px;'>
-                    <div style='margin-left: 15px;height: 40px;float: left;width: 32%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Payout Amount:</span> $amount<br><span style='font-weight: 600;'>Total Amount:</span> $total_amount $payment_currency</p></div>
+                    <div style='margin-left: 15px;height: 40px;float: left;width: 32%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Payout Amount:</span> $amount $payment_currency<br><span style='font-weight: 600;'>Total Amount:</span> $total_amount $current_currency</p></div>
                     <div style='margin-left: 15px;height: 40px;float: left;width: 32%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Transaction Fee:</span> $fee<br><span style='font-weight: 600;'>From:</span> $sender_country <span style='font-weight: 600;'>To:</span> $receiver_country</p></div>
                     <div style='margin-left: 15px;height: 40px;float: left;width: 32%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Exchange Rate:</span> 1 $current_currency = $charge $payment_currency</p></div>
                 </div>
