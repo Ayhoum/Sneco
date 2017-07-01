@@ -74,3 +74,59 @@ print_r($json['_embedded']['addresses'][0]['nen5825']['street']);
 echo "<br/>";
 print_r($json['_embedded']['addresses'][0]['city']['label']);
 ?>
+
+<style>
+
+    input {
+        font-family: monospace;
+    }
+    label {
+        display: block;
+    }
+    div {
+        margin: 0 0 1rem 0;
+    }
+
+    .shell {
+        position: relative;
+        line-height: 1; }
+    .shell span {
+        position: absolute;
+        left: 3px;
+        top: 1px;
+        color: #ccc;
+        pointer-events: none;
+        z-index: -1; }
+    .shell span i {
+        font-style: normal;
+        /* any of these 3 will work */
+        color: transparent;
+        opacity: 0;
+        visibility: hidden; }
+
+    input.masked,
+    .shell span {
+        font-size: 16px;
+        font-family: monospace;
+        padding-right: 10px;
+        background-color: transparent;
+        text-transform: uppercase; }
+
+</style>
+<form action="">
+
+    <div>
+        <label for="cc">Expiration Date</label>
+        <!-- Set via HTML -->
+        <input id="cc" type="text" placeholder="MM/YY" class="masked" pattern="(1[0-2]|0[1-9])\/(1[5-9]|2\d)" data-valid-example="05/18"/>
+    </div>
+
+    <div>
+        <label for="czc">Canadian Zip Code</label>
+        <input id="czc" style="text-transform: uppercase;"  placeholder="XXXX XXXX XXXX XXXX XX" pattern="\w\w\d\d \w\w\w\w \d\d\d\d \d\d\d\d \d\d" class="masked"
+               data-charset="__XX ____ XXXX XXXX XX" id="zipca" type="text" name="zipcodeca"/>
+    </div>
+
+</form>
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
