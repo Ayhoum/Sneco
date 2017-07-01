@@ -2,51 +2,23 @@
 <head>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 
-
-    <script>
-        function updateInput1(ish1){
-            document.getElementById("res1").value = ish1;
-            $var1 = ish1;
-
-        }
-
-        function updateInput2(ish2){
-            document.getElementById("res2").value = ish2;
-            $var2 = ish2;
-        }
-
-        // get the most recent exchange rates via the "live" endpoint:
-function convert (var1,var2) {
-    endpoint = 'live';
-    access_key = '4698860831eb58175144f90d1bcedb6f';
-    var combine = var1 + var2;
-    $.ajax({
-        url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key,
-        dataType: 'jsonp',
-        success: function(json) {
-
-            return json.quotes.[combine];
-        }
-    });
-}
-    </script>
-
   </head>
 
 <body>
 <?php
-$var = "EUR";
-$ch=curl_init("http://apilayer.net/api/live?access_key=4698860831eb58175144f90d1bcedb6f&currencies={$var}");
-curl_setopt($ch,CURLOPT_HEADER,0);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-$result=curl_exec($ch);
-$result = json_decode($result, true); // true turns it into an array
-echo $result['quotes']['USD' . $var] . '<br />'; // why doesnt this work
-curl_close($ch);
+//$var = "EUR";
+//$ch=curl_init("http://apilayer.net/api/live?access_key=4698860831eb58175144f90d1bcedb6f&currencies={$var}");
+//curl_setopt($ch,CURLOPT_HEADER,0);
+//curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+//$result=curl_exec($ch);
+//$result = json_decode($result, true); // true turns it into an array
+//echo $result['quotes']['USD' . $var] . '<br />'; // why doesnt this work
+//curl_close($ch);
 ?>
 
-<select id="cur1" onchange="updateInput1(this.value)" name='currencies1'>
+<select id="cur1" onchange="var1(this)" name='currencies1'>
+    <option value="" disabled="disabled" selected="selected" none="">$ € £</option>
     <option value='AED' title='United Arab Emirates Dirham'>AED</option>
     <option value='AFN' title='Afghan Afghani'>AFN</option>
     <option value='ALL' title='Albanian Lek'>ALL</option>
@@ -217,9 +189,11 @@ curl_close($ch);
     <option value='ZMW' title='Zambian Kwacha'>ZWL</option>
     <option value='ZWL' title='Zimbabwean Dollar'>ZWL</option>
 </select>
+<input type="text" readonly id="showTitle1" style="width: 230px;"></input>
 
 
-<select id="cur2" onchange="updateInput2(this.value)" name='currencies2'>
+<select id="cur2" onchange="var2(this)" name='currencies2'>
+    <option value="" disabled="disabled" selected="selected" none="">$ € £</option>
     <option value='AED' title='United Arab Emirates Dirham'>AED</option>
     <option value='AFN' title='Afghan Afghani'>AFN</option>
     <option value='ALL' title='Albanian Lek'>ALL</option>
@@ -390,12 +364,71 @@ curl_close($ch);
     <option value='ZMW' title='Zambian Kwacha'>ZWL</option>
     <option value='ZWL' title='Zimbabwean Dollar'>ZWL</option>
 </select>
+<input type="text" readonly id="showTitle2" style="width: 230px;"></input>
+
+<script>
+    $(document).ready(function(){
+        $(document).on('change','#cur1',function(){
+            var title1 = $("option:selected",this).attr('title');
+            $("#showTitle1").val(title1);
+        });
+    });
+
+    $(document).ready(function(){
+        $(document).on('change','#cur2',function(){
+            var title2 = $("option:selected",this).attr('title');
+            $("#showTitle2").val(title2);
+        });
+    });
+</script>
+
+<input  type="text" name="convert" id="convert" required />
 
 
-<input  type="text" name="res1" id="res1" required />
-<input  type="text" name="res2" id="res2" required />
-<input  type="submit" name="sub" id="sub" onclick="getElementById('con').val=convert($var1, $var2)" required />
-<input  type="text" name="con" id="con" required />
+<div id="but">
+<Button class="butt">Try it</Button>
+</div>
+<script>
+
+    function var1(ish1) {
+        $value1 = ish1.value;
+    }
+    function var2(ish2) {
+        $value2 = ish2.value;
+    }
+
+</script>
+
+<script>
+
+
+
+</script>
+<script>
+
+    $("#but").click(function(){
+
+        endpoint = 'live';
+        access_key = '4698860831eb58175144f90d1bcedb6f';  // can't reveal API key
+
+        var from = $value1;
+        var to = $value2;
+        var combine = from+to;
+
+        // get the most recent exchange rates via the "live" endpoint:
+        $.ajax({
+            url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key,
+            dataType: 'jsonp',
+            success: function(json) {
+                $value = json.quotes[combine];
+            }
+        });
+
+        $("#convert").val($value);
+    });
+</script>
+
+
 
 </body>
 </html>

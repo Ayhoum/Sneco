@@ -19,6 +19,21 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 Enjoy!
 
 */
+$(document).ready(function(){
+    $(document).on('change','#Current_Currency',function(){
+        $value1 = $("option:selected",this).attr('value');
+        var title1 = $("option:selected",this).attr('title');
+        $("#showTitle1").val(title1);
+    });
+});
+
+$(document).ready(function(){
+    $(document).on('change','#Payment_Currency',function(){
+        $value2 = $("option:selected",this).attr('value');
+        var title2 = $("option:selected",this).attr('title');
+        $("#showTitle2").val(title2);
+    });
+});
 
 (function($) {
   $.uniform = {
