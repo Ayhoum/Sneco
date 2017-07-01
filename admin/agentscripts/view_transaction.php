@@ -84,7 +84,6 @@ if(!isset($_SESSION['role'])){
                                     echo "<tr>";
                                     ?>
                                     <?php
-                                    $fee = $rate - $amount;
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                     echo "<td>$sender_name</td>";
@@ -96,7 +95,7 @@ if(!isset($_SESSION['role'])){
                                     echo "<td>$amount</td>";
                                     echo "<td>$payment_currency</td>";
                                     echo "<td>$total_amount</td>";
-                                    echo "<td>$fee</td>";
+                                    echo "<td>$rate</td>";
                                     echo "<td>$charge</td>";
                                     if($status == 'Pending'){
                                         $back = "background:;color:;";
