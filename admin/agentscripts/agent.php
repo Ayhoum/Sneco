@@ -51,7 +51,7 @@ $rEmail       = $_POST['Receiver_Email'];
     $mtrn9 = rand(0, 9);
     $mtrn10 = rand(0, 9);
 //Insert Customerrrr into database::
-    $query = "INSERT INTO TRANSITION(Agent_ID,
+    $query = "INSERT INTO TRANSACTION(Agent_ID,
                                     Account_ID,
                                     Sender_fName,
                                     Sender_lName, 
