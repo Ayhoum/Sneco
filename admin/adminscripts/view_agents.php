@@ -63,7 +63,7 @@
         echo "<td><a href='agents.php?block=$agent_id'>Block</a></td>";
         echo "<td><a href='agents.php?activate=$agent_id'>Activate</a></td>";
 
-        echo "<td><a href='view_agent_transaction.php?agent_id=$agent_id'> View</a></td>";
+        echo "<td><a href='agent_transaction.php?agent_id=$agent_id'> View</a></td>";
 
 
 
