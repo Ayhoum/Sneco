@@ -6,7 +6,7 @@ include '../../include/phpscripts/DB.php'
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Matrix Admin</title>
+    <title>Agents</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -53,7 +53,7 @@ include '../../include/phpscripts/DB.php'
     <ul>
         <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSITION";
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];

@@ -11,14 +11,14 @@ session_start();
 if(isset($_GET['t_id'])){
     $transaction_id = $_GET['t_id'];
 }
-$query = "SELECT * FROM TRANSITION WHERE ID = $transaction_id ";
+$query = "SELECT * FROM TRANSACTION WHERE ID = $transaction_id ";
 $select_trans_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans_by_id)){
 
     $transaction_ID = $row['ID'];
     $Agent_id     = $row['Agent_ID'];
-    $sfName       = $row['Sender_fName'];
-    $slName       = $row['Sender_lName'];
+    $seName       = $row['Sender_eName'];
+    $saName       = $row['Sender_aName'];
     $sStreetName  = $row['Sender_StreetName'];
     $sHouseNumber = $row['Sender_HouseNo'];
     $sPostcode    = $row['Sender_Postcode'];
@@ -31,8 +31,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $sIDNumber    = $row['Sender_IdNumber'];
     $sExpiary     = $row['Sender_IdExp'];
     // Receiver
-    $rfName       = $row['Receiver_fName'];
-    $rlName       = $row['Receiver_lName'];
+    $reName       = $row['Receiver_eName'];
+    $raName       = $row['Receiver_aName'];
     $rStreetName  = $row['Receiver_StreetName'];
     $rHouseNumber = $row['Receiver_HouseNo'];
     $rPostcode    = $row['Receiver_Postcode'];
@@ -55,8 +55,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
 
         $ID           = $_POST['ID'];
         $Agent_id     = $_POST['Agent_ID'];
-        $sfName       = $_POST['Sender_fName'];
-        $slName       = $_POST['Sender_lName'];
+        $seName       = $_POST['Sender_eName'];
+        $saName       = $_POST['Sender_aName'];
         $sStreetName  = $_POST['Sender_StreetName'];
         $sHouseNumber = $_POST['Sender_HouseNumber'];
         $sPostcode    = $_POST['Sender_Postcode'];
@@ -70,8 +70,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $sExpiary     = $_POST['Sender_Expiary'];
 
         // Receiver
-        $rfName       = $_POST['Receiver_fName'];
-        $rlName       = $_POST['Receiver_lName'];
+        $reName       = $_POST['Receiver_eName'];
+        $raName       = $_POST['Receiver_aName'];
         $rStreetName  = $_POST['Receiver_StreetName'];
         $rHouseNumber = $_POST['Receiver_HouseNumber'];
         $rPostcode    = $_POST['Receiver_Postcode'];
@@ -89,11 +89,11 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $reason = $_POST['Reason'];
         $comment = $_POST['Comment'];
 
-        $query = "UPDATE TRANSITION SET ";
+        $query = "UPDATE TRANSACTION SET ";
         $query .= "ID = '{$ID}', ";
         $query .= "Agent_ID = '{$Agent_id}', ";
-        $query .= "Sender_fName = '{$sfName}', ";
-        $query .= "Sender_lName = '{$slName}', ";
+        $query .= "Sender_eName = '{$seName}', ";
+        $query .= "Sender_aName = '{$saName}', ";
         $query .= "Sender_Phone = '{$sPhone}', ";
         $query .= "Sender_Email = '{$sEmail}', ";
         $query .= "Sender_StreetName = '{$sStreetName}', ";
@@ -106,8 +106,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $query .= "Sender_Nationality = '{$sNationality}', ";
         $query .= "Sender_IdExp = '{$sExpiary}', ";
 
-        $query .= "Receiver_fName = '{$rfName}', ";
-        $query .= "Receiver_lName = '{$rlName}', ";
+        $query .= "Receiver_eName = '{$reName}', ";
+        $query .= "Receiver_aName = '{$raName}', ";
         $query .= "Receiver_Phone = '{$rPhone}', ";
         $query .= "Receiver_Email = '{$rEmail}', ";
         $query .= "Receiver_StreetName = '{$rStreetName}', ";
@@ -162,13 +162,13 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                 <div class="control-group">
                                     <label class="control-label">First Name</label>
                                     <div class="controls">
-                                        <input type="text" name="Sender_fName" id="Sender_fName" value="<?php echo $sfName; ?>" required>
+                                        <input type="text" name="Sender_fName" id="Sender_fName" value="<?php echo $seName; ?>" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Last Name</label>
                                     <div class="controls">
-                                        <input type="text" name="Sender_lName" id="Sender_lName" value="<?php echo $slName; ?>" required>
+                                        <input type="text" name="Sender_lName" id="Sender_lName" value="<?php echo $saName; ?>" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -690,13 +690,13 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                 <div class="control-group">
                                     <label class="control-label">First Name</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_fName" id="Receiver_fName" value="<?php echo $rfName; ?>" required />
+                                        <input type="text" name="Receiver_fName" id="Receiver_fName" value="<?php echo $reName; ?>" required />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Last Name</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_lName" id="Receiver_lName" value="<?php echo $rlName; ?>" required />
+                                        <input type="text" name="Receiver_lName" id="Receiver_lName" value="<?php echo $raName; ?>" required />
                                     </div>
                                 </div>
                                 <div class="control-group">

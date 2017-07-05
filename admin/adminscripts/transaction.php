@@ -54,7 +54,7 @@ include '../../include/phpscripts/DB.php'
     <ul>
         <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSITION";
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];

@@ -15,10 +15,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th style="background: #c9302c;color: #fff">MTRN</th>
-                                    <th>Sneder Name</th>
-                                    <th>Sneder Email</th>
+                                    <th>Sender E.Name</th>
+                                    <th>Sender A.Name</th>
+                                    <th>Sender Email</th>
                                     <th>Expiary Date</th>
-                                    <th>Receiver Name</th>
+                                    <th>Receiver E.Name</th>
+                                    <th>Receiver A.Name</th>
                                     <th>Receiver Email</th>
                                     <th>Receiver Country</th>
                                     <th>Amount in Sent Currency</th>
@@ -34,7 +36,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $query = "SELECT * FROM TRANSITION ORDER BY ID DESC";
+                                $query = "SELECT * FROM TRANSACTION ORDER BY ID DESC";
                                 $select_trans = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_trans)){
                                     $id = $row['ID'];
@@ -50,15 +52,15 @@
                                     $mtrn9  = $row['MTRN9'];
                                     $mtrn10 = $row['MTRN10'];
                                     $agent_id = $row['Agent_ID'];
-                                    $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
-                                    $sender_fname = $row['Sender_fName'];
-                                    $sender_lname = $row['Sender_lName'];
+//                                    $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                    $sender_ename = $row['Sender_eName'];
+                                    $sender_aname = $row['Sender_aName'];
                                     $sender_email = $row['Sender_Email'];
                                     $sender_idnumber = $row['Sender_IdNumber'];
                                     $sender_expiary = $row['Sender_IdExp'];
-                                    $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
-                                    $receiver_fname = $row['Receiver_fName'];
-                                    $receiver_lname = $row['Receiver_lName'];
+//                                    $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+                                    $receiver_aname = $row['Receiver_aName'];
+                                    $receiver_ename = $row['Receiver_eName'];
                                     $receiver_email = $row['Receiver_Email'];
                                     $receiver_country = $row['Receiver_Country'];
                                     $amount = $row['Amount'] . " " . $row['Current_Currency'];
@@ -76,10 +78,12 @@
                                     <?php
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
-                                    echo "<td>$sender_name</td>";
+                                    echo "<td>$sender_ename</td>";
+                                    echo "<td>$sender_aname</td>";
                                     echo "<td>$sender_email</td>";
                                     echo "<td>$sender_expiary</td>";
-                                    echo "<td>$receiver_name</td>";
+                                    echo "<td>$receiver_ename</td>";
+                                    echo "<td>$receiver_aname</td>";
                                     echo "<td>$receiver_email</td>";
                                     echo "<td>$receiver_country</td>";
                                     echo "<td>$amount</td>";
@@ -96,7 +100,7 @@
 
 
 
-                                    echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_fname}&senderl={$sender_lname}&receiverf={$receiver_fname}&receiverl={$receiver_lname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'>Delete</a></td>";
+                                    echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'>Delete</a></td>";
                                     echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
 
 
@@ -107,7 +111,7 @@
                                         $agent_place = $row['Agent_Area'];
                                     }
 
-                                    echo "<td><a href='../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'>Download</a></td>";
+                                    echo "<td><a href='../pdf/{$sender_ename}{$sender_aname}{$receiver_ename}{$receiver_aname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'>Download</a></td>";
 
 
 
@@ -127,9 +131,9 @@
 if(isset($_GET['delete'])){
 
     $id = $_GET['delete'];
-    $query = "DELETE FROM TRANSITION WHERE ID = {$id} ";
+    $query = "DELETE FROM TRANSACTION WHERE ID = {$id} ";
     $delete_query = mysqli_query($mysqli, $query);
-    $filelink = "../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf";
+    $filelink = "../pdf/{$sender_ename}{$sender_aname}{$receiver_ename}{$receiver_aname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf";
     unlink($filelink) or die("Couldn't delete file");
     header("Location: transaction.php");
 }

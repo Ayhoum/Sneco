@@ -81,7 +81,7 @@ users_online();
   <ul>
     <li class="active"><a href="admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
       <?php
-      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION";
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
       $counter = mysqli_query($mysqli,$query);
       $num = mysqli_fetch_array($counter);
       $countTrans = $num["ID"];
@@ -136,14 +136,14 @@ users_online();
 
 
       <?php
-      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Status = 'Done' ";
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Status = 'Done' ";
       $counter = mysqli_query($mysqli,$query);
       $num = mysqli_fetch_array($counter);
       $countTransDone = $num["ID"];
       ?>
 
       <?php
-      $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Status != 'Done'";
+      $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Status != 'Done'";
       $counter = mysqli_query($mysqli,$query);
       $num = mysqli_fetch_array($counter);
       $countTransNot = $num["ID"];
