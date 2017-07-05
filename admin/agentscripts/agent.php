@@ -7,8 +7,8 @@ if(isset($_POST['Submit'])) {
          //Sender
 $Agent_id     = $_POST['Agent_ID'];
 $noAcc        = "NaN";
-$sfName       = $_POST['Sender_fName'];
-$slName       = $_POST['Sender_lName'];
+$sfName       = $_POST['Sender_eName'];
+$slName       = $_POST['Sender_aName'];
 $sStreetName  = $_POST['Sender_StreetName'];
 $sHouseNumber = $_POST['Sender_HouseNumber'];
 $sPostcode    = $_POST['Sender_Postcode'];
@@ -22,8 +22,8 @@ $sIDNumber    = $_POST['Sender_IDNumber'];
 $sExpiary     = $_POST['Sender_Expiary'];
 
         // Receiver
-$rfName       = $_POST['Receiver_fName'];
-$rlName       = $_POST['Receiver_lName'];
+$rfName       = $_POST['Receiver_eName'];
+$rlName       = $_POST['Receiver_aName'];
 $rStreetName  = $_POST['Receiver_StreetName'];
 $rHouseNumber = $_POST['Receiver_HouseNumber'];
 $rPostcode    = $_POST['Receiver_Postcode'];
