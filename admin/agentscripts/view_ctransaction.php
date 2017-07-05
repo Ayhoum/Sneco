@@ -27,10 +27,12 @@ if(!isset($_SESSION['role'])){
                             <tr>
                                 <th>ID</th>
                                 <th style="background: #c9302c;color: #fff">MTRN</th>
-                                <th>Sneder Name</th>
+                                <th>Sneder Name (EN)</th>
+                                <th>Sneder Name (AR)</th>
                                 <th>Sneder Email</th>
                                 <th>Expiary Date</th>
-                                <th>Receiver Name</th>
+                                <th>Receiver Name (EN)</th>
+                                <th>Receiver Name (AR)</th>
                                 <th>Receiver Email</th>
                                 <th>Receiver Country</th>
                                 <th>Amount with Current Currency</th>
@@ -46,9 +48,9 @@ if(!isset($_SESSION['role'])){
                             </thead>
                             <tbody>
                             <?php
-                            $query = "SELECT * FROM TRANSITION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed' ORDER BY ID DESC";
-                            $select_posts = mysqli_query($mysqli, $query);
-                            while($row = mysqli_fetch_assoc($select_posts)){
+                            $query = "SELECT * FROM TRANSACTION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed' ORDER BY ID DESC";
+                            $select_ctrans = mysqli_query($mysqli, $query);
+                            while($row = mysqli_fetch_assoc($select_ctrans)){
                                 $id = $row['ID'];
                                 $mtrn1  = $row['MTRN1'];
                                 $mtrn2  = $row['MTRN2'];
@@ -60,18 +62,18 @@ if(!isset($_SESSION['role'])){
                                 $mtrn8  = $row['MTRN8'];
                                 $mtrn9  = $row['MTRN9'];
                                 $mtrn10 = $row['MTRN10'];
-                                $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
-                                $sender_fname = $row['Sender_fName'];
-                                $sender_lname = $row['Sender_lName'];
+//                                $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                $sender_ename = $row['Sender_eName'];
+                                $sender_aname = $row['Sender_aName'];
                                 $sender_email = $row['Sender_Email'];
                                 $sender_country = $row['Sender_Country'];
                                 $sender_bankaccount = $row['Sender_BankAcount'];
                                 $sender_idnumber = $row['Sender_IdNumber'];
                                 $sender_nationality = $row['Sender_Nationality'];
                                 $sender_expiary = $row['Sender_IdExp'];
-                                $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
-                                $receiver_fname = $row['Receiver_fName'];
-                                $receiver_lname = $row['Receiver_lName'];
+//                                $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+                                $receiver_ename = $row['Receiver_eName'];
+                                $receiver_aname = $row['Receiver_aName'];
                                 $receiver_email = $row['Receiver_Email'];
                                 $receiver_country = $row['Receiver_Country'];
                                 $amount = $row['Amount'] . " " . $row['Current_Currency'];
@@ -86,10 +88,12 @@ if(!isset($_SESSION['role'])){
                                 <?php
                                 echo "<td>$id</td>";
                                 echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
-                                echo "<td>$sender_name</td>";
+                                echo "<td>$sender_ename</td>";
+                                echo "<td>$sender_aname</td>";
                                 echo "<td>$sender_email</td>";
                                 echo "<td>$sender_expiary</td>";
-                                echo "<td>$receiver_name</td>";
+                                echo "<td>$receiver_ename</td>";
+                                echo "<td>$receiver_aname</td>";
                                 echo "<td>$receiver_email</td>";
                                 echo "<td>$receiver_country</td>";
                                 echo "<td>$amount</td>";
@@ -109,7 +113,7 @@ if(!isset($_SESSION['role'])){
                                 echo "<td><a href='ctransaction.php?complete=$id'>Complete</a></td>";
                                 echo "<td><a href='ctransaction.php?pending=$id'>Pending</a></td>";
 
-                                echo "<td><a href='../pdf/{$sender_fname}{$sender_lname}{$receiver_fname}{$receiver_lname}{$mtrn1}{$mtrn5}{$mtrn10}.pdf'>Download</a></td>";
+                                echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}.pdf'>Download</a></td>";
 
 
 
@@ -128,7 +132,7 @@ if(!isset($_SESSION['role'])){
 if(isset($_GET['complete'])){
 
     $id = $_GET['complete'];
-    $query = "UPDATE TRANSITION SET Status = 'Completed' WHERE ID = {$id}";
+    $query = "UPDATE TRANSACTION SET Status = 'Completed' WHERE ID = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: ctransaction.php");
     echo "Agent Blocked!";
@@ -137,7 +141,7 @@ if(isset($_GET['complete'])){
 if(isset($_GET['pending'])){
 
     $id = $_GET['pending'];
-    $query = "UPDATE TRANSITION SET Status = 'Pending' WHERE ID = {$id}";
+    $query = "UPDATE TRANSACTION SET Status = 'Pending' WHERE ID = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: ctransaction.php");
     echo "Agent Activated!";

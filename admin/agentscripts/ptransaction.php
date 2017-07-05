@@ -68,7 +68,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 <!--sidebar-menu-->
 
 <?php
-$query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed'";
+$query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed'";
 $counterc = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($counterc);
 $countcTrans = $num["ID"];
@@ -84,7 +84,7 @@ $countcTrans = $num["ID"];
         </li>
 
         <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSITION WHERE Agent_ID = '{$agent_id_val}'";
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Agent_ID = '{$agent_id_val}'";
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];

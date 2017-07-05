@@ -19,14 +19,17 @@ if(!isset($_SESSION['role'])){
 if(isset($_SESSION['email'])){
     $agent_email_get_id = $_SESSION['email'];
 }
+
 $query = "SELECT * FROM AGENT WHERE Agent_Email = '{$agent_email_get_id}' ";
 $select_agent_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_agent_by_id)){
     $agent_id_val = $row['ID'];
     $agent_name = $row['Agent_Name'];
 }
-?>
 
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1158,6 +1161,95 @@ $agent_id_val = $row['ID'];
             $('#Rate').val($rate);
         });
 
+        $("#ExRa").click(function(){
+
+            var e = document.getElementById("Current_Currency");
+            var value1 = e.options[e.selectedIndex].value;
+
+            var f = document.getElementById("Payment_Currency");
+            var value2 = f.options[f.selectedIndex].value;
+
+
+
+            if (value1+value2 == 'AEDEUR'){
+                var id = 0;
+            }
+            else if  (value1+value2 == 'AEDSAR'){
+                var id = 1;
+            }
+            else if (value1+value2 == 'AEDSYP'){
+                var id = 2;
+            }
+            else if (value1+value2 == 'AEDUSD'){
+                var id = 3;
+            }
+            else if (value1+value2 == 'EURAED'){
+                var id = 4;
+            }
+            else if (value1+value2 == 'EURSAR'){
+                var id = 5;
+            }
+            else if (value1+value2 == 'EURSYP'){
+                var id = 6;
+            }
+            else if (value1+value2 == 'EURUSD'){
+                var id = 7;
+            }
+            else if (value1+value2 == 'SARAED'){
+                var id = 8;
+            }
+            else if  (value1+value2 == 'SAREUR'){
+                var id = 9;
+            }
+            else if (value1+value2 == 'SARSYP'){
+                var id = 10;
+            }
+            else if (value1+value2 == 'SARUSD'){
+                var id = 11;
+            }
+            else if (value1+value2 == 'SYPAED'){
+                var id = 12;
+            }
+            else if (value1+value2 == 'SYPEUR'){
+                var id = 13;
+            }
+            else if (value1+value2 == 'SYPSAR'){
+                var id = 14;
+            }
+            else if (value1+value2 == 'SYPUSD'){
+                var id = 15;
+            }
+            else if (value1+value2 == 'USDAED'){
+                var id = 16;
+            }
+            else if (value1+value2 == 'USDEUR'){
+                var id = 17;
+            }
+            else if (value1+value2 == 'USDSAR'){
+                var id = 18;
+            }
+            else if (value1+value2 == 'USDSYP'){
+                var id = 19;
+            }
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'agentscripts/exchange.php',
+                        data: 'id=testdata',
+                        dataType: 'json',
+                        cache: false,
+                        success: function(result) {
+                          $value = result[id]['ID'];
+
+//                            $('#content1').html(result[0]);
+                        }
+                    });
+
+
+                $("#ExRa").val($value);
+        });
+
         $("#Totalt").click(function(){
             $('#Totalt').val($total);
 
@@ -1170,7 +1262,6 @@ $agent_id_val = $row['ID'];
             $('#Totalg').val($amtotal);
 
         });
-
     </script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
 </body>
