@@ -746,19 +746,19 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Street Name</label>
                             <div class="controls">
-                                <input type="text" name="Receiver_StreetName" id="Receiver_StreetName" required />
+                                <input type="text" name="Receiver_StreetName" id="Receiver_StreetName"  />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">House Number</label>
                             <div class="controls">
-                                <input type="text" name="Receiver_HouseNumber" id="Receiver_HouseNumber" required />
+                                <input type="text" name="Receiver_HouseNumber" id="Receiver_HouseNumber"  />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Postcode</label>
                             <div class="controls">
-                                <input type="text" name="Receiver_Postcode" id="Receiver_Postcode" required />
+                                <input type="text" name="Receiver_Postcode" id="Receiver_Postcode"  />
                             </div>
                         </div>
                         <div class="control-group">
