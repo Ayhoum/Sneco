@@ -45,7 +45,7 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
 ?>
 
 
-<h1>EDIT TRANSITION</h1>
+<h1>EDIT TRANSACTION </h1>
 <div class="container-fluid"><hr>
     <div class="row-fluid">
         <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">

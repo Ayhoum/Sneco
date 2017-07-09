@@ -82,7 +82,7 @@
 //if(isset($_GET['delete'])){
 //
 //    $id = $_GET['delete'];
-//    $query = "DELETE FROM TRANSITION WHERE ID = {$id} ";
+//    $query = "DELETE FROM TRANSACTION  WHERE ID = {$id} ";
 //    $delete_query = mysqli_query($mysqli, $query);
 //    header("Location: transaction.php");
 //}

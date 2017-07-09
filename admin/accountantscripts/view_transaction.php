@@ -37,7 +37,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $query = "SELECT * FROM TRANSITION ORDER BY ID DESC";
+                                $query = "SELECT * FROM TRANSACTION  ORDER BY ID DESC";
                                 $select_posts = mysqli_query($mysqli, $query);
                                 while($row = mysqli_fetch_assoc($select_posts)){
                                     $id = $row['ID'];
@@ -117,7 +117,7 @@
 if(isset($_GET['delete'])){
 
     $id = $_GET['delete'];
-    $query = "DELETE FROM TRANSITION WHERE ID = {$id} ";
+    $query = "DELETE FROM TRANSACTION  WHERE ID = {$id} ";
     $delete_query = mysqli_query($mysqli, $query);
     header("Location: transaction.php");
 }
