@@ -18,14 +18,14 @@ if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($
 
 }
 
-$query = "SELECT * FROM TRANSITION WHERE Sender_fName = '{$sender}' AND MTRN1 = '{$mtrn1}' AND  MTRN2 = '{$mtrn2}' AND  MTRN3 = '{$mtrn3}' AND  MTRN4 = '{$mtrn4}' AND  MTRN5 = '{$mtrn5}' AND  MTRN6 = '{$mtrn6}' AND  MTRN7 = '{$mtrn7}' AND  MTRN8 = '{$mtrn8}' AND  MTRN9 = '{$mtrn9}' AND  MTRN10 = '{$mtrn10}'";
+$query = "SELECT * FROM TRANSACTION WHERE Sender_eName = '{$sender}' AND MTRN1 = '{$mtrn1}' AND  MTRN2 = '{$mtrn2}' AND  MTRN3 = '{$mtrn3}' AND  MTRN4 = '{$mtrn4}' AND  MTRN5 = '{$mtrn5}' AND  MTRN6 = '{$mtrn6}' AND  MTRN7 = '{$mtrn7}' AND  MTRN8 = '{$mtrn8}' AND  MTRN9 = '{$mtrn9}' AND  MTRN10 = '{$mtrn10}'";
 $select_trans = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans)) {
     $id = $row['ID'];
     $agent_id = $row['Agent_ID'];
     $account_Id = $row['Account_ID'];
-    $fsender_name = $row['Sender_fName'];
-    $lsender_name = $row['Sender_lName'];
+    $sender_ename = $row['Sender_eName'];
+    $sender_aname = $row['Sender_aName'];
     $sender_email = $row['Sender_Email'];
     $sender_country = $row['Sender_Country'];
     $sender_nationality = $row['Sender_Nationality'];
@@ -38,8 +38,8 @@ while($row = mysqli_fetch_assoc($select_trans)) {
     $sender_phone = $row['Sender_Phone'];
     $sender_idtype = $row['Sender_IdType'];
     $ID_No = $row['Sender_IdNumber'];
-    $freceiver_name = $row['Receiver_fName'];
-    $lreceiver_name = $row['Receiver_lName'];
+    $receiver_ename = $row['Receiver_eName'];
+    $receiver_aname = $row['Receiver_aName'];
     $receiver_email = $row['Receiver_Email'];
     $receiver_country = $row['Receiver_Country'];
     $receiver_city = $row['Receiver_City'];
@@ -78,11 +78,11 @@ require_once '../../dompdf/autoload.inc.php';
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
 $dompdf->loadHtml("
-<html lang='en'>
+<html lang='AR'>
 <head>
     <meta charset='utf-8'>
     <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' />
-    <title>Example 1</title>
+    <title>Invoice</title>
     <style>
         .clearfix:after {
             content: '';
@@ -156,7 +156,7 @@ $dompdf->loadHtml("
 <table class='tg'>
     <tr>
         <th class='tg-031e' colspan='3'><img src='../img/ourimages/1.jpeg' style='width:200px;'></th>
-        <th class='tg-yw4l'><p style='font-size:10px;color: #A9A9A9;float: right;'><b>SNECO</b><br>KvK: 68233361<br>Ferrandweg 4J<br>2523XT, Den Haag<br>M: +31657966657<br>www.sneco.nl</p></th>
+        <th class='tg-yw4l'><p style='font-size:10px;color: #A9A9A9;float: right;'><b>SNECO</b><br>KvK: 68233361<br>Weesperstraat 118 H<br>1112 AP, Diemen<br>M: +31657966657<br>www.sneco.nl</p></th>
     </tr>
     <tr>
         <td class='tg-yw4l' colspan='4' >
@@ -209,16 +209,16 @@ $dompdf->loadHtml("
         <td class='tg-031e' colspan='2' style='width: 50%;'><div style='border-radius:12px 12px 0px 0px;;font-weight: 800;font-size: 14px;color: #837e84;padding-top: 9px;padding-bottom: 1px;width:100%;text-align: center;background: #023560;'><p><span style='font-size: 16px'>SENDER</span></p></div>
             <div style='border-radius: 0px 0px 12px 12px;border: 2px solid #023560;width: 100%;height: 140px;'>
                 <div style='width: 100%;height: 140px;'>
-                    <div style='margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Account No.:</span> $account_Id<br><span style='font-weight: 600;'>First Name:</span> $fsender_name<br><span style='font-weight: 600;'>Nationality:</span> $sender_nationality<br><span style='font-weight: 600;'>ID No.:</span> $ID_No<br><span style='font-weight: 600;'>Address</span><br><span style='font-weight: 600;'>Street:</span> $sender_st<br><span style='font-weight: 600;'>Postal Code:</span> $sender_pc<br><span style='font-weight: 600;'>Country:</span> $sender_country<br><span style='font-weight: 600;'>Tel No.:</span> $sender_phone</p></div>
-                    <div style='margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><br><span style='font-weight: 600;'>Last Name:</span> $lsender_name<br><span style='font-weight: 600;'>ID Type:</span> $sender_idtype<br><span style='font-weight: 600;'>Exp. Date:</span> $sender_expiary<br><br><span style='font-weight: 600;'>House No.:</span> $sender_hn<br><span style='font-weight: 600;'>City:</span> $sender_city<br><br><span style='font-weight: 600;'>Email:</span> $sender_email</p></div>
+                    <div style='margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'><!--Account No.:</span> $account_Id<br>--><span style='font-weight: 600;'>Name in English:</span> $sender_ename<br><span style='font-weight: 600;'>Nationality:</span> $sender_nationality<br><span style='font-weight: 600;'>ID No.:</span> $ID_No<br><span style='font-weight: 600;'>Address</span><br><span style='font-weight: 600;'>Street:</span> $sender_st<br><span style='font-weight: 600;'>Postal Code:</span> $sender_pc<br><span style='font-weight: 600;'>Country:</span> $sender_country<br><span style='font-weight: 600;'>Tel No.:</span> $sender_phone</p></div>
+                    <div style='margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><br><span style='font-weight: 600;'><!--Name in Arabic:</span> $sender_aname--><br><span style='font-weight: 600;'>ID Type:</span> $sender_idtype<br><span style='font-weight: 600;'>Exp. Date:</span> $sender_expiary<br><br><span style='font-weight: 600;'>House No.:</span> $sender_hn<br><span style='font-weight: 600;'>City:</span> $sender_city<br><br><span style='font-weight: 600;'>Email:</span> $sender_email</p></div>
                 </div>
             </div>
         </td>
         <td class='tg-031e' colspan='2' style='width: 50%;'><div style='border-radius:12px 12px 0px 0px;;font-weight: 800;font-size: 14px;color: #023560;padding-top: 9px;padding-bottom: 1px;width:100%;text-align: center;background: #837e84;'><p><span style='font-size: 16px'>RECEIVER</span></p></div>
             <div style='border-radius: 0px 0px 12px 12px;border: 2px solid #837e84;width: 100%;height: 140px;'>
                 <div style='width: 100%;height: 140px;'>
-                    <div style='margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>First Name:</span> $freceiver_name<br><span style='font-weight: 600;'>Address</span><br><span style='font-weight: 600;'>Street:</span> $receiver_st<br><span style='font-weight: 600;'>Postal Code:</span> $receiver_pc<br><span style='font-weight: 600;'>Country:</span> $receiver_country<br><span style='font-weight: 600;'>Tel No.:</span> $receiver_phone<br><span style='font-weight: 600;'>Reason:</span> $reason<br><span style='font-weight: 600;'>Message:</span> $message</p></div>
-                    <div style='margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Last Name:</span> $lreceiver_name<br><br><span style='font-weight: 600;'>House No.:</span> $receiver_hn<br><span style='font-weight: 600;'>City:</span> $receiver_city<br><br><span style='font-weight: 600;'>Email:</span> $receiver_email</p></div>
+                    <div style='margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'>Name in English:</span> $receiver_ename<br><span style='font-weight: 600;'>Address</span><br><span style='font-weight: 600;'>Street:</span> $receiver_st<br><span style='font-weight: 600;'>Postal Code:</span> $receiver_pc<br><span style='font-weight: 600;'>Country:</span> $receiver_country<br><span style='font-weight: 600;'>Tel No.:</span> $receiver_phone<br><span style='font-weight: 600;'>Reason:</span> $reason<br><span style='font-weight: 600;'>Message:</span> $message</p></div>
+                    <div style='margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;'><p><span style='font-weight: 600;'><!--Name in Arabic:</span>$receiver_aname--><br><br><span style='font-weight: 600;'>House No.:</span> $receiver_hn<br><span style='font-weight: 600;'>City:</span> $receiver_city<br><br><span style='font-weight: 600;'>Email:</span> $receiver_email</p></div>
                 </div>
             </div>
         </td>
@@ -239,7 +239,7 @@ $dompdf->render();
 //$dompdf->stream("samplepdf");
 
 $output = $dompdf->output();
-file_put_contents("../pdf/{$fsender_name}{$lsender_name}{$freceiver_name}{$lreceiver_name}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
+file_put_contents("../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
 
-header("Location: ../test.php?senderf={$fsender_name}&senderl={$lsender_name}&receiverf={$freceiver_name}&receiverl={$lreceiver_name}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
+header("Location: ../test.php?senderf={$sender_ename}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
 

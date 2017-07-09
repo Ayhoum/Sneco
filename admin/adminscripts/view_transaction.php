@@ -111,7 +111,7 @@
                                         $agent_place = $row['Agent_Area'];
                                     }
 
-                                    echo "<td><a href='../pdf/{$sender_ename}{$sender_aname}{$receiver_ename}{$receiver_aname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'>Download</a></td>";
+                                    echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'>Download</a></td>";
 
 
 
@@ -133,7 +133,7 @@ if(isset($_GET['delete'])){
     $id = $_GET['delete'];
     $query = "DELETE FROM TRANSACTION WHERE ID = {$id} ";
     $delete_query = mysqli_query($mysqli, $query);
-    $filelink = "../pdf/{$sender_ename}{$sender_aname}{$receiver_ename}{$receiver_aname}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf";
+    $filelink = "../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf";
     unlink($filelink) or die("Couldn't delete file");
     header("Location: transaction.php");
 }

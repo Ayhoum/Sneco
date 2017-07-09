@@ -14,8 +14,8 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>From</th>
-                            <th>To</th>
+                            <th>Name</th>
+                           <!-- <th>To</th>-->
                             <th>Value</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -23,12 +23,12 @@
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM Currencies ORDER BY ID DESC";
+                        $query = "SELECT * FROM CURRENCIES ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
                             $id = $row['ID'];
                             $from = $row['CurNameFr'];
-                            $to = $row['CurNameTo'];
+                            //$to = $row['CurNameTo'];
                             $value = $row['Value'];
 
                             echo "<tr>";
@@ -36,7 +36,7 @@
                             <?php
                             echo "<td>$id</td>";
                             echo "<td>$from</td>";
-                            echo "<td>$to</td>";
+                            //echo "<td>$to</td>";
                             echo "<td>$value</td>";
 
 

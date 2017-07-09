@@ -11,13 +11,13 @@ session_start();
 if(isset($_GET['c_id'])){
     $currency_id = $_GET['c_id'];
 }
-$query = "SELECT * FROM Currencies WHERE ID = $currency_id ";
+$query = "SELECT * FROM CURRENCIES WHERE ID = $currency_id ";
 $select_cur_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_cur_by_id)){
 
     $currency_id = $row['ID'];
     $from     = $row['CurNameFr'];
-    $to       = $row['CurNameTo'];
+   // $to       = $row['CurNameTo'];
     $value       = $row['Value'];
 
 
@@ -25,13 +25,13 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
 
         $ID           = $_POST['ID'];
         $from     = $_POST['Currency_From'];
-        $to       = $_POST['Currency_To'];
+       // $to       = $_POST['Currency_To'];
         $value       = $_POST['Value'];
 
         $query = "UPDATE Currencies SET ";
         $query .= "ID = '{$ID}', ";
         $query .= "CurNameFr = '{$from}', ";
-        $query .= "CurNameTo = '{$to}', ";
+       // $query .= "CurNameTo = '{$to}', ";
         $query .= "Value = '{$value}' ";
         $query .= "WHERE ID = {$currency_id} ";
 
@@ -63,17 +63,17 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">From</label>
+                                <label class="control-label">From To Name</label>
                                 <div class="controls">
                                     <input type="text" name="Currency_From" id="Currency_From" value="<?php echo $from; ?>" required>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">To</label>
-                                <div class="controls">
-                                    <input type="text" name="Currency_To" id="Currency_To" value="<?php echo $to; ?>" required>
-                                </div>
-                            </div>
+<!--                            <div class="control-group">-->
+<!--                                <label class="control-label">To</label>-->
+<!--                                <div class="controls">-->
+<!--                                    <input type="text" name="Currency_To" id="Currency_To" value="--><?php //echo $to; ?><!--" required>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="control-group">
                                 <label class="control-label">Value</label>
                                 <div class="controls">
