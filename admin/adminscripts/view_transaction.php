@@ -103,6 +103,8 @@
                                     echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'>Delete</a></td>";
                                     echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
 
+                                    echo "<td><a href='transaction_indetails.php?t_id={$id}'>View In details</a></td>";
+
 
                                     $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
                                     $select_trans_by_id = mysqli_query($mysqli, $query);
