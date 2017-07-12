@@ -717,7 +717,7 @@ include 'include/phpscripts/create_transaction.php';
 
 				<div class="container clearfix">
 
-					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
+					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 70%;">
 
 
 							<!--transaction from-->

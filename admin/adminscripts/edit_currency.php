@@ -15,22 +15,22 @@ $query = "SELECT * FROM CURRENCIES WHERE ID = $currency_id ";
 $select_cur_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_cur_by_id)){
 
-    $currency_id = $row['ID'];
-    $from     = $row['CurNameFr'];
-   // $to       = $row['CurNameTo'];
-    $value       = $row['Value'];
+    $currency_id    = $row['ID'];
+    $from           = $row['CurNameFr'];
+   // $to           = $row['CurNameTo'];
+    $value          = $row['Value'];
 
 
     if(isset($_POST['Update'])){
 
         $ID           = $_POST['ID'];
-        $from     = $_POST['Currency_From'];
+        //$from     = $_POST['Currency_From'];
        // $to       = $_POST['Currency_To'];
         $value       = $_POST['Value'];
 
-        $query = "UPDATE Currencies SET ";
+        $query = "UPDATE CURRENCIES SET ";
         $query .= "ID = '{$ID}', ";
-        $query .= "CurNameFr = '{$from}', ";
+        //$query .= "CurNameFr = '{$from}', ";
        // $query .= "CurNameTo = '{$to}', ";
         $query .= "Value = '{$value}' ";
         $query .= "WHERE ID = {$currency_id} ";
@@ -65,7 +65,7 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
                             <div class="control-group">
                                 <label class="control-label">From To Name</label>
                                 <div class="controls">
-                                    <input type="text" name="Currency_From" id="Currency_From" value="<?php echo $from; ?>" required>
+                                    <input type="text" name="Currency_From" id="Currency_From" value="<?php echo $from; ?>" required readonly>
                                 </div>
                             </div>
 <!--                            <div class="control-group">-->
