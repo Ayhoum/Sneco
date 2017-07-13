@@ -109,7 +109,8 @@ users_online();
               <li><a href="adminscripts/add_currency.php">Add Currencies</a></li>
           </ul>
       </li>
-
+      <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
+      <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
   </ul>
 </div>
 <!--sidebar-menu-->
