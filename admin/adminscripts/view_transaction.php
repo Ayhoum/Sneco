@@ -16,21 +16,18 @@
                                     <th>ID</th>
                                     <th style="background: #c9302c;color: #fff">MTRN</th>
                                     <th>Sender E.Name</th>
-                                    <th>Sender A.Name</th>
                                     <th>Sender Email</th>
-                                    <th>Expiary Date</th>
                                     <th>Receiver E.Name</th>
-                                    <th>Receiver A.Name</th>
                                     <th>Receiver Email</th>
                                     <th>Receiver Country</th>
-                                    <th>Amount in Sent Currency</th>
-                                    <th>Payment Currency</th>
-                                    <th>Total Amount</th>
+                                    <th>Amount Received</th>
+                                    <th>Payout Amount</th>
                                     <th>Rate</th>
-                                    <th>Charge</th>
+                                    <th>Exchange</th>
                                     <th>Status</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
+                                    <th>View In details</th>
                                     <th>Download a PDF</th>
                                 </tr>
                                 </thead>
@@ -79,20 +76,16 @@
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
                                     echo "<td>$sender_ename</td>";
-                                    echo "<td>$sender_aname</td>";
                                     echo "<td>$sender_email</td>";
-                                    echo "<td>$sender_expiary</td>";
                                     echo "<td>$receiver_ename</td>";
-                                    echo "<td>$receiver_aname</td>";
                                     echo "<td>$receiver_email</td>";
                                     echo "<td>$receiver_country</td>";
                                     echo "<td>$amount</td>";
-                                    echo "<td>$payment_currency</td>";
-                                    echo "<td>$total_amount</td>";
+                                    echo "<td>$total_amount $payment_currency</td>";
                                     echo "<td>$rate</td>";
                                     echo "<td>$charge</td>";
                                     if($status == 'Pending'){
-                                        $back = "background:;color:;";
+                                        $back = "background:#2f97b1;color:#000;";
                                     }else{
                                         $back = "background:#C39527;color:#fff;";
                                     }
@@ -100,10 +93,10 @@
 
 
 
-                                    echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'>Delete</a></td>";
-                                    echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
+                                    echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
+                                    echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'><p><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
-                                    echo "<td><a href='transaction_indetails.php?t_id={$id}'>View In details</a></td>";
+                                    echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
                                     $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
@@ -113,7 +106,7 @@
                                         $agent_place = $row['Agent_Area'];
                                     }
 
-                                    echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'>Download</a></td>";
+                                    echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'><p class='text-center'><i class=\"fa fa-cloud-download fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
 
