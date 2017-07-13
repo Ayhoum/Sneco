@@ -8,6 +8,15 @@ include '../../include/phpscripts/DB.php'
 session_start();
 ?>
 <?php
+if(!isset($_SESSION['role'])){
+    header("Location: index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: Agent_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: accountant_index.php");
+}
+?>
+<?php
 if(isset($_GET['c_id'])){
     $currency_id = $_GET['c_id'];
 }

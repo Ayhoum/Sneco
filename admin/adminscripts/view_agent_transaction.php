@@ -1,5 +1,14 @@
 <?php include("../../include/phpscripts/DB.php") ?>
+<?php
 
+if(!isset($_SESSION['role'])){
+    header("Location: index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: Agent_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: accountant_index.php");
+}
+?>
 <div class="container-fluid">
     <hr>
     <div class="row-fluid">
