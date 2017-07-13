@@ -14,7 +14,6 @@ if(!isset($_SESSION['role'])){
 <?php
 if(isset($_POST['Submit'])) {
 
-//    $invoice_id       = $_POST['ID'];
     $invoice_number   = $_POST['invoice_number'];
     $address1         = $_POST['address_line1'];
     $address2         = $_POST['address_line2'];
@@ -24,7 +23,8 @@ if(isset($_POST['Submit'])) {
     $total            = $_POST['total'];
     $discount         = $_POST['discount'];
     $advanced_payment = $_POST['advanced_payment'];
-    $invoice_type     = $_POST['Invoice_type_type'];
+    $invoice_type     = $_POST['invoice_type'];
+    $type_shortcut    = $_POST['type_shortcut'];
     $client_id        = $_POST['Client_ID'];
 
     if(!empty($invoice_number) && !empty($address1) && !empty($address2) && !empty($address3)  && !empty($quantity) && !empty($total) && !empty($discount) && !empty($advanced_payment) && !empty($item_id) && !empty($invoice_type) && !empty($client_id)) {
@@ -38,7 +38,8 @@ if(isset($_POST['Submit'])) {
                                 discount,
                                 advanced_payment,
                                 Item_ID,
-                                Invoice_type,
+                                invoice_type,
+                                type_shortcut,
                                 Client_ID) ";
     $query .= "VALUES('{$invoice_number}',
                     '{$address1}',
@@ -50,7 +51,8 @@ if(isset($_POST['Submit'])) {
                     '{$advanced_payment}',
                     '{$item_id}',
                     '{$invoice_type}',
-                    '{$client_ID}') ";
+                    '{$type_shortcut}',
+                    '{$client_id}') ";
 
     $result =  mysqli_query($mysqli, $query);
     if (!$result) {
@@ -138,7 +140,7 @@ if(isset($_POST['Submit'])) {
             </ul>
         </li>
         <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="items.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
     </ul>
 </div>
 <!--sidebar-menu-->
@@ -183,8 +185,8 @@ if(isset($_POST['Submit'])) {
                               <div class="control-group">
                                   <label class="control-label">Address </label>
                                   <div class="controls">
-                                      <input type="text" name="address_line1"  required> <br>
-                                      <input type="text" name="address_line2"  > <br>
+                                      <input type="text" name="address_line1"  required> <br> <br>
+                                      <input type="text" name="address_line2"  > <br> <br>
                                       <input type="text" name="address_line3"  >
                                   </div>
                               </div>
@@ -220,13 +222,8 @@ if(isset($_POST['Submit'])) {
                                   <div class="control-group">
                                       <label class="control-label">Invoice Type</label>
                                       <div class="controls">
-                                          <input type="text" name="Invoice_type_type" required>
-                                      </div>
-                                  </div>
-                                  <div class="control-group">
-                                      <label class="control-label">Invoice Type ID </label>
-                                      <div class="controls">
-                                          <input type="text" name="Invoice_type_type" required>
+                                          <input type="text" name="Invoice_type" required>
+                                          <input type="text" name="type_shortcut" readonly>
                                       </div>
                                   </div>
                                   <div class="control-group">
@@ -236,7 +233,7 @@ if(isset($_POST['Submit'])) {
                                       </div>
                                   </div>
 <!--                                  <div class="control-group">-->
-<!--                                      <label class="control-label">Agent Area</label>-->
+<!--                                      <label class="control-label">It</label>-->
 <!--                                      <div class="controls">-->
 <!--                                          <input type="text" name="Agent_Area" id="Agent_Area" required>-->
 <!--                                      </div>-->
