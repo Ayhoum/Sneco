@@ -5,7 +5,6 @@ ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-session_start();
 ?>
 <?php
 if(!isset($_SESSION['role'])){

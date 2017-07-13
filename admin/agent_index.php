@@ -63,29 +63,29 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
     <script src="js/jquery.validate.js"></script>
     <script src="js/matrix.form_validation.js"></script>
 <style>
-    .shell {
-        position: relative;
-        line-height: 1; }
-    .shell span {
-        position: absolute;
-        left: 3px;
-        top: 1px;
-        color: #ccc;
-        pointer-events: none;
-        z-index: -1; }
-    .shell span i {
-        font-style: normal;
-        /* any of these 3 will work */
-        color: transparent;
-        opacity: 0;
-        visibility: hidden; }
+    /*.shell {*/
+        /*position: relative;*/
+        /*line-height: 1; }*/
+    /*.shell span {*/
+        /*position: absolute;*/
+        /*left: 3px;*/
+        /*top: 1px;*/
+        /*color: #ccc;*/
+        /*pointer-events: none;*/
+        /*z-index: -1; }*/
+    /*.shell span i {*/
+        /*font-style: normal;*/
+        /*!* any of these 3 will work *!*/
+        /*color: transparent;*/
+        /*opacity: 0;*/
+        /*visibility: hidden; }*/
 
-    input.masked,
-    .shell span {
-        font-size: 16px;
-        font-family: monospace;
-        padding-right: 10px;
-        text-transform: uppercase; }
+    /*input.masked,*/
+    /*.shell span {*/
+        /*font-size: 16px;*/
+        /*font-family: monospace;*/
+        /*padding-right: 10px;*/
+        /*text-transform: uppercase; }*/
 </style>
 </head>
 <body>
@@ -700,12 +700,12 @@ $agent_id_val = $row['ID'];
                                     </select>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">Bank Account</label>
-                                <div class="controls">
-                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" placeholder="XXXX XXXX XXXX XXXX XX" pattern="\w\w\d\d \w\w\w\w \d\d\d\d \d\d\d\d \d\d" class="masked" data-charset="__XX ____ XXXX XXXX XX">
-                                </div>
-                            </div>
+<!--                            <div class="control-group">-->
+<!--                                <label class="control-label">Bank Account</label>-->
+<!--                                <div class="controls">-->
+<!--                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" placeholder="XXXX XXXX XXXX XXXX XX" pattern="\w\w\d\d \w\w\w\w \d\d\d\d \d\d\d\d \d\d" class="masked" data-charset="__XX ____ XXXX XXXX XX">-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="control-group">
                                 <label class="control-label">ID Number</label>
                                 <div class="controls">
@@ -734,13 +734,13 @@ $agent_id_val = $row['ID'];
                         <div class="control-group">
                             <label class="control-label">Name (English)</label>
                             <div class="controls">
-                                <input type="text" name="Receiver_eName" id="Receiver_eName"required />
+                                <input type="text" name="Receiver_eName" id="Receiver_eName" required />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Name (Arabic)</label>
                             <div class="controls">
-                                <input type="text" name="Receiver_aName" id="Receiver_aName"required />
+                                <input type="text" name="Receiver_aName" id="Receiver_aName" required />
                             </div>
                         </div>
                         <div class="control-group">
@@ -1263,6 +1263,6 @@ $agent_id_val = $row['ID'];
 
         });
     </script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
+<!--    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>-->
 </body>
 </html>

@@ -28,6 +28,24 @@ if(!isset($_SESSION['role'])){
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/colorpicker.css" />
+    <link rel="stylesheet" href="../css/datepicker.css" />
+    <link rel="stylesheet" href="../css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" href="../css/fullcalendar.css" />
+    <link rel="stylesheet" href="../css/jquery.gritter.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/bootstrap-colorpicker.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.ui.custom.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.uniform.js"></script>
+    <script src="../js/select2.min.js"></script>
+    <script src="../js/jquery.validate.js"></script>
+    <script src="../js/matrix.js"></script>
+    <script src="../js/matrix.form_validation.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/matrix.tables.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script>
 </head>
 
 <body>
@@ -154,17 +172,7 @@ if(!isset($_SESSION['role'])){
 
 <!--end-Footer-part-->
 
-<script src="../js/jquery.min.js"></script>
-<script src="../js/jquery.ui.custom.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/jquery.uniform.js"></script>
-<script src="../js/select2.min.js"></script>
-<script src="../js/jquery.validate.js"></script>
-<script src="../js/matrix.js"></script>
-<script src="../js/matrix.form_validation.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/matrix.tables.js"></script>
-<script src="../js/bootstrap-datepicker.js"></script>
+
 
 </body>
 </html>

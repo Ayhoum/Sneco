@@ -5,7 +5,6 @@ ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-session_start();
 ?>
 <?php
 if(!isset($_SESSION['role'])){
@@ -36,7 +35,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $sPhone       = $row['Sender_Phone'];
     $sEmail       = $row['Sender_Email'];
     $sNationality = $row['Sender_Nationality'];
-    $sBankAccount = $row['Sender_BankAcount'];
     $sIDNumber    = $row['Sender_IdNumber'];
     $sExpiary     = $row['Sender_IdExp'];
     // Receiver
@@ -74,7 +72,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $sPhone       = $_POST['Sender_Phone'];
         $sEmail       = $_POST['Sender_Email'];
         $sNationality = $_POST['Sender_Nationality'];
-        $sBankAccount = $_POST['Sender_BankAccount'];
         $sIDNumber    = $_POST['Sender_IDNumber'];
         $sExpiary     = $_POST['Sender_Expiary'];
 
@@ -89,12 +86,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $rPhone       = $_POST['Receiver_Phone'];
         $rEmail       = $_POST['Receiver_Email'];
         //Other Data
-        $amount = $_POST['Amount'];
+        $amount = $_POST['Totalt'];
         $current = $_POST['Current_Currency'];
         $payment = $_POST['Payment_Currency'];
-        $total = $_POST['Total'];
+        $total = $_POST['Totalg'];
         $rate = $_POST['Rate'];
-        $charge = $_POST['Charge'];
+        $charge = $_POST['ExRa'];
         $reason = $_POST['Reason'];
         $comment = $_POST['Comment'];
 
@@ -110,7 +107,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $query .= "Sender_Postcode = '{$sPostcode}', ";
         $query .= "Sender_City = '{$sCity}', ";
         $query .= "Sender_Country = '{$sCountry}', ";
-        $query .= "Sender_BankAcount = '{$sBankAccount}', ";
         $query .= "Sender_IdNumber = '{$sIDNumber}', ";
         $query .= "Sender_Nationality = '{$sNationality}', ";
         $query .= "Sender_IdExp = '{$sExpiary}', ";
@@ -145,10 +141,10 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
 ?>
 
 
-        <h1>EDIT TRANSACTION </h1>
+<h1>EDIT TRANSACTION </h1>
     <div class="container-fluid"><hr>
         <div class="row-fluid">
-            <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="#" name="basic_validate" contentType="charset=UTF-8" id="basic_validate" novalidate="novalidate">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
@@ -156,12 +152,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                         </div>
                         <div class="widget-content nopadding">
                             <form action="#" method="get" class="form-horizontal">
-                                <div class="control-group">
-                                    <label class="control-label">ID</label>
-                                    <div class="controls">
-                                        <input type="text" name="ID" id="ID" value="<?php echo $transaction_ID; ?>" required>
-                                    </div>
-                                </div>
+
+
                                 <div class="control-group">
                                     <label class="control-label">Agent No.</label>
                                     <div class="controls">
@@ -169,15 +161,15 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">First Name</label>
+                                    <label class="control-label">Name (English)</label>
                                     <div class="controls">
-                                        <input type="text" name="Sender_fName" id="Sender_fName" value="<?php echo $seName; ?>" required>
+                                        <input type="text" name="Sender_eName" id="Sender_eName" value="<?php echo $seName; ?>" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Last Name</label>
+                                    <label class="control-label">Name (Arabic)</label>
                                     <div class="controls">
-                                        <input type="text" name="Sender_lName" id="Sender_lName" value="<?php echo $saName; ?>" required>
+                                        <input type="text" name="Sender_aName" id="Sender_aName" value="<?php echo $saName; ?>" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -455,7 +447,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Phone</label>
                                         <div class="controls">
-                                            <input type="text" name="Sender_Phone" id="Sender_Phone" value="<?php echo $sPhone; ?>" required>
+                                            <input type="text" name="Sender_Phone" value="<?php echo $sPhone; ?>" id="Sender_Phone" required>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -605,7 +597,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                                 <option value="omani">Omani</option>
                                                 <option value="pakistani">Pakistani</option>
                                                 <option value="palauan">Palauan</option>
-                                                <option value="palestinian">Palestinian</option>
+                                                <option value="Palestinian">Palestinian</option>
                                                 <option value="panamanian">Panamanian</option>
                                                 <option value="papua new guinean">Papua New Guinean</option>
                                                 <option value="paraguayan">Paraguayan</option>
@@ -666,24 +658,25 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Bank Account</label>
-                                        <div class="controls">
-                                            <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" value="<?php echo $sBankAccount; ?>" required>
-                                        </div>
-                                    </div>
+                                    <!--                            <div class="control-group">-->
+                                    <!--                                <label class="control-label">Bank Account</label>-->
+                                    <!--                                <div class="controls">-->
+                                    <!--                                    <input type="text" name="Sender_BankAccount" id="Sender_BankAccount" placeholder="XXXX XXXX XXXX XXXX XX" pattern="\w\w\d\d \w\w\w\w \d\d\d\d \d\d\d\d \d\d" class="masked" data-charset="__XX ____ XXXX XXXX XX">-->
+                                    <!--                                </div>-->
+                                    <!--                            </div>-->
                                     <div class="control-group">
                                         <label class="control-label">ID Number</label>
                                         <div class="controls">
-                                            <input type="text" name="Sender_IDNumber" id="Sender_IDNumber" value="<?php echo $sIDNumber; ?>" required>
+                                            <input type="text" name="Sender_IDNumber" value="<?php echo $sIDNumber; ?>" id="Sender_IDNumber" required>
                                         </div>
                                     </div>
+                                    <?php
+                                    ?>
                                     <div class="control-group">
-                                        <label class="control-label">Expiry Date </label>
+                                        <label class="control-label">Date picker (yyy-mm-dd)</label>
                                         <div class="controls">
-                                            <input type="text" name="Sender_Expiary" id="Sender_Expiary" data-date-format="yyyy-mm-dd" value="<?php echo $sExpiary; ?>" class="datepicker span2" required>
-<!--                                            <input type="date" name="Sender_Expiary" id="Sender_Expiary" value="" required>-->
-                                        </div>
+                                            <input type="text" name="Sender_Expiary" id="Sender_Expiary" required data-date="<?php echo date('Y-n-j', strtotime('+1 months')); ?>" data-date-format="yyyy-mm-dd" value="<?php echo $sExpiary; ?>" class="datepicker span11" style="width:215px;">
+                                            <span class="help-block">Date with Formate of  (yyy-mm-dd)</span> </div>
                                     </div>
                                 </div>
                         </div>
@@ -697,47 +690,45 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                             </div>
                             <div class="widget-content nopadding">
                                 <div class="control-group">
-                                    <label class="control-label">First Name</label>
+                                    <label class="control-label">Name (English)</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_fName" id="Receiver_fName" value="<?php echo $reName; ?>" required />
+                                        <input type="text" name="Receiver_eName" value="<?php echo $reName; ?>" id="Receiver_eName" required />
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Last Name</label>
+                                    <label class="control-label">Name (Arabic)</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_lName" id="Receiver_lName" value="<?php echo $raName; ?>" required />
+                                        <input type="text" name="Receiver_aName" id="Receiver_aName" value="<?php echo $raName; ?>" required />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Street Name</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_StreetName" id="Receiver_StreetName" value="<?php echo $rStreetName; ?>" required />
+                                        <input type="text" name="Receiver_StreetName" value="<?php echo $rStreetName; ?>" id="Receiver_StreetName"  />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">House Number</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_HouseNumber" id="Receiver_HouseNumber" value="<?php echo $rHouseNumber; ?>" required />
+                                        <input type="text" name="Receiver_HouseNumber" value="<?php echo $rHouseNumber; ?>" id="Receiver_HouseNumber"  />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Postcode</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_Postcode" id="Receiver_Postcode" value="<?php echo $rPostcode; ?>" required />
+                                        <input type="text" name="Receiver_Postcode" value="<?php echo $rPostcode; ?>" id="Receiver_Postcode"  />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">City</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_City" id="Receiver_City" value="<?php echo $rCity; ?>" required />
+                                        <input type="text" name="Receiver_City" value="<?php echo $rCity; ?>" id="Receiver_City" required />
                                     </div>
                                 </div>
-
-
                                 <div class="control-group">
                                     <label class="control-label">Country</label>
                                     <div class="controls">
-                                        <select style="width:215px;" name="Receiver_Country" id="Receiver_Country" >
+                                        <select style="width:215px;" name="Receiver_Country" id="Receiver_Country">
                                             <option value="">-- select one --</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
@@ -985,13 +976,13 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                 <div class="control-group">
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_Phone" id="Receiver_Phone" value="<?php echo $rPhone; ?>" required />
+                                        <input type="text" name="Receiver_Phone" value="<?php echo $rPhone; ?>" id="Receiver_Phone" required />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_Email" id="Receiver_Email" value="<?php echo $rEmail; ?>" required />
+                                        <input type="text" name="Receiver_Email" value="<?php echo $rEmail; ?>" id="Receiver_Email" required />
                                     </div>
                                 </div>
                             </div>
@@ -1007,49 +998,75 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Amount</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" id="Amount" value="<?php echo $amount; ?>" required />
+                                            <input type="text" name="Amount" value="<?php echo $amount; ?>" id="Amount" required />
                                         </div>
                                     </div>
+
+
                                     <div class="control-group">
                                         <label class="control-label">Current Currency</label>
                                         <div class="controls">
-                                            <input  type="text" name="Current_Currency" id="Current_Currency" value="<?php echo $current; ?>" required />
+                                            <select id="Current_Currency" style="width:215px;" onchange="var1(this)" name='Current_Currency' required>
+                                                <option disabled="disabled" selected>Select Currency</option>
+                                                <option value='AED' title='United Arab Emirates Dirham'>AED (United Arab Emirates Dirham)</option>
+                                                <option value='EUR' title='Euro'>EUR (Euro)</option>
+                                                <option value='SAR' title='Saudi Riyal'>SAR (Saudi Riyal)</option>
+                                                <option value='SYP' title='Syrian Pound'>SYP (Syrian Pound)</option>
+                                                <option value='USD' title='United States Dollar'>USD (United States Dollar)</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Payment Currency</label>
                                         <div class="controls">
-                                            <input  type="text" name="Payment_Currency" id="Payment_Currency" value="<?php echo $payment; ?>" required />
+                                            <select id="Payment_Currency" style="width:215px;" onchange="var2(this)" name='Payment_Currency' required>
+                                                <option disabled="disabled" selected>Select Currency</option>
+                                                <option value='AED' title='United Arab Emirates Dirham'>AED (United Arab Emirates Dirham)</option>
+                                                <option value='EUR' title='Euro'>EUR (Euro)</option>
+                                                <option value='SAR' title='Saudi Riyal'>SAR (Saudi Riyal)</option>
+                                                <option value='SYP' title='Syrian Pound'>SYP (Syrian Pound)</option>
+                                                <option value='USD' title='United States Dollar'>USD (United States Dollar)</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Reason</label>
+                                        <label class="control-label">Exchange Rate</label>
                                         <div class="controls">
-                                            <input  type="text" name="Reason" id="Reason" value="<?php echo $reason; ?>" required />
+                                            <input  type="text" name="ExRa" id="ExRa" value="<?php echo $charge; ?>" readonly required />
                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Comment</label>
                                         <div class="controls">
-                                            <input  type="text" name="Comment" id="Comment" value="<?php echo $comment; ?>" required />
+                                            <!-- STILL NOT WORKING!!!! -->
+                                            <Button id="Calc" onclick="return " class="btn btn-success">Calculate</Button>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Rate</label>
                                         <div class="controls">
-                                            <input  type="text" name="Rate" id="Rate" value="<?php echo $rate; ?>" required />
+                                            <input  type="text" name="Rate" id="Rate" value="<?php echo $rate; ?>" readonly required />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Charge</label>
+                                        <label class="control-label">Reason</label>
                                         <div class="controls">
-                                            <input  type="text" name="Charge" id="Charge" value="<?php echo $charge; ?>" required />
+                                            <textarea name="Reason" id="Reason" required> <?php echo $reason; ?> </textarea>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Total</label>
+                                        <label class="control-label">Comment</label>
                                         <div class="controls">
-                                            <input  type="text" name="Total" id="Total" value="<?php echo $total; ?>" required />
+                                            <textarea name="Comment" id="Comment" required> <?php echo $comment; ?> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Total Amount to Take</label>
+                                        <div class="controls">
+                                            <input  type="text" name="Totalt" id="Totalt" value=" " readonly required />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Total Amount to Pay</label>
+                                        <div class="controls">
+                                            <input  type="text" name="Totalg" id="Totalg" value="<?php echo $total; ?>" readonly required />
                                         </div>
                                     </div>
                                     <div class="form-actions">
@@ -1062,7 +1079,223 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 </div>
             </form>
 
-                <script>
+                <script type="text/javascript">
+
+                    ( function($) {
+                        // we can now rely on $ within the safety of our "bodyguard" function
+                        $(document).ready( function() { alert("nyah nyah! I'm able to use '$'!!!!");  } );
+                    } ) ( jQuery );
+
+                    //this will fail
+                    $(document).ready( function() { alert('fail?'); } );
+                    </script>
+            <script>
+//
+//                    $('#Rate').click(function(){
+//                        $obj = $('#Amount');
+//                        $var = Number($obj.val());
+//
+//                        if ($var > 0 && $var <= 150){
+//                            $rate = 10;
+//                            $total = $var + $rate;
+//                        }
+//
+//                        else if  ($var >= 151 && $var <= 400){
+//                            $rate = $var * 0.08;
+//                            $total = $var + $rate;
+//                        }
+//                        else if ($var >= 401 && $var <= 1000){
+//                            $rate = $var * 0.07;
+//                            $total = $var + $rate;
+//                        }
+//                        else if ($var >= 1001 && $var <= 3000){
+//                            $rate = $var * 0.06;
+//                            $total = $var + $rate;
+//                        }
+//                        else if ($var >= 3001 && $var <= 7000) {
+//                            $rate = $var * 0.05;
+//                            $total = $var + $rate;
+//                        }
+//                        else if ($var >= 7001 && $var < 10000){
+//                            $rate = $var * 0.04;
+//                            $total = $var + $rate;
+//                        }
+//                        else{
+//                            $total = 0;
+//                        }
+//
+//                        $('#Rate').val($rate);
+//                    });
+//
+
+
+                    $('#Amount').change(function() {
+
+                        $var = Number($(this).val());
+
+                        if ($var > 0 && $var <= 150){
+                            $rate = 10;
+                            $total = $var + $rate;
+                        }
+
+                        else if  ($var >= 151 && $var <= 400){
+                            $rate = $var * 0.08;
+                            $total = $var + $rate;
+                        }
+                        else if ($var >= 401 && $var <= 1000){
+                            $rate = $var * 0.07;
+                            $total = $var + $rate;
+                        }
+                        else if ($var >= 1001 && $var <= 3000){
+                            $rate = $var * 0.06;
+                            $total = $var + $rate;
+                        }
+                        else if ($var >= 3001 && $var <= 7000) {
+                            $rate = $var * 0.05;
+                            $total = $var + $rate;
+                        }
+                        else if ($var >= 7001 && $var < 10000){
+                            $rate = $var * 0.04;
+                            $total = $var + $rate;
+                        }
+                        else{
+                            $total = 0;
+                        }
+
+                        $('#Rate').val($rate);
+
+                        $('#Totalt').val($total);
+
+                        $chvar = Number($('#ExRa').val());
+                        $amtotal = $var * $chvar;
+
+                        $('#Totalg').val($amtotal);
+
+                    });
+
+
+
+                    $("#Calc").click(function(){
+
+                        var e = document.getElementById("Current_Currency");
+                        var value1 = e.options[e.selectedIndex].value;
+                        var f = document.getElementById("Payment_Currency");
+                        var value2 = f.options[f.selectedIndex].value;
+
+
+                        if (value1+value2 == 'AEDEUR'){
+                            var id = 0;
+                        }
+                        else if  (value1+value2 == 'AEDSAR'){
+                            var id = 1;
+                        }
+                        else if (value1+value2 == 'AEDSYP'){
+                            var id = 2;
+                        }
+                        else if (value1+value2 == 'AEDUSD'){
+                            var id = 3;
+                        }
+                        else if (value1+value2 == 'EURAED'){
+                            var id = 4;
+                        }
+                        else if (value1+value2 == 'EURSAR'){
+                            var id = 5;
+                        }
+                        else if (value1+value2 == 'EURSYP'){
+                            var id = 6;
+                        }
+                        else if (value1+value2 == 'EURUSD'){
+                            var id = 7;
+                        }
+                        else if (value1+value2 == 'SARAED'){
+                            var id = 8;
+                        }
+                        else if  (value1+value2 == 'SAREUR'){
+                            var id = 9;
+                        }
+                        else if (value1+value2 == 'SARSYP'){
+                            var id = 10;
+                        }
+                        else if (value1+value2 == 'SARUSD'){
+                            var id = 11;
+                        }
+                        else if (value1+value2 == 'SYPAED'){
+                            var id = 12;
+                        }
+                        else if (value1+value2 == 'SYPEUR'){
+                            var id = 13;
+                        }
+                        else if (value1+value2 == 'SYPSAR'){
+                            var id = 14;
+                        }
+                        else if (value1+value2 == 'SYPUSD'){
+                            var id = 15;
+                        }
+                        else if (value1+value2 == 'USDAED'){
+                            var id = 16;
+                        }
+                        else if (value1+value2 == 'USDEUR'){
+                            var id = 17;
+                        }
+                        else if (value1+value2 == 'USDSAR'){
+                            var id = 18;
+                        }
+                        else if (value1+value2 == 'USDSYP'){
+                            var id = 19;
+                        }
+                        else if ((value1+value2 == 'AEDAED') || (value1+value2 == 'EUREUR') || (value1+value2 == 'SARSAR') || (value1+value2 == 'SYPSYP') || (value1+value2 == 'USDUSD') ){
+                            var id = 20;
+                        }
+
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '../agentscripts/exchange.php',
+                            data: 'id=testdata',
+                            dataType: 'json',
+                            cache: false,
+                            success: function(result) {
+                                $value = result[id]['Value'];
+
+//                            $('#content1').html(result[0]);
+                            }
+                        });
+
+
+                        $("#ExRa").val($value);
+
+                        $chvar = Number($('#ExRa').val());
+                        $amtotal = $var * $chvar;
+
+                        $('#Totalg').val($amtotal);
+                    });
+
+
+
+//$('#ExRa').change(function() {
+//
+//    $chvar = Number($('#ExRa').val());
+//    $amtotal = $var * $chvar;
+//
+//    $('#Totalg').val($amtotal);
+//
+//});
+
+//                    $("#Totalt").click(function(){
+//                        $('#Totalt').val($total);
+//                    });
+
+//                    $("#Totalg").click(function(){
+//
+//                        $chvar = Number($("#ExRa").val());
+//                        $amtotal = $var * $chvar;
+//                        $('#Totalg').val($amtotal);
+//
+//                    });
+
+
+
+
                 function setSelectedIndex(s, valsearch)
                 {
 // Loop through all the items in drop down list
@@ -1079,6 +1312,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 }
                 setSelectedIndex(document.getElementById("Receiver_Country"),"<?php echo $rCountry; ?>");
                 setSelectedIndex(document.getElementById("Sender_Nationality"),"<?php echo $sNationality; ?>");
+                setSelectedIndex(document.getElementById("Current_Currency"),"<?php echo $current; ?>");
+                setSelectedIndex(document.getElementById("Payment_Currency"),"<?php echo $payment; ?>");
                 setSelectedIndex(document.getElementById("Sender_Country"),"<?php echo $sCountry; ?>");
 
-      </script>
+
+
+
+
+            </script>
