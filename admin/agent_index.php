@@ -1076,7 +1076,6 @@ $agent_id_val = $row['ID'];
                                     <input  type="text" name="ExRa" id="ExRa" value=" " readonly required />
                                 </div>
                                 <div class="controls">
-                                    <!-- STILL NOT WORKING!!!! -->
                                     <Button id="Calc" onclick="return false;" class="btn btn-success">Calculate</Button>
                                 </div>
                             </div>
