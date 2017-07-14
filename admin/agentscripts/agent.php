@@ -27,7 +27,6 @@ $sCountry     = $_POST['Sender_Country'];
 $sPhone       = $_POST['Sender_Phone'];
 $sEmail       = $_POST['Sender_Email'];
 $sNationality = $_POST['Sender_Nationality'];
-$sBankAccount = $_POST['Sender_BankAccount'];
 $sIDNumber    = $_POST['Sender_IDNumber'];
 $sExpiary     = $_POST['Sender_Expiary'];
 
@@ -72,7 +71,6 @@ $rEmail       = $_POST['Receiver_Email'];
                                     Sender_Postcode, 
                                     Sender_City, 
                                     Sender_Country, 
-                                    Sender_BankAcount, 
                                     Sender_IdNumber, 
                                     Sender_Nationality, 
                                     Sender_IdExp, 
@@ -116,7 +114,6 @@ $rEmail       = $_POST['Receiver_Email'];
                     '{$sPostcode}',
                     '{$sCity}', 
                     '{$sCountry}',
-                    '{$sBankAccount}',
                     '{$sIDNumber}',
                     '{$sNationality}',
                     '{$sExpiary}',
