@@ -3,7 +3,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="Sneco" content="Senco.nl" />
 
     <!-- Stylesheets
     ============================================= -->
@@ -21,7 +21,7 @@
 
     <!-- Document Title
     ============================================= -->
-    <title>Canvas | The Multi-Purpose HTML5 Template</title>
+    <title>Sneco.nl</title>
 
     <style>
         .header-login-trigger {
@@ -656,7 +656,7 @@
                         </li>
                     </ul>
 
-                    <a href="#modal-login-form" data-lightbox="inline" class="header-login-trigger"><i class="icon-line2-login"></i></a>
+                    <a href="login-register-2.php" class="header-login-trigger"><i class="icon-line2-login"></i></a>
 
                 </nav><!-- #primary-menu end -->
 
@@ -674,7 +674,7 @@
                     <div class="swiper-slide dark" style="background-image: url('images/slider/swiper/1.jpg');">
                         <div class="container clearfix">
                             <div class="slider-caption slider-caption-center">
-                                <h2 data-caption-animate="fadeInUp">Welcome to Canvas</h2>
+                                <h2 data-caption-animate="fadeInUp">Welcome to Sneco </h2>
                                 <p data-caption-animate="fadeInUp" data-caption-delay="200">Create just what you need for your Perfect Website. Choose from a wide range of Elements &amp; simply put them on your own Canvas.</p>
                             </div>
                         </div>
