@@ -13,46 +13,46 @@ if(!isset($_SESSION['role'])){
 ?>
 <?php
 if(isset($_POST['Submit'])) {
-    //Sender
 
-    $agName       = $_POST['Agent_Name'];
-    $agEmail      = $_POST['Agent_Email'];
-    $agPassword   = $_POST['Agent_Password'];
-    $agSt         = $_POST['Agent_StreetName'];
-    $agHn         = $_POST['Agent_HouseNumber'];
-    $agPc         = $_POST['Agent_Postcode'];
-    $agCity       = $_POST['Agent_City'];
-    $agPhone      = $_POST['Agent_PhoneNumber'];
-    $agArea       = $_POST['Agent_Area'];
-    $agStats      = "Active";
+    $invoice_number   = $_POST['invoice_number'];
+    $address1         = $_POST['address_line1'];
+    $address2         = $_POST['address_line2'];
+    $address3         = $_POST['address_line3'];
+    $item_id          = $_POST['item_id'];
+    $quantity         = $_POST['quantity'];
+    $total            = $_POST['total'];
+    $discount         = $_POST['discount'];
+    $advanced_payment = $_POST['advanced_payment'];
+    $invoice_type     = $_POST['invoice_type'];
+    $type_shortcut    = $_POST['type_shortcut'];
+    $client_id        = $_POST['Client_ID'];
 
-
-    $enccode = ['cost' => 11];
-    $encAgPassword = password_hash($agPassword, PASSWORD_BCRYPT, $enccode);
-
-
-    if(!empty($agName) && !empty($agEmail) && !empty($agPassword) && !empty($agSt) && !empty($agHn) && !empty($agPc) && !empty($agCity) && !empty($agPhone) && !empty($agArea) && !empty($agStats)){
+    if(!empty($invoice_number) && !empty($address1) && !empty($address2) && !empty($address3)  && !empty($quantity) && !empty($total) && !empty($discount) && !empty($advanced_payment) && !empty($item_id) && !empty($invoice_type) && !empty($client_id)) {
 //Insert Customerrrr into database::
-    $query = "INSERT INTO AGENT(Agent_Name,
-                                Agent_Email,
-                                Agent_Pass,
-                                Agent_StreetName,
-                                Agent_HouseNo,
-                                Agent_Postcode,
-                                Agent_City,
-                                Agent_Phone,
-                                Agent_Area,
-                                Agent_Status) ";
-    $query .= "VALUES('{$agName}',
-                    '{$agEmail}',
-                    '{$encAgPassword}',
-                    '{$agSt}',
-                    '{$agHn}',
-                    '{$agPc}',
-                    '{$agCity}',
-                    '{$agPhone}',
-                    '{$agArea}',
-                    '{$agStats}') ";
+    $query = "INSERT INTO INVOICE (invoice_number,
+                                address_line1,
+                                address_line2,
+                                address_line3,
+                                quantity,
+                                total,
+                                discount,
+                                advanced_payment,
+                                Item_ID,
+                                invoice_type,
+                                type_shortcut,
+                                Client_ID) ";
+    $query .= "VALUES('{$invoice_number}',
+                    '{$address1}',
+                    '{$address2}',
+                    '{$address3}',
+                    '{$quantity}',
+                    '{$total}',
+                    '{$discount}',
+                    '{$advanced_payment}',
+                    '{$item_id}',
+                    '{$invoice_type}',
+                    '{$type_shortcut}',
+                    '{$client_id}') ";
 
     $result =  mysqli_query($mysqli, $query);
     if (!$result) {
@@ -139,9 +139,8 @@ if(isset($_POST['Submit'])) {
                 <li><a href="add_currency.php">Add Currencies</a></li>
             </ul>
         </li>
-
         <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="items.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
     </ul>
 </div>
 <!--sidebar-menu-->
@@ -178,58 +177,67 @@ if(isset($_POST['Submit'])) {
                           </div>
                           <div class="widget-content nopadding">
                               <div class="control-group">
-                                  <label class="control-label">Agent Name</label>
+                                  <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" name="Agent_Name" id="Agent_Name" required>
+                                      <input type="text" name="invoice_number" required>
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Agent Email Address</label>
+                                  <label class="control-label">Address </label>
                                   <div class="controls">
-                                      <input type="text" name="Agent_Email" id="Agent_Email" required>
+                                      <input type="text" name="address_line1"  required> <br> <br>
+                                      <input type="text" name="address_line2"  > <br> <br>
+                                      <input type="text" name="address_line3"  >
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Agent Password</label>
+                                  <label class="control-label">Item ID </label>
                                   <div class="controls">
-                                      <input type="text" name="Agent_Password" id="Agent_Password" required>
+                                      <input type="text" name="item_id" required>
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Agent Street Name</label>
+                                  <label class="control-label">Quantity</label>
                                   <div class="controls">
-                                      <input type="text" name="Agent_StreetName" id="Agent_StreetName" required>
+                                      <input type="number" name="quantity" required>
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Agent House Number</label>
+                                  <label class="control-label">Discount</label>
                                   <div class="controls">
-                                      <input type="text" name="Agent_HouseNumber" id="Agent_HouseNumber" required>
+                                      <input type="text" name="discount">
                                   </div>
                                   <div class="control-group">
-                                      <label class="control-label">Agent Postcode</label>
+                                      <label class="control-label">Advanced Payment</label>
                                       <div class="controls">
-                                          <input type="text" name="Agent_Postcode" id="Agent_Postcode" required>
+                                          <input type="text" name="advanced_payment">
                                       </div>
                                   </div>
                                   <div class="control-group">
-                                      <label class="control-label">Agent City</label>
+                                      <label class="control-label">Total</label>
                                       <div class="controls">
-                                          <input type="text" name="Agent_City" id="Agent_City" required>
+                                          <input type="text" name="total">
                                       </div>
                                   </div>
                                   <div class="control-group">
-                                      <label class="control-label">Agent Phone Number</label>
+                                      <label class="control-label">Invoice Type</label>
                                       <div class="controls">
-                                          <input type="text" name="Agent_PhoneNumber" id="Agent_PhoneNumber" required>
+                                          <input type="text" name="Invoice_type" required>
+                                          <input type="text" name="type_shortcut" readonly>
                                       </div>
                                   </div>
                                   <div class="control-group">
-                                      <label class="control-label">Agent Area</label>
+                                      <label class="control-label">Client ID</label>
                                       <div class="controls">
-                                          <input type="text" name="Agent_Area" id="Agent_Area" required>
+                                          <input type="text" name="Client_ID"required>
                                       </div>
                                   </div>
+<!--                                  <div class="control-group">-->
+<!--                                      <label class="control-label">It</label>-->
+<!--                                      <div class="controls">-->
+<!--                                          <input type="text" name="Agent_Area" id="Agent_Area" required>-->
+<!--                                      </div>-->
+<!--                                  </div>-->
                                   <div class="widget-content nopadding">
                                       <div class="form-actions">
                                           <input name="Submit" type="submit" value="Add" class="btn btn-success">
