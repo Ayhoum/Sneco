@@ -14,24 +14,24 @@ if(!isset($_SESSION['role'])){
 <?php
 if(isset($_POST['submit'])) {
 
-    $invoice_number   = $_POST['invoice_number'];
-    $address1         = $_POST['address_line1'];
-    $address2         = $_POST['address_line2'];
-    $address3         = $_POST['address_line3'];
-    $quantity         = $_POST['quantity'];
-    $total            = $_POST['total'];
-    $discount         = $_POST['discount'];
+    $invoice_number = $_POST['invoice_number'];
+    $address1 = $_POST['address_line1'];
+    $address2 = $_POST['address_line2'];
+    $address3 = $_POST['address_line3'];
+    $quantity = $_POST['quantity'];
+    $total = $_POST['total'];
+    $discount = $_POST['discount'];
     $advanced_payment = $_POST['advanced_payment'];
-    $item_id          = $_POST['item_id'];
-    $client_id        = $_POST['Client_ID'];
-    $invoice_type     = $_POST['invoice_type'];
-    $type_shortcut    = $_POST['type_shortcut'];
+    $item_id = $_POST['item_id'];
+    $client_id = $_POST['Client_ID'];
+    $invoice_type = $_POST['invoice_type'];
+    $type_shortcut = $_POST['type_shortcut'];
 
 
-    if(!empty($invoice_number) && !empty($address1) && !empty($address2) && !empty($address3)  && !empty($quantity) && !empty($total) && !empty($discount) && !empty($advanced_payment) && !empty($item_id) && !empty($invoice_type) && !empty($client_id)) {
-//Insert Invoice into database::
+    if (!empty($invoice_number) && !empty($address1) && !empty($quantity) && !empty($total) && !empty($discount) && !empty($advanced_payment) && !empty($item_id) && !empty($invoice_type) && !empty($client_id)) {
+//Insert Invoice into database:
 
-    $query = "INSERT INTO INVOICE  (invoice_number, 
+        $query = "INSERT INTO INVOICE(invoice_number, 
                                     address_line1, 
                                     address_line2, 
                                     address_line3, 
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])) {
                                     invoice_type, 
                                     type_shortcut) ";
 
-    $query .= "VALUES('{$invoice_number}',
+        $query .= "VALUES('{$invoice_number}',
                     '{$address1}',
                     '{$address2}',
                     '{$address3}',
@@ -53,16 +53,17 @@ if(isset($_POST['submit'])) {
                     '{$discount}',
                     '{$advanced_payment}',
                     '{$item_id}',
-                    '{$client_id}'
+                    SELECT ID FROM ITEM WHERE ID='{$item_id}',
+                    SELECT ID FROM CLIENT WHERE ID='{$client_id}',
                     '{$invoice_type}',
                     '{$type_shortcut}') ";
 
-    $result =  mysqli_query($mysqli, $query);
-    if (!$result) {
-        die("Failed!" . mysqli_error($mysqli));
-    }else{
-        header("Location: invoices.php");
-    }
+        $result = mysqli_query($mysqli, $query);
+        if (!$result) {
+            die("Failed!" . mysqli_error($mysqli));
+        } else {
+            header("Location: invoices.php");
+        }
     }
 }
 ?>
@@ -182,11 +183,11 @@ if(isset($_POST['submit'])) {
 
       <div class="container-fluid"><hr>
           <div class="row-fluid">
-              <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+              <form class="form-horizontal" method="post" action="add_invoice.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
                   <div class="span12">
                       <div class="widget-box">
                           <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                              <h5>New Agent</h5>
+                              <h5>New Invoice</h5>
                           </div>
                           <div class="widget-content nopadding">
                               <div class="control-group">

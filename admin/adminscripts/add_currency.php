@@ -13,7 +13,6 @@ if(!isset($_SESSION['role'])){
 ?>
 <?php
 if(isset($_POST['Submit'])) {
-    //Sender
 
     $curNameFr       = $_POST['Currency_From'];
     $curNameTo       = $_POST['Currency_To'];
