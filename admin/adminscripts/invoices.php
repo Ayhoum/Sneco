@@ -63,7 +63,7 @@ if(!isset($_SESSION['role'])){
     <ul>
         <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION ";
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];
@@ -83,9 +83,24 @@ if(!isset($_SESSION['role'])){
             </ul>
         </li>
         <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-        <li><a href="currency.php"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
-        <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
+            <ul>
+                <li><a href="currency.php">Current Currencies </a></li>
+                <li><a href="add_currency.php">Add Currencies</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
+            <ul>
+                <li><a href="items.php">Current Items</a></li>
+                <li><a href="add_item.php">Add Item</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="invoices.php">Current Invoices</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
 <!--sidebar-menu-->

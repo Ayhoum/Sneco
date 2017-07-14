@@ -109,8 +109,18 @@ users_online();
               <li><a href="adminscripts/add_currency.php">Add Currencies</a></li>
           </ul>
       </li>
-      <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-      <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
+          <ul>
+              <li><a href="adminscripts/items.php">Current Items</a></li>
+              <li><a href="adminscripts/add_item.php">Add Item</a></li>
+          </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+          <ul>
+              <li><a href="adminscripts/invoices.php">Current Invoices</a></li>
+              <li><a href="adminscripts/add_invoice.php">Add Invoice</a></li>
+          </ul>
+      </li>
   </ul>
 </div>
 <!--sidebar-menu-->

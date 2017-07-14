@@ -139,9 +139,20 @@ if(isset($_POST['Submit'])) {
                 <li><a href="add_currency.php">Add Currencies</a></li>
             </ul>
         </li>
+        <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
 
-        <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
+            <ul>
+                <li><a href="items.php">Current Items</a></li>
+                <li><a href="add_item.php">Add Item</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="invoices.php">Current Invoices</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
 <!--sidebar-menu-->

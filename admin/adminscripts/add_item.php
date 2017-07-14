@@ -113,13 +113,16 @@ if(isset($_POST['Submit'])) {
         </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
             <ul>
-                <li><a href="item.php">Current Items</a></li>
-                <li><a href="add_item.php">Add Items</a></li>
+                <li><a href="items.php">Current Items</a></li>
+                <li><a href="add_item.php">Add Item</a></li>
             </ul>
         </li>
-
-        <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="invoices.php">Current Invoices</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
 <!--sidebar-menu-->
