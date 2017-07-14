@@ -12,35 +12,38 @@ if(!isset($_SESSION['role'])){
 }
 ?>
 <?php
-if(isset($_POST['Submit'])) {
+if(isset($_POST['submit'])) {
 
     $invoice_number   = $_POST['invoice_number'];
     $address1         = $_POST['address_line1'];
     $address2         = $_POST['address_line2'];
     $address3         = $_POST['address_line3'];
-    $item_id          = $_POST['item_id'];
     $quantity         = $_POST['quantity'];
     $total            = $_POST['total'];
     $discount         = $_POST['discount'];
     $advanced_payment = $_POST['advanced_payment'];
+    $item_id          = $_POST['item_id'];
+    $client_id        = $_POST['Client_ID'];
     $invoice_type     = $_POST['invoice_type'];
     $type_shortcut    = $_POST['type_shortcut'];
-    $client_id        = $_POST['Client_ID'];
+
 
     if(!empty($invoice_number) && !empty($address1) && !empty($address2) && !empty($address3)  && !empty($quantity) && !empty($total) && !empty($discount) && !empty($advanced_payment) && !empty($item_id) && !empty($invoice_type) && !empty($client_id)) {
-//Insert Customerrrr into database::
-    $query = "INSERT INTO INVOICE (invoice_number,
-                                address_line1,
-                                address_line2,
-                                address_line3,
-                                quantity,
-                                total,
-                                discount,
-                                advanced_payment,
-                                Item_ID,
-                                invoice_type,
-                                type_shortcut,
-                                Client_ID) ";
+//Insert Invoice into database::
+
+    $query = "INSERT INTO INVOICE  (invoice_number, 
+                                    address_line1, 
+                                    address_line2, 
+                                    address_line3, 
+                                    quantity, 
+                                    total, 
+                                    discount, 
+                                    advanced_payment, 
+                                    Item_ID, 
+                                    Client_ID, 
+                                    invoice_type, 
+                                    type_shortcut) ";
+
     $query .= "VALUES('{$invoice_number}',
                     '{$address1}',
                     '{$address2}',
@@ -50,15 +53,15 @@ if(isset($_POST['Submit'])) {
                     '{$discount}',
                     '{$advanced_payment}',
                     '{$item_id}',
+                    '{$client_id}'
                     '{$invoice_type}',
-                    '{$type_shortcut}',
-                    '{$client_id}') ";
+                    '{$type_shortcut}') ";
 
     $result =  mysqli_query($mysqli, $query);
     if (!$result) {
         die("Failed!" . mysqli_error($mysqli));
     }else{
-        header("Location: agents.php");
+        header("Location: invoices.php");
     }
     }
 }
@@ -222,14 +225,14 @@ if(isset($_POST['Submit'])) {
                                   <div class="control-group">
                                       <label class="control-label">Invoice Type</label>
                                       <div class="controls">
-                                          <input type="text" name="Invoice_type" required>
-                                          <input type="text" name="type_shortcut" readonly>
+                                          <input type="text" name="invoice_type" required>
+                                          <input type="text" name="type_shortcut" required>
                                       </div>
                                   </div>
                                   <div class="control-group">
                                       <label class="control-label">Client ID</label>
                                       <div class="controls">
-                                          <input type="text" name="Client_ID"required>
+                                          <input type="text" name="Client_ID" required>
                                       </div>
                                   </div>
 <!--                                  <div class="control-group">-->

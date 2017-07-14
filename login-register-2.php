@@ -1,3 +1,7 @@
+<?php
+include 'include/phpscripts/login-register.php';
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
@@ -388,7 +392,7 @@
 										<li class="mega-menu-title"><a href="#"><div>Miscellaneous</div></a>
 											<ul>
 												<li><a href="login-register.html"><div>Login/Register</div></a></li>
-												<li><a href="login-register-2.html"><div>Login/Register - Style 2</div></a></li>
+												<li><a href="login-register-2.php"><div>Login/Register - Style 2</div></a></li>
 												<li><a href="login-register-3.html"><div>Login/Register - Style 3</div></a></li>
 												<li><a href="login-1.html"><div>Login - Style 1</div></a></li>
 												<li><a href="login-2.html"><div>Login - Style 2</div></a></li>
@@ -757,33 +761,54 @@
 										<form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
 
 											<div class="col_full">
-												<label for="register-form-name">Name:</label>
-												<input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
+												<label for="register-form-name">FirstName:</label>
+												<input type="text" id="register-form-name" name="first_name" value="" class="form-control" />
 											</div>
+
+                                            <div class="col_full">
+                                                <label for="register-form-username">Last Name:</label>
+                                                <input type="text" id="register-form-username" name="Last_Name" value="" class="form-control" />
+                                            </div>
 
 											<div class="col_full">
 												<label for="register-form-email">Email Address:</label>
-												<input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
-											</div>
-
-											<div class="col_full">
-												<label for="register-form-username">Choose a Username:</label>
-												<input type="text" id="register-form-username" name="register-form-username" value="" class="form-control" />
+												<input type="text" id="register-form-email" name="Email" value="" class="form-control" />
 											</div>
 
 											<div class="col_full">
 												<label for="register-form-phone">Phone:</label>
-												<input type="text" id="register-form-phone" name="register-form-phone" value="" class="form-control" />
+												<input type="text" id="register-form-phone" name="Phone" value="" class="form-control" />
 											</div>
+
+                                            <div class="col_full">
+                                                <label for="register-form-phone">Street Name:</label>
+                                                <input type="text" id="register-form-phone" name="Street_Name" value="" class="form-control" />
+                                            </div>
+
+                                            <div class="col_full">
+                                                <label for="register-form-phone">House Number:</label>
+                                                <input type="text" id="register-form-phone" name="House_Number" value="" class="form-control" />
+                                            </div>
+
+                                            <div class="col_full">
+                                                <label for="register-form-phone">Postcode:</label>
+                                                <input type="text" id="register-form-phone" name="Postcode" value="" class="form-control" />
+                                            </div>
+
+                                            <div class="col_full">
+                                                <label for="register-form-phone">City:</label>
+                                                <input type="text" id="register-form-phone" name="City" value="" class="form-control" />
+                                            </div>
+
 
 											<div class="col_full">
 												<label for="register-form-password">Choose Password:</label>
-												<input type="password" id="register-form-password" name="register-form-password" value="" class="form-control" />
+												<input type="password" id="register-form-password" name="Password" value="" class="form-control" />
 											</div>
 
 											<div class="col_full">
 												<label for="register-form-repassword">Re-enter Password:</label>
-												<input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
+												<input type="password" id="register-form-repassword" name="repassword" value="" class="form-control" />
 											</div>
 
 											<div class="col_full nobottommargin">

@@ -408,7 +408,7 @@
                                     <li class="mega-menu-title"><a href="#"><div>Miscellaneous</div></a>
                                         <ul>
                                             <li><a href="login-register.html"><div>Login/Register</div></a></li>
-                                            <li><a href="login-register-2.html"><div>Login/Register - Style 2</div></a></li>
+                                            <li><a href="login-register-2.php"><div>Login/Register - Style 2</div></a></li>
                                             <li><a href="login-register-3.html"><div>Login/Register - Style 3</div></a></li>
                                             <li><a href="login-1.html"><div>Login - Style 1</div></a></li>
                                             <li><a href="login-2.html"><div>Login - Style 2</div></a></li>
