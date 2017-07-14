@@ -85,7 +85,7 @@ if(!isset($_SESSION['role'])){
         <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
         <li><a href="currency.php"><i class="fa fa-money"></i> <span>Currency rates</span></a></li>
         <li class="submenu"> <a href="invoices.php"><i class="fa fa-pencil"></i> <span>Invoices</span></a></li>
-        <li class="submenu"> <a href="items.php.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
+        <li class="submenu"> <a href="items.php"><i class="fa fa-pencil"></i> <span>Items</span></a></li>
     </ul>
 </div>
 <!--sidebar-menu-->

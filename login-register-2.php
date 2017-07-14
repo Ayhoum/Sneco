@@ -25,7 +25,7 @@ include 'include/phpscripts/login-register.php';
 		Made by Alaa,
 		23-05-2017
 	============================================= -->
-	<title>Login</title>
+	<title>Login & Register</title>
 
 </head>
 
@@ -717,7 +717,7 @@ include 'include/phpscripts/login-register.php';
 
 				<div class="container clearfix">
 
-					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
+					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 70%;">
 
 						<ul class="tab-nav tab-nav2 center clearfix">
 							<li class="inline-block"><a href="#tab-login">Login</a></li>
@@ -762,7 +762,7 @@ include 'include/phpscripts/login-register.php';
 
 											<div class="col_full">
 												<label for="register-form-name">FirstName:</label>
-												<input type="text" id="register-form-name" name="first_name" value="" class="form-control" />
+												<input type="text" id="register-form-name" name="First_Name" value="" class="form-control" />
 											</div>
 
                                             <div class="col_full">
@@ -1068,7 +1068,6 @@ include 'include/phpscripts/login-register.php';
 	============================================= -->
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
-
 	<!-- Footer Scripts
 	============================================= -->
 	<script type="text/javascript" src="js/functions.js"></script>

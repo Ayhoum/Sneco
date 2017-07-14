@@ -24,39 +24,50 @@ if (isset($_POST['login-form-submit'])) {
 ?>
 
 <?php
+
 // Sign-Up process:
 if (isset($_POST['register-form-submit'])){
 $first_name  =     $_POST  ['First_Name'];
-$last_name   =     $_POST  ['Last_name'];
+$last_name   =     $_POST  ['Last_Name'];
 $email       =     $_POST  ['Email'];
 $password    =     $_POST  ['Password'];
+$repassword  =     $_POST  ['repassword'];
 $phone       =     $_POST  ['Phone'];
 $street_name =     $_POST  ['Street_Name'];
 $house_nr    =     $_POST  ['House_Number'];
 $postcode    =     $_POST  ['Postcode'];
 $city        =     $_POST  ['City'];
 
+    if($password == $repassword){
+        $query = "SELECT * FROM USER WHERE Email = '{$email}'";
+        $result = mysqli_query($mysqli, $query);
+        if (mysqli_num_rows($result) == 1){
+            echo "";
+        } else{
 
-$query  = "INSERT INTO USER (First_Name,
-                            Last_Name,
-                            Email,
-                            Password,
-                            Phone,
-                            Street_Name,
-                            House_Number,
-                            Postcode,
-                            City)";
+            $query  = "INSERT INTO USER (First_Name,
+                                Last_Name,
+                                Email,
+                                Password,
+                                Phone,
+                                Street_Name,
+                                House_Number,
+                                Postcode,
+                                City)";
 
-        $query .= "VALUES ('{$first_name}',
-                           '{$last_name}',
-                           '{$email}',
-                           '{$password}',
-                           '{$phone}',
-                           '{$street_name}',
-                           '{$house_nr}',
-                           '{$postcode}',
-                           '{$city}')";
+            $query .= "VALUES ('{$first_name}',
+                               '{$last_name}',
+                               '{$email}',
+                               '{$password}',
+                               '{$phone}',
+                               '{$street_name}',
+                               '{$house_nr}',
+                               '{$postcode}',
+                               '{$city}')";
+            $result = mysqli_query($mysqli ,$query);
+            header('login-register-2.php');
+        }
+    }
 }
-$result = mysqli_query($mysqli ,$query);
- header('login-register-2.php');
+
 ?>
