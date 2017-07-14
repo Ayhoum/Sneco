@@ -27,22 +27,19 @@ if(!isset($_SESSION['role'])){
                                 <tr>
                                     <th>ID</th>
                                     <th style="background: #c9302c;color: #fff">MTRN</th>
-                                    <th>Sneder Name (EN)</th>
-                                    <th>Sneder Name (AR)</th>
-                                    <th>Sneder Email</th>
-                                    <th>Expiary Date</th>
-                                    <th>Receiver Name (EN)</th>
-                                    <th>Receiver Name (AR)</th>
+                                    <th>Sender E.Name</th>
+                                    <th>Sender Email</th>
+                                    <th>Receiver E.Name</th>
                                     <th>Receiver Email</th>
                                     <th>Receiver Country</th>
-                                    <th>Amount in Sent Currency</th>
-                                    <th>Payment Currency</th>
-                                    <th>Total Amount</th>
+                                    <th>Amount Received</th>
+                                    <th>Payout Amount</th>
                                     <th>Rate</th>
-                                    <th>Charge</th>
+                                    <th>Exchange</th>
                                     <th>Status</th>
-                                    <th>Complete</th>
-                                    <th>Pending</th>
+                                    <th>Delete</th>
+                                    <th>Edit</th>
+                                    <th>View In details</th>
                                     <th>Download a PDF</th>
                                 </tr>
                                 </thead>
@@ -89,20 +86,16 @@ if(!isset($_SESSION['role'])){
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                     echo "<td>$sender_ename</td>";
-                                    echo "<td>$sender_aname</td>";
                                     echo "<td>$sender_email</td>";
-                                    echo "<td>$sender_expiary</td>";
                                     echo "<td>$receiver_ename</td>";
-                                    echo "<td>$receiver_aname</td>";
                                     echo "<td>$receiver_email</td>";
                                     echo "<td>$receiver_country</td>";
+                                    echo "<td>$total_amount $payment_currency</td>";
                                     echo "<td>$amount</td>";
-                                    echo "<td>$payment_currency</td>";
-                                    echo "<td>$total_amount</td>";
                                     echo "<td>$rate</td>";
                                     echo "<td>$charge</td>";
                                     if($status == 'Pending'){
-                                        $back = "background:;color:;";
+                                        $back = "background:#2f97b1;color:#000;";
                                     }else{
                                         $back = "background:#C39527;color:#fff;";
                                     }
@@ -112,7 +105,10 @@ if(!isset($_SESSION['role'])){
                                     echo "<td><a href='transaction.php?complete=$id'>Complete</a></td>";
                                     echo "<td><a href='transaction.php?pending=$id'>Pending</a></td>";
 
-                                    echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf'>Download</a></td>";
+                                    echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
+
+
+                                    echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf'><p class='text-center'><i class=\"fa fa-cloud-download fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
 

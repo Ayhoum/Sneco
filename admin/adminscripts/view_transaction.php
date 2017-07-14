@@ -34,8 +34,8 @@ if(!isset($_SESSION['role'])){
                                     <th>Rate</th>
                                     <th>Exchange</th>
                                     <th>Status</th>
-                                    <th>Delete</th>
-                                    <th>Edit</th>
+                                    <th>Complete</th>
+                                    <th>Pending</th>
                                     <th>View In details</th>
                                     <th>Download a PDF</th>
                                 </tr>

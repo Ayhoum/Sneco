@@ -41,10 +41,10 @@ $rCountry     = $_POST['Receiver_Country'];
 $rPhone       = $_POST['Receiver_Phone'];
 $rEmail       = $_POST['Receiver_Email'];
     //Other Data
-    $amount = $_POST['Totalg'];
+    $amount = $_POST['Totalt'];
     $current = $_POST['Current_Currency'];
     $payment = $_POST['Payment_Currency'];
-    $total = $_POST['Totalt'];
+    $total = $_POST['Totalg'];
     $rate = $_POST['Rate'];
     $charge = $_POST['ExRa'];
     $reason = $_POST['Reason'];
