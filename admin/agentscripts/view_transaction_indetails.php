@@ -47,12 +47,13 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $rCountry     = $row['Receiver_Country'];
     $rPhone       = $row['Receiver_Phone'];
     $rEmail       = $row['Receiver_Email'];
-    //Other Data
-    $amount       = $row['Amount'];
+//Other Data
+    $sentAmount = $row['Received_Amount'];
+    $payout_amount = $row['Payout_Amount'];
     $current      = $row['Current_Currency'];
     $payment      = $row['Payment_Currency'];
-    $total        = $row['Total_Amount'];
     $rate         = $row['Rate'];
+    $receivedAmount = $sentAmount + $rate;
     $charge       = $row['Charge'];
     $reason       = $row['Reason'];
     $comment      = $row['Comment'];
@@ -175,19 +176,21 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                     <tbody>
                     <tr>
                         <td class="msg-invoice" width="85%"><h4>Payments</h4>
-<!--                            <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>-->
-                        <td class="right"><strong>Received Amount:</strong> <br>
+                            <!--                            <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>-->
+                        <td class="right"><strong>Sent Amount</strong> <br>
                             <strong>Transaction Fee</strong> <br>
+                            <strong>Received amount</strong> <br>
                             <strong> 1 <?php echo $current;?> =</strong> <br>
-                            </td>
-                        <td class="right"><strong><?php echo $amount . " " . $current?><br>
+                        </td>
+                        <td class="right"><strong><?php echo $sentAmount . " " . $current; ?><br>
                                 <?php echo $rate; ?> <br>
+                                <?php echo $receivedAmount . " " . $current; ?> <br>
                                 <?php echo $charge . " " . $payment;?></strong></td>
                     </tr>
                     </tbody>
                 </table>
                 <div class="pull-right">
-                    <h4><span>Payout Amount:</span> <?php echo $total . " " . $payment ?></h4>
+                    <h4><span>Payout Amount:</span> <?php echo $payout_amount . " " . $payment ?></h4>
                     <br>
                     <a class="btn btn-primary btn-large pull-right" href="">Pay Invoice</a> </div>
             </div>

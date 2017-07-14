@@ -41,10 +41,10 @@ $rCountry     = $_POST['Receiver_Country'];
 $rPhone       = $_POST['Receiver_Phone'];
 $rEmail       = $_POST['Receiver_Email'];
     //Other Data
-    $amount = $_POST['Totalt'];
+    $ReceivedAmount = $_POST['Amount'];
     $current = $_POST['Current_Currency'];
     $payment = $_POST['Payment_Currency'];
-    $total = $_POST['Totalg'];
+    $payoutAmount = $_POST['Totalg'];
     $rate = $_POST['Rate'];
     $charge = $_POST['ExRa'];
     $reason = $_POST['Reason'];
@@ -83,10 +83,10 @@ $rEmail       = $_POST['Receiver_Email'];
                                     Receiver_Postcode, 
                                     Receiver_City, 
                                     Receiver_Country, 
-                                    Amount, 
+                                    Received_Amount, 
                                     Current_Currency, 
                                     Payment_Currency, 
-                                    Total_Amount, 
+                                    Payout_Amount, 
                                     Rate, 
                                     Charge, 
                                     Reason, 
@@ -126,10 +126,10 @@ $rEmail       = $_POST['Receiver_Email'];
                     '{$rPostcode}', 
                     '{$rCity}', 
                     '{$rCountry}', 
-                    '{$amount}', 
+                    '{$ReceivedAmount}', 
                     '{$current}', 
                     '{$payment}', 
-                    '{$total}', 
+                    '{$payoutAmount}', 
                     '{$rate}',
                     '{$charge}', 
                     '{$reason}', 

@@ -24,21 +24,18 @@ if(!isset($_SESSION['role'])){
                                     <th>ID</th>
                                     <th style="background: #c9302c;color: #fff">MTRN</th>
                                     <th>Sender E.Name</th>
-                                    <th>Sender A.Name</th>
                                     <th>Sender Email</th>
-                                    <th>Expiary Date</th>
                                     <th>Receiver E.Name</th>
-                                    <th>Receiver A.Name</th>
                                     <th>Receiver Email</th>
                                     <th>Receiver Country</th>
-                                    <th>Amount in Sent Currency</th>
-                                    <th>Payment Currency</th>
-                                    <th>Total Amount</th>
+                                    <th>Received Amount</th>
+                                    <th>Payout Amount</th>
                                     <th>Rate</th>
-                                    <th>Charge</th>
+                                    <th>Exchange</th>
                                     <th>Status</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
+                                    <th>View In details</th>
                                     <th>Download a PDF</th>
                                 </tr>
                                 </thead>

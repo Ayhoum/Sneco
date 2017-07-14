@@ -29,7 +29,7 @@ if(!isset($_SESSION['role'])){
                             <th>Receiver E.Name</th>
                             <th>Receiver Email</th>
                             <th>Receiver Country</th>
-                            <th>Amount Received</th>
+                            <th>Received Amount</th>
                             <th>Payout Amount</th>
                             <th>Rate</th>
                             <th>Exchange</th>
@@ -70,10 +70,11 @@ if(!isset($_SESSION['role'])){
                             $receiver_ename = $row['Receiver_eName'];
                             $receiver_email = $row['Receiver_Email'];
                             $receiver_country = $row['Receiver_Country'];
-                            $amount = $row['Amount'] . " " . $row['Current_Currency'];
-                            $payment_currency = $row['Payment_Currency'];
-                            $total_amount = $row['Total_Amount'];
+                            $receivedAmount = $row['Received_Amount'];
+                            $current = $row['Current_Currency'];
+                            $payout_amount = $row['Payout_Amount'] . " " . $row['Payment_Currency'];
                             $rate = $row['Rate'];
+                            $total_received_amount = $receivedAmount + $rate;
                             $charge = $row['Charge'];
                             $status = $row['Status'];
                             $timestamp = strtotime($row['Time']);
@@ -90,8 +91,8 @@ if(!isset($_SESSION['role'])){
                             echo "<td>$receiver_ename</td>";
                             echo "<td>$receiver_email</td>";
                             echo "<td>$receiver_country</td>";
-                            echo "<td>$amount</td>";
-                            echo "<td>$total_amount $payment_currency</td>";
+                            echo "<td>$total_received_amount $current</td>";
+                            echo "<td>$payout_amount</td>";
                             echo "<td>$rate</td>";
                             echo "<td>$charge</td>";
                             if($status == 'Pending'){

@@ -48,11 +48,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $rPhone       = $row['Receiver_Phone'];
     $rEmail       = $row['Receiver_Email'];
     //Other Data
-    $amount       = $row['Amount'];
+    $SentAmount       = $row['Received_Amount'];
     $current      = $row['Current_Currency'];
     $payment      = $row['Payment_Currency'];
-    $total        = $row['Total_Amount'];
+    $payoutAmount        = $row['Payout_Amount'];
     $rate         = $row['Rate'];
+    $totalRecieved = $SentAmount + $rate;
     $charge       = $row['Charge'];
     $reason       = $row['Reason'];
     $comment      = $row['Comment'];
@@ -86,10 +87,10 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $rPhone       = $_POST['Receiver_Phone'];
         $rEmail       = $_POST['Receiver_Email'];
         //Other Data
-        $amount = $_POST['Totalt'];
+        $sentAmount = $_POST['Amount'];
         $current = $_POST['Current_Currency'];
         $payment = $_POST['Payment_Currency'];
-        $total = $_POST['Totalg'];
+        $payoutAmount = $_POST['Totalg'];
         $rate = $_POST['Rate'];
         $charge = $_POST['ExRa'];
         $reason = $_POST['Reason'];
@@ -121,10 +122,10 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         $query .= "Receiver_City = '{$rCity}', ";
         $query .= "Receiver_Country = '{$rCountry}', ";
 
-        $query .= "Amount = '{$amount}', ";
+        $query .= "Received_Amount = '{$sentAmount}', ";
         $query .= "Current_Currency = '{$current}', ";
         $query .= "Payment_Currency = '{$payment}', ";
-        $query .= "Total_Amount = '{$total}', ";
+        $query .= "Payout_Amount = '{$payoutAmount}', ";
         $query .= "Rate = '{$rate}', ";
         $query .= "Charge = '{$charge}', ";
         $query .= "Reason = '{$reason}', ";
@@ -1064,13 +1065,13 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Total Amount to Take</label>
                                         <div class="controls">
-                                            <input  type="text" name="Totalt" id="Totalt" value="<?php echo $amount; ?>" readonly required />
+                                            <input  type="text" name="Totalt" id="Totalt" value="<?php echo $totalRecieved; ?>" readonly required />
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Total Amount to Pay</label>
                                         <div class="controls">
-                                            <input  type="text" name="Totalg" id="Totalg" value="<?php echo $total; ?>" readonly required />
+                                            <input  type="text" name="Totalg" id="Totalg" value="<?php echo $payoutAmount; ?>" readonly required />
                                         </div>
                                     </div>
                                     <div class="form-actions">

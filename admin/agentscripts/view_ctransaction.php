@@ -28,22 +28,19 @@ if(!isset($_SESSION['role'])){
                             <tr>
                                 <th>ID</th>
                                 <th style="background: #c9302c;color: #fff">MTRN</th>
-                                <th>Sneder Name (EN)</th>
-                                <th>Sneder Name (AR)</th>
-                                <th>Sneder Email</th>
-                                <th>Expiary Date</th>
-                                <th>Receiver Name (EN)</th>
-                                <th>Receiver Name (AR)</th>
+                                <th>Sender E.Name</th>
+                                <th>Sender Email</th>
+                                <th>Receiver E.Name</th>
                                 <th>Receiver Email</th>
                                 <th>Receiver Country</th>
-                                <th>Amount with Current Currency</th>
-                                <th>Payment Currency</th>
-                                <th>Total Amount</th>
+                                <th>Received Amount</th>
+                                <th>Payout Amount</th>
                                 <th>Rate</th>
-                                <th>Charge</th>
+                                <th>Exchange</th>
                                 <th>Status</th>
-                                <th>Complete</th>
-                                <th>Pending</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+                                <th>View In details</th>
                                 <th>Download a PDF</th>
                             </tr>
                             </thead>
@@ -53,6 +50,8 @@ if(!isset($_SESSION['role'])){
                             $select_ctrans = mysqli_query($mysqli, $query);
                             while($row = mysqli_fetch_assoc($select_ctrans)){
                                 $id = $row['ID'];
+                                $agent_id = $row['Agent_ID'];
+                                $account_Id = $row['Account_ID'];
                                 $mtrn1  = $row['MTRN1'];
                                 $mtrn2  = $row['MTRN2'];
                                 $mtrn3  = $row['MTRN3'];
@@ -63,24 +62,23 @@ if(!isset($_SESSION['role'])){
                                 $mtrn8  = $row['MTRN8'];
                                 $mtrn9  = $row['MTRN9'];
                                 $mtrn10 = $row['MTRN10'];
-//                                $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
+                                $mtrn = $row['MTRN1'] . " " . $row['MTRN2'] . " " . $row['MTRN3'] . " " . $row['MTRN4'] . " " . $row['MTRN5'] . " " . $row['MTRN6'] . " " . $row['MTRN7'] . " " . $row['MTRN8'] . " " . $row['MTRN9'] . " " . $row['MTRN10'] ;
+//                                    $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
                                 $sender_ename = $row['Sender_eName'];
                                 $sender_aname = $row['Sender_aName'];
                                 $sender_email = $row['Sender_Email'];
-                                $sender_country = $row['Sender_Country'];
-                                $sender_bankaccount = $row['Sender_BankAcount'];
                                 $sender_idnumber = $row['Sender_IdNumber'];
-                                $sender_nationality = $row['Sender_Nationality'];
                                 $sender_expiary = $row['Sender_IdExp'];
-//                                $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
+//                                    $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
                                 $receiver_ename = $row['Receiver_eName'];
                                 $receiver_aname = $row['Receiver_aName'];
                                 $receiver_email = $row['Receiver_Email'];
                                 $receiver_country = $row['Receiver_Country'];
-                                $amount = $row['Amount'] . " " . $row['Current_Currency'];
-                                $payment_currency = $row['Payment_Currency'];
-                                $total_amount = $row['Total_Amount'];
+                                $receivedAmount = $row['Received_Amount'];
+                                $current = $row['Current_Currency'];
+                                $payout_amount = $row['Payout_Amount'] . " " . $row['Payment_Currency'];
                                 $rate = $row['Rate'];
+                                $total_received_amount = $receivedAmount + $rate;
                                 $charge = $row['Charge'];
                                 $status = $row['Status'];
 
@@ -88,33 +86,31 @@ if(!isset($_SESSION['role'])){
                                 ?>
                                 <?php
                                 echo "<td>$id</td>";
-                                echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
+                                echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                 echo "<td>$sender_ename</td>";
-                                echo "<td>$sender_aname</td>";
                                 echo "<td>$sender_email</td>";
-                                echo "<td>$sender_expiary</td>";
                                 echo "<td>$receiver_ename</td>";
-                                echo "<td>$receiver_aname</td>";
                                 echo "<td>$receiver_email</td>";
                                 echo "<td>$receiver_country</td>";
-                                echo "<td>$amount</td>";
-                                echo "<td>$payment_currency</td>";
-                                echo "<td>$total_amount</td>";
+                                echo "<td>$total_received_amount $current</td>";
+                                echo "<td>$payout_amount</td>";
                                 echo "<td>$rate</td>";
                                 echo "<td>$charge</td>";
                                 if($status == 'Pending'){
-                                    $back = "background:;color:;";
+                                    $back = "background:#2f97b1;color:#000;";
                                 }else{
                                     $back = "background:#C39527;color:#fff;";
                                 }
                                 echo "<td style='$back' >$status</td>";
 
 
+                                echo "<td><a href='transaction.php?complete=$id'>Complete</a></td>";
+                                echo "<td><a href='transaction.php?pending=$id'>Pending</a></td>";
 
-                                echo "<td><a href='ctransaction.php?complete=$id'>Complete</a></td>";
-                                echo "<td><a href='ctransaction.php?pending=$id'>Pending</a></td>";
+                                echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
-                                echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}.pdf'>Download</a></td>";
+
+                                echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf'><p class='text-center'><i class=\"fa fa-cloud-download fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
 
