@@ -68,7 +68,7 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
                             <div class="control-group">
                                 <label class="control-label">ID</label>
                                 <div class="controls">
-                                    <input type="text" name="ID" id="ID" value="<?php echo $currency_id; ?>" required>
+                                    <input type="text" name="ID" id="ID" value="<?php echo $currency_id; ?>" readonly required>
                                 </div>
                             </div>
                             <div class="control-group">

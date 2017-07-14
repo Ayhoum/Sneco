@@ -178,11 +178,11 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
 <!--                            <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>-->
                         <td class="right"><strong>Received Amount:</strong> <br>
                             <strong>Transaction Fee</strong> <br>
-                            <strong><?php echo $current;?> to <?php echo $payment; ?></strong> <br>
+                            <strong> 1 <?php echo $current;?> =</strong> <br>
                             </td>
                         <td class="right"><strong><?php echo $amount . " " . $current?><br>
                                 <?php echo $rate; ?> <br>
-                                <?php echo $charge;?></strong></td>
+                                <?php echo $charge . " " . $payment;?></strong></td>
                     </tr>
                     </tbody>
                 </table>

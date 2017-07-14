@@ -6,7 +6,6 @@ date_default_timezone_set('Europe/Amsterdam');
 //include 'rate.php';
 ?>
 <?php
-session_start();
 if(!isset($_SESSION['role'])){
     header("Location: index.php");
 }else if($_SESSION['role'] == "Admin"){
@@ -1074,7 +1073,11 @@ $agent_id_val = $row['ID'];
                             <div class="control-group">
                                 <label class="control-label">Exchange Rate</label>
                                 <div class="controls">
-                                    <input  type="text" name="ExRa" id="ExRa" VALUE=" " readonly required />
+                                    <input  type="text" name="ExRa" id="ExRa" value=" " readonly required />
+                                </div>
+                                <div class="controls">
+                                    <!-- STILL NOT WORKING!!!! -->
+                                    <Button id="Calc" onclick="return false;" class="btn btn-success">Calculate</Button>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -1159,16 +1162,26 @@ $agent_id_val = $row['ID'];
             }
 
             $('#Rate').val($rate);
+
+            $('#Totalt').val($total);
+
+            $chvar = Number($('#ExRa').val());
+            $amtotal = $var * $chvar;
+
+            $('#Totalg').val($amtotal);
+
         });
 
-        $("#ExRa").click(function(){
+
+
+        $("#Calc").on("click", function () {
 
             var e = document.getElementById("Current_Currency");
             var value1 = e.options[e.selectedIndex].value;
 
+
             var f = document.getElementById("Payment_Currency");
             var value2 = f.options[f.selectedIndex].value;
-
 
 
             if (value1+value2 == 'AEDEUR'){
@@ -1231,37 +1244,32 @@ $agent_id_val = $row['ID'];
             else if (value1+value2 == 'USDSYP'){
                 var id = 19;
             }
+            else if ((value1+value2 == 'AEDAED') || (value1+value2 == 'EUREUR') || (value1+value2 == 'SARSAR') || (value1+value2 == 'SYPSYP') || (value1+value2 == 'USDUSD') ){
+                var id = 20;
+            }
 
 
-                    $.ajax({
-                        type: 'POST',
-                        url: 'agentscripts/exchange.php',
-                        data: 'id=testdata',
-                        dataType: 'json',
-                        cache: false,
-                        success: function(result) {
-                          $value = result[id]['ID'];
-
-//                            $('#content1').html(result[0]);
-                        }
-                    });
+            $.ajax({
+                type: 'POST',
+                url: 'agentscripts/exchange.php',
+                data: 'id=testdata',
+                dataType: 'json',
+                cache: false,
+                success: function(result) {
+                    $value = result[id]['Value'];
+                }
+            });
 
 
-                $("#ExRa").val($value);
-        });
+            $("#ExRa").val($value);
 
-        $("#Totalt").click(function(){
-            $('#Totalt').val($total);
-
-        });
-
-        $("#Totalg").click(function(){
-
-            $chvar = Number($("#ExRa").val());
+            $chvar = Number($('#ExRa').val());
             $amtotal = $var * $chvar;
-            $('#Totalg').val($amtotal);
 
+            $('#Totalg').val($amtotal);
         });
+
+
     </script>
 <!--    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>-->
 </body>

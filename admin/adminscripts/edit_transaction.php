@@ -153,7 +153,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                         <div class="widget-content nopadding">
                             <form action="#" method="get" class="form-horizontal">
 
-
+                                <div class="control-group">
+                                    <label class="control-label">Trans ID.</label>
+                                    <div class="controls">
+                                        <input type="text" name="ID" id="ID" value="<?php echo $transaction_ID; ?>" required>
+                                    </div>
+                                </div>
                                 <div class="control-group">
                                     <label class="control-label">Agent No.</label>
                                     <div class="controls">
@@ -163,7 +168,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                 <div class="control-group">
                                     <label class="control-label">Name (English)</label>
                                     <div class="controls">
-                                        <input type="text" name="Sender_eName" id="Sender_eName" value="<?php echo $seName; ?>" required>
+                                        <input type="text" name="Sender_eName" id="Sender_eName" value="<?php echo $seName; ?>">
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -692,7 +697,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                 <div class="control-group">
                                     <label class="control-label">Name (English)</label>
                                     <div class="controls">
-                                        <input type="text" name="Receiver_eName" value="<?php echo $reName; ?>" id="Receiver_eName" required />
+                                        <input type="text" name="Receiver_eName" value="<?php echo $reName; ?>" id="Receiver_eName" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -998,7 +1003,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Amount</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" value="<?php echo $amount; ?>" id="Amount" required />
+                                            <input type="text" name="Amount" value=" " id="Amount" />
                                         </div>
                                     </div>
 
@@ -1007,7 +1012,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                         <label class="control-label">Current Currency</label>
                                         <div class="controls">
                                             <select id="Current_Currency" style="width:215px;" onchange="var1(this)" name='Current_Currency' required>
-                                                <option disabled="disabled" selected>Select Currency</option>
+                                                <option value='' disabled="disabled" selected>Select Currency</option>
                                                 <option value='AED' title='United Arab Emirates Dirham'>AED (United Arab Emirates Dirham)</option>
                                                 <option value='EUR' title='Euro'>EUR (Euro)</option>
                                                 <option value='SAR' title='Saudi Riyal'>SAR (Saudi Riyal)</option>
@@ -1036,7 +1041,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                         </div>
                                         <div class="controls">
                                             <!-- STILL NOT WORKING!!!! -->
-                                            <Button id="Calc" onclick="return " class="btn btn-success">Calculate</Button>
+                                            <Button id="Calc" onclick="return false;" class="btn btn-success">Calculate</Button>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -1060,7 +1065,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                                     <div class="control-group">
                                         <label class="control-label">Total Amount to Take</label>
                                         <div class="controls">
-                                            <input  type="text" name="Totalt" id="Totalt" value=" " readonly required />
+                                            <input  type="text" name="Totalt" id="Totalt" value="<?php echo $amount; ?>" readonly required />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -1079,16 +1084,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 </div>
             </form>
 
-                <script type="text/javascript">
-
-                    ( function($) {
-                        // we can now rely on $ within the safety of our "bodyguard" function
-                        $(document).ready( function() { alert("nyah nyah! I'm able to use '$'!!!!");  } );
-                    } ) ( jQuery );
-
-                    //this will fail
-                    $(document).ready( function() { alert('fail?'); } );
-                    </script>
             <script>
 //
 //                    $('#Rate').click(function(){
@@ -1175,10 +1170,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
 
 
 
-                    $("#Calc").click(function(){
+                    $("#Calc").on("click", function () {
 
                         var e = document.getElementById("Current_Currency");
                         var value1 = e.options[e.selectedIndex].value;
+
+
                         var f = document.getElementById("Payment_Currency");
                         var value2 = f.options[f.selectedIndex].value;
 
@@ -1256,8 +1253,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                             cache: false,
                             success: function(result) {
                                 $value = result[id]['Value'];
-
-//                            $('#content1').html(result[0]);
                             }
                         });
 

@@ -103,17 +103,10 @@ if(!isset($_SESSION['role'])){
 
 
                                     echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
-                                    echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'><p><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
+                                    echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'><p class='text-center'><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
                                     echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
-
-                                    $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
-                                    $select_trans_by_id = mysqli_query($mysqli, $query);
-                                    while($row = mysqli_fetch_assoc($select_trans_by_id)) {
-
-                                        $agent_place = $row['Agent_Area'];
-                                    }
 
                                     echo "<td><a href='../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$accountId}.pdf'><p class='text-center'><i class=\"fa fa-cloud-download fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
