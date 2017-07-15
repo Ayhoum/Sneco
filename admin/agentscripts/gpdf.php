@@ -78,9 +78,10 @@ require_once '../../dompdf/autoload.inc.php';
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
 $dompdf->loadHtml("
-<html lang='AR'>
+<html lang='ar'>
 <head>
     <meta charset='utf-8'>
+    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">
     <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' />
     <title>Invoice</title>
     <style>
