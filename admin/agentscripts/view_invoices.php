@@ -2,8 +2,8 @@
 <?php
 if(!isset($_SESSION['role'])){
     header("Location: index.php");
-}else if($_SESSION['role'] == "Agent"){
-    header("Location: Agent_index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: accountant_index.php");
 }
@@ -38,7 +38,7 @@ if(!isset($_SESSION['role'])){
                         <tbody>
 
                         <?php
-                        $query = "SELECT * FROM INVOICE ORDER BY ID DESC";
+                        $query = "SELECT * FROM INVOICE WHERE status = ". " 'Approved'ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
                             $invoice_id       = $row['ID'];

@@ -26,7 +26,7 @@ if(!isset($_SESSION['role'])){
                            <!-- <th>To</th>-->
                             <th>Value</th>
                             <th>Edit</th>
-                            <th>Delete</th>
+<!--                            <th>Delete</th>-->
                         </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@ if(!isset($_SESSION['role'])){
 
                             echo "<td><a href='currency.php?source=edit_currency&c_id={$id}'><p class='text-center'><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
-                            echo "<td><a href='currency.php?delete=$id'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
+//                            echo "<td><a href='currency.php?delete=$id'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
 //                            $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
