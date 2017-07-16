@@ -714,6 +714,15 @@
 
 			</div>
 
+            <!-- Cookie Notification Bar
+    ============================================= -->
+            <div id="cookie-notification" class="dark">
+                <div class="container clearfix">
+                    This Website uses cookies. No personal data can be followed.
+                    <a href="#" class="cookie-accept cookie-noti-btn fright btn btn-danger btn-sm">Accept</a>
+                </div>
+            </div>
+
 		</section><!-- #content end -->
 
 		<!-- Footer

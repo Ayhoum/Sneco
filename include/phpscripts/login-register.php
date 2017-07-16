@@ -1,5 +1,6 @@
 <?php
 include 'DB.php';
+session_start();
 ?>
 <?php
 // Login process:
@@ -13,10 +14,12 @@ if (isset($_POST['login-form-submit'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $first_name = $row['First_Name'];
             $last_name = $row['Last_Name'];
-            $username = $first_name + $last_name;
+            $id = $row['ID'];
+            $username = $first_name ." ". $last_name;
             $role = "user";
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
+            $_SESSION['ID'] =$id;
             header("Location: user_index.php");
         }
     }

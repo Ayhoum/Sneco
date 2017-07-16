@@ -55,9 +55,9 @@ include 'include/phpscripts/login-register.php';
 					============================================= -->
 					<nav id="primary-menu">
 						<ul>
-							<li><a href="one-page_index.php"><div>Home</div></a></li>
+							<li><a href="one-page_index.php#"><div>Home</div></a></li>
                             <li><a href="#" data-href="#section-about"><div>About</div></a></li>
-							<li><a href="one-page_index.php" data-href="#section-services"><div>Services</div></a></li>
+							<li><a href="one-page_index.php#" data-href="#section-services"><div>Services</div></a></li>
                             <li><a href="#" data-href="#section-contact"><div>Contact</div></a></li>
 						</ul>
 					</nav><!-- #primary-menu end -->
