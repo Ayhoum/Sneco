@@ -24,7 +24,7 @@ include 'include/phpscripts/login-register.php';
 		Made by Alaa,
 		23-05-2017
 	============================================= -->
-	<title>Login & Register</title>
+	<title>Sneco.nl | Login & Register</title>
 
 </head>
 
@@ -56,9 +56,17 @@ include 'include/phpscripts/login-register.php';
 					<nav id="primary-menu">
 						<ul>
 							<li><a href="one-page_index.php#"><div>Home</div></a></li>
-                            <li><a href="#" data-href="#section-about"><div>About</div></a></li>
-							<li><a href="one-page_index.php#" data-href="#section-services"><div>Services</div></a></li>
-                            <li><a href="#" data-href="#section-contact"><div>Contact</div></a></li>
+                            <?php if(!isset($_SESSION['logged'])) { ?>
+                                <li><a href="login-register-2.php"><div> Login & Register </div></a></li>
+                            <?php }
+                            else { ?>
+                                <li><a href="user_index.php"><div><?php echo $username; ?> </div> </a>
+                                    <ul>
+                                        <li><a href="logout.php"><div>logout</div></a></li>
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                        </ul>
 						</ul>
 					</nav><!-- #primary-menu end -->
 				</div>

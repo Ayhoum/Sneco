@@ -67,6 +67,8 @@ if(!isset($_SESSION['role'])) {
                         else { ?>
                             <li><a href="user_index.php"><div><?php echo $username; ?> </div> </a>
                                 <ul>
+                                    <li><a href="transaction.php"><div>Create Transactions</div></a></li>
+                                    <li><a href="user_transaction.php"><div>Old Transactions</div></a></li>
                                     <li><a href="logout.php"><div>logout</div></a></li>
                                 </ul>
                             </li>
@@ -82,9 +84,88 @@ if(!isset($_SESSION['role'])) {
     <section id="content">
 
         <div class="content-wrap">
-            <a href="transaction.php"      class="button button-desc button-dark button-rounded"><div>New</div> <span>Create a new transaction </span></a> <br>
-            <a href="user_transaction.php" class="button button-desc button-dark button-rounded"><div>History</div> <span>Track your old transactions</span></a>
+            <h3 style="align:center">Your Transaction History</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th style="background: #c9302c;color: #fff">MTRN</th>
+                    <th>Sender E.Name</th>
+                    <th>Sender Email</th>
+                    <th>Receiver E.Name</th>
+                    <th>Receiver Email</th>
+                    <th>Receiver Country</th>
+                    <th>Received Amount</th>
+                    <th>Payout Amount</th>
+                    <th>Rate</th>
+                    <th>Exchange</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $query = "SELECT * FROM USER_TRANSACTION WHERE USER_ID = $id";
+                $select_trans = mysqli_query($mysqli, $query);
+                while($row = mysqli_fetch_assoc($select_trans)) {
+                    $id = $row['ID'];
+                    $mtrn1 = $row['MTRN1'];
+                    $mtrn2 = $row['MTRN2'];
+                    $mtrn3 = $row['MTRN3'];
+                    $mtrn4 = $row['MTRN4'];
+                    $mtrn5 = $row['MTRN5'];
+                    $mtrn6 = $row['MTRN6'];
+                    $mtrn7 = $row['MTRN7'];
+                    $mtrn8 = $row['MTRN8'];
+                    $mtrn9 = $row['MTRN9'];
+                    $mtrn10 = $row['MTRN10'];
+                    //sender
+                    $sender_ename = $row['Sender_eName'];
+                    $sender_aname = $row['Sender_aName'];
+                    $sender_email = $row['Sender_Email'];
+                    $sender_idnumber = $row['Sender_IdNumber'];
+                    $sender_expiary = $row['Sender_IdExp'];
+                    //receiver
+                    $receiver_aname = $row['Receiver_aName'];
+                    $receiver_ename = $row['Receiver_eName'];
+                    $receiver_email = $row['Receiver_Email'];
+                    $receiver_country = $row['Receiver_Country'];
+                    $receivedAmount = $row['Received_Amount'];
+                    $current = $row['Current_Currency'];
+                    $payout_amount = $row['Payout_Amount'] . " " . $row['Payment_Currency'];
+                    $rate = $row['Rate'];
+                    $total_received_amount = $receivedAmount + $rate;
+                    $charge = $row['Charge'];
+                    $status = $row['Status'];
+                    $timestamp = strtotime($row['Time']);
+                    $date = date('Y-m-d', $timestamp);
+                    $time = date('h:m:s', $timestamp);
 
+                    echo "<tr>";
+                    ?>
+                    <?php
+                    echo "<td>$id</td>";
+                    echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
+                    echo "<td>$sender_ename</td>";
+                    echo "<td>$sender_email</td>";
+                    echo "<td>$receiver_ename</td>";
+                    echo "<td>$receiver_email</td>";
+                    echo "<td>$receiver_country</td>";
+                    echo "<td>$total_received_amount $current</td>";
+                    echo "<td>$payout_amount</td>";
+                    echo "<td>$rate</td>";
+                    echo "<td>$charge</td>";
+                    if ($status == 'Pending') {
+                        $back = "background:#2f97b1;color:#000;";
+                    } else {
+                        $back = "background:#C39527;color:#fff;";
+                    }
+                    echo "<td style='$back' >$status</td>";
+                }
+                ?>
+                </tbody>
+
+                </tbody>
+            </table>
         </div>
 
     </section><!-- #content end -->

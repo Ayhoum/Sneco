@@ -20,6 +20,7 @@ if (isset($_POST['login-form-submit'])) {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
             $_SESSION['ID'] =$id;
+            $_SESSION['logged']=1;
             header("Location: user_index.php");
         }
     }

@@ -1,3 +1,8 @@
+<?php
+include 'include/phpscripts/login-register.php';
+$username =$_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
@@ -55,7 +60,7 @@
 
 					<div class="clear topmargin-sm"></div>
 
-					<abbr title="Phone Number">Phone:</abbr> (91) 8547 632521<br>
+					<abbr title="Phone Number">Phone:</abbr> <br>
 					<abbr title="Email Address">Email:</abbr> info@sneco.nl
 				</div>
 
@@ -116,10 +121,20 @@
 						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
 							<li><a href="#" data-href="#wrapper"><div>Home</div></a></li>
 							<li><a href="#" data-href="#section-about"><div>About</div></a></li>
-<!--							<li><a href="#" data-href="#section-works"><div>Works</div></a></li>-->
 							<li><a href="#" data-href="#section-services"><div>Services</div></a></li>
 							<li><a href="#" data-href="#section-contact"><div>Contact</div></a></li>
-                            <li><a href="login-register-2.php" data-href="#section-blog"><div>Login/ Sign up</div></a></li>
+                            <?php if(!isset($_SESSION['logged'])) { ?>
+                                <li><a href="login-register-2.php"><div> Login & Register </div></a></li>
+                            <?php }
+                            else { ?>
+                            <li><a href="user_index.php"><div><?php echo $username; ?> </div> </a>
+                                <ul>
+                                    <li><a href="transaction.php"><div>Create Transactions</div></a></li>
+                                    <li><a href="user_transaction.php"><div>Old Transactions</div></a></li>
+                                    <li><a href="logout.php"><div>logout</div></a></li>
+                                </ul>
+                            </li>
+                            <?php } ?>
 						</ul>
 
 						<div id="side-panel-trigger" class="side-panel-trigger"><a href="#"><i class="icon-reorder"></i></a></div>
@@ -182,219 +197,10 @@
 
 						<div class="clear"></div>
 
-<!--						<div class="row topmargin-lg divcenter" style="max-width: 1000px;">-->
-<!---->
-<!--							<div class="col-sm-4 bottommargin">-->
-<!---->
-<!--								<div class="team">-->
-<!--									<div class="team-image">-->
-<!--										<img src="one-page/images/team/1.jpg" alt="John Doe">-->
-<!--										<div class="team-overlay">-->
-<!--											<div class="team-social-icons">-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-facebook" title="Facebook">-->
-<!--													<i class="icon-facebook"></i>-->
-<!--													<i class="icon-facebook"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">-->
-<!--													<i class="icon-twitter"></i>-->
-<!--													<i class="icon-twitter"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-github" title="Github">-->
-<!--													<i class="icon-github"></i>-->
-<!--													<i class="icon-github"></i>-->
-<!--												</a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="team-desc team-desc-bg">-->
-<!--										<div class="team-title"><h4>John Doe</h4><span>CEO</span></div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--							</div>-->
-<!---->
-<!--							<div class="col-sm-4 bottommargin">-->
-<!---->
-<!--								<div class="team">-->
-<!--									<div class="team-image">-->
-<!--										<img src="one-page/images/team/2.jpg" alt="Josh Clark">-->
-<!--										<div class="team-overlay">-->
-<!--											<div class="team-social-icons">-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">-->
-<!--													<i class="icon-twitter"></i>-->
-<!--													<i class="icon-twitter"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-linkedin" title="LinkedIn">-->
-<!--													<i class="icon-linkedin"></i>-->
-<!--													<i class="icon-linkedin"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-flickr" title="Flickr">-->
-<!--													<i class="icon-flickr"></i>-->
-<!--													<i class="icon-flickr"></i>-->
-<!--												</a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="team-desc team-desc-bg">-->
-<!--										<div class="team-title"><h4>Mary Jane</h4><span>Co-Founder</span></div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--							</div>-->
-<!---->
-<!--							<div class="col-sm-4 bottommargin">-->
-<!---->
-<!--								<div class="team">-->
-<!--									<div class="team-image">-->
-<!--										<img src="one-page/images/team/3.jpg" alt="Mary Jane">-->
-<!--										<div class="team-overlay">-->
-<!--											<div class="team-social-icons">-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">-->
-<!--													<i class="icon-twitter"></i>-->
-<!--													<i class="icon-twitter"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-vimeo" title="Vimeo">-->
-<!--													<i class="icon-vimeo"></i>-->
-<!--													<i class="icon-vimeo"></i>-->
-<!--												</a>-->
-<!--												<a href="#" class="social-icon si-borderless si-small si-instagram" title="Instagram">-->
-<!--													<i class="icon-instagram"></i>-->
-<!--													<i class="icon-instagram"></i>-->
-<!--												</a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="team-desc team-desc-bg">-->
-<!--										<div class="team-title"><h4>Josh Clark</h4><span>Sales</span></div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--							</div>-->
-<!---->
-<!--						</div>-->
-
 					</div>
 
 				</div>
 
-<!--				<div id="section-works" class="page-section notoppadding">-->
-<!---->
-<!--					<div class="section nomargin">-->
-<!--						<div class="container clearfix">-->
-<!--							<div class="divcenter center" style="max-width: 900px;">-->
-<!--								<h2 class="nobottommargin t300 ls1">We create &amp; craft projects that ooze creativity in every aspect. We try to create a benchmark in everything we do. Take a moment to browse through some of our recent completed work.</h2>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!---->
-<!--					<!-- Portfolio Items-->
-<!--					============================================= -->-->
-<!--					<div id="portfolio" class="portfolio grid-container portfolio-nomargin portfolio-full portfolio-masonry mixed-masonry clearfix">-->
-<!---->
-<!--						<article class="portfolio-item pf-media pf-icons wide">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/1.jpg" alt="Open Imagination">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Open Imagination</a></h3>-->
-<!--										<span><a href="#">Media</a>, <a href="#">Icons</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-illustrations">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/2.jpg" alt="Locked Steel Gate">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Locked Steel Gate</a></h3>-->
-<!--										<span><a href="#">Illustrations</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-graphics pf-uielements">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/3.jpg" alt="Mac Sunglasses">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Mac Sunglasses</a></h3>-->
-<!--										<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-media pf-icons wide">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/4.jpg" alt="Open Imagination">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Open Imagination</a></h3>-->
-<!--										<span><a href="#">Media</a>, <a href="#">Icons</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-uielements pf-media wide">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/5.jpg" alt="Console Activity">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Console Activity</a></h3>-->
-<!--										<span><a href="#">UI Elements</a>, <a href="#">Media</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-media pf-icons">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/6.jpg" alt="Open Imagination">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Open Imagination</a></h3>-->
-<!--										<span><a href="#">Media</a>, <a href="#">Icons</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--						<article class="portfolio-item pf-uielements pf-icons">-->
-<!--							<div class="portfolio-image">-->
-<!--								<a href="#">-->
-<!--									<img src="one-page/images/portfolio/mixed/7.jpg" alt="Backpack Contents">-->
-<!--								</a>-->
-<!--								<div class="portfolio-overlay">-->
-<!--									<div class="portfolio-desc">-->
-<!--										<h3><a href="#">Backpack Contents</a></h3>-->
-<!--										<span><a href="#">UI Elements</a>, <a href="#">Icons</a></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</article>-->
-<!---->
-<!--					</div><!-- #portfolio end -->-->
-<!---->
-<!---->
-<!--					<div class="topmargin center"><a href="#" class="button button-border button-circle t600">View More Projects</a></div>-->
-<!---->
-<!--				</div>-->
 
 				<div id="section-services" class="page-section notoppadding">
 
@@ -472,7 +278,7 @@
 						</div>
 					</div>
 
-					<div class="section parallax nomargin dark" style="background-image: url('one-page/images/page/testimonials.jpg'); padding: 150px 0;" data-stellar-background-ratio="0.3">
+					<div class="section parallax nomargin dark" style="background-color: #f9f9f9; padding: 150px 0;" data-stellar-background-ratio="0.3">
 
 						<div class="container clearfix">
 
@@ -484,29 +290,20 @@
 									<div class="flexslider">
 										<div class="slider-wrap">
 											<div class="slide">
-												<div class="testi-content">
-													<p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque vero numquam?</p>
+												<div class="testi-content" style="color: #0e0e0e">
+													<p>Money Transfer to UAE within 1 day</p>
 													<div class="testi-meta">
-														Steve Jobs
-														<span>Apple Inc.</span>
+														Mousab
+														<span></span>
 													</div>
 												</div>
 											</div>
 											<div class="slide">
-												<div class="testi-content">
-													<p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
+												<div class="testi-content" style="color: #0e0e0e">
+													<p>Nice Service!</p>
 													<div class="testi-meta">
-														Collis Ta'eed
-														<span>Envato Inc.</span>
-													</div>
-												</div>
-											</div>
-											<div class="slide">
-												<div class="testi-content">
-													<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-													<div class="testi-meta">
-														John Doe
-														<span>XYZ Inc.</span>
+														Ayham
+														<span></span>
 													</div>
 												</div>
 											</div>
@@ -521,117 +318,6 @@
 					</div>
 
 				</div>
-
-<!--				<div id="section-blog" class="page-section">-->
-<!---->
-<!--					<h2 class="center uppercase t300 ls3 font-body">Recently From the Blog</h2>-->
-<!---->
-<!--					<div class="section nobottommargin">-->
-<!--						<div class="container clearfix">-->
-<!---->
-<!--							<div class="row topmargin clearfix">-->
-<!---->
-<!--								<div class="ipost col-sm-6 bottommargin clearfix">-->
-<!--									<div class="row">-->
-<!--										<div class="col-md-6">-->
-<!--											<div class="entry-image nobottommargin">-->
-<!--												<a href="#"><img src="one-page/images/blog/1.jpg" alt="Paris"></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--										<div class="col-md-6" style="margin-top: 20px;">-->
-<!--											<span class="before-heading" style="font-style: normal;">Press &amp; Media</span>-->
-<!--											<div class="entry-title">-->
-<!--												<h3 class="t400" style="font-size: 22px;"><a href="#">Global Meetup Program is Launching!</a></h3>-->
-<!--											</div>-->
-<!--											<div class="entry-content">-->
-<!--												<a href="#" class="more-link">Read more <i class="icon-angle-right"></i></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--								<div class="ipost col-sm-6 bottommargin clearfix">-->
-<!--									<div class="row">-->
-<!--										<div class="col-md-6">-->
-<!--											<div class="entry-image nobottommargin">-->
-<!--												<a href="#"><img src="one-page/images/blog/2.jpg" alt="Paris"></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--										<div class="col-md-6" style="margin-top: 20px;">-->
-<!--											<span class="before-heading" style="font-style: normal;">Inside Scoops</span>-->
-<!--											<div class="entry-title">-->
-<!--												<h3 class="t400" style="font-size: 22px;"><a href="#">The New YouTube Economy unfolds itself</a></h3>-->
-<!--											</div>-->
-<!--											<div class="entry-content">-->
-<!--												<a href="#" class="more-link">Read more <i class="icon-angle-right"></i></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--								<div class="ipost col-sm-6 bottommargin clearfix">-->
-<!--									<div class="row">-->
-<!--										<div class="col-md-6">-->
-<!--											<div class="entry-image nobottommargin">-->
-<!--												<a href="#"><img src="one-page/images/blog/3.jpg" alt="Paris"></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--										<div class="col-md-6" style="margin-top: 20px;">-->
-<!--											<span class="before-heading" style="font-style: normal;">Video Blog</span>-->
-<!--											<div class="entry-title">-->
-<!--												<h3 class="t400" style="font-size: 22px;"><a href="#">Kicking Off Design Party in Style</a></h3>-->
-<!--											</div>-->
-<!--											<div class="entry-content">-->
-<!--												<a href="#" class="more-link">Read more <i class="icon-angle-right"></i></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--								<div class="ipost col-sm-6 bottommargin clearfix">-->
-<!--									<div class="row">-->
-<!--										<div class="col-md-6">-->
-<!--											<div class="entry-image nobottommargin">-->
-<!--												<a href="#"><img src="one-page/images/blog/4.jpg" alt="Paris"></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--										<div class="col-md-6" style="margin-top: 20px;">-->
-<!--											<span class="before-heading" style="font-style: normal;">Inspiration</span>-->
-<!--											<div class="entry-title">-->
-<!--												<h3 class="t400" style="font-size: 22px;"><a href="#">Top Ten Signs You're a Designer</a></h3>-->
-<!--											</div>-->
-<!--											<div class="entry-content">-->
-<!--												<a href="#" class="more-link">Read more <i class="icon-angle-right"></i></a>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!---->
-<!--							</div>-->
-<!---->
-<!--						</div>-->
-<!--					</div>-->
-<!---->
-<!--					<div class="container topmargin-lg clearfix">-->
-<!---->
-<!--						<div id="oc-clients" class="owl-carousel topmargin image-carousel carousel-widget" data-margin="80" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xxs="2" data-items-xs="3" data-items-sm="4" data-items-md="5" data-items-lg="6">-->
-<!---->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/1.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/2.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/3.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/4.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/5.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/6.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/7.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/8.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/9.png" alt="Clients"></a></div>-->
-<!--							<div class="oc-item"><a href="#"><img src="images/clients/10.png" alt="Clients"></a></div>-->
-<!---->
-<!--						</div>-->
-<!---->
-<!--					</div>-->
-<!---->
-<!--				</div>-->
 
 				<div id="section-contact" class="page-section notoppadding">
 
@@ -648,7 +334,7 @@
                                         1112 AP, Diemen<br>
 									</address>
 
-									<abbr title="Phone Number"><strong>Phone:</strong></abbr> (91) 8547 632521<br>
+									<abbr title="Phone Number"><strong>Phone:</strong></abbr> <br>
 									<abbr title="Email Address"><strong>Email:</strong></abbr> info@sneco.nl
 								</div>
 							</div>

@@ -1,12 +1,17 @@
 <?php
 ob_start();
 date_default_timezone_set('Europe/Amsterdam');
-include 'DB.php'
+include 'DB.php';
+include 'login-register.php';
+?>
+<?php
+$id = $_SESSION['ID'];
+//echo $id;
 ?>
 <?php
 if(isset($_POST['Submit'])) {
     //Sender
-    $user_id      =  1;
+    $user_id      =  $id;
     $sfName       = $_POST['Sender_eName'];
     $slName       = $_POST['Sender_aName'];
     $sStreetName  = $_POST['Sender_StreetName'];
@@ -17,7 +22,6 @@ if(isset($_POST['Submit'])) {
     $sPhone       = $_POST['Sender_Phone'];
     $sEmail       = $_POST['Sender_Email'];
     $sNationality = $_POST['Sender_Nationality'];
-    $sBankAccount = $_POST['Sender_BankAccount'];
     $sIDNumber    = $_POST['Sender_IDNumber'];
     $sExpiary     = $_POST['Sender_Expiary'];
 
@@ -26,7 +30,6 @@ if(isset($_POST['Submit'])) {
     $rlName       = $_POST['Receiver_aName'];
     $rStreetName  = $_POST['Receiver_StreetName'];
     $rHouseNumber = $_POST['Receiver_HouseNumber'];
-    $rPostcode    = $_POST['Receiver_Postcode'];
     $rCity        = $_POST['Receiver_City'];
     $rCountry     = $_POST['Receiver_Country'];
     $rPhone       = $_POST['Receiver_Phone'];
@@ -60,8 +63,7 @@ if(isset($_POST['Submit'])) {
                                     Sender_HouseNo, 
                                     Sender_Postcode, 
                                     Sender_City, 
-                                    Sender_Country, 
-                                    Sender_BankAcount, 
+                                    Sender_Country,  
                                     Sender_IdNumber, 
                                     Sender_Nationality, 
                                     Sender_IdExp, 
@@ -71,13 +73,12 @@ if(isset($_POST['Submit'])) {
                                     Receiver_Email, 
                                     Receiver_StreetName, 
                                     Receiver_HouseNo, 
-                                    Receiver_Postcode, 
                                     Receiver_City, 
                                     Receiver_Country, 
-                                    Amount, 
+                                    Received_Amount, 
                                     Current_Currency, 
                                     Payment_Currency, 
-                                    Total_Amount, 
+                                    Payout_Amount, 
                                     Rate, 
                                     Charge, 
                                     Reason, 
@@ -104,7 +105,6 @@ if(isset($_POST['Submit'])) {
                     '{$sPostcode}',
                     '{$sCity}', 
                     '{$sCountry}',
-                    '{$sBankAccount}',
                     '{$sIDNumber}',
                     '{$sNationality}',
                     '{$sExpiary}',
@@ -113,8 +113,7 @@ if(isset($_POST['Submit'])) {
                     '{$rPhone}', 
                     '{$rEmail}', 
                     '{$rStreetName}', 
-                    '{$rHouseNumber}',
-                    '{$rPostcode}', 
+                    '{$rHouseNumber}', 
                     '{$rCity}', 
                     '{$rCountry}', 
                     '{$amount}', 
