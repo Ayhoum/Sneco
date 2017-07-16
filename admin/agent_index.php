@@ -6,7 +6,6 @@ date_default_timezone_set('Europe/Amsterdam');
 //include 'rate.php';
 ?>
 <?php
-session_start();
 if(!isset($_SESSION['role'])){
     header("Location: index.php");
 }else if($_SESSION['role'] == "Admin"){
