@@ -16,7 +16,7 @@ if(!isset($_SESSION['role'])){
 
             <div class="widget-box">
                 <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                    <h5>Agents</h5>
+                    <h5>Clients</h5>
                 </div>
                 <div class="widget-content nopadding">
                     <table class="table table-bordered data-table">
@@ -36,10 +36,12 @@ if(!isset($_SESSION['role'])){
                         $query = "SELECT * FROM CLIENT ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
-                            $item_id          = $row['ID'];
-                            $item_name        = $row['Client_name'];
-                            $item_price       = $row['Client_address_1'];
-                            $item_description = $row['Client_address_1'];
+                            $client_id          = $row['ID'];
+                            $client_name        = $row['Client_name'];
+                            $client_address1       = $row['Client_address_1'];
+                            $client_address2 = $row['Client_address_2'];
+                            $client_phone = $row['Client_phone'];
+                            $client_email = $row[''];
                             echo "<tr>";
                             ?>
                             <?php
