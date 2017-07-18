@@ -2,11 +2,11 @@
 
 <?php
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Admin"){
-    header("Location: admin_index.php");
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
 
@@ -37,7 +37,7 @@ if(!isset($_SESSION['role'])){
                                     <th>Rate</th>
                                     <th>Exchange</th>
                                     <th>Status</th>
-                                    <th>Delete</th>
+                                    <th>Money Status</th>
                                     <th>Edit</th>
                                     <th>View In details</th>
                                     <th>Download a PDF</th>
@@ -80,6 +80,7 @@ if(!isset($_SESSION['role'])){
                                     $total_received_amount = $receivedAmount + $rate;
                                     $charge = $row['Charge'];
                                     $status = $row['Status'];
+                                    $money_status = $row['Money_Status'];
 
                                     echo "<tr>";
                                     ?>
@@ -102,9 +103,16 @@ if(!isset($_SESSION['role'])){
                                     }
                                     echo "<td style='$back' >$status</td>";
 
+                                    if($money_status == 'Pending'){
+                                        $back = "background:#2f97b1;color:#000;";
+                                    }else{
+                                        $back = "background:#C39527;color:#fff;";
+                                    }
+                                    echo "<td style='$back' >$money_status</td>";
 
-                                    echo "<td><a href='transaction.php?complete=$id'>Complete</a></td>";
-                                    echo "<td><a href='transaction.php?pending=$id'>Pending</a></td>";
+
+                                    echo "<td><a href='transaction.php?complete=$id'>Transferred</a> <br> <hr>";
+                                    echo "<a href='transaction.php?pending=$id'>Pending</a></td>";
 
                                     echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
@@ -128,19 +136,17 @@ if(!isset($_SESSION['role'])){
 if(isset($_GET['complete'])){
 
     $id = $_GET['complete'];
-    $query = "UPDATE TRANSACTION SET Status = 'Completed' WHERE ID = {$id}";
+    $query = "UPDATE TRANSACTION SET Money_Status = 'Transferred' WHERE ID = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: transaction.php");
-    echo "Agent Blocked!";
 }
 
 if(isset($_GET['pending'])){
 
     $id = $_GET['pending'];
-    $query = "UPDATE TRANSACTION SET Status = 'Pending' WHERE ID = {$id}";
+    $query = "UPDATE TRANSACTION SET Money_Status = 'Pending' WHERE ID = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: transaction.php");
-    echo "Agent Activated!";
 }
 ?>
 

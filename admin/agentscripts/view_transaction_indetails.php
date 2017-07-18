@@ -8,11 +8,11 @@ include '../../include/phpscripts/DB.php'
 ?>
 <?php
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Admin"){
-    header("Location: admin_index.php");
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
 <?php
@@ -57,6 +57,8 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $charge       = $row['Charge'];
     $reason       = $row['Reason'];
     $comment      = $row['Comment'];
+    $status = $row['Status'];
+    $money_status = $row['Money_Status'];
 }
 ?>
 
@@ -165,6 +167,14 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                         <td class="width30"><strong>Email Address:</strong></td>
                         <td class="width70"><?php echo $rEmail; ?></td>
                     </tr>
+                    <tr>
+                        <td class="width30"><strong>Transaction Status:</strong></td>
+                        <td class="width70"><?php echo $status; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="width30"><strong>Money Status:</strong></td>
+                        <td class="width70"><?php echo $money_status; ?></td>
+                    </tr>
                     </tbody>
 
                 </table>
@@ -192,7 +202,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 <div class="pull-right">
                     <h4><span>Payout Amount:</span> <?php echo $payout_amount . " " . $payment ?></h4>
                     <br>
-                    <a class="btn btn-primary btn-large pull-right" href="">Pay Invoice</a> </div>
+
             </div>
         </div>
     </div>

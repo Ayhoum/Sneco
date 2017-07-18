@@ -4,11 +4,11 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Admin"){
-    header("Location: admin_index.php");
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
 

@@ -2,11 +2,11 @@
 <?php
 
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: Agent_index.php");
+    header("Location: ../Agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
         <div class="container-fluid">
@@ -34,6 +34,8 @@ if(!isset($_SESSION['role'])){
                                     <th>Rate</th>
                                     <th>Exchange</th>
                                     <th>Status</th>
+                                    <th>Money Status</th>
+                                    <th>Edit Status</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
                                     <th>View In details</th>
@@ -79,6 +81,7 @@ if(!isset($_SESSION['role'])){
                                     $timestamp = strtotime($row['Time']);
                                     $date = date('Y-m-d',$timestamp);
                                     $time = date('h:m:s',$timestamp);
+                                    $money_status = $row['Money_Status'];
 
                                     echo "<tr>";
                                     ?>
@@ -101,6 +104,17 @@ if(!isset($_SESSION['role'])){
                                     }
                                     echo "<td style='$back' >$status</td>";
 
+                                    //Money Status
+
+                                    if($money_status == 'Pending'){
+                                        $back = "background:#2f97b1;color:#000;";
+                                    }else{
+                                        $back = "background:#C39527;color:#fff;";
+                                    }
+                                    echo "<td style='$back' >$money_status</td>";
+
+                                    echo "<td><a href='transaction.php?complete=$id'>Completed</a> <br> <hr>";
+                                    echo "<a href='transaction.php?pending=$id'>Pending</a></td>";
 
 
                                     echo "<td><a href='transaction.php?delete={$id}&senderf={$sender_ename}&senderl={$sender_aname}&receiverf={$receiver_ename}&receiverl={$receiver_aname}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$accountId}'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
@@ -124,6 +138,23 @@ if(!isset($_SESSION['role'])){
             </div>
         </div>
 
+<?php
+if(isset($_GET['complete'])){
+
+    $id = $_GET['complete'];
+    $query = "UPDATE TRANSACTION SET Status = 'Completed' WHERE ID = {$id}";
+    $block_agent_query = mysqli_query($mysqli, $query);
+    header("Location: transaction.php");
+}
+
+if(isset($_GET['pending'])){
+
+    $id = $_GET['pending'];
+    $query = "UPDATE TRANSACTION SET Status = 'Pending' WHERE ID = {$id}";
+    $block_agent_query = mysqli_query($mysqli, $query);
+    header("Location: transaction.php");
+}
+?>
 <?php
 
 if(isset($_GET['delete'])){

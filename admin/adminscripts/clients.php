@@ -5,11 +5,11 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: Agent_index.php");
+    header("Location: ../Agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
 
@@ -137,9 +137,12 @@ if(!isset($_SESSION['role'])){
                 }else{
                     $source = '';
                 }
-                switch($source){
+                switch($source) {
+                    case 'edit_client':
+                        include "edit_client.php";
+                        break;
                     default:
-                        include "view_clients.php";
+                        include "view_client.php";
                         break;
                 }
                 ?>

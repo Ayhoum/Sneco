@@ -28,7 +28,7 @@ if(!isset($_SESSION['role'])){
                             <th>Client Phone</th>
                             <th>Client Email</th>
                             <th>Comments</th>
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
 
