@@ -2,6 +2,31 @@
 ob_start();
 use Dompdf\Dompdf;
 require_once 'dompdf/autoload.inc.php';
+include '../include/phpscripts/DB.php';
+
+if(isset($_GET['invoice_number'])){
+
+    $invoice_number = $_GET['invoice_number'];
+}
+
+$query = "SELECT * FROM INVOCIE WHERE invoice_number = '{$invoice_number}'";
+$result = mysqli_query($mysqli, $result);
+while($row = mysqli_fetch_assoc($result)) {
+
+    $invoice_number = $row['invoice_number'];
+    $address_line1 = $row['address_line1'];
+    $address_line2 = $row['address_line2'];
+    $address_line3 = $row['address_line3'];
+    $quantity = $row['quantity'];
+    $total = $row['total'];
+    $discount = $row['discount'];
+    $advanced_payment = $row['advanced_payment'];
+    $item_ID = $row['Item_ID'];
+    $client_ID = $row['Client_ID'];
+    $invoice_type = $row['invoice_type'];
+    $type_shortcut = $row['type_shortcut'];
+    $status = $row['status'];
+}
 
 
 $dompdf = new Dompdf();

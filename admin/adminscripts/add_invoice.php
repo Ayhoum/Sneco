@@ -61,6 +61,7 @@ if(isset($_POST['submit'])){
     if (!$result) {
         die("Failed!" . mysqli_error($mysqli));
     } else {
+        header("location: ../gipdf.php?invoice_number={$invoic1}");
         header("Location: invoices.php");
     }
 }
