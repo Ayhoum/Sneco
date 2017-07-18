@@ -208,7 +208,7 @@ $html="
         <div style=\"border-radius: 0 0 12px 12px;border: 2px solid #023560;width: 100%;height: 150px;\">
         <div style=\"width: 100%;height: 150px;\">
         <div style=\"margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><span style=\"font-weight: 600;\">Account No.:</span> $account_Id<br><span style=\"font-weight: 600;\">Name in English:</span> $sender_ename<br><span style=\"font-weight: 600;\">Nationality:</span> $sender_nationality<br><span style=\"font-weight: 600;\">ID No.:</span> $ID_No<br><span style=\"font-weight: 600;\">Address</span><br><span style=\"font-weight: 600;\">Street:</span> $sender_st<br><span style=\"font-weight: 600;\">Postal Code:</span> $sender_pc<br><span style=\"font-weight: 600;\">Country:</span> $sender_country<br><span style=\"font-weight: 600;\">Tel No.:</span> $sender_phone</p></div>
-        <div style=\"margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><br><span style=\"font-weight: 600;\">Name in Arabic:</span> $sender_aname<br><span style=\"font-weight: 600;\">ID Type:</span> $sender_idtype<br><span style=\"font-weight: 600;\">Exp. Date:</span> $sender_expiary<br><br><span style=\"font-weight: 600;\">House No.:</span> $sender_hn<br><span style=\"font-weight: 600;\">City:</span> $sender_city<br><br><span style=\"font-weight: 600;\">Email:</span> $sender_email</p></div>
+        <div style=\"margin-left: 15px;height: 40px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><br><br><span style=\"font-weight: 600;\">ID Type:</span> $sender_idtype<br><span style=\"font-weight: 600;\">Exp. Date:</span> $sender_expiary<br><br><span style=\"font-weight: 600;\">House No.:</span> $sender_hn<br><span style=\"font-weight: 600;\">City:</span> $sender_city<br><br><span style=\"font-weight: 600;\">Email:</span> $sender_email</p></div>
         </div>
         </div>
         </td>
@@ -216,13 +216,12 @@ $html="
         <div style=\"border-radius: 0 0 12px 12px;border: 2px solid #837e84;width: 100%;height: 150px;\">
         <div style=\"width: 100%;height: 150px;\">
         <div style=\"margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><span style=\"font-weight: 600;\">Name in English:</span> $receiver_ename<br><span style=\"font-weight: 600;\">Address</span><br><span style=\"font-weight: 600;\">Street:</span> $receiver_st<br><span style=\"font-weight: 600;\">Postal Code:</span> $receiver_pc<br><span style=\"font-weight: 600;\">Country:</span> $receiver_country<br><span style=\"font-weight: 600;\">Tel No.:</span> $receiver_phone<br><span style=\"font-weight: 600;\">Reason:</span> $reason<br><span style=\"font-weight: 600;\">Message:</span> $message</p></div>
-        <div style=\"margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><span style=\"font-weight: 600;\">Name in Arabic:</span> $receiver_aname<br><br><span style=\"font-weight: 600;\">House No.:</span> $receiver_hn<br><span style=\"font-weight: 600;\">City:</span> $receiver_city<br><br><span style=\"font-weight: 600;\">Email:</span> $receiver_email</p></div>
+        <div style=\"margin-left: 15px;height: 130px;float: left;width: 47%;line-height: 1.5em;color: #000;font-size: 10px;\"><p><br><br><span style=\"font-weight: 600;\">House No.:</span> $receiver_hn<br><span style=\"font-weight: 600;\">City:</span> $receiver_city<br><br><span style=\"font-weight: 600;\">Email:</span> $receiver_email</p></div>
         </div>
         </div>
         </td>
     </tr>
-    <tr>
-        <td class=\"tg-031e\" colspan=\"2\" style=\"width: 50%;\">
+    <tr>        <td class=\"tg-031e\" colspan=\"2\" style=\"width: 50%;\">
         <div style=\"font-size: 6px;text-align: justify;text-justify: inter-word;\">The Service is offered by <b>SNECO</b> Payment Services in The Netherlands through a network of authorised agents “Agents”.<br>
         <b>SNECO is regulated by the Central Bank of The Netherlands</b> and is registered as a payment institution in the Kamer van Koophandel’s register of payment service firms under number KvK: 68233361.<br>
         <b>SNECO offers the Service domestically and internationally.</b> By recieving this form, providing the funds to be sent and identification as required, you agreed to the execution of the money transfer. Before confirming the money transfer, you will be informed as to the maximum execution time, the commission charged and the exchange rate applied to the transaction, via the same channel as the one used to place the money transfer. You are required to inform the receiver about the money transfer, including name of sender, country of origin, name of receiver, approximate sum, the Money Transfer Reciept Number (the “MTRN”) and any other conditions or requirements applicable at the Agent location.<br>
@@ -264,7 +263,7 @@ $dompdf->render();
 
 $output = $dompdf->output();
 
-file_put_contents("../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
+file_put_contents("../transaction_pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
 
 header("Location: ../test.php?senderf={$sender_ename}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
 
