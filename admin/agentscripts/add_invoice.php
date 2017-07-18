@@ -11,9 +11,14 @@ if(!isset($_SESSION['role'])){
     header("Location: accountant_index.php");
 }
 ?>
+
 <?php
-$rand= rand(0,100000000);
+$query = "SELECT COUNT(*)  AS ID FROM INVOICE";
+$countinv = mysqli_query($mysqli,$query);
+$num = mysqli_fetch_array($countinv);
+$countcIvoices = $num["ID"];
 ?>
+
 <?php
 if(isset($_POST['submit'])){
     $invoic1 = $_POST['invoice_number'];
@@ -29,8 +34,9 @@ if(isset($_POST['submit'])){
     $invoic11= $_POST['invoice_type'];
     $invoic12= $_POST['type_shortcut'];
 
+    $countcIvoices = $countcIvoices +1;
 
-
+$invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
     $query = "INSERT INTO INVOICE(invoice_number, 
                                     address_line1, 
                                     address_line2, 
@@ -41,10 +47,9 @@ if(isset($_POST['submit'])){
                                     advanced_payment, 
                                     Item_ID, 
                                     Client_ID, 
-                                    invoice_type, 
-                                    type_shortcut) ";
+                                    invoice_type) ";
 
-    $query .= "VALUES('{$invoic1}',
+    $query .= "VALUES('{$invoice_no}',
                   '{$invoic2}',
                   '{$invoic3}',
                   '{$invoic4}',
@@ -54,14 +59,13 @@ if(isset($_POST['submit'])){
                   '{$invoic8}',
                   '{$invoic5}',
                   '{$invoic10}',
-                  '{$invoic11}',
-                  '{$invoic12}') ";
+                  '{$invoic11}') ";
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
         die("Failed!" . mysqli_error($mysqli));
     } else {
-        header("Location: invoices.php");
+        header("Location: ../gipdf.php?number={$countcIvoices}");
     }
 }
 ?>
@@ -191,19 +195,21 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" value="<?php echo $rand; ?> " name="invoice_number" readonly>
+                                      <input type="text" value="<?php echo $countcIvoices; ?> " name="invoice_number" readonly>
                                   </div>
                               </div>
                               <div class="control-group">
                                   <label class="control-label">Invoice Type</label>
                                   <div class="controls">
-                                      <input type="text" name="invoice_type">
-                                  </div>
-                              </div>
-                              <div class="control-group">
-                                  <label class="control-label">Invoice Type Shortcut </label>
-                                  <div class="controls">
-                                      <input type="text" name="type_shortcut">
+                                      <select id="invoice_type" style="width:215px;" onchange="var2(this)" name='invoice_type' required>
+                                          <option disabled="disabled" selected>Select Type</option>
+                                          <option value='EU' title='Europe Invoice'>Europe Invoice</option>
+                                          <option value='INT' title='International Invoice'>International Invoice</option>
+                                          <option value='TM' title='Tourism Invoice'>Tourism Invoice</option>
+                                          <option value='FR' title='Freight Invoice'>Freight Invoice</option>
+                                          <option value='CB' title='Commercial Brokerage Invoice'>Commercial Brokerage Invoice</option>
+                                          <option value='TR' title='Transportation Invoice'>Transportation Invoice</option>
+                                      </select>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -215,7 +221,7 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Address Add.</label>
                                   <div class="controls">
-                                      <input type="text" name="address_line2" required> <br> <br>
+                                      <input type="text" name="address_line2"> <br> <br>
                                   </div>
                               </div>
                               <div class="control-group">

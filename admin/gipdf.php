@@ -1,33 +1,62 @@
+
 <?php
 ob_start();
 use Dompdf\Dompdf;
-require_once 'dompdf/autoload.inc.php';
 include '../include/phpscripts/DB.php';
 
-if(isset($_GET['invoice_number'])){
+require_once '../dompdf/autoload.inc.php';
 
-    $invoice_number = $_GET['invoice_number'];
+if(isset($_GET['number'])){
+
+    $invoice_number = $_GET['number'];
 }
+$date = date('d-m-Y');
 
-$query = "SELECT * FROM INVOCIE WHERE invoice_number = '{$invoice_number}'";
-$result = mysqli_query($mysqli, $result);
+$query = "SELECT * FROM INVOICE WHERE ID = {$invoice_number} ";
+echo $query;
+$result = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($result)) {
 
-    $invoice_number = $row['invoice_number'];
     $address_line1 = $row['address_line1'];
-    $address_line2 = $row['address_line2'];
-    $address_line3 = $row['address_line3'];
-    $quantity = $row['quantity'];
-    $total = $row['total'];
-    $discount = $row['discount'];
-    $advanced_payment = $row['advanced_payment'];
-    $item_ID = $row['Item_ID'];
-    $client_ID = $row['Client_ID'];
-    $invoice_type = $row['invoice_type'];
-    $type_shortcut = $row['type_shortcut'];
-    $status = $row['status'];
+      $address_line2 = $row['address_line2'];
+     $address_line3 = $row['address_line3'];
+     $quantity = $row['quantity'];
+     $total = $row['total'];
+     $discount = $row['discount'];
+     $advanced_payment = $row['advanced_payment'];
+     $item_ID = $row['Item_ID'];
+     $client_ID = $row['Client_ID'];
+     $invoice_type = $row['invoice_type'];
+     $status = $row['status'];
 }
 
+$query = "SELECT * FROM CLIENT WHERE ID = '{$client_ID}'";
+$clients = mysqli_query($mysqli, $query);
+while($row = mysqli_fetch_assoc($clients)) {
+
+    $clientName = $row['Client_name'];
+    $clientAddress = $row['Client_address_1'];
+    $clientAddress1 = $row['Client_address_2'];
+    $clientEmail = $row['Client_email'];
+    $clientPhone = $row['Client_phone'];
+
+}
+
+$query = "SELECT * FROM ITEM WHERE ID = '{$item_ID}'";
+$items = mysqli_query($mysqli, $query);
+while($row = mysqli_fetch_assoc($items)) {
+
+    $itemName = $row['item_name'];
+    $itemPrice = $row['item_price'];
+    $itemDescription = $row['item_description'];
+
+}
+
+$totalPrice = $quantity * $itemPrice;
+
+$grandTotal = $totalPrice - $discount - $advanced_payment;
+
+echo $grandTotal;
 
 $dompdf = new Dompdf();
 
@@ -131,7 +160,7 @@ $html="<html lang=\"ar\">
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 6%;float:left;\"></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;width: 94%;float:left;\">
-                <p style=\"font-size:12px;\"><b>CHEIKH MERAI CHADI</b><br>VIA MASSA AVENZA N.2<br>54100 – MASSA (MS)<br>E-Mail: marmocarrara1@gmail.com<br>C.F. CHKCHD76A20Z240U<br>P.IVA 01269810451</p>
+                <p style=\"font-size:12px;\"><b>$clientName</b><br>Address: $clientAddress $clientAddress1<br>E-mail: $clientEmail<br>Phone: $clientPhone</p>
             </td>
         </tr>
         </tbody>
@@ -144,8 +173,8 @@ $html="<html lang=\"ar\">
         <tr>
             <td colspan=\"4\" style=\"padding: 10px 18px;background: #023560;width: 40%;\"><p class=\"text-center\" style=\"color: #fff;font-weight: 800;margin: 0;font-size: 30px;\">INVOICE</p></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;width: 5%;\"></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;width: 25%;\"><p style=\"color: #fff;font-weight: 800;margin: 0;\"><span style=\"font-weight: 700;font-size: 15px;\">Invoice No.</span><br>SNE-EU-201706-001</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;width: 30%;\"><p style=\"color: #fff;font-weight: 800;margin: 0;\"><span style=\"font-weight: 700;font-size: 15px;\">Date</span><br>04-06-2017</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;width: 25%;\"><p style=\"color: #fff;font-weight: 800;margin: 0;\"><span style=\"font-weight: 700;font-size: 15px;\">Invoice No.</span><br>$invoice_number</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;width: 30%;\"><p style=\"color: #fff;font-weight: 800;margin: 0;\"><span style=\"font-weight: 700;font-size: 15px;\">Date</span><br>$date</p></td>
         </tr>
         </tbody>
     </table>
@@ -168,19 +197,11 @@ $html="<html lang=\"ar\">
         </tr>
         <tr>
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;border-right: 1px solid #000;float: left;width: 2%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">1</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #fff;float: left;width: 39%;\"><p style=\"margin: 0;font-size:10px;\">POLISHED TILES DARK EMPERADOR 60X30X2 CM</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\" ><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">2,461</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">442.980 M2</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ 18.00</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ 7,973.64</p></td>
-        </tr>
-        <tr>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #D3D3D3;border-right: 1px solid #000;float: left;width: 2%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">2</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;float: left;width: 39%;\"><p style=\"margin: 0;font-size:10px;\">POLISHED TILES DARK EMPERADOR 140X70X3 CM</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #D3D3D3;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">286</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #D3D3D3;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">280.280 M2</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #D3D3D3;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ 38.00</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #D3D3D3;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ 10,650.64</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #fff;float: left;width: 39%;\"><p style=\"margin: 0;font-size:10px;\">$itemDescription</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\" ><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$quantity</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">NaN</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $itemPrice</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $totalPrice</p></td>
         </tr>
         </tbody>
     </table>
@@ -195,22 +216,22 @@ $html="<html lang=\"ar\">
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p class=\"text-center\" style=\"color: #000;font-size:11px;margin: 0;\">Sub Total</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ 18,624.28</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $totalPrice</p></td>
         </tr>
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p class=\"text-center\" style=\"color: #000;font-size:11px;margin: 0;\">Advanced</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ 0.00</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $advanced_payment</p></td>
         </tr>
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p class=\"text-center\" style=\"color: #000;font-size:11px;margin: 0;\">Discount</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ 0.00</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $discount</p></td>
         </tr>
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;\"><p class=\"text-center\" style=\"color: #fff;font-size:11px;font-weight: 800;margin: 0;\">Grand Total</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;\"><p style=\"color: #fff;font-size:11px;font-weight: 800;margin: 0;\">€ 18,624.28</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;\"><p style=\"color: #fff;font-size:11px;font-weight: 800;margin: 0;\">€ $grandTotal</p></td>
         </tr>
         </tbody>
     </table>
@@ -271,9 +292,11 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream("sample.pdf");
-//$output = $dompdf->output();
+//$dompdf->stream("sample.pdf");
+$output = $dompdf->output();
 
-//file_put_contents("../pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
+file_put_contents("invoice_pdf/{$invoice_number}.pdf", $output);
 
-//header("Location: ../test.php?senderf={$sender_ename}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
+header("Location: agentscripts/invoices.php");
+?>
+
