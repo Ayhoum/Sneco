@@ -2,11 +2,11 @@
 <?php
 
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: Agent_index.php");
+    header("Location: ../Agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
+    header("Location: ../accountant_index.php");
 }
 ?>
 <div class="container-fluid">
@@ -41,14 +41,17 @@ if(!isset($_SESSION['role'])){
                             $client_address1       = $row['Client_address_1'];
                             $client_address2 = $row['Client_address_2'];
                             $client_phone = $row['Client_phone'];
-                            $client_email = $row[''];
+                            $client_email = $row['Client_email'];
+                            $comment = $row['Comments'];
                             echo "<tr>";
                             ?>
                             <?php
-                            echo "<td>$item_id</td>";
-                            echo "<td>$item_name</td>";
-                            echo "<td>$item_price</td>";
-                            echo "<td>$item_description</td>";
+                            echo "<td>$client_id</td>";
+                            echo "<td>$client_name</td>";
+                            echo "<td>$client_address1 <br> $client_address2</td>";
+                            echo "<td>$client_phone</td>";
+                            echo "<td>$client_email</td>";
+                            echo "<td>$comment</td>";
 
 //                            echo "<td><a href='agents.php?block=$agent_id'>Block</a></td>";
 //                            echo "<td><a href='agents.php?activate=$agent_id'>Activate</a></td>";
