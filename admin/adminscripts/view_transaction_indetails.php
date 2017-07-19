@@ -202,7 +202,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 <div class="pull-right">
                     <h4><span>Payout Amount:</span> <?php echo $payout_amount . " " . $payment ?></h4>
                     <br>
-                    <a class="btn btn-primary btn-large pull-right" href="send_email.php">Send to agent</a></div>
+                    <a class="btn btn-primary btn-large pull-right" href="send_email.php?">Send to agent</a></div>
             </div>
         </div>
     </div>

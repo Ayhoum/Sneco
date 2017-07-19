@@ -36,7 +36,7 @@ if(!isset($_SESSION['role'])){
                         $query = "SELECT * FROM CLIENT ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
-                            $client_id          = $row['ID'];
+                            $client_id          = $row['id'];
                             $client_name        = $row['Client_name'];
                             $client_address1       = $row['Client_address_1'];
                             $client_address2 = $row['Client_address_2'];

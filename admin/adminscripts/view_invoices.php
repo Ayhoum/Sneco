@@ -30,48 +30,66 @@ if(!isset($_SESSION['role'])){
                             <th>Discount</th>
                             <th>Advanced Payment</th>
                             <th>Total</th>
-
-                            <th>Client ID</th>
-                            <th>Edit</th>
+                            <th>Client</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <?php
+                        //invoice
                         $query = "SELECT * FROM INVOICE ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
-                        while($row = mysqli_fetch_assoc($select_posts)){
-                            $invoice_id       = $row['ID'];
-                            $invoice_number   = $row['invoice_number'];
-                            $invoice_type     = $row['invoice_type'];
-                            $address1         = $row['address_line1'];
-                            $address2         = $row['address_line2'];
-                            $address3         = $row['address_line3'];
-                            $item_id          = $row['Item_ID'];
-                            $quantity         = $row['quantity'];
-                            $discount         = $row['discount'];
+                        while($row = mysqli_fetch_assoc($select_posts)) {
+                            $invoice_id = $row['id'];
+                            $invoice_number = $row['invoice_number'];
+                            $invoice_type = $row['invoice_type'];
+                            $address1 = $row['address_line1'];
+                            $address2 = $row['address_line2'];
+                            $address3 = $row['address_line3'];
+                            $discount = $row['discount'];
                             $advanced_payment = $row['advanced_payment'];
-                            $total            = $row['total'];
-                            $shortcut         = $row['type_shortcut'];
-                            $client_id        = $row['Client_ID'];
-                            echo "<tr>";
-                            ?>
-                            <?php
-                            echo "<td>$invoice_id</td>";
-                            echo "<td>$invoice_number</td>";
-                            echo "<td>$invoice_type</td>";
-                            echo "<td>$address1 <br> <br> $address2 <br> <br> $address3</td>";
-                            echo "<td>$item_id</td>";
-                            echo "<td>$quantity</td>";
-                            echo "<td>$discount</td>";
-                            echo "<td>$advanced_payment</td>";
-                            echo "<td>$total</td>";
+                            $client_id = $row['CLIENT_id'];
+                        // Invoice Line
+                            $query1 = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}' ";
+                            $select_posts2 = mysqli_query($mysqli, $query1);
+                            while ($row = mysqli_fetch_assoc($select_posts2)) {
+                                $item_id = $row['ITEM_id'];
+                                $quantity = $row['Quantity'];
+                                $total = $row['Total'];
 
-//                            echo "<td>$client_id</td>";
-//                            echo "<td><a href='agents.php?block=$agent_id'>Block</a></td>";
-                            echo "<td><a href='clients.php?client_id=$client_id'>View</a></td>";
-                            echo "<td>edit</td>";
-                            echo "</tr>";
+                                // Item Name:
+                                $query2 = "SELECT item_name FROM ITEM WHERE id = '{$item_id}' ";
+                                $select_posts3 = mysqli_query($mysqli, $query2);
+                                while ($row = mysqli_fetch_assoc($select_posts3)) {
+
+                                    $item_name = $row['item_name'];
+
+                                    // Client Name:
+                                    $query3 = "SELECT Client_name FROM CLIENT WHERE id = '{$client_id}' ";
+                                    $select_posts4 = mysqli_query($mysqli, $query3);
+                                    while ($row = mysqli_fetch_assoc($select_posts4)) {
+
+                                        $client_name = $row['Client_name'];
+
+
+                                        echo "<tr>";
+                                        ?>
+                                        <?php
+                                        echo "<td>$invoice_id</td>";
+                                        echo "<td>$invoice_number</td>";
+                                        echo "<td>$invoice_type</td>";
+                                        echo "<td>$address1 <br> <br> $address2 <br> <br> $address3</td>";
+                                        echo "<td>$item_name</td>";
+                                        echo "<td>$quantity</td>";
+                                        echo "<td>$discount</td>";
+                                        echo "<td>$advanced_payment</td>";
+                                        echo "<td>$total</td>";
+                                        echo "<td><a href='clients.php?client_id=$client_id'>$client_name</a></td>";
+                                        echo "</tr>";
+                                    }
+                                }
+
+                            }
                         }
                         ?>
                         </tbody>

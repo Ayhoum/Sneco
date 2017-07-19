@@ -26,6 +26,7 @@ if(!isset($_SESSION['role'])){
                             <th>Item Name</th>
                             <th>Item Price</th>
                             <th>Item Description</th>
+                            <th>Item Size</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,10 +35,11 @@ if(!isset($_SESSION['role'])){
                         $query = "SELECT * FROM ITEM ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
-                            $item_id          = $row['ID'];
+                            $item_id          = $row['id'];
                             $item_name        = $row['item_name'];
                             $item_price       = $row['item_price'];
                             $item_description = $row['item_description'];
+                            $item_size        = $row['item_size'];
                             echo "<tr>";
                             ?>
                             <?php
@@ -45,6 +47,7 @@ if(!isset($_SESSION['role'])){
                             echo "<td>$item_name</td>";
                             echo "<td>$item_price</td>";
                             echo "<td>$item_description</td>";
+                            echo "<td>$item_size</td>";
 
 //                            echo "<td><a href='agents.php?block=$agent_id'>Block</a></td>";
 //                            echo "<td><a href='agents.php?activate=$agent_id'>Activate</a></td>";

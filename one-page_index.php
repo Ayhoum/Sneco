@@ -214,7 +214,7 @@ $username =$_SESSION['username'];
 
 					<div class="common-height clearfix">
 
-						<div class="col-md-4 hidden-xs" style="background: url('images/sneco/services/44-256.png') center center no-repeat; background-size: cover;"></div>
+						<div class="col-md-4 hidden-xs" style="background: url('images/services/main-bg.jpg') center center no-repeat; background-size: cover; "></div>
 						<div class="col-md-8">
 							<div class="max-height">
 								<div class="row common-height grid-border clearfix">
