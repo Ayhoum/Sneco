@@ -1,6 +1,7 @@
 <?php
-include 'DB.php';
 session_start();
+ob_start();
+include 'DB.php';
 ?>
 <?php
 // Login process:

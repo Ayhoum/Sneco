@@ -9,7 +9,7 @@ $_SESSION['username'] = null;
 $_SESSION['role']  = null;
 $_SESSION['ID'] =null;
 $_SESSION['logged']=null;
-header("Location: one-page_index.php");
+header("Location: index.php");
 
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-include 'include/phpscripts/login-register.php';
+require 'include/phpscripts/login-register.php';
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
