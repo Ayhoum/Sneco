@@ -25,9 +25,7 @@ if(!isset($_SESSION['role'])){
                                     <th>ID</th>
                                     <th style="background: #c9302c;color: #fff">MTRN</th>
                                     <th>Sender E.Name</th>
-                                    <th>Sender Email</th>
                                     <th>Receiver E.Name</th>
-                                    <th>Receiver Email</th>
                                     <th>Receiver Country</th>
                                     <th>Received Amount</th>
                                     <th>Payout Amount</th>
@@ -89,9 +87,7 @@ if(!isset($_SESSION['role'])){
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn1 $mtrn2 $mtrn3 $mtrn4 $mtrn5 $mtrn6 $mtrn7 $mtrn8 $mtrn9 $mtrn10</td>";
                                     echo "<td>$sender_ename</td>";
-                                    echo "<td>$sender_email</td>";
                                     echo "<td>$receiver_ename</td>";
-                                    echo "<td>$receiver_email</td>";
                                     echo "<td>$receiver_country</td>";
                                     echo "<td>$total_received_amount $current</td>";
                                     echo "<td>$payout_amount</td>";
