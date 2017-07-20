@@ -60,7 +60,7 @@ if(!isset($_SESSION['role'])) {
                 ============================================= -->
                 <nav id="primary-menu">
                     <ul>
-                        <li><a href="one-page_index.php"><div>Home</div></a></li>
+                        <li><a href="index.php"><div>Home</div></a></li>
                         <?php if(!isset($_SESSION['logged'])) { ?>
                             <li><a href="login-register-2.php"><div> Login & Register </div></a></li>
                         <?php }
