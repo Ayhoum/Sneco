@@ -14,7 +14,7 @@ if(!isset($_SESSION['role'])){
 
 <?php
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
-$countinv = mysqli_query($mysqli,$query);
+$countInv = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($countinv);
 $countcIvoices = $num["ID"];
 ?>
@@ -340,6 +340,5 @@ $invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>

@@ -10,11 +10,13 @@ if(!isset($_SESSION['role'])){
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
-?>
-<?php
-$rand= rand(0,100000000);
-?>
-<?php
+
+$query = "SELECT COUNT(*)  AS ID FROM INVOICE";
+$countInv = mysqli_query($mysqli,$query);
+$num = mysqli_fetch_array($countInv);
+$countcInvoices = $num["ID"];
+$countcInvoices = $countcInvoices +1;
+
 
 if(isset($_POST['submit'])){
     $invoice_number     = $_POST['invoice_number'];
@@ -41,6 +43,12 @@ if(isset($_POST['submit'])){
 //    echo $quantity ."<br>";
 //    echo $total ."<br>";
     // Inseret into INVOICE !
+
+
+    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
+
+
+
     $query = "INSERT INTO INVOICE(invoice_number,
                                     invoice_type,
                                     address_line1,
@@ -207,20 +215,20 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text"  name="invoice_number" >
+                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countcInvoices; ?>"  name="invoice_number" readonly >
                                   </div>
                               </div>
                               <div class="control-group">
                                   <label class="control-label">Invoice Type</label>
                                   <div class="controls">
-                                      <select style="width:215px;" name="invoice_type">
-                                          <option>Select One</option>
-                                          <option value="Europe Invoices">Europe Invoices</option>
-                                          <option value="International Invoices">International Invoices</option>
-                                          <option value="Tourism Invoices">Tourism Invoices</option>
-                                          <option value="Freight Invoices">Freight Invoices</option>
-                                          <option value="Commercial Brokerage Invoices">Commercial Brokerage Invoices</option>
-                                          <option value="Transportation Invoices">Transportation Invoices</option>
+                                      <select id="invoice_type" style="width:215px;" onchange="var2(this)" name='invoice_type' required>
+                                          <option disabled="disabled" selected>Select Type</option>
+                                          <option value='EU' title='Europe Invoice'>Europe Invoice</option>
+                                          <option value='INT' title='International Invoice'>International Invoice</option>
+                                          <option value='TM' title='Tourism Invoice'>Tourism Invoice</option>
+                                          <option value='FR' title='Freight Invoice'>Freight Invoice</option>
+                                          <option value='CB' title='Commercial Brokerage Invoice'>Commercial Brokerage Invoice</option>
+                                          <option value='TR' title='Transportation Invoice'>Transportation Invoice</option>
                                       </select>
                                   </div>
                               </div>
