@@ -70,9 +70,9 @@ if(isset($_POST['submit'])){
                                               Quantity,
                                               Total)";
 
-        $query1 .= "VALUES('{$last_id}'
-                           '{$item_id}'
-                           '{$quantity}'
+        $query1 .= "VALUES('{$last_id}',
+                           '{$item_id}',
+                           '{$quantity}',
                            '{$total}')";
 
     $result1 = mysqli_query($mysqli, $query1);
