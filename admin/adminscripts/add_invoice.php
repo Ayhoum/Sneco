@@ -61,11 +61,8 @@ if(isset($_POST['submit'])){
 
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
-    echo $last_id;
-    echo $client;
-    if (!$result) {
-        die("Failed!" . mysqli_error($mysqli));
-    } else {
+//    echo $last_id;
+//    echo $client;
         // Inseret into INVOICE_LINE
 
         $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
@@ -78,9 +75,10 @@ if(isset($_POST['submit'])){
                            '{$quantity}'
                            '{$total}')";
 
-        header("location: ../gipdf.php?invoice_number={$invoic1}");
-        header("Location: invoices.php");
-    }
+    $result1 = mysqli_query($mysqli, $query1);
+
+//        header("location: ../gipdf.php?invoice_number={$invoic1}");
+//        header("Location: invoices.php");
 }
 ?>
 <!DOCTYPE html>
@@ -215,7 +213,15 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Type</label>
                                   <div class="controls">
-                                      <input type="text" name="invoice_type">
+                                      <select style="width:215px;" name="invoice_type">
+                                          <option>Select One</option>
+                                          <option value="Europe Invoices">Europe Invoices</option>
+                                          <option value="International Invoices">International Invoices</option>
+                                          <option value="Tourism Invoices">Tourism Invoices</option>
+                                          <option value="Freight Invoices">Freight Invoices</option>
+                                          <option value="Commercial Brokerage Invoices">Commercial Brokerage Invoices</option>
+                                          <option value="Transportation Invoices">Transportation Invoices</option>
+                                      </select>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -240,21 +246,23 @@ if(isset($_POST['submit'])){
                                   <label class="control-label">Item ID </label>
                                   <div class="controls">
                                       <select style="width:215px;" name="item_id">
+                                          <option> Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM ITEM ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) == 1 ){
+                                          if (mysqli_num_rows($result) >0 ){
                                               while($row = mysqli_fetch_assoc($result)){
-                                                  $item_id               = $row ['id'];
+                                                  $item_id          = $row ['id'];
                                                   $item_name        = $row ['item_name'];
                                                   $item_price       = $row ['item_price'];
                                                   $item_description = $row ['item_description'];
-                                                  echo "<option> Select One</option>";
-                                                  echo "<option value= " ."{$item_id}". ">" ."{$item_name}". "</option>";
-                                                  echo "</select>";
+
+                                                  echo "<option value=" . $item_id . ">" . $item_name . "</option>";
+
                                               }
                                           }
                                           ?>
+                                      </select> <br>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -286,22 +294,19 @@ if(isset($_POST['submit'])){
                                   <label class="control-label">Client ID</label>
                                   <div class="controls">
                                       <select style="width:215px;" name="client_id">
+                                          <option>Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM CLIENT ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) == 1 ){
-
+                                          if (mysqli_num_rows($result) > 0 ){
                                               while($row = mysqli_fetch_assoc($result)){
                                                   $client_id               = $row ['id'];
-                                                  $client_name       = $row ['Client_name'];
-
-                                                  echo "<option> Select One</option>";
-                                                  echo "<option value= " ."{$client_id}". ">" ."{$client_name}". "</option>";
-                                                  echo "</select> <br>";
-
+                                                  $client_name             = $row ['Client_name'];
+                                                  echo "<option value=" . $client_id . ">" . $client_name . "</option>";
                                               }
                                           }
                                           ?>
+                                      </select> <br>
                                   </div>
                               </div>
                               <div class="widget-content nopadding">
