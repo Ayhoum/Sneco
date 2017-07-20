@@ -18,7 +18,7 @@ if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($
     $mtrn9 = $_GET['m9'];
     $mtrn10 = $_GET['m10'];
 
-}
+
 
 $query = "SELECT * FROM TRANSACTION WHERE Sender_eName = '{$sender}' AND MTRN1 = '{$mtrn1}' AND  MTRN2 = '{$mtrn2}' AND  MTRN3 = '{$mtrn3}' AND  MTRN4 = '{$mtrn4}' AND  MTRN5 = '{$mtrn5}' AND  MTRN6 = '{$mtrn6}' AND  MTRN7 = '{$mtrn7}' AND  MTRN8 = '{$mtrn8}' AND  MTRN9 = '{$mtrn9}' AND  MTRN10 = '{$mtrn10}'";
 $select_trans = mysqli_query($mysqli, $query);
@@ -74,7 +74,7 @@ $select_trans = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans)) {
     $agent_place = $row['Agent_City'];
 }
-
+}
 $html="
 <html lang=\"ar\">
 <head>
