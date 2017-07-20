@@ -121,6 +121,12 @@ users_online();
               <li><a href="adminscripts/add_invoice.php">Add Invoice</a></li>
           </ul>
       </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
+          <ul>
+              <li><a href="adminscripts/clients.php">Current Clients</a></li>
+              <li><a href="adminscripts/add_client.php">Add Clients</a></li>
+          </ul>
+      </li>
   </ul>
 </div>
 <!--sidebar-menu-->
