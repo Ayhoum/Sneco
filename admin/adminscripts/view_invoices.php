@@ -25,13 +25,9 @@
                             <th>Invoice Number</th>
                             <th>Invoice Type</th>
                             <th>Status</th>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Discount</th>
-                            <th>Advanced Payment</th>
-                            <th>Total per unit</th>
+                            <th>Total invoice amount</th>
                             <th>Client</th>
-                            <th>Approve</th>
+                            <th>Actions</th>
                             <th>View in details</th>
                         </tr>
                         </thead>
@@ -57,42 +53,14 @@
                             echo "<td>$invoice_id</td>";
                             echo "<td>$invoice_number</td>";
                             echo "<td>$invoice_type</td>";
-                            echo "<td>$status</td>";
+                            if($status == 'Pending'){
+                                $back = "background:#2f97b1;color:#000;";
+                            }else{
+                                $back = "background:#C39527;color:#fff;";
+                            }
+                            echo "<td style='$back' >$status</td>";
                         // Invoice Line
-
-                            echo "<td>";
-
-                            $query1 = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}' ";
-                            $select_posts2 = mysqli_query($mysqli, $query1);
-                        if (mysqli_num_rows($select_posts2) > 0 ) {
-                            while ($row = mysqli_fetch_assoc($select_posts2)) {
-                                $item_id = $row['ITEM_id'];
-                                $quantity = $row['Quantity'];
-                                $total = $row['Total'];
-
-
-                                // Item Name:
-                                $query2 = "SELECT item_name FROM ITEM WHERE id = '{$item_id}' ";
-                                $select_posts3 = mysqli_query($mysqli, $query2);
-                                while ($row = mysqli_fetch_assoc($select_posts3)) {
-                                    $item_name = $row['item_name'];
-                                    echo "<table class='table table-bordered'>";
-                                    echo "<tbody>";
-                                    echo"<tr>";
-                                    echo "<td>$item_name</td>";
-                                    echo "</tr>";
-                                    echo "</tbody>";
-                                    echo "</table>";
-
-                                }
-                            }
-
-                        }
-echo  "</td>";
-
-
-                            echo "<td>";
-
+                            $total_invoice_amount = 0;
                             $query1 = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}' ";
                             $select_posts2 = mysqli_query($mysqli, $query1);
                             if (mysqli_num_rows($select_posts2) > 0 ) {
@@ -100,59 +68,17 @@ echo  "</td>";
                                     $item_id = $row['ITEM_id'];
                                     $quantity = $row['Quantity'];
                                     $total = $row['Total'];
-
-
                                     // Item Name:
-                                    $query2 = "SELECT item_name FROM ITEM WHERE id = '{$item_id}' ";
+                                    $query2 = "SELECT * FROM ITEM WHERE id = '{$item_id}' ";
                                     $select_posts3 = mysqli_query($mysqli, $query2);
                                     while ($row = mysqli_fetch_assoc($select_posts3)) {
-                                        $item_name = $row['item_name'];
-                                        echo "<table class='table table-bordered'>";
-                                        echo "<tbody>";
-                                        echo"<tr>";
-                                        echo "<td>$quantity</td>";
-                                        echo "</tr>";
-                                        echo "</tbody>";
-                                        echo "</table>";
-
+                                        $item_price = $row['item_price'];
+                                        $total_item_price = $item_price * $quantity;
+                                        $total_invoice_amount = $total_invoice_amount + $total_item_price;
                                     }
                                 }
-
                             }
-                            echo  "</td>";
-                            echo "<td>$discount</td>";
-                            echo "<td>$advanced_payment</td>";
-                          echo "<td>";
-
-                            $query1 = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}' ";
-                            $select_posts2 = mysqli_query($mysqli, $query1);
-                            if (mysqli_num_rows($select_posts2) > 0 ) {
-                                while ($row = mysqli_fetch_assoc($select_posts2)) {
-                                    $item_id = $row['ITEM_id'];
-                                    $quantity = $row['Quantity'];
-                                    $total = $row['Total'];
-
-
-                                    // Item Name:
-                                    $query2 = "SELECT item_name FROM ITEM WHERE id = '{$item_id}' ";
-                                    $select_posts3 = mysqli_query($mysqli, $query2);
-                                    while ($row = mysqli_fetch_assoc($select_posts3)) {
-                                        $item_name = $row['item_name'];
-                                        echo "<table class='table table-bordered'>";
-                                        echo "<tbody>";
-                                        echo"<tr>";
-                                        echo "<td>$discount</td>";
-                                        echo "</tr>";
-                                        echo "</tbody>";
-                                        echo "</table>";
-
-                                    }
-                                }
-
-                            }
-                            echo  "</td>";
-
-
+                            echo "<td>$total_invoice_amount</td>";
                             // Client Name:
                             $query3 = "SELECT Client_name FROM CLIENT WHERE id = '{$client_id}'";
                             $select_posts4 = mysqli_query($mysqli, $query3);
@@ -161,7 +87,15 @@ echo  "</td>";
                                 echo "<td>$client_name</td>";
 
                             }
-                            echo "<td><a href='invoices.php?approve=$invoice_id'>Approved</a> <br> ";
+
+                            echo "<td><div class=\"dropdown\">
+                                        <button data-toggle=\"dropdown\" class=\"btn dropdown-toggle\" style='width: 100%;'><span class=\"caret\"></span></button>
+                                        <ul class=\"dropdown-menu\" id='toggle'>
+                                        <li><a href='invoices.php?approve=$invoice_id'>Approve</a></li>
+                                        <li><a href='invoices.php?pending=$invoice_id'>Pending</a></li>
+                                        </ul>
+                                    </div></td>";
+
                             echo "<td><a href='invoice_indetails.php?i_id={$invoice_id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
                             echo "</tr>";
                         }
@@ -183,7 +117,16 @@ if(isset($_GET['approve'])){
 ?>
 
 
+<?php
+if(isset($_GET['pending'])){
+    $id = $_GET['pending'];
+    $query = "UPDATE INVOICE SET status = 'Pending' WHERE ID = {$id}";
+    $block_agent_query = mysqli_query($mysqli, $query);
+    header("Location: invoices.php");
+}
+?>
+
+
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/matrix.tables.js"></script>
-
