@@ -118,43 +118,39 @@ $counterc = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($counterc);
 $countcTrans = $num["ID"];
 ?>
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+<div id="sidebar"><a href="admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"><?php echo $countcTrans; ?></span></a> <ul>
+        <li class="active"><a href="admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <?php
+        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
+        $counter = mysqli_query($mysqli,$query);
+        $num = mysqli_fetch_array($counter);
+        $countTrans = $num["ID"];
+        ?>
+        <?php
+        $query = "SELECT COUNT(*)  AS ID FROM AGENT";
+        $counter = mysqli_query($mysqli,$query);
+        $num = mysqli_fetch_array($counter);
+        $countAgent = $num["ID"];
+        ?>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"><?php echo $countcTrans; ?></span></a>
+            <ul>
                 <li><a href="agentscripts/transaction.php">All transactions </a></li>
                 <li><a href="agentscripts/ctransaction.php">Completed transactions </a></li>
                 <li><a href="agentscripts/ptransaction.php">Pending transactions</a></li>
             </ul>
         </li>
-
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Agent_ID = '{$agent_id_val}'";
-        $counter = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counter);
-        $countTrans = $num["ID"];
-        ?>
-
-
-        <?php
-        if($countTrans == 0){
-            $per = 0;
-        }else{
-        $formatted_number = ($countcTrans * 100) / $countTrans;
-        sprintf('%0.2f', $formatted_number);
-        $per = sprintf('%0.2f', $formatted_number);
-        }
-        ?>
-
-        <li class="content"> <span>Completed Transactions</span>
-            <div class="progress progress-mini progress-danger active progress-striped">
-                <div style="width: <?php echo $per . "%"; ?>;" class="bar"></div>
-            </div>
-
-            <span class="percent"><?php echo $per . "%"; ?></span>
-            <div class="stat"><?php echo $countcTrans; ?> / <?php echo $countTrans; ?></div>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
+            <ul>
+                <li><a href="agentscripts/currency.php">Current Currencies </a></li>
+            </ul>
         </li>
-    </ul>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="agentscripts/invoices.php">Current Invoices</a></li>
+                <li><a href="agentscripts/add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
 </div>
 <!--sidebar-menu-->
 
