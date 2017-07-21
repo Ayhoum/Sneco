@@ -4,69 +4,89 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: ../index.php");
+    header("Location: index.php");
 }else if($_SESSION['role'] == "Admin"){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
-?>
 
-<?php
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
-$num = mysqli_fetch_array($countinv);
-$countcIvoices = $num["ID"];
-?>
+$num = mysqli_fetch_array($countInv);
+$countcInvoices = $num["ID"];
+$countcInvoices = $countcInvoices +1;
 
-<?php
+
 if(isset($_POST['submit'])){
-    $invoic1 = $_POST['invoice_number'];
-    $invoic2 = $_POST['address_line1'];
-    $invoic3 = $_POST['address_line2'];
-    $invoic4 = $_POST['address_line3'];
-    $invoic5 = $_POST['item_id'];
-    $invoic6 = $_POST['quantity'];
-    $invoic7 = $_POST['discount'];
-    $invoic8 = $_POST['advanced_payment'];
-    $invoic9 = $_POST['total'];
-    $invoic10= $_POST['client_id'];
-    $invoic11= $_POST['invoice_type'];
-    $invoic12= $_POST['type_shortcut'];
+    $invoice_number     = $_POST['invoice_number'];
+    $invoice_type       = $_POST['invoice_type'];
+    $address1           = $_POST['address_line1'];
+    $address2           = $_POST['address_line2'];
+    $address3           = $_POST['address_line3'];
+    $discount           = $_POST['discount'];
+    $advanced_payment   = $_POST['advanced_payment'];
+    $client             = $_POST['client_id'];
+    $item_id            = $_POST['item_id'];
+    $quantity           = $_POST['quantity'];
+    $total              = $_POST['total'];
 
-    $countcIvoices = $countcIvoices +1;
+//    echo $invoice_number ."<br>";
+//    echo $invoice_type ."<br>";
+//    echo $address1 ."<br>";
+//    echo $address2 ."<br>";
+//    echo $address3 ."<br>";
+//    echo $discount ."<br>";
+//    echo $advanced_payment ."<br>";
+//    echo $client ."<br>";
+//    echo $item_id ."<br>";
+//    echo $quantity ."<br>";
+//    echo $total ."<br>";
+    // Inseret into INVOICE !
 
-$invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
-    $query = "INSERT INTO INVOICE(invoice_number, 
-                                    address_line1, 
-                                    address_line2, 
-                                    address_line3, 
-                                    quantity, 
-                                    total, 
-                                    discount, 
-                                    advanced_payment, 
-                                    Item_ID, 
-                                    Client_ID, 
-                                    invoice_type) ";
 
-    $query .= "VALUES('{$invoice_no}',
-                  '{$invoic2}',
-                  '{$invoic3}',
-                  '{$invoic4}',
-                  '{$invoic6}',
-                  '{$invoic9}',
-                  '{$invoic7}',
-                  '{$invoic8}',
-                  '{$invoic5}',
-                  '{$invoic10}',
-                  '{$invoic11}') ";
+    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
+
+
+
+    $query = "INSERT INTO INVOICE(invoice_number,
+                                    invoice_type,
+                                    address_line1,
+                                    address_line2,
+                                    address_line3,
+                                    discount,
+                                    advanced_payment,
+                                    CLIENT_id) ";
+
+    $query .= "VALUES('{$invoice_number}',
+                      '{$invoice_type}',
+                      '{$address1}',
+                      '{$address2}',
+                      '{$address3}',
+                      '{$discount}',
+                      '{$advanced_payment}',
+                      '{$client}') ";
 
     $result = mysqli_query($mysqli, $query);
-    if (!$result) {
-        die("Failed!" . mysqli_error($mysqli));
-    } else {
-        header("Location: ../gipdf.php?number={$countcIvoices}");
-    }
+    $last_id = mysqli_insert_id($mysqli);
+//    echo $last_id;
+//    echo $client;
+        // Inseret into INVOICE_LINE
+
+        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
+                                              ITEM_id,
+                                              Quantity,
+                                              Total)";
+
+        $query1 .= "VALUES('{$last_id}',
+                           '{$item_id}',
+                           '{$quantity}',
+                           '{$total}')";
+
+    $result1 = mysqli_query($mysqli, $query1);
+
+//        header("location: ../gipdf.php?invoice_number={$invoic1}");
+//        header("Location: invoices.php");
 }
 ?>
 <!DOCTYPE html>
@@ -115,9 +135,28 @@ $invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<?php
-include 'side_bar_agent.php' ;
-?>
+<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+    <ul>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
+            <ul>
+                <li><a href="transaction.php">All transactions </a></li>
+                <li><a href="ctransaction.php">Completed transactions </a></li>
+                <li><a href="ptransaction.php">Pending transactions</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
+            <ul>
+                <li><a href="currency.php">Current Currencies </a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="../dumb/invoices.php">Current Invoices</a></li>
+                <li><a href="dd_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
+</div>
 <!--sidebar-menu-->
 
 <!--main-container-part-->
@@ -133,7 +172,8 @@ include 'side_bar_agent.php' ;
       <div class="quick-actions_homepage">
           <ul class="quick-actions">
               <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-              <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
+              <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"></span> Transactions</a> </li>
+
           </ul>
       </div>
 <!--End-Action boxes-->
@@ -150,7 +190,7 @@ include 'side_bar_agent.php' ;
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" value="<?php echo $countcIvoices; ?> " name="invoice_number" readonly>
+                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countcInvoices; ?>"  name="invoice_number" readonly >
                                   </div>
                               </div>
                               <div class="control-group">
@@ -176,7 +216,7 @@ include 'side_bar_agent.php' ;
                               <div class="control-group">
                                   <label class="control-label">Address Add.</label>
                                   <div class="controls">
-                                      <input type="text" name="address_line2"> <br> <br>
+                                      <input type="text" name="address_line2" required> <br> <br>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -189,21 +229,23 @@ include 'side_bar_agent.php' ;
                                   <label class="control-label">Item ID </label>
                                   <div class="controls">
                                       <select style="width:215px;" name="item_id">
+                                          <option> Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM ITEM ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) == 1 ){
+                                          if (mysqli_num_rows($result) >0 ){
                                               while($row = mysqli_fetch_assoc($result)){
-                                                  $item_id               = $row ['ID'];
+                                                  $item_id          = $row ['id'];
                                                   $item_name        = $row ['item_name'];
                                                   $item_price       = $row ['item_price'];
                                                   $item_description = $row ['item_description'];
-                                                  echo "<option> Select One</option>";
-                                                  echo "<option value= " ."{$item_id}". ">" ."{$item_name}". "</option>";
-                                                  echo "</select>";
+
+                                                  echo "<option value=" . $item_id . ">" . $item_name . "</option>";
+
                                               }
                                           }
                                           ?>
+                                      </select> <br>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -235,22 +277,19 @@ include 'side_bar_agent.php' ;
                                   <label class="control-label">Client ID</label>
                                   <div class="controls">
                                       <select style="width:215px;" name="client_id">
+                                          <option>Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM CLIENT ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) == 1 ){
-
+                                          if (mysqli_num_rows($result) > 0 ){
                                               while($row = mysqli_fetch_assoc($result)){
-                                                  $client_id               = $row ['ID'];
-                                                  $client_name       = $row ['Client_name'];
-
-                                                  echo "<option> Select One</option>";
-                                                  echo "<option value= " ."{$client_id}". ">" ."{$client_name}". "</option>";
-                                                  echo "</select> <br>";
-
+                                                  $client_id               = $row ['id'];
+                                                  $client_name             = $row ['Client_name'];
+                                                  echo "<option value=" . $client_id . ">" . $client_name . "</option>";
                                               }
                                           }
                                           ?>
+                                      </select> <br>
                                   </div>
                               </div>
                               <div class="widget-content nopadding">
@@ -295,5 +334,6 @@ include 'side_bar_agent.php' ;
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
+
 </body>
 </html>

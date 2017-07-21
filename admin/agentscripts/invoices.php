@@ -59,9 +59,28 @@ if(!isset($_SESSION['role'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<?php
-include 'side_bar_agent.php' ;
-?>
+<<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+    <ul>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
+            <ul>
+                <li><a href="transaction.php">All transactions </a></li>
+                <li><a href="ctransaction.php">Completed transactions </a></li>
+                <li><a href="ptransaction.php">Pending transactions</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
+            <ul>
+                <li><a href="currency.php">Current Currencies </a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="invoices.php">Current Invoices</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
+</div>
 <!--sidebar-menu-->
 
 <!--main-container-part-->
@@ -77,7 +96,8 @@ include 'side_bar_agent.php' ;
         <div class="quick-actions_homepage">
             <ul class="quick-actions">
                 <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-                <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
+                <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"></span> Transactions</a> </li>
+            </ul>
         </div>
         <!--End-Action boxes-->
 

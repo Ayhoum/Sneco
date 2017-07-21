@@ -111,16 +111,15 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 
 <!--close-top-serch-->
 <!--sidebar-menu-->
-
 <?php
 $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION WHERE Agent_ID = '{$agent_id_val}' AND Status = 'Completed'";
 $counterc = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($counterc);
 $countcTrans = $num["ID"];
 ?>
-<div id="sidebar"><a href="admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <?php
         $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
         $counter = mysqli_query($mysqli,$query);
@@ -133,7 +132,7 @@ $countcTrans = $num["ID"];
         $num = mysqli_fetch_array($counter);
         $countAgent = $num["ID"];
         ?>
-        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"><?php echo $countcTrans; ?></span></a>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="agentscripts/transaction.php">All transactions </a></li>
                 <li><a href="agentscripts/ctransaction.php">Completed transactions </a></li>

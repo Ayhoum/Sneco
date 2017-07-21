@@ -6,7 +6,7 @@ session_start();
 if(!isset($_SESSION['role'])){
 header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: ../Agent_index.php");
+    header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
@@ -117,6 +117,12 @@ if(isset($_POST['Submit'])) {
                 <li><a href="add_item.php">Add Item</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
+            <ul>
+                <li><a href="clients.php">Current Clients</a></li>
+                <li><a href="add_client.php">Add Client</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="invoices.php">Current Invoices</a></li>
@@ -155,7 +161,7 @@ if(isset($_POST['Submit'])) {
                     <div class="span12">
                         <div class="widget-box">
                             <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                                <h5>New Agent</h5>
+                                <h5>New Item</h5>
                             </div>
                             <div class="widget-content nopadding">
                                 <div class="control-group">

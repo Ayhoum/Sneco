@@ -2,8 +2,8 @@
 <?php
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
-}else if($_SESSION['role'] == "Agent"){
-    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
@@ -23,44 +23,34 @@ if(!isset($_SESSION['role'])){
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Street Name</th>
-                            <th>House Number</th>
-                            <th>Post Code</th>
-                            <th>City</th>
+                           <!-- <th>To</th>-->
+                            <th>Value</th>
+                            <th>Edit</th>
+<!--                            <th>Delete</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM USER ORDER BY ID DESC";
+                        $query = "SELECT * FROM CURRENCIES ORDER BY ID DESC";
                         $select_posts = mysqli_query($mysqli, $query);
                         while($row = mysqli_fetch_assoc($select_posts)){
                             $id = $row['ID'];
-                            $name = $row['First_Name'] . " " . $row['Last_Name'] ;
-                            $email = $row['Email'];
-                            $phone = $row['Phone'];
-                            $streetName = $row['Street_Name'];
-                            $houseName = $row['House_Number'];
-                            $postCode = $row['Postcode'];
-                            $city = $row['City'];
+                            $from = $row['CurNameFr'];
+                            //$to = $row['CurNameTo'];
+                            $value = $row['Value'];
 
                             echo "<tr>";
                             ?>
                             <?php
                             echo "<td>$id</td>";
-                            echo "<td>$name</td>";
-                            echo "<td>$email</td>";
-                            echo "<td>$phone</td>";
-                            echo "<td>$streetName</td>";
-                            echo "<td>$houseName</td>";
-                            echo "<td>$postCode</td>";
-                            echo "<td>$city</td>";
+                            echo "<td>$from</td>";
+                            //echo "<td>$to</td>";
+                            echo "<td>$value</td>";
 
 
+                            echo "<td><a href='currency.php?source=edit_currency&c_id={$id}'><p class='text-center'><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
-//                            echo "<td><a href='transaction.php?delete=$id'>Delete</a></td>";
-//                            echo "<td><a href='transaction.php?source=edit_transaction&t_id={$id}'>Edit</a></td>";
+//                            echo "<td><a href='currency.php?delete=$id'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
 
 
 //                            $query = "SELECT * FROM AGENT WHERE ID = $agent_id ";
@@ -86,14 +76,14 @@ if(!isset($_SESSION['role'])){
 </div>
 
 <?php
-//
-//if(isset($_GET['delete'])){
-//
-//    $id = $_GET['delete'];
-//    $query = "DELETE FROM TRANSACTION  WHERE ID = {$id} ";
-//    $delete_query = mysqli_query($mysqli, $query);
-//    header("Location: transaction.php");
-//}
+
+if(isset($_GET['delete'])){
+
+    $id = $_GET['delete'];
+    $query = "DELETE FROM Currencies WHERE ID = {$id} ";
+    $delete_query = mysqli_query($mysqli, $query);
+    header("Location: currency.php");
+}
 ?>
 
 

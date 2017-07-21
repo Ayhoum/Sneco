@@ -66,9 +66,29 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<?php
-include 'side_bar_agent.php' ;
-?>
+
+<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+    <ul>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
+            <ul>
+                <li><a href="transaction.php">All transactions </a></li>
+                <li><a href="ctransaction.php">Completed transactions </a></li>
+                <li><a href="ptransaction.php">Pending transactions</a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
+            <ul>
+                <li><a href="currency.php">Current Currencies </a></li>
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
+            <ul>
+                <li><a href="invoices.php">Current Invoices</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
+            </ul>
+        </li>
+</div>
 <!--sidebar-menu-->
 
 <?php

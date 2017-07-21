@@ -6,43 +6,40 @@ session_start();
 if(!isset($_SESSION['role'])){
 header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: ../Agent_index.php");
+    header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
 ?>
 <?php
 if(isset($_POST['Submit'])) {
-    $client_name          = $_POST['client_name'];
-    $client_add1          = $_POST['client_address1'];
-    $client_add2          = $_POST['client_address2'];
-    $client_add3          = $_POST['client_address3'];
-    $client_phone         = $_POST['client_phone'];
-    $client_email         = $_POST['client_email'];
+    $client_name          = $_POST['Client_name'];
+    $client_add1          = $_POST['Client_address_1'];
+    $client_add2          = $_POST['Client_address_2'];
+    $client_phone         = $_POST['Client_phone'];
+    $client_email         = $_POST['Client_email'];
     $comment              = $_POST['Comments'];
 
-    if(!empty($item_name) && !empty($item_price) && !empty($item_description)){
+    if(!empty($client_name) && !empty($client_email) && !empty($client_phone)){
 //Insert item into database::
         $query = "INSERT INTO CLIENT (Client_name,
                                 Client_address_1,
                                 Client_address_2,
-                                Client_phone,
                                 Client_email,
+                                Client_phone,
                                 Comments)";
         $query .= "VALUES('{$client_name}',
-                    '{$client_email}',
                     '{$client_add1}',
                     '{$client_add2}',
-                    '{$client_add3}',
-                    '{$client_phone}',
                     '{$client_email}',
-                    '{$comment}') ";
+                    '{$client_phone}',
+                    '{$comment}')";
 
         $result =  mysqli_query($mysqli, $query);
         if (!$result) {
             die("Failed!" . mysqli_error($mysqli));
         }else{
-            //header("Location: item.php");
+            header("Location: clients.php");
         }
     }
 }
@@ -129,6 +126,12 @@ if(isset($_POST['Submit'])) {
                 <li><a href="add_item.php">Add Item</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
+            <ul>
+                <li><a href="clients.php">Current Clients</a></li>
+                <li><a href="add_client.php">Add Client</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="invoices.php">Current Invoices</a></li>
@@ -163,46 +166,44 @@ if(isset($_POST['Submit'])) {
 
         <div class="container-fluid"><hr>
             <div class="row-fluid">
-                <form class="form-horizontal" method="post" action="add_item.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                <form class="form-horizontal" method="post" action="add_client.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
                     <div class="span12">
                         <div class="widget-box">
                             <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                                <h5>New Agent</h5>
+                                <h5>New Client</h5>
                             </div>
                             <div class="widget-content nopadding">
                                 <div class="control-group">
                                     <label class="control-label">Client Name</label>
                                     <div class="controls">
-                                        <input type="text" name="client_name" id="item_name" required>
+                                        <input type="text" name="Client_name" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Client Address</label>
                                     <div class="controls">
-                                        <input type="text" name="client_address1" id="Agent_Email" required> <br>
-                                        <input type="text" name="client_address2" id="Agent_Password" > <br>
-                                        <input type="text" name="client_address3" id="Agent_Password" >
+                                        <input type="text" name="Client_address_1" required> <br>
+                                        <input type="text" name="Client_address_2">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
-                                        <input type="text" name="client_phone" id="Agent_Password" required>
+                                        <input type="text" name="Client_phone" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" name="client_email" id="Agent_Password" required>
+                                        <input type="text" name="Client_email" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Comments </label>
                                     <div class="controls">
-                                        <input type="text" name="Comments" id="Agent_Password">
+                                        <input type="text" name="Comments" ">
                                     </div>
                                 </div>
-
                                 <div class="widget-content nopadding">
                                         <div class="form-actions">
                                             <input name="Submit" type="submit" value="Add" class="btn btn-success">

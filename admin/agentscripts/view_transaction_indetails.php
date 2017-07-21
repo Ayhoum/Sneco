@@ -9,8 +9,8 @@ include '../../include/phpscripts/DB.php'
 <?php
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
-}else if($_SESSION['role'] == "Admin"){
-    header("Location: ../admin_index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
@@ -47,7 +47,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $rCountry     = $row['Receiver_Country'];
     $rPhone       = $row['Receiver_Phone'];
     $rEmail       = $row['Receiver_Email'];
-//Other Data
+    //Other Data
     $sentAmount = $row['Received_Amount'];
     $payout_amount = $row['Payout_Amount'];
     $current      = $row['Current_Currency'];
@@ -59,6 +59,16 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $comment      = $row['Comment'];
     $status = $row['Status'];
     $money_status = $row['Money_Status'];
+    $mtrn1  = $row['MTRN1'] ;
+    $mtrn2  = $row['MTRN2'] ;
+    $mtrn3  = $row['MTRN3'] ;
+    $mtrn4  = $row['MTRN4'] ;
+    $mtrn5  = $row['MTRN5'] ;
+    $mtrn6  = $row['MTRN6'] ;
+    $mtrn7  = $row['MTRN7'] ;
+    $mtrn8  = $row['MTRN8'] ;
+    $mtrn9  = $row['MTRN9'] ;
+    $mtrn10 = $row['MTRN10'] ;
 }
 ?>
 
@@ -70,6 +80,19 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
         <h5 >Transaction No. <?php echo $transaction_ID; ?></h5>
     </div>
     <div class="widget-content">
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-bordered table-invoice">
+                    <tbody>
+                    <p class="text-center" style="font-size: 20px;"><strong>MTRN</strong></p>
+                    <tr>
+                        <td style="font-size: 18px;"><p style="margin:0;" class="text-center"><?php echo $mtrn1 . " " . $mtrn2 . " " . $mtrn3 . " " . $mtrn4 . " " . $mtrn5 . " " . $mtrn6 . " " . $mtrn7 . " " . $mtrn8 . " " . $mtrn9 . " " . $mtrn10; ?></p></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="span6">
                 <table class="table table-bordered table-invoice">
@@ -137,7 +160,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                     </tr>
                     <tr>
                         <td class="width30"><strong>Name in Arabic:</strong></td>
-                        <td class="width70"><?php echo $reName; ?></td>
+                        <td class="width70"><?php echo $raName; ?></td>
                     </tr>
                     <tr>
                         <td class="width30"><strong>Street Name:</strong></td>
@@ -186,12 +209,12 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                     <tbody>
                     <tr>
                         <td class="msg-invoice" width="85%"><h4>Payments</h4>
-                            <!--                            <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>-->
+<!--                            <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>-->
                         <td class="right"><strong>Sent Amount</strong> <br>
                             <strong>Transaction Fee</strong> <br>
                             <strong>Received amount</strong> <br>
                             <strong> 1 <?php echo $current;?> =</strong> <br>
-                        </td>
+                            </td>
                         <td class="right"><strong><?php echo $sentAmount . " " . $current; ?><br>
                                 <?php echo $rate; ?> <br>
                                 <?php echo $receivedAmount . " " . $current; ?> <br>
@@ -202,7 +225,7 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 <div class="pull-right">
                     <h4><span>Payout Amount:</span> <?php echo $payout_amount . " " . $payment ?></h4>
                     <br>
-
+                    <a class="btn btn-primary btn-large pull-right" href="gintpdf.php?m1=<?php echo $mtrn1;?>&m2=<?php echo $mtrn2;?>&m3=<?php echo $mtrn3;?>&m4=<?php echo $mtrn4;?>&m5=<?php echo $mtrn5;?>&m6=<?php echo $mtrn6;?>&m7=<?php echo $mtrn7;?>&m8=<?php echo $mtrn8;?>&m9=<?php echo $mtrn9;?>&m10=<?php echo $mtrn10;?>&sender=<?php echo $seName;?>">Send to agent</a></div>
             </div>
         </div>
     </div>

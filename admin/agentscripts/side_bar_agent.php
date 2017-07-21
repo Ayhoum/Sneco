@@ -14,8 +14,8 @@
         </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
-                <li><a href="invoices.php">Current Invoices</a></li>
-                <li><a href="add_invoice.php">Add Invoice</a></li>
+                <li><a href="../dumb/invoices.php">Current Invoices</a></li>
+                <li><a href="../dumb/add_invoice.php">Add Invoice</a></li>
             </ul>
         </li>
         <li class="content"> <span>Completed Transactions</span>

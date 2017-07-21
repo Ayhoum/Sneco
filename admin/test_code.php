@@ -1,64 +1,39 @@
 <?php
 include "../include/phpscripts/DB.php";
 ?>
-<!--    <select style="width:215px;" name="client_id">-->
-<!--        <option>Select One</option>-->
-<?php
-//$query  = " SELECT * FROM CLIENT ";
-//$result = mysqli_query($mysqli,$query);
-//if (mysqli_num_rows($result) > 0 ){
-//    while($row = mysqli_fetch_assoc($result)){
-//        $client_id               = $row ['id'];
-//        $client_name             = $row ['Client_name'];
-//        echo "<option value=" . $client_id . ">" . $client_name . "</option>";
-//    }
-//
-//    } else {
-//    echo "Error";
-//}
-//?><!--</select>-->
-
-<form method="post" action="test_code.php">
-    <select style="width:215px;" name="item" multiple="multiple">
-        <option>Select One</option>
-<?php
-$query  = " SELECT * FROM ITEM ";
-$result = mysqli_query($mysqli,$query);
-if (mysqli_num_rows($result) > 0 ){
-    while($row = mysqli_fetch_assoc($result)){
-        $item_id               = $row ['id'];
-        $item_name             = $row ['item_name'];
-        echo "<option value=\"$item_id\">$item_name</option>";
-    }
-
-} else {
-    echo "Error";
-}
-?>
-
-    </select>
-    <input type="submit" name="add_item" value="add">
+<form name="add_name" id="add_name" method="post" action="test_code.php">
+    <table class="table table-brodered" id="dynamic_field">
+        <tr>
+            <td><input type="text" name="name[]" id="name" placeholder="Enter Name" class="form-control name_list"></td>
+            <td><button type="button" name="add" id ="add" class="btn btn-success"> Add More</button></td>
+        </tr>
+    </table>
+    <input type="submit" name="submit" id="submit" value="submit">
 </form>
 
-<?php
-$last_id = mysqli_insert_id($mysqli);
-$itemss =  $_POST['item'];
-if ($itemss){
-    foreach ($itemss as $c){
+<script>
+    $(document).ready(function(){
+        var i = 1;
+        $('#add').click(function(){
+           i++;
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="name" placeholder="Enter Name" class="form-control name_list"></td><td><button name="remove" id ="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
+        });
+        $(document).on('click', '#btn_remove',function(){
+           var button_id = $(this).attr("id");
+           $('#row'+button_id+'').remove();
+        });
+        $('#submit').click(function(){
+            .$ajax({
+                url:"name.php",
+                method:"post",
+                data:$('#add_name').serialize(),
+                success:function(data)
+                {
+                 alert(data);
+                 $('#add_name')[0].reset();
+                }
+            });
+        });
 
-        $query  = "INSERT INTO INVOICE_LINE (Invoice_id, ITEM_id)";
-        $query .= " VALUES ('{$last_id}' , " . mysqli_real_escape_string($mysqli , $c);
-
-        $result = mysqli_query($mysqli,$query);
-        if (mysqli_num_rows($result)>0 ){
-            echo "Done";
-        } else{
-            echo "Error";
-        }
-    }
-
-
-
-}
-
-?>
+    });
+</script>

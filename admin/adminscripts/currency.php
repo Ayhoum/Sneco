@@ -7,7 +7,7 @@ session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: ../Agent_index.php");
+    header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
@@ -84,7 +84,7 @@ if(!isset($_SESSION['role'])){
             </ul>
         </li>
         <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span> </a>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
             <ul>
                 <li><a href="currency.php">Current Currencies </a></li>
                 <li><a href="add_currency.php">Add Currencies</a></li>
@@ -96,6 +96,12 @@ if(!isset($_SESSION['role'])){
                 <li><a href="add_item.php">Add Item</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
+            <ul>
+                <li><a href="clients.php">Current Clients</a></li>
+                <li><a href="add_client.php">Add Client</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="invoices.php">Current Invoices</a></li>
@@ -103,6 +109,7 @@ if(!isset($_SESSION['role'])){
             </ul>
         </li>
     </ul>
+</div>
 </div>
 <!--sidebar-menu-->
 

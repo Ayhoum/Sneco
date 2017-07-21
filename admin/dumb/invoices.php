@@ -6,8 +6,8 @@ include '../../include/phpscripts/DB.php'
 session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
-}else if($_SESSION['role'] == "Agent"){
-    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
@@ -59,55 +59,28 @@ if(!isset($_SESSION['role'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="../admin_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<
+<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION";
-        $counter = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counter);
-        $countTrans = $num["ID"];
-        ?>
-
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM AGENT";
-        $counter = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counter);
-        $countAgent = $num["ID"];
-        ?>
-        <li> <a href="transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
-                <li><a href="agents.php">Current Agents </a></li>
-                <li><a href="add_agent.php">Add Agent</a></li>
+                <li><a href="../agentscripts/transaction.php">All transactions </a></li>
+                <li><a href="../agentscripts/ctransaction.php">Completed transactions </a></li>
+                <li><a href="../agentscripts/ptransaction.php">Pending transactions</a></li>
             </ul>
         </li>
-        <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
             <ul>
-                <li><a href="currency.php">Current Currencies </a></li>
-                <li><a href="add_currency.php">Add Currencies</a></li>
-            </ul>
-        </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
-            <ul>
-                <li><a href="items.php">Current Items</a></li>
-                <li><a href="add_item.php">Add Item</a></li>
-            </ul>
-        </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
-            <ul>
-                <li><a href="clients.php">Current Clients</a></li>
-                <li><a href="add_client.php">Add Client</a></li>
+                <li><a href="../agentscripts/currency.php">Current Currencies </a></li>
             </ul>
         </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="invoices.php">Current Invoices</a></li>
-                <li><a href="add_invoice.php">Add Invoice</a></li>
+                <li><a href="dd_invoice.php">Add Invoice</a></li>
             </ul>
         </li>
-    </ul>
 </div>
 <!--sidebar-menu-->
 
@@ -123,13 +96,8 @@ if(!isset($_SESSION['role'])){
     <div class="container-fluid">
         <div class="quick-actions_homepage">
             <ul class="quick-actions">
-                <li class="bg_lb span3"> <a href="../admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-                <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
-                <li class="bg_ls span3"> <a href="agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
-                <li class="bg_lo span3"> <a href="form-common.html"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
-                <li class="bg_lb span3"> <a href="interface.html"> <i class="fa fa-money"></i>Currency Rates</a> </li>
-
-            </ul>
+                <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+                <li class="bg_lg span3"> <a href="../agentscripts/transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
         </div>
         <!--End-Action boxes-->
 

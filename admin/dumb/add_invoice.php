@@ -4,89 +4,69 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
-}else if($_SESSION['role'] == "Agent"){
-    header("Location: ../agent_index.php");
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
 }
+?>
 
+<?php
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
-$num = mysqli_fetch_array($countInv);
-$countcInvoices = $num["ID"];
-$countcInvoices = $countcInvoices +1;
+$num = mysqli_fetch_array($countinv);
+$countcIvoices = $num["ID"];
+?>
 
-
+<?php
 if(isset($_POST['submit'])){
-    $invoice_number     = $_POST['invoice_number'];
-    $invoice_type       = $_POST['invoice_type'];
-    $address1           = $_POST['address_line1'];
-    $address2           = $_POST['address_line2'];
-    $address3           = $_POST['address_line3'];
-    $discount           = $_POST['discount'];
-    $advanced_payment   = $_POST['advanced_payment'];
-    $client             = $_POST['client_id'];
-    $item_id            = $_POST['item_id'];
-    $quantity           = $_POST['quantity'];
-    $total              = $_POST['total'];
+    $invoic1 = $_POST['invoice_number'];
+    $invoic2 = $_POST['address_line1'];
+    $invoic3 = $_POST['address_line2'];
+    $invoic4 = $_POST['address_line3'];
+    $invoic5 = $_POST['item_id'];
+    $invoic6 = $_POST['quantity'];
+    $invoic7 = $_POST['discount'];
+    $invoic8 = $_POST['advanced_payment'];
+    $invoic9 = $_POST['total'];
+    $invoic10= $_POST['client_id'];
+    $invoic11= $_POST['invoice_type'];
+    $invoic12= $_POST['type_shortcut'];
 
-//    echo $invoice_number ."<br>";
-//    echo $invoice_type ."<br>";
-//    echo $address1 ."<br>";
-//    echo $address2 ."<br>";
-//    echo $address3 ."<br>";
-//    echo $discount ."<br>";
-//    echo $advanced_payment ."<br>";
-//    echo $client ."<br>";
-//    echo $item_id ."<br>";
-//    echo $quantity ."<br>";
-//    echo $total ."<br>";
-    // Inseret into INVOICE !
+    $countcIvoices = $countcIvoices +1;
 
+$invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
+    $query = "INSERT INTO INVOICE(invoice_number, 
+                                    address_line1, 
+                                    address_line2, 
+                                    address_line3, 
+                                    quantity, 
+                                    total, 
+                                    discount, 
+                                    advanced_payment, 
+                                    Item_ID, 
+                                    Client_ID, 
+                                    invoice_type) ";
 
-    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
-
-
-
-    $query = "INSERT INTO INVOICE(invoice_number,
-                                    invoice_type,
-                                    address_line1,
-                                    address_line2,
-                                    address_line3,
-                                    discount,
-                                    advanced_payment,
-                                    CLIENT_id) ";
-
-    $query .= "VALUES('{$invoice_number}',
-                      '{$invoice_type}',
-                      '{$address1}',
-                      '{$address2}',
-                      '{$address3}',
-                      '{$discount}',
-                      '{$advanced_payment}',
-                      '{$client}') ";
+    $query .= "VALUES('{$invoice_no}',
+                  '{$invoic2}',
+                  '{$invoic3}',
+                  '{$invoic4}',
+                  '{$invoic6}',
+                  '{$invoic9}',
+                  '{$invoic7}',
+                  '{$invoic8}',
+                  '{$invoic5}',
+                  '{$invoic10}',
+                  '{$invoic11}') ";
 
     $result = mysqli_query($mysqli, $query);
-    $last_id = mysqli_insert_id($mysqli);
-//    echo $last_id;
-//    echo $client;
-        // Inseret into INVOICE_LINE
-
-        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
-                                              ITEM_id,
-                                              Quantity,
-                                              Total)";
-
-        $query1 .= "VALUES('{$last_id}',
-                           '{$item_id}',
-                           '{$quantity}',
-                           '{$total}')";
-
-    $result1 = mysqli_query($mysqli, $query1);
-
-//        header("location: ../gipdf.php?invoice_number={$invoic1}");
-//        header("Location: invoices.php");
+    if (!$result) {
+        die("Failed!" . mysqli_error($mysqli));
+    } else {
+        header("Location: ../gipdf.php?number={$countcIvoices}");
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -135,56 +115,30 @@ if(isset($_POST['submit'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
-    <ul>
-        <li class="active"><a href="../admin_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM TRANSACTION ";
-        $counter = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counter);
-        $countTrans = $num["ID"];
-        ?>
 
-        <?php
-        $query = "SELECT COUNT(*)  AS ID FROM AGENT";
-        $counter = mysqli_query($mysqli,$query);
-        $num = mysqli_fetch_array($counter);
-        $countAgent = $num["ID"];
-        ?>
-        <li> <a href="transaction.php"><i class="fa fa-exchange"></i> <span>Transactions</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a> </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Agents</span> <span class="label label-important"><?php echo("$countAgent"); ?></span></a>
+<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+    <ul>
+        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"><?php echo $countcTrans; ?></span></a>
             <ul>
-                <li><a href="agents.php">Current Agents </a></li>
-                <li><a href="add_agent.php">Add Agent</a></li>
+                <li><a href="../agentscripts/transaction.php">All transactions </a></li>
+                <li><a href="../agentscripts/ctransaction.php">Completed transactions </a></li>
+                <li><a href="../agentscripts/ptransaction.php">Pending transactions</a></li>
             </ul>
         </li>
-        <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span> <span class="label label-important"><?php echo("$countTrans"); ?></span></a></li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Currency rates</span></a>
             <ul>
-                <li><a href="currency.php">Current Currencies </a></li>
-                <li><a href="add_currency.php">Add Currencies</a></li>
-            </ul>
-        </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Items</span></a>
-            <ul>
-                <li><a href="items.php">Current Items</a></li>
-                <li><a href="add_item.php">Add Item</a></li>
-            </ul>
-        </li>
-        <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Clients</span></a>
-            <ul>
-                <li><a href="clients.php">Current Clients</a></li>
-                <li><a href="add_client.php">Add Client</a></li>
+                <li><a href="../agentscripts/currency.php">Current Currencies </a></li>
             </ul>
         </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="invoices.php">Current Invoices</a></li>
-                <li><a href="add_invoice.php">Add Invoice</a></li>
+                <li><a href="dd_invoice.php">Add Invoice</a></li>
             </ul>
         </li>
-    </ul>
 </div>
+
 <!--sidebar-menu-->
 
 <!--main-container-part-->
@@ -199,12 +153,8 @@ if(isset($_POST['submit'])){
   <div class="container-fluid">
       <div class="quick-actions_homepage">
           <ul class="quick-actions">
-              <li class="bg_lb span3"> <a href="../admin_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-              <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
-              <li class="bg_ls span3"> <a href="agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
-              <li class="bg_lo span3"> <a href="users.php"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
-              <li class="bg_lb span3"> <a href="currency.php"> <i class="fa fa-money"></i>Currency Rates</a> </li>
-
+              <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+              <li class="bg_lg span3"> <a href="../agentscripts/transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Transactions</a> </li>
           </ul>
       </div>
 <!--End-Action boxes-->
@@ -221,7 +171,7 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countcInvoices; ?>"  name="invoice_number" readonly >
+                                      <input type="text" value="<?php echo $countcIvoices; ?> " name="invoice_number" readonly>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -247,7 +197,7 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Address Add.</label>
                                   <div class="controls">
-                                      <input type="text" name="address_line2" required> <br> <br>
+                                      <input type="text" name="address_line2"> <br> <br>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -260,23 +210,21 @@ if(isset($_POST['submit'])){
                                   <label class="control-label">Item ID </label>
                                   <div class="controls">
                                       <select style="width:215px;" name="item_id">
-                                          <option> Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM ITEM ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) >0 ){
+                                          if (mysqli_num_rows($result) == 1 ){
                                               while($row = mysqli_fetch_assoc($result)){
-                                                  $item_id          = $row ['id'];
+                                                  $item_id               = $row ['ID'];
                                                   $item_name        = $row ['item_name'];
                                                   $item_price       = $row ['item_price'];
                                                   $item_description = $row ['item_description'];
-
-                                                  echo "<option value=" . $item_id . ">" . $item_name . "</option>";
-
+                                                  echo "<option> Select One</option>";
+                                                  echo "<option value= " ."{$item_id}". ">" ."{$item_name}". "</option>";
+                                                  echo "</select>";
                                               }
                                           }
                                           ?>
-                                      </select> <br>
                                   </div>
                               </div>
                               <div class="control-group">
@@ -308,19 +256,22 @@ if(isset($_POST['submit'])){
                                   <label class="control-label">Client ID</label>
                                   <div class="controls">
                                       <select style="width:215px;" name="client_id">
-                                          <option>Select One</option>
                                           <?php
                                           $query  = " SELECT * FROM CLIENT ";
                                           $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) > 0 ){
+                                          if (mysqli_num_rows($result) == 1 ){
+
                                               while($row = mysqli_fetch_assoc($result)){
-                                                  $client_id               = $row ['id'];
-                                                  $client_name             = $row ['Client_name'];
-                                                  echo "<option value=" . $client_id . ">" . $client_name . "</option>";
+                                                  $client_id               = $row ['ID'];
+                                                  $client_name       = $row ['Client_name'];
+
+                                                  echo "<option> Select One</option>";
+                                                  echo "<option value= " ."{$client_id}". ">" ."{$client_name}". "</option>";
+                                                  echo "</select> <br>";
+
                                               }
                                           }
                                           ?>
-                                      </select> <br>
                                   </div>
                               </div>
                               <div class="widget-content nopadding">
@@ -365,6 +316,5 @@ if(isset($_POST['submit'])){
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>
