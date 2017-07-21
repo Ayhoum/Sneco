@@ -56,6 +56,40 @@ if(isset($_GET["action"]))
 }
 ?>
 <?php
+if(isset($_POST['submit']))
+{
+    foreach ($_SESSION["shopping_cart"] as $key => $values)
+    {
+        $item_id    = $values['item_id'];
+        $item_price = $values['item_price'];
+        $quantity   = $values['item_quantity'];
+        $total      = number_format($values['item_quantity'] * $values['item_price'], 2);
+
+//        $last_id = mysqli_insert_id($mysqli);
+//        $last_id =40;
+
+//        echo $item_id. "<br>";
+//        echo $item_price. "<br>";
+//        echo $quantity. "<br>";
+//        echo $total. "<br>";
+        $invoice_id = 40;
+        $last_id = "SELECT id FROM INVOICE WHERE invoice_number = '{$invoice_id}'";
+        echo $last_id . "<br>";
+    $query1 = "INSERT INTO INVOICE_LINE (Invoice_id,
+                                              ITEM_id,
+                                              Quantity,
+                                              Total)";
+
+    $query1 .= "VALUES(    '{$last_id}',
+                           '{$item_id}',
+                           '{$quantity}',
+                           '{$total}')";
+
+    $result1 = mysqli_query($mysqli, $query1);
+    }
+}
+?>
+<?php
 $query = "SELECT * FROM ITEM ORDER BY ID ASC";
 $select_posts = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_posts))
@@ -74,6 +108,7 @@ while($row = mysqli_fetch_assoc($select_posts))
         <input type="hidden" name="hidden_price" value="<?php echo $item_price ?>">
         <input type="submit" name="add_item" value="add item">
     </form>
+
     <?php
 }
 ?>
@@ -114,4 +149,6 @@ while($row = mysqli_fetch_assoc($select_posts))
 <?php
 }
 ?>
-
+<form action="2.php" method="post">
+    <input type="submit" name="submit" value="submit">
+</form>
