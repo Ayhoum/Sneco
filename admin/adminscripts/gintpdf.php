@@ -118,11 +118,7 @@ $html = "
         </table>
     </center>
 </div>
-</html>
-
-
-";
-
+</html>";
 require '../../mpdf/vendor/autoload.php';
 
 $mpdf = new mPDF(); // Create new mPDF Document
@@ -131,6 +127,9 @@ $mpdf->autoScriptToLang = true;
 $mpdf->autoLangToFont = false;
 //$mpdf->SetFont('kfgqpcuthmantahanaskh');
 $mpdf->WriteHTML($html);
-//$mpdf->SetAutoFont($html);
 
-$content = $mpdf->Output('123.pdf', 'I');
+$name = "../out_transaction_pdf/" . $sender . $receiver_ename . $mtrn1 . $mtrn5 . $mtrn10 . ".pdf";
+$content = $mpdf->Output($name,'F');
+
+
+header("Location: send_email.php?senderf={$sender}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}");
