@@ -72,7 +72,7 @@ if(isset($_POST['submit']))
 //        echo $item_price. "<br>";
 //        echo $quantity. "<br>";
 //        echo $total. "<br>";
-        $invoice_id = 40;
+        $invoice_id = 'SNE-XXX-201707-14';
         $last_id = "SELECT id FROM INVOICE WHERE invoice_number = '{$invoice_id}'";
         echo $last_id . "<br>";
     $query1 = "INSERT INTO INVOICE_LINE (Invoice_id,

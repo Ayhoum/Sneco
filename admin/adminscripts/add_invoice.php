@@ -49,6 +49,7 @@ if(isset($_POST['submit'])){
 
 
 
+
     $query = "INSERT INTO INVOICE(invoice_number,
                                     invoice_type,
                                     address_line1,
@@ -69,24 +70,25 @@ if(isset($_POST['submit'])){
 
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
-//    echo $last_id;
+    $_SESSION['last_id'] = $last_id;
+
 //    echo $client;
         // Inseret into INVOICE_LINE
 
-        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
-                                              ITEM_id,
-                                              Quantity,
-                                              Total)";
-
-        $query1 .= "VALUES('{$last_id}',
-                           '{$item_id}',
-                           '{$quantity}',
-                           '{$total}')";
-
-    $result1 = mysqli_query($mysqli, $query1);
+//        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
+//                                              ITEM_id,
+//                                              Quantity,
+//                                              Total)";
+//
+//        $query1 .= "VALUES('{$last_id}',
+//                           '{$item_id}',
+//                           '{$quantity}',
+//                           '{$total}')";
+//
+//    $result1 = mysqli_query($mysqli, $query1);
 
 //        header("location: ../gipdf.php?invoice_number={$invoic1}");
-//        header("Location: invoices.php");
+        header("Location: add_items_invoice.php?invoice_number='{$last_id}'");
 }
 ?>
 <!DOCTYPE html>
@@ -257,35 +259,6 @@ if(isset($_POST['submit'])){
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Item ID </label>
-                                  <div class="controls">
-                                      <select style="width:215px;" name="item_id">
-                                          <option> Select One</option>
-                                          <?php
-                                          $query  = " SELECT * FROM ITEM ";
-                                          $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) >0 ){
-                                              while($row = mysqli_fetch_assoc($result)){
-                                                  $item_id          = $row ['id'];
-                                                  $item_name        = $row ['item_name'];
-                                                  $item_price       = $row ['item_price'];
-                                                  $item_description = $row ['item_description'];
-
-                                                  echo "<option value=" . $item_id . ">" . $item_name . "</option>";
-
-                                              }
-                                          }
-                                          ?>
-                                      </select> <br>
-                                  </div>
-                              </div>
-                              <div class="control-group">
-                                  <label class="control-label">Quantity</label>
-                                  <div class="controls">
-                                      <input type="text" name="quantity" required>
-                                  </div>
-                              </div>
-                              <div class="control-group">
                                   <label class="control-label">Discount</label>
                                   <div class="controls">
                                       <input type="text" name="discount">
@@ -297,13 +270,6 @@ if(isset($_POST['submit'])){
                                       <input type="text" name="advanced_payment">
                                   </div>
                               </div>
-                              <div class="control-group">
-                                  <label class="control-label">Total</label>
-                                  <div class="controls">
-                                      <input type="text" name="total">
-                                  </div>
-                              </div>
-
                               <div class="control-group">
                                   <label class="control-label">Client ID</label>
                                   <div class="controls">
@@ -323,6 +289,7 @@ if(isset($_POST['submit'])){
                                       </select> <br>
                                   </div>
                               </div>
+
                               <div class="widget-content nopadding">
                                   <div class="form-actions">
                                       <input name="submit" type="submit" value="Add" class="btn btn-success">
@@ -334,7 +301,6 @@ if(isset($_POST['submit'])){
               </form>
           </div>
       </div>
-
 
 <!--End-Chart-box--> 
     <hr/>

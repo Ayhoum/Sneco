@@ -4,7 +4,7 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
@@ -72,75 +72,38 @@ $countcInvoices = $num["ID"];
 $countcInvoices = $countcInvoices +1;
 
 
-if(isset($_POST['submit'])){
-    $invoice_number     = $_POST['invoice_number'];
-    $invoice_type       = $_POST['invoice_type'];
-    $address1           = $_POST['address_line1'];
-    $address2           = $_POST['address_line2'];
-    $address3           = $_POST['address_line3'];
-    $discount           = $_POST['discount'];
-    $advanced_payment   = $_POST['advanced_payment'];
-    $client             = $_POST['client_id'];
-    $item_id            = $_POST['item_id'];
-    $quantity           = $_POST['quantity'];
-    $total              = $_POST['total'];
+if(isset($_POST['submit']))
+{
+    foreach ($_SESSION["shopping_cart"] as $key => $values)
+    {
+        $item_id    = $values['item_id'];
+        $item_price = $values['item_price'];
+        $quantity   = $values['item_quantity'];
+        $total      = number_format($values['item_quantity'] * $values['item_price'], 2);
+        $last_id    = $_SESSION['last_id'];
 
-//    echo $invoice_number ."<br>";
-//    echo $invoice_type ."<br>";
-//    echo $address1 ."<br>";
-//    echo $address2 ."<br>";
-//    echo $address3 ."<br>";
-//    echo $discount ."<br>";
-//    echo $advanced_payment ."<br>";
-//    echo $client ."<br>";
-//    echo $item_id ."<br>";
-//    echo $quantity ."<br>";
-//    echo $total ."<br>";
-    // Inseret into INVOICE !
+//        $last_id =40;
+//        echo $item_id. "<br>";
+//        echo $item_price. "<br>";
+//        echo $quantity. "<br>";
+//        echo $total. "<br>";
+//        $invoice_id = $_GET['invoice_number'];
+//        $sql = "SELECT id FROM INVOICE WHERE invoice_number = '{$last_id}'";
+//        echo $last_id . "<br>";
 
-
-    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
-
-
-
-    $query = "INSERT INTO INVOICE(invoice_number,
-                                    invoice_type,
-                                    address_line1,
-                                    address_line2,
-                                    address_line3,
-                                    discount,
-                                    advanced_payment,
-                                    CLIENT_id) ";
-
-    $query .= "VALUES('{$invoice_number}',
-                      '{$invoice_type}',
-                      '{$address1}',
-                      '{$address2}',
-                      '{$address3}',
-                      '{$discount}',
-                      '{$advanced_payment}',
-                      '{$client}') ";
-
-    $result = mysqli_query($mysqli, $query);
-    $last_id = mysqli_insert_id($mysqli);
-//    echo $last_id;
-//    echo $client;
-    // Inseret into INVOICE_LINE
-
-    $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
+        $query1 = "INSERT INTO INVOICE_LINE (Invoice_id,
                                               ITEM_id,
                                               Quantity,
                                               Total)";
 
-    $query1 .= "VALUES('{$last_id}',
+        $query1 .= "VALUES('{$last_id}',
                            '{$item_id}',
                            '{$quantity}',
                            '{$total}')";
 
-    $result1 = mysqli_query($mysqli, $query1);
-
-//        header("location: ../gipdf.php?invoice_number={$invoic1}");
-//        header("Location: invoices.php");
+        $result1 = mysqli_query($mysqli, $query1);
+    }
+    header();
 }
 ?>
 <!DOCTYPE html>
@@ -331,17 +294,19 @@ if(isset($_POST['submit'])){
                     <?php
                     $total = $total + ($values['item_quantity'] * $values['item_price']);
                 }
-
                 ?>
             </table>
-
-                                <div class="widget-content nopadding">
-                                    <div class="form-actions">
-                                        <input name="submit" type="submit" value="Add" class="btn btn-success">
+                                <form method="post" action="add_items_invoice.php">
+                                    <div class="widget-content nopadding">
+                                        <div class="form-actions">
+                                            <input name="submit" type="submit" value="Add" class="btn btn-success">
+                                        </div>
                                     </div>
-                                </div>
-        </div>                            </div>
+                                </form>
 
+
+        </div>
+                        </div>
                     </div>
             </div>
         </div>
