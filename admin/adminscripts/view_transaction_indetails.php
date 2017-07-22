@@ -1,6 +1,5 @@
 <?php
 ob_start();
-
 include '../../include/phpscripts/DB.php';
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");

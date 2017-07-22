@@ -1,8 +1,9 @@
 <?php
+session_start();
+ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
