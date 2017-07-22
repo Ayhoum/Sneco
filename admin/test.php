@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once('../include/phpmailer/class.phpmailer.php');
 include '../include/phpscripts/DB.php';
 
