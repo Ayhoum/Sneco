@@ -1,12 +1,6 @@
 <?php
-if(!isset($_SESSION['role'])){
+if($_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent" && $_SESSION['role'] != "Accountant"){
     header("Location: index.php");
-}else if($_SESSION['role'] == "Admin"){
-    header("Location: admin_index.php");
-}else if($_SESSION['role'] == "Accountant"){
-    header("Location: accountant_index.php");
-} else if ($_SESSION['role'] == "Agent"){
-    header("Location : agent_index.php");
 }
 ?>
 <?php

@@ -110,7 +110,7 @@ if(isset($_POST['submit'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
         <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
