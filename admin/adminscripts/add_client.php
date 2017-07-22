@@ -4,21 +4,27 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-header("Location: ../index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
-?>
-<?php
 if(isset($_POST['Submit'])) {
     $client_name          = $_POST['Client_name'];
+    $client_name          = mysqli_real_escape_string($mysqli,$client_name);
     $client_add1          = $_POST['Client_address_1'];
+    $client_add1          = mysqli_real_escape_string($mysqli,$client_add1);
     $client_add2          = $_POST['Client_address_2'];
+    $client_add2          = mysqli_real_escape_string($mysqli,$client_add2);
     $client_phone         = $_POST['Client_phone'];
+    $client_phone         = mysqli_real_escape_string($mysqli,$client_phone);
     $client_email         = $_POST['Client_email'];
+    $client_email         = mysqli_real_escape_string($mysqli,$client_email);
     $comment              = $_POST['Comments'];
+    $comment              = mysqli_real_escape_string($mysqli,$comment);
 
     if(!empty($client_name) && !empty($client_email) && !empty($client_phone)){
 //Insert item into database::
@@ -34,7 +40,6 @@ if(isset($_POST['Submit'])) {
                     '{$client_email}',
                     '{$client_phone}',
                     '{$comment}')";
-
         $result =  mysqli_query($mysqli, $query);
         if (!$result) {
             die("Failed!" . mysqli_error($mysqli));
@@ -47,7 +52,7 @@ if(isset($_POST['Submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Matrix Admin</title>
+    <title>Sneco Admin</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -60,16 +65,12 @@ if(isset($_POST['Submit'])) {
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
     <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
 <!--close-Header-part-->
-
-
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -163,7 +164,6 @@ if(isset($_POST['Submit'])) {
             </ul>
         </div>
         <!--End-Action boxes-->
-
         <div class="container-fluid"><hr>
             <div class="row-fluid">
                 <form class="form-horizontal" method="post" action="add_client.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
@@ -212,12 +212,9 @@ if(isset($_POST['Submit'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
-
-
         <!--End-Chart-box-->
         <hr/>
         <div class="row-fluid">
@@ -227,18 +224,12 @@ if(isset($_POST['Submit'])) {
             </div>
         </div>
     </div>
-</div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
     <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -247,6 +238,5 @@ if(isset($_POST['Submit'])) {
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>

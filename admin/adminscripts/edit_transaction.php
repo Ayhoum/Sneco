@@ -5,14 +5,14 @@ ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-?>
-<?php
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -62,39 +62,70 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     if(isset($_POST['Update'])){
 
         $ID           = $_POST['ID'];
+        $ID           = mysqli_real_escape_string($mysqli,$ID);
         $Agent_id     = $_POST['Agent_ID'];
+        $Agent_id     = mysqli_real_escape_string($mysqli,$Agent_id);
         $seName       = $_POST['Sender_eName'];
+        $seName       = mysqli_real_escape_string($mysqli,$seName);
         $saName       = $_POST['Sender_aName'];
+        $saName       = mysqli_real_escape_string($mysqli,$saName);
         $sStreetName  = $_POST['Sender_StreetName'];
+        $sStreetName  = mysqli_real_escape_string($mysqli,$sStreetName);
         $sHouseNumber = $_POST['Sender_HouseNumber'];
+        $sHouseNumber = mysqli_real_escape_string($mysqli,$sHouseNumber);
         $sPostcode    = $_POST['Sender_Postcode'];
+        $sPostcode    = mysqli_real_escape_string($mysqli,$sPostcode);
         $sCity        = $_POST['Sender_City'];
+        $sCity        = mysqli_real_escape_string($mysqli,$sCity);
         $sCountry     = $_POST['Sender_Country'];
+        $sCountry     = mysqli_real_escape_string($mysqli,$sCountry);
         $sPhone       = $_POST['Sender_Phone'];
+        $sPhone       = mysqli_real_escape_string($mysqli,$sPhone);
         $sEmail       = $_POST['Sender_Email'];
+        $sEmail       = mysqli_real_escape_string($mysqli,$sEmail);
         $sNationality = $_POST['Sender_Nationality'];
+        $sNationality = mysqli_real_escape_string($mysqli,$sNationality);
         $sIDNumber    = $_POST['Sender_IDNumber'];
+        $sIDNumber    = mysqli_real_escape_string($mysqli,$sIDNumber);
         $sExpiary     = $_POST['Sender_Expiary'];
+        $sExpiary     = mysqli_real_escape_string($mysqli,$sExpiary);
 
         // Receiver
         $reName       = $_POST['Receiver_eName'];
+        $reName       = mysqli_real_escape_string($mysqli,$reName);
         $raName       = $_POST['Receiver_aName'];
+        $raName       = mysqli_real_escape_string($mysqli,$raName);
         $rStreetName  = $_POST['Receiver_StreetName'];
+        $rStreetName  = mysqli_real_escape_string($mysqli,$rStreetName);
         $rHouseNumber = $_POST['Receiver_HouseNumber'];
+        $rHouseNumber = mysqli_real_escape_string($mysqli,$rHouseNumber);
         $rPostcode    = $_POST['Receiver_Postcode'];
+        $rPostcode    = mysqli_real_escape_string($mysqli,$rPostcode);
         $rCity        = $_POST['Receiver_City'];
+        $rCity        = mysqli_real_escape_string($mysqli,$rCity);
         $rCountry     = $_POST['Receiver_Country'];
+        $rCountry     = mysqli_real_escape_string($mysqli,$rCountry);
         $rPhone       = $_POST['Receiver_Phone'];
+        $rPhone       = mysqli_real_escape_string($mysqli,$rPhone);
         $rEmail       = $_POST['Receiver_Email'];
+        $rEmail       = mysqli_real_escape_string($mysqli,$rEmail);
         //Other Data
         $sentAmount = $_POST['Amount'];
+        $sentAmount = mysqli_real_escape_string($mysqli,$sentAmount);
         $current = $_POST['Current_Currency'];
+        $current = mysqli_real_escape_string($mysqli,$current);
         $payment = $_POST['Payment_Currency'];
+        $payment = mysqli_real_escape_string($mysqli,$payment);
         $payoutAmount = $_POST['Totalg'];
+        $payoutAmount = mysqli_real_escape_string($mysqli,$payoutAmount);
         $rate = $_POST['Rate'];
+        $rate = mysqli_real_escape_string($mysqli,$rate);
         $charge = $_POST['ExRa'];
+        $charge = mysqli_real_escape_string($mysqli,$charge);
         $reason = $_POST['Reason'];
+        $reason = mysqli_real_escape_string($mysqli,$reason);
         $comment = $_POST['Comment'];
+        $comment = mysqli_real_escape_string($mysqli,$comment);
 
         $query = "UPDATE TRANSACTION SET ";
         $query .= "ID = '{$ID}', ";

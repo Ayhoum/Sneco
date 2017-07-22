@@ -9,8 +9,9 @@ if(!isset($_SESSION['role'])){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
-
 if (isset($_POST['add_item']))
 {
     if (isset($_SESSION['shopping_cart']))
@@ -21,9 +22,9 @@ if (isset($_POST['add_item']))
             $count = count($_SESSION["shopping_cart"]);
             $item_array = array(
                 'item_id'         => $_GET["id"],
-                'item_name'       => $_POST["hidden_name"],
-                'item_price'      => $_POST["hidden_price"],
-                'item_quantity'   => $_POST["quantity"],
+                'item_name'       => mysqli_real_escape_string($mysqli,$_POST["hidden_name"]),
+                'item_price'      => mysqli_real_escape_string($mysqli,$_POST["hidden_price"]),
+                'item_quantity'   => mysqli_real_escape_string($mysqli,$_POST["quantity"]),
             );
             $_SESSION["shopping_cart"][$count] = $item_array;
         }
@@ -38,9 +39,9 @@ if (isset($_POST['add_item']))
     {
         $item_array = array(
             'item_id'         => $_GET["id"],
-            'item_name'       => $_POST["hidden_name"],
-            'item_price'      => $_POST["hidden_price"],
-            'item_quantity'   => $_POST["quantity"],
+            'item_name'       => mysqli_real_escape_string($mysqli,$_POST["hidden_name"]),
+            'item_price'      => mysqli_real_escape_string($mysqli,$_POST["hidden_price"]),
+            'item_quantity'   => mysqli_real_escape_string($mysqli,$_POST["quantity"]),
         );
         $_SESSION["shopping_cart"][0] = $item_array;
     }

@@ -6,6 +6,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <div class="container-fluid">

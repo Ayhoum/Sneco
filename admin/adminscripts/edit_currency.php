@@ -2,9 +2,7 @@
 ob_start();
 ?>
 <?php
-include '../../include/phpscripts/DB.php'
-?>
-<?php
+include '../../include/phpscripts/DB.php';
 session_start();
 ?>
 <?php
@@ -14,6 +12,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -32,10 +32,10 @@ while($row = mysqli_fetch_assoc($select_cur_by_id)){
 
     if(isset($_POST['Update'])){
 
-        $ID           = $_POST['ID'];
+        $ID           = mysqli_real_escape_string($mysqli,$_POST['ID']);
         //$from     = $_POST['Currency_From'];
        // $to       = $_POST['Currency_To'];
-        $value       = $_POST['Value'];
+        $value       = mysqli_real_escape_string($mysqli,$_POST['Value']);
 
         $query = "UPDATE CURRENCIES SET ";
         $query .= "ID = '{$ID}', ";

@@ -1,19 +1,15 @@
 <?php
 ob_start();
-?>
-<?php
-include '../../include/phpscripts/DB.php'
-?>
-<?php
-?>
-<?php
-//if(!isset($_SESSION['role'])){
-//    header("Location: ../index.php");
-//}else if($_SESSION['role'] == "Agent"){
-//    header("Location: ../agent_index.php");
-//}else if($_SESSION['role'] == "Accountant"){
-//    header("Location: ../accountant_index.php");
-//}
+include '../../include/phpscripts/DB.php';
+if(!isset($_SESSION['role'])){
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
+}
 ?>
 <?php
 if(isset($_GET['i_id'])){

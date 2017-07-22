@@ -6,17 +6,22 @@ session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
-    header("Location: Agent_index.php");
+    header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
 if(isset($_POST['Submit'])) {
 
     $curNameFr       = $_POST['Currency_From'];
+    $curNameFr       = mysqli_real_escape_string($mysqli,$curNameFr);
     $curNameTo       = $_POST['Currency_To'];
+    $curNameTo       = mysqli_real_escape_string($mysqli,$curNameTo);
     $Value           = $_POST['Value'];
+    $Value           = mysqli_real_escape_string($mysqli,$Value);
 
 
     if(!empty($curNameFr) && !empty($curNameTo) && !empty($Value)){
@@ -27,7 +32,6 @@ if(isset($_POST['Submit'])) {
         $query .= "VALUES('{$curNameFr}',
                     '{$curNameTo}',
                     '{$Value}') ";
-
         $result =  mysqli_query($mysqli, $query);
         if (!$result) {
             die("Failed!" . mysqli_error($mysqli));
@@ -53,16 +57,12 @@ if(isset($_POST['Submit'])) {
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
     <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
 <!--close-Header-part-->
-
-
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -134,7 +134,6 @@ if(isset($_POST['Submit'])) {
     </ul>
 </div>
 <!--sidebar-menu-->
-
 <!--main-container-part-->
 <div id="content">
     <!--breadcrumbs-->
@@ -152,11 +151,9 @@ if(isset($_POST['Submit'])) {
                 <li class="bg_ls span3"> <a href="agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
                 <li class="bg_lo span3"> <a href="users.php"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
                 <li class="bg_lb span3"> <a href="currency.php"> <i class="fa fa-money"></i>Currency Rates</a> </li>
-
             </ul>
         </div>
         <!--End-Action boxes-->
-
         <div class="container-fluid"><hr>
             <div class="row-fluid">
                 <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
@@ -195,8 +192,6 @@ if(isset($_POST['Submit'])) {
                 </form>
             </div>
         </div>
-
-
         <!--End-Chart-box-->
         <hr/>
         <div class="row-fluid">
@@ -207,17 +202,12 @@ if(isset($_POST['Submit'])) {
         </div>
     </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
     <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>

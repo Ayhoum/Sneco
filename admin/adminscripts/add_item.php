@@ -4,19 +4,25 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-header("Location: ../index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
 if(isset($_POST['Submit'])) {
     $item_name           = $_POST['item_name'];
+    $item_name           = mysqli_real_escape_string($mysqli,$item_name);
     $item_price          = $_POST['item_price'];
+    $item_price          = mysqli_real_escape_string($mysqli,$item_price);
     $item_description    = $_POST['item_description'];
+    $item_description    = mysqli_real_escape_string($mysqli,$item_description);
     $item_size           = $_POST['item_size'];
+    $item_size           = mysqli_real_escape_string($mysqli,$item_size);
 
     if(!empty($item_name) && !empty($item_price) && !empty($item_description) && !empty($item_size)){
 //Insert item into database::
@@ -41,7 +47,7 @@ if(isset($_POST['Submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Matrix Admin</title>
+    <title>Sneco Admin</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />

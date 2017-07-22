@@ -1,4 +1,14 @@
 <?php
+session_start();
+if(!isset($_SESSION['role'])){
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
+}
 require_once('../../include/phpmailer/class.phpmailer.php');
 If (isset($_GET['email'])) {
     $address = $_GET['email'];

@@ -1,5 +1,15 @@
 <?php
 ob_start();
+session_start();
+if(!isset($_SESSION['role'])){
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Agent"){
+    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
+}
 include("../../include/phpscripts/DB.php");
 
 if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($_GET['m3']) && isset($_GET['m4']) && isset($_GET['m5']) && isset($_GET['m6']) && isset($_GET['m7']) && isset($_GET['m8']) && isset($_GET['m9']) && isset($_GET['m10'])) {

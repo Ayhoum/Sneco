@@ -4,50 +4,43 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
-
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($countInv);
 $countInvoices = $num["ID"];
 $countInvoices = $countInvoices +1;
-
-
 if(isset($_POST['submit'])){
     $invoice_type       = $_POST['invoice_type'];
+    $invoice_type       = mysqli_real_escape_string($mysqli,$invoice_type);
     $address1           = $_POST['address_line1'];
+    $address1           = mysqli_real_escape_string($mysqli,$address1);
     $address2           = $_POST['address_line2'];
+    $address2           = mysqli_real_escape_string($mysqli,$address2);
     $address3           = $_POST['address_line3'];
+    $address3           = mysqli_real_escape_string($mysqli,$address3);
     $discount           = $_POST['discount'];
+    $discount           = mysqli_real_escape_string($mysqli,$discount);
     $advanced_payment   = $_POST['advanced_payment'];
+    $advanced_payment   = mysqli_real_escape_string($mysqli,$advanced_payment);
     $client             = $_POST['client_id'];
+    $client             = mysqli_real_escape_string($mysqli,$client);
     $item_id            = $_POST['item_id'];
+    $item_id            = mysqli_real_escape_string($mysqli,$item_id);
     $quantity           = $_POST['quantity'];
+    $quantity           = mysqli_real_escape_string($mysqli,$quantity);
     $total              = $_POST['total'];
-
-//    echo $invoice_number ."<br>";
-//    echo $invoice_type ."<br>";
-//    echo $address1 ."<br>";
-//    echo $address2 ."<br>";
-//    echo $address3 ."<br>";
-//    echo $discount ."<br>";
-//    echo $advanced_payment ."<br>";
-//    echo $client ."<br>";
-//    echo $item_id ."<br>";
-//    echo $quantity ."<br>";
-//    echo $total ."<br>";
-    // Inseret into INVOICE !
-
+    $total              = mysqli_real_escape_string($mysqli,$total);
 
     $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countInvoices;
-$invoiceDate = date('Y-m-d');
-
-
+    $invoiceDate = date('Y-m-d');
 
     $query = "INSERT INTO INVOICE(invoice_number,
                                     invoice_type,
@@ -68,27 +61,10 @@ $invoiceDate = date('Y-m-d');
                       '{$discount}',
                       '{$advanced_payment}',
                       '{$client}') ";
-
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
     $_SESSION['last_id'] = $last_id;
-//    echo $client;
-        // Inseret into INVOICE_LINE
-
-//        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
-//                                              ITEM_id,
-//                                              Quantity,
-//                                              Total)";
-//
-//        $query1 .= "VALUES('{$last_id}',
-//                           '{$item_id}',
-//                           '{$quantity}',
-//                           '{$total}')";
-//
-//    $result1 = mysqli_query($mysqli, $query1);
-
-//        header("location: ../gipdf.php?invoice_number={$invoic1}");
-        header("Location: add_items_invoice.php?invoice_number='{$last_id}'");
+    header("Location: add_items_invoice.php?invoice_number='{$last_id}'");
 }
 ?>
 <!DOCTYPE html>
@@ -107,16 +83,12 @@ $invoiceDate = date('Y-m-d');
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
   <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
-<!--close-Header-part--> 
-
-
+<!--close-Header-part-->
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -312,17 +284,12 @@ $invoiceDate = date('Y-m-d');
     </div>
   </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
   <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -331,6 +298,5 @@ $invoiceDate = date('Y-m-d');
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>

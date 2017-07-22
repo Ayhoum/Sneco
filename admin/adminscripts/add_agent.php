@@ -9,6 +9,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../agent_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -16,23 +18,27 @@ if(isset($_POST['Submit'])) {
     //Sender
 
     $agName       = $_POST['Agent_Name'];
+    $agName       = mysqli_real_escape_string($mysqli,$agName);
     $agEmail      = $_POST['Agent_Email'];
+    $agEmail      = mysqli_real_escape_string($mysqli,$agEmail);
     $agPassword   = $_POST['Agent_Password'];
+    $agPassword   = mysqli_real_escape_string($mysqli,$agPassword);
     $agSt         = $_POST['Agent_StreetName'];
+    $agSt         = mysqli_real_escape_string($mysqli,$agSt);
     $agHn         = $_POST['Agent_HouseNumber'];
+    $agHn         = mysqli_real_escape_string($mysqli,$agHn);
     $agPc         = $_POST['Agent_Postcode'];
+    $agPc         = mysqli_real_escape_string($mysqli,$agPc);
     $agCity       = $_POST['Agent_City'];
+    $agCity       = mysqli_real_escape_string($mysqli,$agCity);
     $agPhone      = $_POST['Agent_PhoneNumber'];
+    $agPhone      = mysqli_real_escape_string($mysqli,$agPhone);
     $agArea       = $_POST['Agent_Area'];
+    $agArea       = mysqli_real_escape_string($mysqli,$agArea);
     $agStats      = "Active";
-
-
     $enccode = ['cost' => 11];
     $encAgPassword = password_hash($agPassword, PASSWORD_BCRYPT, $enccode);
-
-
     if(!empty($agName) && !empty($agEmail) && !empty($agPassword) && !empty($agSt) && !empty($agHn) && !empty($agPc) && !empty($agCity) && !empty($agPhone) && !empty($agArea) && !empty($agStats)){
-//Insert Customerrrr into database::
     $query = "INSERT INTO AGENT(Agent_Name,
                                 Agent_Email,
                                 Agent_Pass,
@@ -53,7 +59,6 @@ if(isset($_POST['Submit'])) {
                     '{$agPhone}',
                     '{$agArea}',
                     '{$agStats}') ";
-
     $result =  mysqli_query($mysqli, $query);
     if (!$result) {
         die("Failed!" . mysqli_error($mysqli));
@@ -79,16 +84,12 @@ if(isset($_POST['Submit'])) {
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
   <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
-<!--close-Header-part--> 
-
-
+<!--close-Header-part-->
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -117,9 +118,6 @@ if(isset($_POST['Submit'])) {
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
         $countTrans = $num["ID"];
-        ?>
-
-        <?php
         $query = "SELECT COUNT(*)  AS ID FROM AGENT";
         $counter = mysqli_query($mysqli,$query);
         $num = mysqli_fetch_array($counter);
@@ -160,7 +158,6 @@ if(isset($_POST['Submit'])) {
     </ul>
 </div>
 <!--sidebar-menu-->
-
 <!--main-container-part-->
 <div id="content">
 <!--breadcrumbs-->
@@ -168,7 +165,6 @@ if(isset($_POST['Submit'])) {
     <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
   </div>
 <!--End-breadcrumbs-->
-
 <!--Action boxes-->
   <div class="container-fluid">
       <div class="quick-actions_homepage">
@@ -178,11 +174,9 @@ if(isset($_POST['Submit'])) {
               <li class="bg_ls span3"> <a href="agents.php"> <i class="fa fa-pencil"></i> <span class="label label-important"><?php echo("$countAgent"); ?></span> Agents</a> </li>
               <li class="bg_lo span3"> <a href="users.php"> <i class="fa fa-users"></i> <span class="label label-important"><?php echo("$countTrans"); ?></span> Users</a> </li>
               <li class="bg_lb span3"> <a href="currency.php"> <i class="fa fa-money"></i>Currency Rates</a> </li>
-
           </ul>
       </div>
 <!--End-Action boxes-->
-
       <div class="container-fluid"><hr>
           <div class="row-fluid">
               <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
@@ -257,8 +251,6 @@ if(isset($_POST['Submit'])) {
               </form>
           </div>
       </div>
-
-
 <!--End-Chart-box--> 
     <hr/>
     <div class="row-fluid">
@@ -269,17 +261,12 @@ if(isset($_POST['Submit'])) {
     </div>
   </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
   <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -288,6 +275,5 @@ if(isset($_POST['Submit'])) {
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>
