@@ -12,60 +12,20 @@ if(!isset($_SESSION['role'])){
 }
 ?>
 <?php
-$query = "SELECT COUNT(*)  AS ID FROM INVOICE";
-$countinv = mysqli_query($mysqli,$query);
-$num = mysqli_fetch_array($countinv);
-$countcIvoices = $num["ID"];
-?>
+if (isset($_GET['senderf']) && isset($_GET['receiverf']) && isset($_GET['mtrn1']) && isset($_GET['mtrn5']) && isset($_GET['mtrn10']))
+{
 
-<?php
+    $senderf   = $_GET['senderf'];
+    $receiverf = $_GET['receiverf'];
+    $mtrn1     = $_GET['mtrn1'];
+    $mtrn5     = $_GET['mtrn5'];
+    $mtrn10    = $_GET['mtrn10'];
+}
 if(isset($_POST['submit'])){
-    $invoic1 = $_POST['invoice_number'];
-    $invoic2 = $_POST['address_line1'];
-    $invoic3 = $_POST['address_line2'];
-    $invoic4 = $_POST['address_line3'];
-    $invoic5 = $_POST['item_id'];
-    $invoic6 = $_POST['quantity'];
-    $invoic7 = $_POST['discount'];
-    $invoic8 = $_POST['advanced_payment'];
-    $invoic9 = $_POST['total'];
-    $invoic10= $_POST['client_id'];
-    $invoic11= $_POST['invoice_type'];
-    $invoic12= $_POST['type_shortcut'];
 
-    $countcIvoices = $countcIvoices +1;
+    $email = $_POST['email'];
+    header("Location: email_to.php?senderf={$sender}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&email={$email}");
 
-    $invoice_no = "SNE" . $invoic11 . date("Y") . date("m") . $countcIvoices;
-    $query = "INSERT INTO INVOICE(invoice_number, 
-                                    address_line1, 
-                                    address_line2, 
-                                    address_line3, 
-                                    quantity, 
-                                    total, 
-                                    discount, 
-                                    advanced_payment, 
-                                    Item_ID, 
-                                    Client_ID, 
-                                    invoice_type) ";
-
-    $query .= "VALUES('{$invoice_no}',
-                  '{$invoic2}',
-                  '{$invoic3}',
-                  '{$invoic4}',
-                  '{$invoic6}',
-                  '{$invoic9}',
-                  '{$invoic7}',
-                  '{$invoic8}',
-                  '{$invoic5}',
-                  '{$invoic10}',
-                  '{$invoic11}') ";
-
-    $result = mysqli_query($mysqli, $query);
-    if (!$result) {
-        die("Failed!" . mysqli_error($mysqli));
-    } else {
-        header("Location: ../gipdf.php?number={$countcIvoices}");
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -184,31 +144,17 @@ if(isset($_POST['submit'])){
 
         <div class="container-fluid"><hr>
             <div class="row-fluid">
-                <form class="form-horizontal" method="post" action="add_invoice.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                <form class="form-horizontal" method="post" action="send_email.php" name="basic_validate" id="basic_validate" novalidate="novalidate">
                     <div class="span12">
                         <div class="widget-box">
                             <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                                <h5>New Invoice</h5>
+                                <h5>Select Agent</h5>
                             </div>
                             <div class="widget-content nopadding">
                                 <div class="control-group">
-                                    <label class="control-label">Invoice Number</label>
+                                    <label class="control-label">Agent Email</label>
                                     <div class="controls">
-                                        <input type="text" value="<?php echo $countcIvoices; ?> " name="invoice_number" readonly>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Invoice Type</label>
-                                    <div class="controls">
-                                        <select id="invoice_type" style="width:215px;" name='invoice_type' required>
-                                            <option disabled="disabled" selected>Select Type</option>
-                                            <option value='EU' title='Europe Invoice'>Europe Invoice</option>
-                                            <option value='INT' title='International Invoice'>International Invoice</option>
-                                            <option value='TM' title='Tourism Invoice'>Tourism Invoice</option>
-                                            <option value='FR' title='Freight Invoice'>Freight Invoice</option>
-                                            <option value='CB' title='Commercial Brokerage Invoice'>Commercial Brokerage Invoice</option>
-                                            <option value='TR' title='Transportation Invoice'>Transportation Invoice</option>
-                                        </select>
+                                        <input type="text"  name="email" >
                                     </div>
                                 </div>
                                 <div class="widget-content nopadding">
@@ -222,7 +168,6 @@ if(isset($_POST['submit'])){
                 </form>
             </div>
         </div>
-
 
         <!--End-Chart-box-->
         <hr/>

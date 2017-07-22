@@ -132,4 +132,4 @@ $name = "../out_transaction_pdf/" . $sender . $receiver_ename . $mtrn1 . $mtrn5 
 $content = $mpdf->Output($name,'F');
 
 
-header("Location: send_email.php?senderf={$sender}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}");
+header("Location: send_email.php?senderf={$sender}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}");
