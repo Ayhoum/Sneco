@@ -14,12 +14,11 @@ if(!isset($_SESSION['role'])){
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($countInv);
-$countcInvoices = $num["ID"];
-$countcInvoices = $countcInvoices +1;
+$countInvoices = $num["ID"];
+$countInvoices = $countInvoices +1;
 
 
 if(isset($_POST['submit'])){
-    $invoice_number     = $_POST['invoice_number'];
     $invoice_type       = $_POST['invoice_type'];
     $address1           = $_POST['address_line1'];
     $address2           = $_POST['address_line2'];
@@ -45,13 +44,14 @@ if(isset($_POST['submit'])){
     // Inseret into INVOICE !
 
 
-    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
-
+    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countInvoices;
+$invoiceDate = date('Y-m-d');
 
 
 
     $query = "INSERT INTO INVOICE(invoice_number,
                                     invoice_type,
+                                    invoice_date,
                                     address_line1,
                                     address_line2,
                                     address_line3,
@@ -59,8 +59,9 @@ if(isset($_POST['submit'])){
                                     advanced_payment,
                                     CLIENT_id) ";
 
-    $query .= "VALUES('{$invoice_number}',
+    $query .= "VALUES('{$invoice_no}',
                       '{$invoice_type}',
+                      '{$invoiceDate}',
                       '{$address1}',
                       '{$address2}',
                       '{$address3}',
@@ -71,7 +72,6 @@ if(isset($_POST['submit'])){
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
     $_SESSION['last_id'] = $last_id;
-
 //    echo $client;
         // Inseret into INVOICE_LINE
 
@@ -223,7 +223,7 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countcInvoices; ?>"  name="invoice_number" readonly >
+                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countInvoices; ?>"  name="invoice_number" readonly >
                                   </div>
                               </div>
                               <div class="control-group">

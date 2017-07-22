@@ -103,7 +103,7 @@ if(isset($_POST['submit']))
 
         $result1 = mysqli_query($mysqli, $query1);
     }
-    header();
+    header("Location: ../gipdf.php?id=$last_id");
 }
 ?>
 <!DOCTYPE html>

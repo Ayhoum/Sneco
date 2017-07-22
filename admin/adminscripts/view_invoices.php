@@ -93,6 +93,8 @@
                                         <ul class=\"dropdown-menu\" id='toggle'>
                                         <li><a href='invoices.php?approve=$invoice_id'>Approve</a></li>
                                         <li><a href='invoices.php?pending=$invoice_id'>Pending</a></li>
+                                        <div class='divider'></div>
+                                        <li><a href='invoices.php?delete=$invoice_id'><p class='text-center'><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></p></a></li>
                                         </ul>
                                     </div></td>";
 
@@ -110,7 +112,7 @@
 <?php
 if(isset($_GET['approve'])){
     $id = $_GET['approve'];
-    $query = "UPDATE INVOICE SET status = 'Approved' WHERE ID = {$id}";
+    $query = "UPDATE INVOICE SET status = 'Approved' WHERE id = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: invoices.php");
 }
@@ -120,8 +122,16 @@ if(isset($_GET['approve'])){
 <?php
 if(isset($_GET['pending'])){
     $id = $_GET['pending'];
-    $query = "UPDATE INVOICE SET status = 'Pending' WHERE ID = {$id}";
+    $query = "UPDATE INVOICE SET status = 'Pending' WHERE id = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
+    header("Location: invoices.php");
+}
+if(isset($_GET['delete'])){
+    $id = $_GET['delete'];
+    $query1 = "DELETE FROM INVOICE_LINE WHERE invoice_id = {$id} ";
+    $delete_invoice_line = mysqli_query($mysqli, $query1);
+    $query2 = "DELETE FROM INVOICE WHERE id = {$id} ";
+    $delete_invoice = mysqli_query($mysqli, $query2);
     header("Location: invoices.php");
 }
 ?>

@@ -16,21 +16,24 @@ if(isset($_POST['Submit'])) {
     $item_name           = $_POST['item_name'];
     $item_price          = $_POST['item_price'];
     $item_description    = $_POST['item_description'];
+    $item_size           = $_POST['item_size'];
 
-    if(!empty($item_name) && !empty($item_price) && !empty($item_description)){
+    if(!empty($item_name) && !empty($item_price) && !empty($item_description) && !empty($item_size)){
 //Insert item into database::
         $query = "INSERT INTO ITEM (item_name,
                                 item_price,
-                                item_description)";
+                                item_description,
+                                item_size)";
         $query .= "VALUES('{$item_name}',
                     '{$item_price}',
-                    '{$item_description}') ";
+                    '{$item_description}',
+                    '{$item_size}') ";
 
         $result =  mysqli_query($mysqli, $query);
         if (!$result) {
             die("Failed!" . mysqli_error($mysqli));
         }else{
-            //header("Location: item.php");
+            header("Location: items.php");
         }
     }
 }
@@ -173,13 +176,19 @@ if(isset($_POST['Submit'])) {
                                 <div class="control-group">
                                     <label class="control-label">Item Price</label>
                                     <div class="controls">
-                                        <input type="text" name="item_price" id="Agent_Email" required>
+                                        <input type="text" name="item_price" id="item_price" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Item Description</label>
                                     <div class="controls">
-                                        <input type="text" name="item_description" id="Agent_Password" required>
+                                        <input type="text" name="item_description" id="item_description" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Item Description</label>
+                                    <div class="controls">
+                                        <input type="text" name="item_size" id="item_size" required>
                                     </div>
                                 </div>
                                     <div class="widget-content nopadding">

@@ -49,11 +49,6 @@ if(!isset($_SESSION['role'])){
                             echo "<td>$item_description</td>";
                             echo "<td>$item_size</td>";
 
-//                            echo "<td><a href='agents.php?block=$agent_id'>Block</a></td>";
-//                            echo "<td><a href='agents.php?activate=$agent_id'>Activate</a></td>";
-//
-//                            echo "<td><a href='agent_transaction.php?agent_id=$agent_id'> View</a></td>";
-
 
 
                             echo "</tr>";
@@ -66,27 +61,6 @@ if(!isset($_SESSION['role'])){
         </div>
     </div>
 </div>
-<?php
-//if(isset($_GET['block'])){
-//
-//    $the_agent_id = $_GET['block'];
-//    $query = "UPDATE AGENT SET Agent_Status = 'Blocked' WHERE ID = {$the_agent_id}";
-//    $block_agent_query = mysqli_query($mysqli, $query);
-//    header("Location: agents.php");
-//    echo "Agent Blocked!";
-//}
-//
-//if(isset($_GET['activate'])){
-//
-//    $the_agent_id = $_GET['activate'];
-//    $query = "UPDATE AGENT SET Agent_Status = 'Active' WHERE ID = {$the_agent_id}";
-//    $block_agent_query = mysqli_query($mysqli, $query);
-//    header("Location: agents.php");
-//    echo "Agent Activated!";
-//}
-//?>
-
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/matrix.tables.js"></script>

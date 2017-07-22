@@ -6,31 +6,27 @@ include '../include/phpscripts/DB.php';
 
 require_once '../dompdf/autoload.inc.php';
 
-if(isset($_GET['number'])){
+if(isset($_GET['id'])){
 
-    $invoice_number = $_GET['number'];
+    $invoice_id = $_GET['id'];
 }
 $date = date('d-m-Y');
 
-$query = "SELECT * FROM INVOICE WHERE ID = {$invoice_number} ";
-echo $query;
+$query = "SELECT * FROM INVOICE WHERE id = {$invoice_id} ";
 $result = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($result)) {
-
+    $invoice_number = $row['invoice_number'];
+    $invoice_type = $row['invoice_type'];
     $address_line1 = $row['address_line1'];
-      $address_line2 = $row['address_line2'];
-     $address_line3 = $row['address_line3'];
-     $quantity = $row['quantity'];
-     $total = $row['total'];
-     $discount = $row['discount'];
-     $advanced_payment = $row['advanced_payment'];
-     $item_ID = $row['Item_ID'];
-     $client_ID = $row['Client_ID'];
-     $invoice_type = $row['invoice_type'];
-     $status = $row['status'];
+    $address_line2 = $row['address_line2'];
+    $address_line3 = $row['address_line3'];
+    $discount = $row['discount'];
+    $advanced_payment = $row['advanced_payment'];
+    $client_ID = $row['CLIENT_id'];
+    $status = $row['status'];
 }
 
-$query = "SELECT * FROM CLIENT WHERE ID = '{$client_ID}'";
+$query = "SELECT * FROM CLIENT WHERE id = '{$client_ID}'";
 $clients = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($clients)) {
 
@@ -42,21 +38,29 @@ while($row = mysqli_fetch_assoc($clients)) {
 
 }
 
-$query = "SELECT * FROM ITEM WHERE ID = '{$item_ID}'";
-$items = mysqli_query($mysqli, $query);
-while($row = mysqli_fetch_assoc($items)) {
-
-    $itemName = $row['item_name'];
-    $itemPrice = $row['item_price'];
-    $itemDescription = $row['item_description'];
-
-}
-
-$totalPrice = $quantity * $itemPrice;
-
-$grandTotal = $totalPrice - $discount - $advanced_payment;
-
-echo $grandTotal;
+//$query = "SELECT * FROM INVOICE_LINE WHERE invoice_id = '{$invoice_id}'";
+//$items = mysqli_query($mysqli, $query);
+//while($row = mysqli_fetch_assoc($items)) {
+//
+//    $item_id = $row['ITEM_id'];
+//    $itemQuantity = $row['Quantity'];
+//    $itemTotal = $row['Total'];
+//
+//}
+//
+//$query = "SELECT * FROM ITEM WHERE ID = '{$item_ID}'";
+//$items = mysqli_query($mysqli, $query);
+//while($row = mysqli_fetch_assoc($items)) {
+//
+//    $itemName = $row['item_name'];
+//    $itemPrice = $row['item_price'];
+//    $itemDescription = $row['item_description'];
+//
+//}
+//
+//$totalPrice = $quantity * $itemPrice;
+//
+//$grandTotal = $totalPrice - $discount - $advanced_payment;
 
 $dompdf = new Dompdf();
 
@@ -64,7 +68,7 @@ $html="<html lang=\"ar\">
 <head>
     <meta charset=\"utf-8\">
     <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">
-    <link rel=\"stylesheet\" href=\"css/bootstrap.css\" type=\"text/css\" />
+    <link rel=\"stylesheet\" href=\"../css/bootstrap.css\" type=\"text/css\" />
     <title>Invoice</title>
     <style>
         html { margin: 0;}
@@ -144,7 +148,7 @@ $html="<html lang=\"ar\">
         <tbody>
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 2%;float:left;\"></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;width: 46%;float:left;\"><img src=\"images/ourimages/1.jpeg\" style=\"width:200px;\"></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;width: 46%;float:left;\"><img src=\"../images/ourimages/1.jpeg\" style=\"width:200px;\"></td>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 4%;float:left;\"></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;width: 44%;float:left;\"><p style=\"font-size:10px;color: #A9A9A9;float: right;\"><b>SNECO</b><br>KvK: 68233361<br>Weesperstraat 118 H<br>1112 AP, Diemen<br>M: +31657966657<br>www.sneco.nl</p></td>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 4%;float:left;\"></td>
@@ -160,7 +164,7 @@ $html="<html lang=\"ar\">
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 6%;float:left;\"></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;width: 94%;float:left;\">
-                <p style=\"font-size:12px;\"><b>$clientName</b><br>Address: $clientAddress $clientAddress1<br>E-mail: $clientEmail<br>Phone: $clientPhone</p>
+                <p style=\"font-size:12px;\"><b>$clientName</b><br>Address: $clientAddress<br>$clientAddress1<br>E-mail: $clientEmail<br>Phone: $clientPhone</p>
             </td>
         </tr>
         </tbody>
@@ -194,15 +198,44 @@ $html="<html lang=\"ar\">
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #023560;float: left;width: 14%;\"><p class=\"text-center\" style=\"color: #fff;font-weight: 800;font-size:11px;margin: 0;\">M2/M3/LM/UD</p></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #023560;float: left;width: 13%;\"><p class=\"text-center\" style=\"color: #fff;font-weight: 800;margin: 0;font-size:11px;\">U. PRICE</p></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #023560;float: left;width: 19%;\"><p class=\"text-center\" style=\"color: #fff;font-weight: 800;margin: 0;font-size:11px;\">AMOUNT</p></td>
-        </tr>
+        </tr>";
+$counter = 1;
+$total = 0;
+$query = "SELECT * FROM INVOICE_LINE WHERE invoice_id = '{$invoice_id}'";
+$items = mysqli_query($mysqli, $query);
+while($row = mysqli_fetch_assoc($items)) {
+
+    $item_id = $row['ITEM_id'];
+    $itemQuantity = $row['Quantity'];
+    $itemTotal = $row['Total'];
+
+    $total = $total + $itemTotal;
+
+    $query = "SELECT * FROM ITEM WHERE ID = '{$item_id}'";
+    $items = mysqli_query($mysqli, $query);
+    while($row = mysqli_fetch_assoc($items)) {
+
+        $itemName = $row['item_name'];
+        $itemPrice = $row['item_price'];
+        $itemDescription = $row['item_description'];
+        $itemSize = $row['item_size'];
+    }
+    $html .= "
         <tr>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;border-right: 1px solid #000;float: left;width: 2%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">1</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;border-right: 1px solid #000;float: left;width: 2%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$counter</p></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #fff;float: left;width: 39%;\"><p style=\"margin: 0;font-size:10px;\">$itemDescription</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\" ><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$quantity</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">NaN</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\" ><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$itemQuantity</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$itemSize</p></td>
             <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $itemPrice</p></td>
-            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $totalPrice</p></td>
+            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $itemTotal</p></td>
         </tr>
+        ";
+    $counter = $counter +1;
+
+}
+
+
+$html .= "
         </tbody>
     </table>
 </div>
@@ -216,7 +249,7 @@ $html="<html lang=\"ar\">
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p class=\"text-center\" style=\"color: #000;font-size:11px;margin: 0;\">Sub Total</p></td>
-            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $totalPrice</p></td>
+            <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $total</p></td>
         </tr>
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
@@ -227,7 +260,9 @@ $html="<html lang=\"ar\">
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p class=\"text-center\" style=\"color: #000;font-size:11px;margin: 0;\">Discount</p></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #D3D3D3;\"><p style=\"color: #000;font-size:11px;font-weight: 800;margin: 0;\">€ $discount</p></td>
-        </tr>
+        </tr>";
+$grandTotal = $total - ($advanced_payment + $discount);
+$html .="
         <tr>
             <td colspan=\"3\" style=\"padding: 10px 18px;background: #fff;width: 65%;\"></td>
             <td colspan=\"2\" style=\"padding: 10px 18px;background: #023560;\"><p class=\"text-center\" style=\"color: #fff;font-size:11px;font-weight: 800;margin: 0;\">Grand Total</p></td>
@@ -297,6 +332,7 @@ $output = $dompdf->output();
 
 file_put_contents("invoice_pdf/{$invoice_number}.pdf", $output);
 
-header("Location: agentscripts/invoices.php");
+header("Location: adminscripts/invoices.php");
+
 ?>
 
