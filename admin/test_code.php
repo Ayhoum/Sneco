@@ -37,3 +37,49 @@ include "../include/phpscripts/DB.php";
 
     });
 </script>
+<?php
+$invoice_id = 58;
+$total = 0;
+$query = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}'";
+$items = mysqli_query($mysqli, $query);
+if (mysqli_num_rows($items) > 0 ) {
+    while ($row = mysqli_fetch_assoc($items)) {
+
+        $item_id = $row['ITEM_id'];
+        $itemQuantity = $row['Quantity'];
+        $itemTotal = $row['Total'];
+        $total = $total + $itemTotal;
+
+        echo "ID : ". $item_id. "<br>";
+        echo "Quantity: ". $itemQuantity. "<br>";
+        echo "Total : ".$itemTotal. "<br>";
+        echo $total. "<br>";
+
+        $query1 = "SELECT * FROM ITEM WHERE id = '{$item_id}'";
+        $result= mysqli_query($mysqli, $query1);
+        if (mysqli_num_rows($result)> 0 ){
+            while ($row1 = mysqli_fetch_assoc($result)){
+                $item_name = $row1['item_name'];
+                $item_description = $row1['item_description'];
+                $item_price = $row1['item_price'];
+                $item_size = $row1['item_size'];
+
+                echo "name : ". $item_name. "<br>";
+                echo "des: ". $item_description. "<br>";
+                echo "price : ".$item_price. "<br>";
+                echo "size: ".$item_size. "<br>";
+
+
+
+            }
+        }
+    }
+}
+
+
+//    echo $itemName. "<br>";
+//    echo $itemPrice. "<br>";
+//    echo $itemDescription. "<br>";
+//    echo $itemSize. "<br>";
+
+?>

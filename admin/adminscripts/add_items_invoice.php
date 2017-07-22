@@ -79,7 +79,7 @@ if(isset($_POST['submit']))
         $item_id    = $values['item_id'];
         $item_price = $values['item_price'];
         $quantity   = $values['item_quantity'];
-        $total      = number_format($values['item_quantity'] * $values['item_price'], 2);
+        $total      = $values['item_quantity'] * $values['item_price'];
         $last_id    = $_SESSION['last_id'];
 
 //        $last_id =40;
@@ -286,7 +286,7 @@ if(isset($_POST['submit']))
                         <td><?php echo $values['item_name'] ?></td>
                         <td><?php echo $values['item_price'] ?></td>
                         <td><?php echo $values['item_quantity'] ?></td>
-                        <td><?php echo number_format($values['item_quantity'] * $values['item_price'], 2) ?></td>
+                        <td><?php echo $values['item_quantity'] * $values['item_price'] ?></td>
                         <td><a href="add_items_invoice.php?action=delete&id=<?php echo $values['item_id']?>">Remove</a></td>
 
                     </tr>
