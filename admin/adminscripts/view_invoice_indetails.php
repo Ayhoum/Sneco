@@ -178,6 +178,8 @@ while($row = mysqli_fetch_assoc($select_posts)) {
                     <h4><span>Total to pay:</span> <?php if($invoice_total_amount == 0){echo "Done!";}else{echo $invoice_total_amount;} ?></h4>
                     <br>
                     <a class="btn btn-success btn-large pull-right" href="view_invoice_indetails.php?approve=<?php echo $invoice_id; ?>">Approve</a></div>
+                <br>
+                <a class="btn btn-success btn-large pull-right" href="../invoice_pdf/<?php echo $invoice_number ?>.pdf"><p class='text-center'><i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i></p></a></div>
             </div>
         </div>
     </div>

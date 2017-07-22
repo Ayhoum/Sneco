@@ -12,17 +12,12 @@ if(!isset($_SESSION['role'])){
 }else if($_SESSION['role'] != "Accountant" && $_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent"){
     header("Location: ../index.php");
 }
-
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($countInv);
 $countInvoices = $num["ID"];
 $countInvoices = $countInvoices +1;
-
-
 if(isset($_POST['submit'])){
-    $invoice_number     = $_POST['invoice_number'];
-    $invoice_number     = mysqli_real_escape_string($mysqli,$invoice_number);
     $invoice_type       = $_POST['invoice_type'];
     $invoice_type       = mysqli_real_escape_string($mysqli,$invoice_type);
     $address1           = $_POST['address_line1'];
@@ -45,37 +40,31 @@ if(isset($_POST['submit'])){
     $total              = mysqli_real_escape_string($mysqli,$total);
 
     $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countInvoices;
+    $invoiceDate = date('Y-m-d');
 
     $query = "INSERT INTO INVOICE(invoice_number,
-    invoice_type,
-    address_line1,
-    address_line2,
-    address_line3,
-    discount,
-    advanced_payment,
-    CLIENT_id) ";
-    $query .= "VALUES('{$invoice_number}',
-    '{$invoice_type}',
-    '{$address1}',
-    '{$address2}',
-    '{$address3}',
-    '{$discount}',
-    '{$advanced_payment}',
-    '{$client}') ";
+                                    invoice_type,
+                                    invoice_date,
+                                    address_line1,
+                                    address_line2,
+                                    address_line3,
+                                    discount,
+                                    advanced_payment,
+                                    CLIENT_id) ";
 
+    $query .= "VALUES('{$invoice_no}',
+                      '{$invoice_type}',
+                      '{$invoiceDate}',
+                      '{$address1}',
+                      '{$address2}',
+                      '{$address3}',
+                      '{$discount}',
+                      '{$advanced_payment}',
+                      '{$client}') ";
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
-
-    $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
-    ITEM_id,
-    Quantity,
-    Total)";
-    $query1 .= "VALUES('{$last_id}',
-    '{$item_id}',
-    '{$quantity}',
-    '{$total}')";
-
-    $result1 = mysqli_query($mysqli, $query1);
+    $_SESSION['last_id'] = $last_id;
+    header("Location: add_items_invoice.php?invoice_number='{$last_id}'");
 }
 ?>
 <!DOCTYPE html>
@@ -94,16 +83,12 @@ if(isset($_POST['submit'])){
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
   <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
-<!--close-Header-part--> 
-
-
+<!--close-Header-part-->
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -124,7 +109,7 @@ if(isset($_POST['submit'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
         <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
@@ -141,7 +126,7 @@ if(isset($_POST['submit'])){
         </li>
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
-                <li><a href="../dumb/invoices.php">Current Invoices</a></li>
+                <li><a href="invoices.php">Current Invoices</a></li>
                 <li><a href="add_invoice.php">Add Invoice</a></li>
             </ul>
         </li>
@@ -157,14 +142,13 @@ if(isset($_POST['submit'])){
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
-  <div class="container-fluid">
-      <div class="quick-actions_homepage">
-          <ul class="quick-actions">
-              <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
-              <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"></span> Transactions</a> </li>
-
-          </ul>
-      </div>
+    <div class="container-fluid">
+        <div class="quick-actions_homepage">
+            <ul class="quick-actions">
+                <li class="bg_lb span3"> <a href="../agent_index.php"> <i class="fa fa-tachometer"></i> My Dashboard </a> </li>
+                <li class="bg_lg span3"> <a href="transaction.php"> <i class="fa fa-exchange"></i> <span class="label label-important"></span> Transactions</a> </li>
+            </ul>
+        </div>
 <!--End-Action boxes-->
 
       <div class="container-fluid"><hr>
@@ -215,35 +199,6 @@ if(isset($_POST['submit'])){
                                   </div>
                               </div>
                               <div class="control-group">
-                                  <label class="control-label">Item ID </label>
-                                  <div class="controls">
-                                      <select style="width:215px;" name="item_id">
-                                          <option> Select One</option>
-                                          <?php
-                                          $query  = " SELECT * FROM ITEM ";
-                                          $result = mysqli_query($mysqli,$query);
-                                          if (mysqli_num_rows($result) >0 ){
-                                              while($row = mysqli_fetch_assoc($result)){
-                                                  $item_id          = $row ['id'];
-                                                  $item_name        = $row ['item_name'];
-                                                  $item_price       = $row ['item_price'];
-                                                  $item_description = $row ['item_description'];
-
-                                                  echo "<option value=" . $item_id . ">" . $item_name . "</option>";
-
-                                              }
-                                          }
-                                          ?>
-                                      </select> <br>
-                                  </div>
-                              </div>
-                              <div class="control-group">
-                                  <label class="control-label">Quantity</label>
-                                  <div class="controls">
-                                      <input type="text" name="quantity" required>
-                                  </div>
-                              </div>
-                              <div class="control-group">
                                   <label class="control-label">Discount</label>
                                   <div class="controls">
                                       <input type="text" name="discount">
@@ -255,13 +210,6 @@ if(isset($_POST['submit'])){
                                       <input type="text" name="advanced_payment">
                                   </div>
                               </div>
-                              <div class="control-group">
-                                  <label class="control-label">Total</label>
-                                  <div class="controls">
-                                      <input type="text" name="total">
-                                  </div>
-                              </div>
-
                               <div class="control-group">
                                   <label class="control-label">Client ID</label>
                                   <div class="controls">
@@ -281,6 +229,7 @@ if(isset($_POST['submit'])){
                                       </select> <br>
                                   </div>
                               </div>
+
                               <div class="widget-content nopadding">
                                   <div class="form-actions">
                                       <input name="submit" type="submit" value="Add" class="btn btn-success">
@@ -293,7 +242,6 @@ if(isset($_POST['submit'])){
           </div>
       </div>
 
-
 <!--End-Chart-box--> 
     <hr/>
     <div class="row-fluid">
@@ -304,17 +252,12 @@ if(isset($_POST['submit'])){
     </div>
   </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
   <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -323,6 +266,5 @@ if(isset($_POST['submit'])){
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/matrix.js"></script>
 <script src="../js/matrix.form_validation.js"></script>
-
 </body>
 </html>

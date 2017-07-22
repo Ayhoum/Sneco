@@ -312,5 +312,9 @@ foreach($_SESSION["shopping_cart"] as $keys => $values)
 {
     unset($_SESSION["shopping_cart"][$keys]);
 }
+if($_SESSION['role'] == "Admin"){
 header("Location: adminscripts/invoices.php");
+}else if ($_SESSION['role'] == "Agent"){
+    header("Location: agentscripts/invoices.php");
+}
 ?>

@@ -192,7 +192,7 @@ if(isset($_POST['Submit'])) {
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Item Description</label>
+                                    <label class="control-label">Item Size</label>
                                     <div class="controls">
                                         <input type="text" name="item_size" id="item_size" required>
                                     </div>
