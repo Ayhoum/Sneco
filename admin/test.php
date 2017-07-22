@@ -34,9 +34,9 @@ while($row = mysqli_fetch_assoc($result1)){
 $address ="a.alsirafy@sneco.nl";
 $address1= $sender_email;
 $address2="$agent_email";
-$address3="semsemea.a@hotmail.com";
+$address3="aylosa@outlook.com";
 
-$mail->AddAddress($address1, "Anas Alsirafy");
+$mail->AddAddress($address1);
 $mail->AddbCC($address);
 $mail->AddbCC($address2);
 $mail->AddbCC($address3);
@@ -45,13 +45,13 @@ $mail->Subject    = "Your Invoice";
 
 $mail->MsgHTML($body);
 $pdf= "{$senderf}{$receiverf}{$mtrn1}{$mtrn5}{$mtrn10}{$agentid}{$accountid}.pdf";
-$mail->AddAttachment("pdf/$pdf");      // attachment
+$mail->AddAttachment("transaction_pdf/$pdf");      // attachment
 //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
 
 if(!$mail->Send()) {
 echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    header("Location: transaction_pdf/transaction.php");
+    header("Location: transaction.php");
 }
 ?>
 <!--{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf-->
