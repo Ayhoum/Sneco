@@ -15,19 +15,21 @@ if(!isset($_SESSION['role'])){
 }
 ?>
 <?php
-if (isset($_GET['senderf']) && isset($_GET['receiverf']) && isset($_GET['mtrn1']) && isset($_GET['mtrn5']) && isset($_GET['mtrn10']))
-{
+if (isset($_GET['senderf']) && isset($_GET['receiverf']) && isset($_GET['mtrn1']) && isset($_GET['mtrn5']) && isset($_GET['mtrn10'])) {
 
-    $senderf   = $_GET['senderf'];
-    $receiverf = $_GET['receiverf'];
-    $mtrn1     = $_GET['mtrn1'];
-    $mtrn5     = $_GET['mtrn5'];
-    $mtrn10    = $_GET['mtrn10'];
+    $_SESSION['sender'] = $_GET['senderf'];
+    $_SESSION['receiver'] = $_GET['receiverf'];
+    $_SESSION['mtrn1'] = $_GET['mtrn1'];
+    $_SESSION['mtrn5'] = $_GET['mtrn5'];
+    $_SESSION['mtrn10'] = $_GET['mtrn10'];
+
 }
+
 if(isset($_POST['submit'])){
 
     $email = $_POST['email'];
-    header("Location: email_to.php?senderf={$sender}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&email={$email}");
+
+    header("Location: email_to.php?senderf={$_SESSION['sender']}&receiverf={$_SESSION['receiver']}&mtrn1={$_SESSION['mtrn1']}&mtrn5={$_SESSION['mtrn5']}&mtrn10={$_SESSION['mtrn10']}&email={$email}");
 
 }
 ?>

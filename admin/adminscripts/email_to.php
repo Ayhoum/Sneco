@@ -13,20 +13,20 @@ if(!isset($_SESSION['role'])){
 require_once('../../include/phpmailer/class.phpmailer.php');
 If (isset($_GET['email'])) {
     $address = $_GET['email'];
-    if (isset($_GET['senderf']) && isset($_GET['receiverf']) && isset($_GET['mtrn1']) && isset($_GET['mtrn5']) && isset($_GET['mtrn10'])&& isset($_GET['email'])) {
+    if (isset($_SESSION['sender']) && isset($_SESSION['receiver']) && isset($_SESSION['mtrn1']) && isset($_SESSION['mtrn5']) && isset($_SESSION['mtrn10'])&& isset($_GET['email'])) {
 
-        $senderf   = $_GET['senderf'];
-        $receiverf = $_GET['receiverf'];
-        $mtrn1     = $_GET['mtrn1'];
-        $mtrn5     = $_GET['mtrn5'];
-        $mtrn10    = $_GET['mtrn10'];
+        $senderf   = $_SESSION['sender'];
+        $receiverf = $_SESSION['receiver'];
+        $mtrn1     = $_SESSION['mtrn1'];
+        $mtrn5     = $_SESSION['mtrn5'];
+        $mtrn10    = $_SESSION['mtrn10'];
         $email     = $_GET['email'];
 
     }
     $mail = new PHPMailer(); // defaults to using php "mail()"
-    $body = "This Transaction is ready to be payed !!";
-    $body .= "Kind regards, ";
-    $body .= "Anas Alsirafy";
+    $body = "This Transaction is ready to be payed !!<br>";
+    $body .= "Kind regards, <br>";
+    $body .= "Anas Alsirafy<br>";
     $address1 = "a.alsirafy@sneco.nl";
     $mail->AddAddress($email);
     $mail->AddbCC($address1, "Alaa Semsemea");
@@ -34,12 +34,18 @@ If (isset($_GET['email'])) {
     $mail->AddbCC($address, "Anas Alsirafy");
     $mail->Subject = "Your Invoice";
     $mail->MsgHTML($body);
-    $pdf = "{$senderf}{$receiverf}{$mtrn1}{$mtrn5}{$mtrn10}.pdf";
+    $pdf= "{$senderf}{$receiverf}{$mtrn1}{$mtrn5}{$mtrn10}.pdf";
+    echo $pdf;
     $mail->AddAttachment("../out_transaction_pdf/$pdf");      // attachment
     if (!$mail->Send()) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
-        header("Location: agentscripts/transaction.php");
+        $_SESSION['sender'] = NULL;
+        $_SESSION['receiver'] = NULL;
+        $_SESSION['mtrn1'] = NULL;
+        $_SESSION['mtrn5'] = NULL;
+        $_SESSION['mtrn10'] = NULL;
+        header("Location: transaction.php");
     }
 }
 ?>
