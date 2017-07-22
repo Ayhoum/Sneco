@@ -1,8 +1,9 @@
 <?php
+session_start();
+ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
@@ -102,12 +103,6 @@ if(isset($_POST['submit'])){
     </ul>
 </div>
 <!--close-top-Header-menu-->
-<!--start-top-serch-->
-<div id="search">
-  <input type="text" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
-<!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>

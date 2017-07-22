@@ -1,8 +1,9 @@
 <?php
+session_start();
+ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
 <?php
-session_start();
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
 }else if($_SESSION['role'] == "Agent"){
@@ -278,10 +279,12 @@ if(isset($_POST['submit']))
                 </tr>
                 </thead>
                 <?php
+                if(isset($_SESSION['shopping_cart'])){
                 $total = 0;
                 foreach ($_SESSION["shopping_cart"] as $key => $values) {
 
                     ?>
+
                     <tbody>
                     <tr>
                         <td><?php echo $values['item_name'] ?></td>
@@ -294,6 +297,7 @@ if(isset($_POST['submit']))
                     </tbody>
                     <?php
                     $total = $total + ($values['item_quantity'] * $values['item_price']);
+                }
                 }
                 ?>
             </table>
