@@ -1,18 +1,14 @@
 <?php
 ob_start();
-?>
-<?php
 include '../../include/phpscripts/DB.php'
-?>
-<?php
-?>
-<?php
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
-}else if($_SESSION['role'] == "Agent"){
-    header("Location: ../agent_index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -22,7 +18,6 @@ if(isset($_GET['t_id'])){
 $query = "SELECT * FROM TRANSACTION WHERE ID = $transaction_id ";
 $select_trans_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans_by_id)){
-
     $transaction_ID = $row['ID'];
     $Agent_id     = $row['Agent_ID'];
     $seName       = $row['Sender_eName'];
@@ -71,10 +66,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
     $mtrn10 = $row['MTRN10'] ;
 }
 ?>
-
-
-
-
 <div class="widget-box">
     <div class="widget-title"> <span class="icon"> <i class="fa fa-exchange"></i> </span>
         <h5 >Transaction No. <?php echo $transaction_ID; ?></h5>
@@ -224,8 +215,6 @@ while($row = mysqli_fetch_assoc($select_trans_by_id)){
                 </table>
                 <div class="pull-right">
                     <h4><span>Payout Amount:</span> <?php echo $payout_amount . " " . $payment ?></h4>
-                    <br>
-                    <a class="btn btn-primary btn-large pull-right" href="gintpdf.php?m1=<?php echo $mtrn1;?>&m2=<?php echo $mtrn2;?>&m3=<?php echo $mtrn3;?>&m4=<?php echo $mtrn4;?>&m5=<?php echo $mtrn5;?>&m6=<?php echo $mtrn6;?>&m7=<?php echo $mtrn7;?>&m8=<?php echo $mtrn8;?>&m9=<?php echo $mtrn9;?>&m10=<?php echo $mtrn10;?>&sender=<?php echo $seName;?>">Send to agent</a></div>
             </div>
         </div>
     </div>

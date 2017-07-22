@@ -10,9 +10,10 @@ if(!isset($_SESSION['role'])){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,16 +31,12 @@ if(!isset($_SESSION['role'])){
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
     <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
 <!--close-Header-part-->
-
-
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -52,16 +49,10 @@ if(!isset($_SESSION['role'])){
     </ul>
 </div>
 <!--close-top-Header-menu-->
-<!--start-top-serch-->
-<div id="search">
-    <input type="text" placeholder="Search here..."/>
-    <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
-<!--close-top-serch-->
 <!--sidebar-menu-->
-<<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="transaction.php">All transactions </a></li>
@@ -87,7 +78,7 @@ if(!isset($_SESSION['role'])){
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
-        <div id="breadcrumb"> <a href="index.html" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
+        <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
     </div>
     <!--End-breadcrumbs-->
 

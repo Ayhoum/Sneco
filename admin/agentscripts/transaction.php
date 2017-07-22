@@ -2,7 +2,6 @@
 ob_start();
 include '../../include/phpscripts/DB.php'
 ?>
-
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
@@ -11,6 +10,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -22,7 +23,6 @@ $select_agent_by_id = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_agent_by_id)){
     $agent_id_val = $row['ID'];
     $agent_name = $row['Agent_Name'];
-
 }
 ?>
 <!DOCTYPE html>
@@ -41,16 +41,12 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
     <h1><a href="../agent_index.php">Sneco Agent</a></h1>
 </div>
 <!--close-Header-part-->
-
-
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -62,13 +58,10 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
     </ul>
 </div>
 <!--close-top-Header-menu-->
-<!--start-top-serch-->
-
-<!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="transaction.php">All transactions </a></li>
@@ -89,9 +82,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
             </ul>
         </li>
 </div>
-
 <!--sidebar-menu-->
-
 <?php
 if(isset($_SESSION['email'])){
     $agent_email_get_id = $_SESSION['email'];
@@ -104,9 +95,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 ?>
 <div id="content">
     <div id="content-header">
-
         <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
-
     </div>
     <div class="container-fluid">
         <div class="quick-actions_homepage">
@@ -116,32 +105,23 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 
             </ul>
         </div>
-
         <div class="row-fluid">
             <div class="span12">
-
                 <?php
                 include "view_transaction.php";
                 ?>
-
             </div>
         </div>
         <!--End-Chart-box-->
         <hr/>
-
     </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
     <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>

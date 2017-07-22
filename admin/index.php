@@ -6,7 +6,9 @@ include '../include/phpscripts/DB.php';
 <?php
 if(isset($_POST['login-form-submit'])) {
     $email = $_POST['login-form-username'];
+    $email = mysqli_real_escape_string($mysqli,$email);
     $pass = $_POST['login-form-password'];
+    $pass = mysqli_real_escape_string($mysqli,$pass);
     $statusActive = "Active";
 
     $query = "SELECT * From AGENT WHERE Agent_Email = '{$email}' ";

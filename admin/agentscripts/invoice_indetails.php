@@ -10,6 +10,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -29,13 +31,11 @@ if(!isset($_SESSION['role'])){
 
 <body>
 
-<!--Header-partttt-->
+<!--Header-part-->
 <div id="header">
     <h1><a href="../admin_index.php">Sneco Admin</a></h1>
 </div>
 <!--close-Header-part-->
-
-
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
@@ -56,9 +56,9 @@ if(!isset($_SESSION['role'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="transaction.php">All transactions </a></li>
@@ -79,7 +79,6 @@ if(!isset($_SESSION['role'])){
         </li>
 </div>
 <!--sidebar-menu-->
-
 <!--main-container-part-->
 <div id="content">
     <!--breadcrumbs-->
@@ -87,7 +86,6 @@ if(!isset($_SESSION['role'])){
         <div id="breadcrumb"> <a href="../contact.php" title="Contact Support" class="tip-bottom"> Click here to contact the support</a></div>
     </div>
     <!--End-breadcrumbs-->
-
     <!--Action boxes-->
     <div class="container-fluid">
         <div class="quick-actions_homepage">
@@ -98,12 +96,9 @@ if(!isset($_SESSION['role'])){
             </ul>
         </div>
         <!--End-Action boxes-->
-
         <div class="row-fluid">
             <div class="span12">
-
                 <?php
-
                 if(isset($_GET['source'])){
                     $source = $_GET['source'];
                 }else{
@@ -115,25 +110,18 @@ if(!isset($_SESSION['role'])){
                         break;
                 }
                 ?>
-
             </div>
         </div>
         <!--End-Chart-box-->
         <hr/>
-
     </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
     <div id="footer" class="span12"> 2017 &copy; Matrix Admin. Designed by: Alaa & Ayham </div>
 </div>
-
 <!--end-Footer-part-->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.ui.custom.js"></script>
 <script src="../js/bootstrap.min.js"></script>

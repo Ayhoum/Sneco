@@ -4,89 +4,78 @@ include '../../include/phpscripts/DB.php'
 <?php
 session_start();
 if(!isset($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
 }else if($_SESSION['role'] == "Admin"){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 
 $query = "SELECT COUNT(*)  AS ID FROM INVOICE";
 $countInv = mysqli_query($mysqli,$query);
 $num = mysqli_fetch_array($countInv);
-$countcInvoices = $num["ID"];
-$countcInvoices = $countcInvoices +1;
+$countInvoices = $num["ID"];
+$countInvoices = $countInvoices +1;
 
 
 if(isset($_POST['submit'])){
     $invoice_number     = $_POST['invoice_number'];
+    $invoice_number     = mysqli_real_escape_string($mysqli,$invoice_number);
     $invoice_type       = $_POST['invoice_type'];
+    $invoice_type       = mysqli_real_escape_string($mysqli,$invoice_type);
     $address1           = $_POST['address_line1'];
+    $address1           = mysqli_real_escape_string($mysqli,$address1);
     $address2           = $_POST['address_line2'];
+    $address2           = mysqli_real_escape_string($mysqli,$address2);
     $address3           = $_POST['address_line3'];
+    $address3           = mysqli_real_escape_string($mysqli,$address3);
     $discount           = $_POST['discount'];
+    $discount           = mysqli_real_escape_string($mysqli,$discount);
     $advanced_payment   = $_POST['advanced_payment'];
+    $advanced_payment   = mysqli_real_escape_string($mysqli,$advanced_payment);
     $client             = $_POST['client_id'];
+    $client             = mysqli_real_escape_string($mysqli,$client);
     $item_id            = $_POST['item_id'];
+    $item_id            = mysqli_real_escape_string($mysqli,$item_id);
     $quantity           = $_POST['quantity'];
+    $quantity           = mysqli_real_escape_string($mysqli,$quantity);
     $total              = $_POST['total'];
+    $total              = mysqli_real_escape_string($mysqli,$total);
 
-//    echo $invoice_number ."<br>";
-//    echo $invoice_type ."<br>";
-//    echo $address1 ."<br>";
-//    echo $address2 ."<br>";
-//    echo $address3 ."<br>";
-//    echo $discount ."<br>";
-//    echo $advanced_payment ."<br>";
-//    echo $client ."<br>";
-//    echo $item_id ."<br>";
-//    echo $quantity ."<br>";
-//    echo $total ."<br>";
-    // Inseret into INVOICE !
-
-
-    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countcInvoices;
-
-
+    $invoice_no = "SNE-" . $invoice_type . "-" . date("Y") . date("m") . "-" . $countInvoices;
 
     $query = "INSERT INTO INVOICE(invoice_number,
-                                    invoice_type,
-                                    address_line1,
-                                    address_line2,
-                                    address_line3,
-                                    discount,
-                                    advanced_payment,
-                                    CLIENT_id) ";
-
+    invoice_type,
+    address_line1,
+    address_line2,
+    address_line3,
+    discount,
+    advanced_payment,
+    CLIENT_id) ";
     $query .= "VALUES('{$invoice_number}',
-                      '{$invoice_type}',
-                      '{$address1}',
-                      '{$address2}',
-                      '{$address3}',
-                      '{$discount}',
-                      '{$advanced_payment}',
-                      '{$client}') ";
+    '{$invoice_type}',
+    '{$address1}',
+    '{$address2}',
+    '{$address3}',
+    '{$discount}',
+    '{$advanced_payment}',
+    '{$client}') ";
 
     $result = mysqli_query($mysqli, $query);
     $last_id = mysqli_insert_id($mysqli);
-//    echo $last_id;
-//    echo $client;
-        // Inseret into INVOICE_LINE
 
-        $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
-                                              ITEM_id,
-                                              Quantity,
-                                              Total)";
-
-        $query1 .= "VALUES('{$last_id}',
-                           '{$item_id}',
-                           '{$quantity}',
-                           '{$total}')";
+    $query1  = "INSERT INTO INVOICE_LINE (Invoice_id,
+    ITEM_id,
+    Quantity,
+    Total)";
+    $query1 .= "VALUES('{$last_id}',
+    '{$item_id}',
+    '{$quantity}',
+    '{$total}')";
 
     $result1 = mysqli_query($mysqli, $query1);
-
-//        header("location: ../gipdf.php?invoice_number={$invoic1}");
-//        header("Location: invoices.php");
 }
 ?>
 <!DOCTYPE html>
@@ -135,9 +124,9 @@ if(isset($_POST['submit'])){
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="transaction.php">All transactions </a></li>
@@ -153,7 +142,7 @@ if(isset($_POST['submit'])){
         <li class="submenu"> <a href="#"><i class="fa fa-pencil"></i> <span>Invoices</span></a>
             <ul>
                 <li><a href="../dumb/invoices.php">Current Invoices</a></li>
-                <li><a href="dd_invoice.php">Add Invoice</a></li>
+                <li><a href="add_invoice.php">Add Invoice</a></li>
             </ul>
         </li>
 </div>
@@ -190,7 +179,7 @@ if(isset($_POST['submit'])){
                               <div class="control-group">
                                   <label class="control-label">Invoice Number</label>
                                   <div class="controls">
-                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countcInvoices; ?>"  name="invoice_number" readonly >
+                                      <input type="text" value="<?php echo "SNE-XXX-" . date("Y") . date("m") . "-" . $countInvoices; ?>"  name="invoice_number" readonly >
                                   </div>
                               </div>
                               <div class="control-group">

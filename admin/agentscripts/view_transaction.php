@@ -1,5 +1,4 @@
 <?php include("../../include/phpscripts/DB.php") ?>
-
 <?php
 if(!isset($_SESSION['role'])){
     header("Location: ../index.php");
@@ -7,16 +6,14 @@ if(!isset($_SESSION['role'])){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
-
-
-
         <div class="container-fluid">
             <hr>
             <div class="row-fluid">
                 <div class="span12">
-
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
                             <h5>Transactions</h5>
@@ -62,13 +59,11 @@ if(!isset($_SESSION['role'])){
                                     $mtrn9  = $row['MTRN9'];
                                     $mtrn10 = $row['MTRN10'];
                                     $mtrn = $row['MTRN1'] . " " . $row['MTRN2'] . " " . $row['MTRN3'] . " " . $row['MTRN4'] . " " . $row['MTRN5'] . " " . $row['MTRN6'] . " " . $row['MTRN7'] . " " . $row['MTRN8'] . " " . $row['MTRN9'] . " " . $row['MTRN10'] ;
-//                                    $sender_name = $row['Sender_fName'] . " " . $row['Sender_lName'] ;
                                     $sender_ename = $row['Sender_eName'];
                                     $sender_aname = $row['Sender_aName'];
                                     $sender_email = $row['Sender_Email'];
                                     $sender_idnumber = $row['Sender_IdNumber'];
                                     $sender_expiary = $row['Sender_IdExp'];
-//                                    $receiver_name = $row['Receiver_fName'] . " " . $row['Receiver_lName'] ;
                                     $receiver_ename = $row['Receiver_eName'];
                                     $receiver_aname = $row['Receiver_aName'];
                                     $receiver_email = $row['Receiver_Email'];
@@ -81,10 +76,7 @@ if(!isset($_SESSION['role'])){
                                     $charge = $row['Charge'];
                                     $status = $row['Status'];
                                     $money_status = $row['Money_Status'];
-
                                     echo "<tr>";
-                                    ?>
-                                    <?php
                                     echo "<td>$id</td>";
                                     echo "<td style=\"background: #c91c33;color: #fff\">$mtrn</td>";
                                     echo "<td>$sender_ename</td>";
@@ -109,18 +101,10 @@ if(!isset($_SESSION['role'])){
                                         $back = "background:#C39527;color:#fff;";
                                     }
                                     echo "<td style='$back' >$money_status</td>";
-
-
                                     echo "<td><a href='transaction.php?complete=$id'>Transferred</a> <br> <hr>";
                                     echo "<a href='transaction.php?pending=$id'>Pending</a></td>";
-
                                     echo "<td><a href='transaction_indetails.php?t_id={$id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
-
-
                                     echo "<td><a href='../transaction_pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf'><p class='text-center'><i class=\"fa fa-cloud-download fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
-
-
-
                                     echo "</tr>";
                                 }
                                 ?>
@@ -131,16 +115,13 @@ if(!isset($_SESSION['role'])){
                 </div>
             </div>
         </div>
-
 <?php
 if(isset($_GET['complete'])){
-
     $id = $_GET['complete'];
     $query = "UPDATE TRANSACTION SET Money_Status = 'Transferred' WHERE ID = {$id}";
     $block_agent_query = mysqli_query($mysqli, $query);
     header("Location: transaction.php");
 }
-
 if(isset($_GET['pending'])){
 
     $id = $_GET['pending'];
@@ -149,8 +130,6 @@ if(isset($_GET['pending'])){
     header("Location: transaction.php");
 }
 ?>
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/matrix.tables.js"></script>
-

@@ -11,6 +11,8 @@ if(!isset($_SESSION['role'])){
     header("Location: ../admin_index.php");
 }else if($_SESSION['role'] == "Accountant"){
     header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
 }
 ?>
 <?php
@@ -28,7 +30,7 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Matrix Admin</title>
+    <title>Sneco Admin</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -67,9 +69,9 @@ while($row = mysqli_fetch_assoc($select_agent_by_id)){
 <!--close-top-serch-->
 <!--sidebar-menu-->
 
-<div id="sidebar"><a href="agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
+<div id="sidebar"><a href="../agent_index.php" class="visible-phone"><i class="fa fa-tachometer"></i> Dashboard</a>
     <ul>
-        <li class="active"><a href="agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
+        <li class="active"><a href="../agent_index.php"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-signal"></i> <span>Transactions</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="transaction.php">All transactions </a></li>

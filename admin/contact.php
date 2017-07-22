@@ -14,9 +14,13 @@ if(isset($_POST['Submit'])){
 
     $to      ='semsemea.a@hotmail.com';
     $subject = $_POST['subject'];
+    $subject = mysqli_real_escape_string($mysqli,$subject);
     $msg     = $_POST['message'];
+    $subject = mysqli_real_escape_string($mysqli,$msg);
     $headers  = "CC: aylosa@outlook.com". "\r\n";
-    $headers .= 'Error Type: '.$_POST['error'];
+    $error = $_POST['error'];
+    $error = mysqli_real_escape_string($mysqli,$error);
+    $headers .= 'Error Type: '. $error;
         //send email
         mail($to, $subject, $msg, $headers);
 

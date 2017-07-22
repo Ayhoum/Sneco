@@ -1,12 +1,14 @@
 <?php include("../../include/phpscripts/DB.php") ?>
 <?php
-//if(!isset($_SESSION['role'])){
-//    header("Location: ../index.php");
-//}else if($_SESSION['role'] == "Agent"){
-//    header("Location: ../agent_index.php");
-//}else if($_SESSION['role'] == "Accountant"){
-//    header("Location: ../accountant_index.php");
-//}
+if(!isset($_SESSION['role'])){
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
+}
 ?>
 <div class="container-fluid">
     <hr>
@@ -31,7 +33,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         <?php
                         //invoice
                         $query = "SELECT * FROM INVOICE WHERE status = 'Approved' ORDER BY id DESC";
@@ -47,7 +48,6 @@
                             $advanced_payment = $row['advanced_payment'];
                             $client_id = $row['CLIENT_id'];
                             $status = $row['status'];
-
                             echo "<tr>";
                             echo "<td>$invoice_id</td>";
                             echo "<td>$invoice_number</td>";
@@ -58,7 +58,7 @@
                                 $back = "background:#C39527;color:#fff;";
                             }
                             echo "<td style='$back' >$status</td>";
-                        // Invoice Line
+                            // Invoice Line
                             $total_invoice_amount = 0;
                             $query1 = "SELECT * FROM INVOICE_LINE WHERE Invoice_id = '{$invoice_id}' ";
                             $select_posts2 = mysqli_query($mysqli, $query1);
@@ -86,7 +86,6 @@
                                 echo "<td>$client_name</td>";
 
                             }
-
                             echo "<td><a href='invoice_indetails.php?i_id={$invoice_id}'><p class='text-center'><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
                             echo "</tr>";
                         }
@@ -106,8 +105,6 @@ if(isset($_GET['approve'])){
     header("Location: invoices.php");
 }
 ?>
-
-
 <?php
 if(isset($_GET['pending'])){
     $id = $_GET['pending'];
@@ -116,8 +113,6 @@ if(isset($_GET['pending'])){
     header("Location: invoices.php");
 }
 ?>
-
-
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/matrix.tables.js"></script>

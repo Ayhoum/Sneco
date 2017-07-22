@@ -2,10 +2,18 @@
 ob_start();
 use Dompdf\Dompdf;
 require_once '../../dompdf/autoload.inc.php';
-
+session_start();
+if(!isset($_SESSION['role'])){
+    header("Location: ../index.php");
+}else if($_SESSION['role'] == "Admin"){
+    header("Location: ../admin_index.php");
+}else if($_SESSION['role'] == "Accountant"){
+    header("Location: ../accountant_index.php");
+}else if($_SESSION['role'] != "Accountant" || $_SESSION['role'] != "Admin" || $_SESSION['role'] != "Agent"){
+    header("Location: ../index.php");
+}
 include("../../include/phpscripts/DB.php");
 if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($_GET['m3']) && isset($_GET['m4']) && isset($_GET['m5']) && isset($_GET['m6']) && isset($_GET['m7']) && isset($_GET['m8']) && isset($_GET['m9']) && isset($_GET['m10'])) {
-
     $sender = $_GET['sender'];
     $mtrn1 = $_GET['m1'];
     $mtrn2 = $_GET['m2'];
@@ -17,8 +25,6 @@ if(isset($_GET['sender']) && isset($_GET['m1']) && isset($_GET['m2']) && isset($
     $mtrn8 = $_GET['m8'];
     $mtrn9 = $_GET['m9'];
     $mtrn10 = $_GET['m10'];
-
-
 
 $query = "SELECT * FROM TRANSACTION WHERE Sender_eName = '{$sender}' AND MTRN1 = '{$mtrn1}' AND  MTRN2 = '{$mtrn2}' AND  MTRN3 = '{$mtrn3}' AND  MTRN4 = '{$mtrn4}' AND  MTRN5 = '{$mtrn5}' AND  MTRN6 = '{$mtrn6}' AND  MTRN7 = '{$mtrn7}' AND  MTRN8 = '{$mtrn8}' AND  MTRN9 = '{$mtrn9}' AND  MTRN10 = '{$mtrn10}'";
 $select_trans = mysqli_query($mysqli, $query);
@@ -62,13 +68,10 @@ while($row = mysqli_fetch_assoc($select_trans)) {
     $date = date('Y-m-d', $timestamp);
     $time = date('h:m:s', $timestamp);
 }
-
 iconv(mb_detect_encoding($sender_aname, mb_detect_order(), true), "UTF-8", $sender_aname);
 iconv(mb_detect_encoding($receiver_aname, mb_detect_order(), true), "UTF-8", $receiver_aname);
 
-
 $total_amount_rate = $received_amount + $rate;
-
 $query = "SELECT * FROM AGENT WHERE ID = '{$agent_id}'";
 $select_trans = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($select_trans)) {
@@ -245,25 +248,14 @@ $html="
 </body>
 </html>
 ";
-
 $dompdf = new Dompdf();
-
 $dompdf->loadHtml($html);
-
 // (Optional) Setup the paper size and orientation
 $dompdf->setPaper('A4', 'portrait');
-
-//$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
 // Render the HTML as PDF
 $dompdf->render();
-
 // Output the generated PDF to Browser
 //$dompdf->stream("sample.pdf");
-
 $output = $dompdf->output();
-
 file_put_contents("../transaction_pdf/{$sender_ename}{$receiver_ename}{$mtrn1}{$mtrn5}{$mtrn10}{$agent_id}{$account_Id}.pdf", $output);
-
 header("Location: ../test.php?senderf={$sender_ename}&receiverf={$receiver_ename}&mtrn1={$mtrn1}&mtrn5={$mtrn5}&mtrn10={$mtrn10}&agentid={$agent_id}&accountid={$account_Id}");
-

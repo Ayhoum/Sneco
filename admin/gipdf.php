@@ -1,18 +1,13 @@
-
 <?php
 ob_start();
 session_start();
 use Dompdf\Dompdf;
 include '../include/phpscripts/DB.php';
-
 require_once '../dompdf/autoload.inc.php';
-
 if(isset($_GET['id'])){
-
     $invoice_id = $_GET['id'];
 }
 $date = date('d-m-Y');
-
 $query = "SELECT * FROM INVOICE WHERE id = {$invoice_id} ";
 $result = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($result)) {
@@ -26,7 +21,6 @@ while($row = mysqli_fetch_assoc($result)) {
     $client_ID = $row['CLIENT_id'];
     $status = $row['status'];
 }
-
 $query = "SELECT * FROM CLIENT WHERE id = '{$client_ID}'";
 $clients = mysqli_query($mysqli, $query);
 while($row = mysqli_fetch_assoc($clients)) {
@@ -36,35 +30,8 @@ while($row = mysqli_fetch_assoc($clients)) {
     $clientAddress1 = $row['Client_address_2'];
     $clientEmail = $row['Client_email'];
     $clientPhone = $row['Client_phone'];
-
 }
-
-//$query = "SELECT * FROM INVOICE_LINE WHERE invoice_id = '{$invoice_id}'";
-//$items = mysqli_query($mysqli, $query);
-//while($row = mysqli_fetch_assoc($items)) {
-//
-//    $item_id = $row['ITEM_id'];
-//    $itemQuantity = $row['Quantity'];
-//    $itemTotal = $row['Total'];
-//
-//}
-//
-//$query = "SELECT * FROM ITEM WHERE ID = '{$item_ID}'";
-//$items = mysqli_query($mysqli, $query);
-//while($row = mysqli_fetch_assoc($items)) {
-//
-//    $itemName = $row['item_name'];
-//    $itemPrice = $row['item_price'];
-//    $itemDescription = $row['item_description'];
-//
-//}
-//
-//$totalPrice = $quantity * $itemPrice;
-//
-//$grandTotal = $totalPrice - $discount - $advanced_payment;
-
 $dompdf = new Dompdf();
-
 $html="<html lang=\"ar\">
 <head>
     <meta charset=\"utf-8\">
@@ -252,48 +219,6 @@ if($toggle == 1){
         $counter = $counter + 1;
     }
 }
-
-
-
-//
-//$query = "SELECT * FROM INVOICE_LINE WHERE invoice_id = '{$invoice_id}'";
-//$items = mysqli_query($mysqli, $query);
-//if (mysqli_num_rows($items) > 0 ){
-//while($row = mysqli_fetch_assoc($items)) {
-//
-//
-//    $item_id = $row['ITEM_id'];
-//    $itemQuantity = $row['Quantity'];
-//    $itemTotal = $row['Total'];
-//
-//    $total = $total + $itemTotal;
-//
-//    $query = "SELECT * FROM ITEM WHERE ID = '{$item_id}'";
-//    $items = mysqli_query($mysqli, $query);
-//    if (mysqli_num_rows($items) > 0 ) {
-//        while ($row = mysqli_fetch_assoc($items)) {
-//
-//            $itemName = $row['item_name'];
-//            $itemPrice = $row['item_price'];
-//            $itemDescription = $row['item_description'];
-//            $itemSize = $row['item_size'];
-//        }
-//    }
-//    $html .= "
-//        <tr>
-//            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;border-right: 1px solid #000;float: left;width: 2%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$counter</p></td>
-//            <td colspan=\"2\" style=\"padding: 10px 18px;background: #fff;float: left;width: 39%;\"><p style=\"margin: 0;font-size:10px;\">$itemDescription</p></td>
-//            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\" ><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$itemQuantity</p></td>
-//            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 14%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">$itemSize</p></td>
-//            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 13%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $itemPrice</p></td>
-//            <td colspan=\"1\" style=\"padding: 10px 18px;background: #fff;float: left;width: 19%;\"><p class=\"text-center\" style=\"margin: 0;font-size:10px;\">€ $itemTotal</p></td>
-//        </tr>
-//        ";
-//    $counter = $counter + 1;
-//}
-//}
-
-
 $html .= "
         </tbody>
     </table>
@@ -376,27 +301,16 @@ $html .="
 </html>";
 
 $dompdf->loadHtml($html);
-
 // (Optional) Setup the paper size and orientation
 $dompdf->setPaper('A4', 'portrait');
-
-//$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
 // Render the HTML as PDF
 $dompdf->render();
-
 // Output the generated PDF to Browser
-//$dompdf->stream("sample.pdf");
 $output = $dompdf->output();
-
 file_put_contents("invoice_pdf/{$invoice_number}.pdf", $output);
-
 foreach($_SESSION["shopping_cart"] as $keys => $values)
 {
     unset($_SESSION["shopping_cart"][$keys]);
 }
-
 header("Location: adminscripts/invoices.php");
-
 ?>
-
