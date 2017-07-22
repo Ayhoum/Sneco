@@ -26,7 +26,6 @@ if(!isset($_SESSION['role'])){
                             <th>Name</th>
                            <!-- <th>To</th>-->
                             <th>Value</th>
-                            <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,7 +41,6 @@ if(!isset($_SESSION['role'])){
                             echo "<td>$id</td>";
                             echo "<td>$from</td>";
                             echo "<td>$value</td>";
-                            echo "<td><a href='currency.php?source=edit_currency&c_id={$id}'><p class='text-center'><i class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></p></a></td>";
                         }
                         ?>
                         </tbody>
