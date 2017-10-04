@@ -1,5 +1,8 @@
 <?php
-if($_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent" && $_SESSION['role'] != "Accountant"){
+//if($_SESSION['role'] != "Admin" && $_SESSION['role'] != "Agent" && $_SESSION['role'] != "Accountant"){
+//    header("Location: index.php");
+//}
+if (!isset($_SESSION['role'])){
     header("Location: index.php");
 }
 ?>
